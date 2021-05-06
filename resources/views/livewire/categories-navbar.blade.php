@@ -4,8 +4,12 @@
             @foreach ($categories as $categorie )
                 <x-jet-dropdown align="right" width="60">
                     <x-slot name="trigger">
-                        <span class="inline-flex rounded-md">
-                            <a class="mr-4 hover:text-gray-900 cursor-pointer border-b border-transparent hover:border-indigo-600">{{$categorie->name}}</a>
+                        <span class="inline-flex rounded-md mr-4 hover:text-gray-900 cursor-pointer border-b border-transparent hover:border-indigo-600">
+                            {{-- <a href="{{ route('categorieproducts', ['id' => $categorie->id] ) }}" :active="request()->routeIs('categorieproducts', ['name'=>$categorie->id])"
+                                class="mr-4 hover:text-gray-900 cursor-pointer border-b border-transparent hover:border-indigo-600"> --}}
+                                {{$categorie->name}}
+                            {{-- </a> --}}
+                            {{-- <a class="mr-4 hover:text-gray-900 cursor-pointer border-b border-transparent hover:border-indigo-600">{{$categorie->name}}</a> --}}
                         </span>
                     </x-slot>
                    

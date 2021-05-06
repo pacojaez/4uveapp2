@@ -10,6 +10,15 @@ class Subcategorie extends Model
     use HasFactory;
 
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'name', 'description', 'category_id'
+    ];
+
+    /**
      * Get the product of this subcategorie.
      */
     public function product()
