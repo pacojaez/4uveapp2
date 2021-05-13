@@ -1,18 +1,6 @@
 <?php
 
-use App\Http\Livewire\SingleProductCard;
 use Illuminate\Support\Facades\Route;
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 
 Route::get('/', function () {
     return view('welcome');
@@ -35,9 +23,38 @@ Route::get('categorie/{id}', function($id) {
     return view('categorieproducts', compact('id'));
 })->name('categorieproducts');
 
+Route::get('cart', function(){
+    return view('livewire.cart');
+})->name('cart');
+
+// Route::livewire('cart', 'cart')->name('cart');
+
+// Route::get('cart', 'cart')->name('cart');
 
 // Route::get('/product/{id}', SingleProductCard::class)->name('singleproduct');
 
 Route::get('/vistadeprueba', function() {
     return view('vistadeprueba');
  })->name('prueba');
+
+
+ // route de prueba para laravel 8 //
+
+//  Route::get('/', 'CartController@hello');    ------ASI NO
+
+//----------ASI SI
+//  Route::get('cart1', [CartController::class, 'hello'])->name('cart1');
+// Route::get('cart', [app\Http\Livewire\Cart::class])->name('cart');
+
+// Route::get('cart', function () {
+//     return 'Hello World';
+// });
+
+Route::get('greeting', function () {
+    return 'Hello World';
+});
+
+// Route::view('cart', 'cart');
+
+// Route::livewire('/', 'home')->name('home');
+// Route::livewire('/products', 'products')->name('products');

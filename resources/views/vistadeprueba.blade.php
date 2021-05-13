@@ -1,9 +1,9 @@
 <x-guest-layout>
+    {{-- @livewire('guest-navbar') --}}
     <div>
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight ml-12 mt-4">
+        <h2 class="mt-4 ml-12 text-xl font-semibold leading-tight text-gray-800">
         {{ __('Todos nuestros Productos')  }}
         </h2>
         @livewire('all-products')
     </div>
 </x-guest-layout>
-    
