@@ -1,4 +1,4 @@
-<div>
+{{-- <div>
     <div class="w-2/3 mx-auto">
         <div class="my-6 bg-white rounded shadow-md">
             @if(count($cart['products']) > 0)
@@ -34,4 +34,4 @@
             @endif
         </div>
     </div>
-</div>
+</div> --}}

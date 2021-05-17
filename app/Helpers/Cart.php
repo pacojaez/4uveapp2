@@ -4,7 +4,8 @@
 namespace App\Helpers;
 
 
-use App\MOdels\Product;
+use App\Models\Product;
+use Illuminate\Http\Request;
 
 class Cart
 {
@@ -49,12 +50,12 @@ class Cart
         ];
     }
 
-    public function get(): ?array
+    public function get()
     {
         return request()->session()->get('cart');
     }
 
-    private function set($cart): void
+    private function set(array $cart): void
     {
         request()->session()->put('cart', $cart);
     }

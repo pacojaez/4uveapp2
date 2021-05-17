@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Livewire\Cart;
 
 Route::get('/', function () {
     return view('welcome');
@@ -23,12 +26,18 @@ Route::get('categorie/{id}', function($id) {
     return view('categorieproducts', compact('id'));
 })->name('categorieproducts');
 
-Route::get('cart', function(){
-    return view('livewire.cart');
-})->name('cart');
+Route::resource('/cart', 'CartController');
 
-// Route::livewire('cart', 'cart')->name('cart');
+// Route::get('cart', function(){
+//     return view('livewire.cart');
+// })->name('cart');
 
+// Route::get('/cart', function () {
+//     return view('livewire.shopping-cart');
+// })->name('cart');
+// Route::get('/cart', Cart::class );
+// After
+// Route::get('/cart', Cart::class);
 // Route::get('cart', 'cart')->name('cart');
 
 // Route::get('/product/{id}', SingleProductCard::class)->name('singleproduct');
@@ -58,3 +67,20 @@ Route::get('greeting', function () {
 
 // Route::livewire('/', 'home')->name('home');
 // Route::livewire('/products', 'products')->name('products');
+
+
+//************************RUTAS USUARIOS*****************/
+// User create form
+Route::get('/user/create', [UserController::class, 'createUser'])->middleware('isAdmin')->name('user.create');
+// Store One user
+Route::post('/user/store',[UserController::class, 'store'])->middleware('isAdmin')->name('user.store');
+// Show all users
+Route::get('/users/index', [UserController::class, 'index'])->middleware('isAdmin')->name('users.index');
+
+
+//************************RUTAS PRODUCTOS*****************/
+// Show all products
+Route::get('/products/index', [ProductController::class, 'index'])->middleware('isAdmin')->name('products.index');
+
+// Show edit page one product
+Route::get('/product/edit/{product_id }', [ProductController::class, 'edit'])->middleware('auth')->name('product.edit');

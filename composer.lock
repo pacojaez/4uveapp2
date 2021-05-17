@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9c8c358a5825c17ccddae40d3b2f9644",
+    "content-hash": "e7e167ad93cd7bf62237e83729eabf25",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -170,6 +170,69 @@
                 }
             ],
             "time": "2021-01-20T22:51:39+00:00"
+        },
+        {
+            "name": "darryldecode/cart",
+            "version": "4.2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/darryldecode/laravelshoppingcart.git",
+                "reference": "2ad23e070af341da80300ef990b1fb529af88893"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/darryldecode/laravelshoppingcart/zipball/2ad23e070af341da80300ef990b1fb529af88893",
+                "reference": "2ad23e070af341da80300ef990b1fb529af88893",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "5.0.*|5.1.*|5.2.*|5.3.*|5.4.*|5.5.*|5.6.*|5.7.*|5.8.*|^6.0|^7.0|^8.0",
+                "illuminate/translation": "5.0.*|5.1.*|5.2.*|5.3.*|5.4.*|5.5.*|5.6.*|5.7.*|5.8.*|^6.0|^7.0|^8.0",
+                "illuminate/validation": "5.0.*|5.1.*|5.2.*|5.3.*|5.4.*|5.5.*|5.6.*|5.7.*|5.8.*|^6.0|^7.0|^8.0",
+                "php": ">=7.3"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.4.2",
+                "phpunit/phpunit": "^9.0",
+                "symfony/var-dumper": "5.1.5.*@dev"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Darryldecode\\Cart\\CartServiceProvider"
+                    ],
+                    "aliases": {
+                        "Cart": "Darryldecode\\Cart\\Facades\\CartFacade"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Darryldecode\\": "src/Darryldecode"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Darryl Fernandez",
+                    "email": "engrdarrylfernandez@gmail.com"
+                }
+            ],
+            "description": "Laravel 5 Shopping cart",
+            "keywords": [
+                "cart",
+                "laravel",
+                "shopping cart"
+            ],
+            "support": {
+                "issues": "https://github.com/darryldecode/laravelshoppingcart/issues",
+                "source": "https://github.com/darryldecode/laravelshoppingcart/tree/4.2.1"
+            },
+            "time": "2020-12-18T03:01:17+00:00"
         },
         {
             "name": "dasprid/enum",
@@ -1844,6 +1907,64 @@
                 }
             ],
             "time": "2021-04-28T15:31:15+00:00"
+        },
+        {
+            "name": "mehradsadeghi/laravel-crud-generator",
+            "version": "v0.5.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mehradsadeghi/laravel-crud-generator.git",
+                "reference": "6097524f87785f5454bb313176d647926aa64abf"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mehradsadeghi/laravel-crud-generator/zipball/6097524f87785f5454bb313176d647926aa64abf",
+                "reference": "6097524f87785f5454bb313176d647926aa64abf",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "5.*|6.*|7.*|8.*",
+                "php": "^7.1|^8.0"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^4.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Mehradsadeghi\\CrudGenerator\\CrudGeneratorServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Mehradsadeghi\\CrudGenerator\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mehrad Sadeghi",
+                    "email": "mehrad177@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Generate CRUD for your laravel application like a breeze",
+            "homepage": "https://github.com/mehradsadeghi/laravel-crud-generator",
+            "keywords": [
+                "crud",
+                "crud-generator",
+                "laravel-crud-generator"
+            ],
+            "support": {
+                "issues": "https://github.com/mehradsadeghi/laravel-crud-generator/issues",
+                "source": "https://github.com/mehradsadeghi/laravel-crud-generator/tree/v0.5.4"
+            },
+            "time": "2021-04-16T17:12:51+00:00"
         },
         {
             "name": "mobiledetect/mobiledetectlib",

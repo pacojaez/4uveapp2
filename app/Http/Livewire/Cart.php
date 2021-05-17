@@ -7,18 +7,18 @@ use Livewire\Component;
 
 class Cart extends Component
 {
-    protected $cart = 1;
+    public $cart;
 
     public function mount(): void
     {
         $this->cart = CartFacade::get();
-        dd($this->cart);
+        // dd($this->cart);
     }
 
     public function render()
     {
         return view('livewire.cart', [
-            'cart' => 1
+            'cart' => 1,
         ]);
     }
 

@@ -58,9 +58,10 @@ class Product extends Model
         return empty($search) ? static::query()
                                 : static::query()
                                         ->where('name', 'like', '%'.$search.'%')
-                                        ->orWhere('description', 'like', '%'.$search.'%')
-                                        ->orWhere('short_description', 'like', '%'.$search.'%')
-                                        ->orWhere('brand', 'like', '%'.$search.'%');
+                                        ->orWhere('product_code', 'like', '%'.$search.'%')
+                                        ->orWhere('part_number', 'like', '%'.$search.'%')
+                                        ->orWhere('brand', 'like', '%'.$search.'%')
+                                        ->orWhere('EAN13_individual', 'like', '%'.$search.'%');
 
     }
 

@@ -1,8 +1,7 @@
 <div>
     <div class="w-2/3 mx-auto">
         <div class="my-6 bg-white rounded shadow-md">
-
-            {{-- @if(count($cart['products']) > 0)
+            @if(count($cart['products']) > 0)
                 <table class="w-full text-left border-collapse">
                     <thead>
                         <tr>
@@ -12,7 +11,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($cart['products'] as $product)
+                        @foreach($cart['products'] as $product) --}}
                             <tr class="hover:bg-grey-lighter">
                                 <td class="px-6 py-4 border-b border-grey-light">{{ $product->name }}</td>
                                 <td class="px-6 py-4 border-b border-grey-light">{{ $product->description }}</td>
@@ -32,10 +31,8 @@
                 <div class="w-full p-6 text-center border-collapse">
                     <span class="text-lg">¡Your cart is empty!</span>
                 </div>
-            @endif --}}
-            <div class="w-full p-6 text-center border-collapse">
-                <span class="text-lg">¡Your cart is empty! {{ $cart }}</span>
-            </div>
+            @endif
         </div>
     </div>
 </div>
+

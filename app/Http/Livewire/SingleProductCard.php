@@ -3,9 +3,10 @@
 namespace App\Http\Livewire;
 
 use App\Models\Product;
-use App\Facades\Cart;
+// use App\Facades\Cart;
 use Illuminate\View\View;
 use Livewire\Component;
+use App\Models\Cart;
 
 class SingleProductCard extends Component
 {
@@ -17,16 +18,15 @@ class SingleProductCard extends Component
 
     public function addToCart(string $productId): void
     {
-        if($productId == $this->product->id){
-            // dd('hello');
             Cart::add($this->product);
             $this->emit('productAdded');
-        }
+
 
     }
 
     public function mount($id){
         // dd($id);
+        // $this->set();
         $this->product = Product::findOrFail($id);
         $this->subcategorie = $this->product->subcategorie;
         $this->porte = $this->product->porte;

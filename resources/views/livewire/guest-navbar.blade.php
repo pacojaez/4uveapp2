@@ -15,9 +15,9 @@
                     <x-jet-nav-link href="{{ route('allproducts') }}" class="m-5 font-bold">
                         {{ __('All Products') }}
                     </x-jet-nav-link>
-                    <x-jet-nav-link href="{{ route('cart') }}" data-turbolinks-action="replace" class="m-5 font-bold">
+                    {{-- <x-jet-nav-link href="{{ route('cart') }}" data-turbolinks-action="replace" class="m-5 font-bold">
                         Cart ({{ $cartTotal }})
-                    </x-jet-nav-link>
+                    </x-jet-nav-link> --}}
                 </div>
                 {{-- <x-jet-nav-link href="{{ route('cart') }}" data-turbolinks-action="replace" class="m-5 font-bold">
                 {{ __('Cart'({{$cartTotal}})) }}
@@ -63,6 +63,18 @@
                                 <x-jet-dropdown-link href="{{ route('profile.show') }}">
                                     {{ __('Profile') }}
                                 </x-jet-dropdown-link>
+
+                                @if(Auth::user()->isAdmin())
+                                <x-jet-dropdown-link href="{{ route('products.index') }}">
+                                    {{ __('Show All Products') }}
+                                </x-jet-dropdown-link>
+                                <x-jet-dropdown-link href="{{ route('user.create') }}">
+                                    {{ __('Add User') }}
+                                </x-jet-dropdown-link>
+                                <x-jet-dropdown-link href="{{ route('users.index') }}">
+                                    {{ __('Show All Users') }}
+                                </x-jet-dropdown-link>
+                                @endif
 
                                 @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
                                 <x-jet-dropdown-link href="{{ route('api-tokens.index') }}">
