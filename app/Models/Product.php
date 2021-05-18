@@ -52,6 +52,8 @@ class Product extends Model
     }
 
     public static function search($search){
+
+        // dd($search);
         /**
         *The function get a parameter from the View and retrieve the query from the DB
         */

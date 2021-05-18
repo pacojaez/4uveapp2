@@ -19,7 +19,7 @@ class AllProducts extends Component
 
     public function render()
     {
-        // dd($this->products);
+        // dd($this->search);
         return view('livewire.all-products', [
             'products' => Product::search($this->search)->paginate(15),
         ]);
