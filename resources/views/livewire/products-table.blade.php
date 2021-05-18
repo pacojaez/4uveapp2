@@ -144,8 +144,10 @@
                                     <div class="text-sm text-gray-900">Portes: {{ $product->porte->tipo }}</div>
                                 </td>
                                 <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
-                                    <button wire:click="edit({{$product->id }})" class="px-2 py-1 text-blue-500 bg-blue-200 rounded hover:bg-blue-500 hover:text-white">Editar</button>
-                                    <button wire:click="destroy({{$product->id }})" class="px-2 py-1 text-red-500 bg-red-200 rounded hover:bg-red-500 hover:text-white">Borrar</button>
+                                    <a href="{{ route( 'products.show', $product->id ) }}" class="px-2 py-1 text-blue-500 bg-blue-200 rounded hover:bg-blue-500 hover:text-white">Editar</a>
+                                    {{-- <button class="px-2 py-1 text-blue-500 bg-blue-200 rounded hover:bg-blue-500 hover:text-white">Editar</button> --}}
+
+                                    <button wire:click="destroy({{$product->id}})" class="px-2 py-1 text-red-500 bg-red-200 rounded hover:bg-red-500 hover:text-white">Borrar</button>
                                 </td>
                             </tr>
                             @endforeach

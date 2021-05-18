@@ -14,7 +14,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 })->name('dashboard');
 
 /************************************ RUTAS DE PRODUCTOS  **************************/
-Route::get('products', function() {
+Route::get('productos', function() {
     return view('allproducts');
 })->name('allproducts');
 
@@ -80,7 +80,8 @@ Route::get('/users/index', [UserController::class, 'index'])->middleware('isAdmi
 
 //************************RUTAS PRODUCTOS*****************/
 // Show all products
-Route::get('/products/index', [ProductController::class, 'index'])->middleware('isAdmin')->name('products.index');
-
+// Route::get('/products/index', [ProductController::class, 'index'])->middleware('isAdmin')->name('products.index');
 // Show edit page one product
-Route::get('/product/edit/{product_id }', [ProductController::class, 'edit'])->middleware('auth')->name('product.edit');
+// Route::get('/products/show/{product_id }', [ProductController::class, 'show'])->name('products.show');
+
+Route::resource('products', 'ProductController');

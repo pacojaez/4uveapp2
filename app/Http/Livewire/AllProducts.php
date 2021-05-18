@@ -15,13 +15,14 @@ class AllProducts extends Component
     public $search = '';
 
     public function mount(){
+        $this->products = Product::search($this->search)->paginate(15);
     }
 
     public function render()
     {
         // dd($this->search);
         return view('livewire.all-products', [
-            'products' => Product::search($this->search)->paginate(15),
+            'products' => $this->products,
         ]);
     }
 

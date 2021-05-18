@@ -20,6 +20,12 @@ class ProductController extends Controller
         return view('products.index', compact('products'));
     }
 
+    // public function allproducts(){
+
+    //     $products= Product::pluck('name');
+    //     return view('allproducts', compact('products'));
+    // }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -47,10 +53,17 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    // public function show($product_id)
+    // {
+
+    //     $product = Product::findOrFail($product_id);
+    //     return view('products.show', compact('product'));
+
+    // }
+    public function show(Product $product)
     {
 
-
+        return view('products.show', compact('product'));
     }
 
     /**
