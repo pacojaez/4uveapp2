@@ -57,13 +57,17 @@ class Product extends Model
         /**
         *The function get a parameter from the View and retrieve the query from the DB
         */
-        return empty($search) ? static::query()
+        $result = empty($search) ? static::query()
                                 : static::query()
                                         ->where('name', 'like', '%'.$search.'%')
+                                        ->orWhere('id', 'like', '%'.$search.'%')
                                         ->orWhere('product_code', 'like', '%'.$search.'%')
                                         ->orWhere('part_number', 'like', '%'.$search.'%')
                                         ->orWhere('brand', 'like', '%'.$search.'%')
                                         ->orWhere('EAN13_individual', 'like', '%'.$search.'%');
+
+        // dd($result);
+        return $result;
 
     }
 

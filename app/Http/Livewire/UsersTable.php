@@ -32,6 +32,7 @@ class UsersTable extends Component
 
     public function render()
     {
+        // dd($this->search);
         $this->users =  User::search($this->search)
                             ->orderBy($this->orderBy, $this->orderAsc ? 'asc' : 'desc')
                             ->simplePaginate($this->perPage);

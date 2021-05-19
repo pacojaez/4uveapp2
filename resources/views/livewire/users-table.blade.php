@@ -108,7 +108,7 @@
                                     <div class="text-sm text-gray-500">CIF: {{ $user->CIF }}</div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    <div class="text-sm text-gray-900">{{ $user->tipo_usuario }}</div>
+                                    <div class="text-sm text-gray-900 max-w-prose">{{ $user->tipo_usuario }}</div>
                                     {{-- <span
                                         class="inline-flex px-2 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full">
                                         {{ $user->tipo_usuario }}
