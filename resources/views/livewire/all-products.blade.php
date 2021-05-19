@@ -62,7 +62,8 @@
                             </div> --}}
                         </div>
                         <div class="md:flex-shrink-0">
-                            <img class="object-cover w-full h-48 md:w-48" src="{{ $product->product_image }}" alt="Man looking at item at a store">
+                            <img class="w-10 h-10" src="{{asset('public/storage/images/products/'.$product->product_image)}}" alt="{{ $product->name}}" />
+                            <img class="object-cover w-full h-48 md:w-48" src="{{ asset('storage/'.$product->product_image)}}" alt="{{ $product->name}}" />
                           </div>
                         <div class="flex-1 w-full ml-2">
                             <div>

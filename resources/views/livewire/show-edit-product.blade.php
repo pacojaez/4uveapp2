@@ -9,10 +9,10 @@
 
     <button type="submit">Save Photo</button>
     </form> --}}
-    <form wire:submit.prevent="save" method="POST">
+    <form wire:submit.prevent="update" method="POST">
         @csrf
         @method('PUT')
-    </form>
+
 
     <div class="flex items-center justify-center mt-4 mb-2 bg-gray-200">
         <div class="grid w-11/12 bg-white rounded-lg shadow-xl md:w-1/12 lg:w-10/12">
@@ -307,10 +307,16 @@
                             <input type='file' class="hidden" wire:model="product_image" />
                         </label>
                         @else
+                        <div wire:loading>
+                            Procesando...
+                        </div>
                         <div class='flex flex-col w-full h-56 hover:bg-gray-100 hover:border-purple-300 group'>
                             <div class="class='flex flex-col items-center justify-center pt-7'">
                                 Foto #1 del Producto:
                                 <img src="{{ $product_image->temporaryUrl() }}" class="">
+                            </div>
+                            <div wire:loading>
+                                Procesando...
                             </div>
                         </div>
                         @endif
@@ -337,6 +343,9 @@
                                 Foto #2 del Producto:
                                 <img src="{{ $product_image_2->temporaryUrl() }}" class="">
                             </div>
+                            <div wire:loading>
+                                Procesando...
+                            </div>
                         </div>
                         @endif
                     </div>
@@ -361,6 +370,9 @@
                             <div class="class='flex flex-col items-center justify-center pt-7'">
                                 Foto #3 del Producto:
                                 <img src="{{ $product_image_3->temporaryUrl() }}" class="">
+                            </div>
+                            <div wire:loading>
+                                Procesando...
                             </div>
                         </div>
                         @endif
@@ -452,13 +464,15 @@
 
             <div class='flex items-center justify-center gap-4 pt-5 pb-5 md:gap-8'>
                 <button
-                    class='w-auto px-4 py-2 font-medium text-white bg-gray-500 rounded-lg shadow-xl hover:bg-gray-700'>CANCELAR</button>
+                    class='w-auto px-4 py-2 font-medium text-white bg-gray-500 rounded-lg shadow-xl hover:bg-gray-700' type="reset">CANCELAR</button>
                 <button
-                    class='w-auto px-4 py-2 font-medium text-white bg-purple-500 rounded-lg shadow-xl hover:bg-purple-700'>ACTUALIZAR</button>
+                    class='w-auto px-4 py-2 font-medium text-white bg-purple-500 rounded-lg shadow-xl hover:bg-purple-700' type="submit">ACTUALIZAR</button>
             </div>
 
         </div>
     </div>
+
+    </form>
 
     {{-- <form action="{{ route('products.update', $product->id )}}" method="POST" enc-type="multipart-form-data">
     @csrf

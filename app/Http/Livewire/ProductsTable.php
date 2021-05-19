@@ -33,7 +33,7 @@ class ProductsTable extends Component
     {
         $this->products =  Product::search($this->search)
                             ->orderBy($this->orderBy, $this->orderAsc ? 'asc' : 'desc')
-                            ->simplePaginate($this->perPage);
+                            ->paginate($this->perPage);
 
         return view('livewire.products-table',[
             'products' => $this->products

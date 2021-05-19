@@ -90,8 +90,8 @@
                                     <div class="flex items-center">
                                         <div class="flex-shrink-0 w-10 h-10">
                                             <img class="w-10 h-10 rounded-full"
-                                                src="{{ $product->product_image }}"
-                                                alt="{{ $product->name}}">
+                                            src="{{asset('storage/images/products/'.$product->product_image)}}"
+                                                alt="{{ $product->name}}" />
                                         </div>
                                         <div class="ml-4">
                                             <div class="text-sm font-medium text-gray-900">
