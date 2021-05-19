@@ -284,50 +284,97 @@
                     </select>
                 </div>
             </div>
-            {{-- 
-            <div class="grid grid-cols-1 mt-5 mx-7">
-                <label class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">Input 1</label>
-                <input
-                    class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
-                    type="text" placeholder="Input 1" />
-            </div>
+            <hr>
 
-            <div class="grid grid-cols-1 gap-5 mt-5 md:grid-cols-2 md:gap-8 mx-7">
-                <div class="grid grid-cols-1">
-                    <label class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">Input 2</label>
-                    <input
-                        class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
-                        type="text" placeholder="Input 2" />
+                <label class="p-2 mt-12 text-4xl font-bold text-center text-gray-500 uppercase bg-gray-300 md:text-4xl text-light">
+                    AÑADIR FOTOS DEL PRODUCTO
+                </label>
+                <div class="grid justify-between grid-cols-3 mt-5 bg-gray-200 mx-7">
+                    <div class='flex items-center justify-center w-5/6'>
+                        @if (!$product_image)
+                        <label
+                            class='flex flex-col w-full h-32 border-4 border-dashed hover:bg-gray-100 hover:border-purple-300 group'>
+                            <div class='flex flex-col items-center justify-center pt-7'>
+                                <svg class="w-10 h-10 text-purple-400 group-hover:text-purple-600" fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z">
+                                    </path>
+                                </svg>
+                                <p class='pt-1 text-sm tracking-wider text-gray-400 lowercase group-hover:text-purple-600'>
+                                    Select a photo</p>
+                            </div>
+                            <input type='file' class="hidden" wire:model="product_image" />
+                        </label>
+                        @else
+                        <div class='flex flex-col w-full h-56 hover:bg-gray-100 hover:border-purple-300 group'>
+                            <div class="class='flex flex-col items-center justify-center pt-7'">
+                                Foto #1 del Producto:
+                                <img src="{{ $product_image->temporaryUrl() }}" class="">
+                            </div>
+                        </div>
+                        @endif
+                    </div>
+                    <div class='flex items-center justify-center w-5/6'>
+                        @if (!$product_image_2)
+                        <label
+                            class='flex flex-col w-full h-32 border-4 border-dashed hover:bg-gray-100 hover:border-purple-300 group'>
+                            <div class='flex flex-col items-center justify-center pt-7'>
+                                <svg class="w-10 h-10 text-purple-400 group-hover:text-purple-600" fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z">
+                                    </path>
+                                </svg>
+                                <p class='pt-1 text-sm tracking-wider text-gray-400 lowercase group-hover:text-purple-600'>
+                                    Select a photo</p>
+                            </div>
+                            <input type='file' class="hidden" wire:model="product_image_2" />
+                        </label>
+                        @else
+                        <div class='flex flex-col w-full h-56 hover:bg-gray-100 hover:border-purple-300 group'>
+                            <div class="class='flex flex-col items-center justify-center pt-7'">
+                                Foto #2 del Producto:
+                                <img src="{{ $product_image_2->temporaryUrl() }}" class="">
+                            </div>
+                        </div>
+                        @endif
+                    </div>
+                    <div class='flex items-center justify-center w-5/6'>
+                        @if (!$product_image_3)
+                        <label
+                            class='flex flex-col w-full h-32 border-4 border-dashed hover:bg-gray-100 hover:border-purple-300 group'>
+                            <div class='flex flex-col items-center justify-center pt-7'>
+                                <svg class="w-10 h-10 text-purple-400 group-hover:text-purple-600" fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z">
+                                    </path>
+                                </svg>
+                                <p class='pt-1 text-sm tracking-wider text-gray-400 lowercase group-hover:text-purple-600'>
+                                    Select a photo</p>
+                            </div>
+                            <input type='file' class="hidden" wire:model="product_image_3" />
+                        </label>
+                        @else
+                        <div class='flex flex-col w-full h-56 hover:bg-gray-100 hover:border-purple-300 group'>
+                            <div class="class='flex flex-col items-center justify-center pt-7'">
+                                Foto #3 del Producto:
+                                <img src="{{ $product_image_3->temporaryUrl() }}" class="">
+                            </div>
+                        </div>
+                        @endif
+                    </div>
                 </div>
-                <div class="grid grid-cols-1">
-                    <label class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">Input 3</label>
-                    <input
-                        class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
-                        type="text" placeholder="Input 3" />
-                </div>
-            </div>
 
-            <div class="grid grid-cols-1 mt-5 mx-7">
-                <label class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">Selection</label>
-                <select
-                    class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent">
-                    <option>Option 1</option>
-                    <option>Option 2</option>
-                    <option>Option 3</option>
-                </select>
-            </div>
 
-            <div class="grid grid-cols-1 mt-5 mx-7">
-                <label class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">Another Input</label>
-                <input
-                    class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
-                    type="text" placeholder="Another Input" />
-            </div> --}}
-            <label class="mt-6 mb-1 text-2xl font-bold text-center text-gray-500 uppercase md:text-sm text-light">AÑADIR
-                FOTOS DEL PRODUCTO</label>
-            <div class="grid justify-between grid-cols-3 mt-5 mx-7">
-                <div class='flex items-center justify-center w-1/3'>
-                    @if (!$product_image)
+
+                <label class="p-2 mt-12 text-4xl font-bold text-center text-gray-500 uppercase bg-gray-300 md:text-4xl text-light">
+                AÑADIR FOTOS DEL PAQUETE
+            </label>
+            <div class="grid justify-between grid-cols-3 mt-5 bg-gray-200 mx-7">
+                <div class='flex items-center justify-center w-5/6'>
+                    @if (!$user_image)
                     <label
                         class='flex flex-col w-full h-32 border-4 border-dashed hover:bg-gray-100 hover:border-purple-300 group'>
                         <div class='flex flex-col items-center justify-center pt-7'>
@@ -338,21 +385,21 @@
                                 </path>
                             </svg>
                             <p class='pt-1 text-sm tracking-wider text-gray-400 lowercase group-hover:text-purple-600'>
-                                Selecciona una Foto</p>
+                                Select a photo</p>
                         </div>
-                        <input type='file' class="hidden" wire:model="product_image" />
+                        <input type='file' class="hidden" wire:model="user_image" />
                     </label>
                     @else
                     <div class='flex flex-col w-full h-56 hover:bg-gray-100 hover:border-purple-300 group'>
                         <div class="class='flex flex-col items-center justify-center pt-7'">
-                            Foto #1 del Producto:
-                            <img src="{{ $product_image->temporaryUrl() }}" class="">
+                            Foto #1 del Embalaje:
+                            <img src="{{ $user_image->temporaryUrl() }}" class="">
                         </div>
                     </div>
                     @endif
                 </div>
-                <div class='flex items-center justify-center w-1/3'>
-                    @if (!$product_image_2)
+                <div class='flex items-center justify-center w-5/6'>
+                    @if (!$user_image_2)
                     <label
                         class='flex flex-col w-full h-32 border-4 border-dashed hover:bg-gray-100 hover:border-purple-300 group'>
                         <div class='flex flex-col items-center justify-center pt-7'>
@@ -365,25 +412,19 @@
                             <p class='pt-1 text-sm tracking-wider text-gray-400 lowercase group-hover:text-purple-600'>
                                 Select a photo</p>
                         </div>
-                        <input type='file' class="hidden" wire:model="product_image" />
+                        <input type='file' class="hidden" wire:model="user_image_2" />
                     </label>
                     @else
                     <div class='flex flex-col w-full h-56 hover:bg-gray-100 hover:border-purple-300 group'>
                         <div class="class='flex flex-col items-center justify-center pt-7'">
-                            Foto #2 del Producto:
-                            <img src="{{ $product_image_2->temporaryUrl() }}" class="">
+                            Foto #2 del Embalaje:
+                            <img src="{{ $user_image_2->temporaryUrl() }}" class="">
                         </div>
                     </div>
                     @endif
                 </div>
-                <div class='flex items-center justify-center w-1/3'>
-                    <input type="file" wire:model="photos" multiple>
-
-                    @error('photos.*') <span class="error">{{ $message }}</span> @enderror
-
-                    <button type="submit">Save Photo</button>
-                </div>
-                {{-- <div class='flex items-center justify-center w-1/3'>
+                <div class='flex items-center justify-center w-5/6'>
+                    @if (!$user_image_3)
                     <label
                         class='flex flex-col w-full h-32 border-4 border-dashed hover:bg-gray-100 hover:border-purple-300 group'>
                         <div class='flex flex-col items-center justify-center pt-7'>
@@ -396,70 +437,24 @@
                             <p class='pt-1 text-sm tracking-wider text-gray-400 lowercase group-hover:text-purple-600'>
                                 Select a photo</p>
                         </div>
-                        <input type='file' class="hidden" />
+                        <input type='file' class="hidden" wire:model="user_image_3" />
                     </label>
-                </div> --}}
-            </div>
-
-            <label class="mt-6 mb-1 text-2xl font-bold text-center text-gray-500 uppercase md:text-sm text-light">AÑADIR
-                FOTOS DEL PAQUETE</label>
-            <div class="grid justify-between grid-cols-3 mt-5 mx-7">
-                {{-- <label class="mb-1 text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">AÑADIR FOTOS</label> --}}
-                <div class='flex items-center justify-center w-1/3'>
-                    <label
-                        class='flex flex-col w-full h-32 border-4 border-dashed hover:bg-gray-100 hover:border-purple-300 group'>
-                        <div class='flex flex-col items-center justify-center pt-7'>
-                            <svg class="w-10 h-10 text-purple-400 group-hover:text-purple-600" fill="none"
-                                stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z">
-                                </path>
-                            </svg>
-                            <p class='pt-1 text-sm tracking-wider text-gray-400 lowercase group-hover:text-purple-600'>
-                                Select a photo</p>
+                    @else
+                    <div class='flex flex-col w-full h-56 hover:bg-gray-100 hover:border-purple-300 group'>
+                        <div class="class='flex flex-col items-center justify-center pt-7'">
+                            Foto #3 del Embalaje:
+                            <img src="{{ $user_image_3->temporaryUrl() }}" class="">
                         </div>
-                        <input type='file' class="hidden" />
-                    </label>
-                </div>
-                <div class='inline-flex items-center justify-center w-1/3'>
-                    <label
-                        class='flex flex-col w-full h-32 border-4 border-dashed hover:bg-gray-100 hover:border-purple-300 group'>
-                        <div class='flex flex-col items-center justify-center pt-7'>
-                            <svg class="w-10 h-10 text-purple-400 group-hover:text-purple-600" fill="none"
-                                stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z">
-                                </path>
-                            </svg>
-                            <p class='pt-1 text-sm tracking-wider text-gray-400 lowercase group-hover:text-purple-600'>
-                                Select a photo</p>
-                        </div>
-                        <input type='file' class="hidden" />
-                    </label>
-                </div>
-                <div class='flex items-center justify-center w-1/3'>
-                    <label
-                        class='flex flex-col w-full h-32 border-4 border-dashed hover:bg-gray-100 hover:border-purple-300 group'>
-                        <div class='flex flex-col items-center justify-center pt-7'>
-                            <svg class="w-10 h-10 text-purple-400 group-hover:text-purple-600" fill="none"
-                                stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z">
-                                </path>
-                            </svg>
-                            <p class='pt-1 text-sm tracking-wider text-gray-400 lowercase group-hover:text-purple-600'>
-                                Select a photo</p>
-                        </div>
-                        <input type='file' class="hidden" />
-                    </label>
+                    </div>
+                    @endif
                 </div>
             </div>
 
             <div class='flex items-center justify-center gap-4 pt-5 pb-5 md:gap-8'>
                 <button
-                    class='w-auto px-4 py-2 font-medium text-white bg-gray-500 rounded-lg shadow-xl hover:bg-gray-700'>Cancel</button>
+                    class='w-auto px-4 py-2 font-medium text-white bg-gray-500 rounded-lg shadow-xl hover:bg-gray-700'>CANCELAR</button>
                 <button
-                    class='w-auto px-4 py-2 font-medium text-white bg-purple-500 rounded-lg shadow-xl hover:bg-purple-700'>Create</button>
+                    class='w-auto px-4 py-2 font-medium text-white bg-purple-500 rounded-lg shadow-xl hover:bg-purple-700'>ACTUALIZAR</button>
             </div>
 
         </div>

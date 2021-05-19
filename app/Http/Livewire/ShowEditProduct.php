@@ -30,7 +30,7 @@ class ShowEditProduct extends Component
     {
         $this->isOpen = true;
     }
-   
+
     /**
      * The attributes that are mass assignable.
      *
@@ -48,11 +48,16 @@ class ShowEditProduct extends Component
     {
         $this->validate([
             // 'product_image' => 'image|max:1024', // 1MB Max
-            'photos.*' => 'image|max:1024'
-            
+            'product_image' => 'image|max:1024',
+            'product_image_2' => 'image|max:1024',
+            'product_image_3' => 'image|max:1024',
+            'user_image' => 'image|max:1024',
+            'user_image_2' => 'image|max:1024',
+            'user_image_3' => 'image|max:1024'
         ]);
 
-        $this->photo->store('photos');
+        $this->product_image->store('photos');
+        $this->product_image_2->store('photos');
     }
 
     public function mount($product){
