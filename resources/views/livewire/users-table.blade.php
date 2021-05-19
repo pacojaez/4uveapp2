@@ -15,15 +15,15 @@
         </div>
         <div class="relative w-1/6 mx-1">
             <select wire:model="orderBy" class="block w-full px-4 py-3 pr-8 leading-tight text-gray-700 bg-gray-200 border border-gray-200 rounded appearance-none focus:outline-none focus:bg-white focus:border-gray-500" id="grid-state">
+                <option value="name" >Nombre</option>
                 <option value="id">ID</option>
-                <option value="name">Name</option>
                 <option value="email">Email</option>
                 <option value="company">Empresa</option>
                 <option value="comercial_name">Nombre Comercial</option>
                 <option value="tipo_usuario">Tipo de Usuario</option>
             </select>
             <div class="absolute inset-y-0 right-0 flex items-center px-2 text-gray-700 pointer-events-none">
-                <svg class="w-4 h-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                {{-- <svg class="w-4 h-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg> --}}
             </div>
         </div>
         <div class="relative w-1/6 mx-1">
@@ -32,7 +32,7 @@
                 <option value="0">Descending</option>
             </select>
             <div class="absolute inset-y-0 right-0 flex items-center px-2 text-gray-700 pointer-events-none">
-                <svg class="w-4 h-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                {{-- <svg class="w-4 h-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg> --}}
             </div>
         </div>
         <div class="relative w-1/6 mx-1">
@@ -43,7 +43,7 @@
                 <option value="100">100</option>
             </select>
             <div class="absolute inset-y-0 right-0 flex items-center px-2 text-gray-700 pointer-events-none">
-                <svg class="w-4 h-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                {{-- <svg class="w-4 h-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg> --}}
             </div>
         </div>
     </div>
@@ -52,8 +52,8 @@
     @else
     <div class="flex flex-col">
         <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-            <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
-                <div class="p-2 m-auto bg-gray-200"> {!! $users->links() !!} </div>
+            <div class="min-w-full py-2 align-middle sm:px-6 lg:px-8">
+                <div class="p-2 m-2 bg-gray-200"> {!! $users->links() !!} </div>
                 <div class="overflow-hidden border-b border-gray-200 shadow sm:rounded-lg">
                     <table class="min-w-full divide-y divide-gray-200">
                         <thead class="bg-gray-50">
@@ -75,7 +75,7 @@
                                     Dirección
                                 </th>
                                 <th scope="col" class="relative px-6 py-3">
-                                    <span class="sr-only">Edit</span>
+                                    Acciones<span class="sr-only">Edit</span>
                                 </th>
                             </tr>
                         </thead>
@@ -128,7 +128,7 @@
                             @endforeach
                         </tbody>
                     </table>
-                    {!! $users->links() !!}
+                    <div class="p-2 m-2 bg-gray-200"> {!! $users->links() !!} </div>
                 </div>
             </div>
         </div>

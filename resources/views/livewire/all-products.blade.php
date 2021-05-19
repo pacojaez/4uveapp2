@@ -8,9 +8,9 @@
              <div class="space-x-8 text-center justify-items-center sm:-my-px sm:ml-10 sm:flex sm:w-full">
                 <div class="relative w-1/2">
                     <input wire:model.debounce.500ms="search" type="search" class="w-full p-2 pl-8 bg-gray-200 border border-gray-200 rounded focus:bg-white focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent" placeholder="Buscar Productos..." />
-                    <svg class="w-4 h-4 absolute left-2.5 top-3.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    {{-- <svg class="w-4 h-4 absolute left-2.5 top-3.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
-                    </svg>
+                    </svg> --}}
                 </div>
                 {{-- <input wire:model.debounce.500ms="search" type="search" class="max-w-md px-3 mt-2 mb-2 ml-20 text-xl rounded shadow-lg sm:max-w-1/2 h-5/6 focus:outline-none focus:shadow-outline" placeholder="Buscar Productos...">
                 <svg class="w-4 h-4 absolute left-2.5 top-3.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -201,7 +201,7 @@
     </script> --}}
             @endforeach
         </div>
-        <div class="p-2 mx-8 font-semibold bg-gray-300 justify-items-center">
+        <div class="p-2 mx-8 font-semibold bg-gray-800 justify-items-center">
             {{ $products->links() }}
         </div>
 </div>
