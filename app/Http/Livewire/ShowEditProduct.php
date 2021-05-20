@@ -9,6 +9,7 @@ use Livewire\Component;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
+use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
 
@@ -26,7 +27,7 @@ class ShowEditProduct extends Component
         $unidades_embalaje_2, $dimensions_boxes_2, $weight_2, $unidades_embalaje_3, $dimensions_boxes_3, $weight_3,
         $plazo_preparacion_pedido, $contraoferta, $localidad_recogida, $cp_recogida, $provincia_recogida, $offer_units,
         $boxes_quantity, $whole_box_dimensions, $embalaje_original, $provider, $invoice_cost_price,
-        $buyed_date, $boxes, $offer, $new, $offer_until, $offer_prize;
+        $buyed_date, $boxes, $offer, $new, $offer_until, $offer_prize, $porte_id, $subcategorie_id;
 
     public $isOpen = false;
 
@@ -58,22 +59,53 @@ class ShowEditProduct extends Component
     // public function mount($product){
     //     $this->product = Product::findOrFail($id);
     // }
-    public function update()
+    public function update(Request $request)
     {
         $id = Auth::id();
 
-        $data = $this->validate([
+        $data = $this->validate($request,[
             // Images:
-            'product_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'product_image_2' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'product_image_3' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'user_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'user_image_2' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'user_image_3' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'product_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048|nullable',
+            'product_image_2' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048|nullable',
+            'product_image_3' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048|nullable',
+            'user_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048|nullable',
+            'user_image_2' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048|nullable',
+            'user_image_3' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048|nullable',
             //rest of the fields:
+            'name' => 'string|nullable',
+            'short_description' => 'string|nullable',
+            'description' => 'string|nullable',
+            'product_code' => 'string|nullable',
+            'part_number'=> 'string|nullable',
+            'brand' => 'string|nullable',
+            'EAN13_individual' =>'string|nullable',
+            'dimensions_boxes' => 'string|nullable',
+            'unidades_embalaje_individual' => 'string|nullable',
+            'weight' => 'string|nullable',
+            'pack_units' => 'string|nullable',
+            'dimensions_boxes_2' => 'string|nullable',
+            'weight_2' => 'string|nullable',
+            'dimensions_boxes_3' => 'string|nullable',
+            'weight_3' => 'string|nullable',
+            'plazo_preparacion_pedido' => 'string|nullable',
+            'offer_units' => 'string|nullable',
+            'boxes_quantity' => 'string|nullable',
+            'whole_box_dimensions' => 'string|nullable',
+            'boxes_quantity' => 'string|nullable',
+            'provider' => 'string|nullable',
+            'invoice_cost_price' => 'string|nullable',
+            'buyed_date' => 'date|nullable',
+            'offer_until' => 'string|nullable',
+            'localidad_recogida' => 'string|nullable',
+            'cp_recogida' => 'string|nullable',
+            'provincia_recogida' => 'string|nullable',
+            'porte_id' => 'int|nullable',
+            'subcategorie_id' => 'int|nullable',
 
         ]);
-        // $this->processing = true;
+
+        dd($data);
+        $this->processing = true;
 
         $image = $this->product_image;
         $image_2 = $this->product_image_2;
@@ -151,7 +183,7 @@ class ShowEditProduct extends Component
 // dd($this->product->product_image_3);
         $this->product->save();
 
-        // $this->processing = false;
+        $this->processing = false;
 
         return redirect()->route('products.index');
     }

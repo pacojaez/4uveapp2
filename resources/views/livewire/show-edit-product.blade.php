@@ -1,34 +1,14 @@
 <div>
-    {{-- <form wire:submit.prevent="save">
-        @if ($photo)
-        Photo Preview:
-        <img src="{{ $photo->temporaryUrl() }}">
-    @endif
-    <input type="file" wire:model="photo">
-    @error('photo') <span class="error">{{ $message }}</span> @enderror
-
-    <button type="submit">Save Photo</button>
-    </form> --}}
     <form wire:submit.prevent="update" method="POST">
         @method('PUT')
         @csrf
     <div class="flex items-center justify-center mt-4 mb-2 bg-gray-200">
         <div class="grid w-11/12 bg-white rounded-lg shadow-xl md:w-1/12 lg:w-10/12">
-            {{-- <div class="flex justify-center py-4">
-                        <div class="flex p-2 bg-purple-200 border-2 border-purple-300 rounded-full md:p-4">
-                          <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
-                        </div>
-                      </div> --}}
-
-            {{-- <div class="flex justify-center">
-                        <div class="flex">
-                          <h1 class="text-xl font-bold text-gray-600 md:text-2xl">Tailwind Form</h1>
-                        </div>
-                      </div> --}}
             <div class="grid grid-cols-1 gap-5 mt-5 md:grid-cols-2 md:gap-8 mx-7">
                 <div class="grid grid-cols-1">
                     <label class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">Producto:</label>
                     <input
+                        wire:model='name' id='name'
                         class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
                         type="text" placeholder="{{$product->name}}" />
                 </div>
@@ -144,7 +124,7 @@
                         PEDIDO: </label>
                     <input
                         class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
-                        type="date" placeholder="{{ $product->plazo_preparacion_pedido}} mm" />
+                        type="date" placeholder="{{ $product->plazo_preparacion_pedido}}" />
                 </div>
                 <div class="grid grid-cols-1">
                     <label class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">ACEPTA
@@ -232,15 +212,16 @@
                     <label class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">CODIGO POSTAL:
                     </label>
                     <input
+                        name="cp_recogida"
                         class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
-                        type="text" placeholder="{{ $product->cp }}" />
+                        type="text" placeholder="{{ $product->cp_recogida }}" />
                 </div>
                 <div class="grid grid-cols-1">
                     <label class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">PROVINCIA:
                     </label>
                     <input
                         class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
-                        type="text" placeholder="{{ $product->province }}" />
+                        type="text" placeholder="{{ $product->provincia_recogida }}" />
                 </div>
             </div>
             <div class="grid grid-cols-1 gap-5 mt-5 md:grid-cols-2 md:gap-8 mx-7">
