@@ -10,10 +10,8 @@
     <button type="submit">Save Photo</button>
     </form> --}}
     <form wire:submit.prevent="update" method="POST">
-        @csrf
         @method('PUT')
-
-
+        @csrf
     <div class="flex items-center justify-center mt-4 mb-2 bg-gray-200">
         <div class="grid w-11/12 bg-white rounded-lg shadow-xl md:w-1/12 lg:w-10/12">
             {{-- <div class="flex justify-center py-4">

@@ -103,12 +103,13 @@
                                     </div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    <div class="text-sm text-gray-900">Empresa: {{ $user->company }}</div>
+                                    <div class="text-sm text-gray-900">EMPRESA: {{ $user->company }}</div>
                                     <div class="text-sm text-gray-900">Nombre Comercial: {{ $user->comercial_name }}</div>
                                     <div class="text-sm text-gray-500">CIF: {{ $user->CIF }}</div>
+                                    <div class="overflow-hidden font-bold text-gray-900">{{ $user->tipo_usuario }}</div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    <div class="text-sm text-gray-900 max-w-prose">{{ $user->tipo_usuario }}</div>
+                                    <div class="overflow-hidden text-xs text-gray-900 w-28">{{ $user->email }}</div>
                                     {{-- <span
                                         class="inline-flex px-2 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full">
                                         {{ $user->tipo_usuario }}
@@ -121,7 +122,9 @@
                                     <div class="text-sm text-gray-500">Provincia: {{ $user->province }}</div>
                                 </td>
                                 <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
-                                    <button wire:click="edit({{ $user->id }})" class="px-2 py-1 text-blue-500 bg-blue-200 rounded hover:bg-blue-500 hover:text-white">Editar</button>
+                                    <a href="{{ route( 'user.edit', $user->id ) }}">
+                                    <button class="px-2 py-1 text-blue-500 bg-blue-200 rounded hover:bg-blue-500 hover:text-white">Editar</button>
+                                    </a>
                                     <button wire:click="destroy({{ $user->id }})" class="px-2 py-1 text-red-500 bg-red-200 rounded hover:bg-red-500 hover:text-white">Borrar</button>
                                 </td>
                             </tr>

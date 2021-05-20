@@ -53,6 +53,8 @@ class UsersTable extends Component
         $this->email = null;
         $this->password = null;
     }
+
+
     public function store()
     {
         $this->validate([
@@ -67,16 +69,22 @@ class UsersTable extends Component
         ]);
         $this->resetInput();
     }
+
+
     public function edit($id)
     {
-        $this->contentIsVisible = true;
+        // $this->contentIsVisible = true;
+        // dd($id);
+        // $record = User::findOrFail($id);
+        // $this->selected_id = $id;
+        // $this->name = $record->name;
+        // $this->email = $record->email;
+        // $this->updateMode = true;
 
-        $record = User::findOrFail($id);
-        $this->selected_id = $id;
-        $this->name = $record->name;
-        $this->email = $record->email;
-        $this->updateMode = true;
+        return redirect()->route('products.index');
     }
+
+
     public function update()
     {
         $this->validate([

@@ -67,8 +67,8 @@ class UserController extends Controller
         User::create($validated);
 
         // $this->emit('alert_remove');
-
-        return back()->with('message', 'Usuario añadido correctamente');
+        return redirect()->route('users.index')->with('message', 'Usuario añadido correctamente');
+        // return back()->with('message', 'Usuario añadido correctamente');
     }
 
     /**
@@ -88,8 +88,9 @@ class UserController extends Controller
      * @param  \App\Models\User $user
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit($id)
     {
+        $user = User::find($id);
         return view('users.edit', compact('user'));
     }
 
@@ -100,27 +101,33 @@ class UserController extends Controller
      * @param  \App\Models\User $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, $user )
     {
+        // dd($request);
         $validated = $this->validate($request, [
-            "name" => "required|min:3|string",
-            "surname" => "required|min:3|string",
-            "company" => "required",
-            "comercial_name" => "required|string",
-            "CIF" => "required",
-            "adress" => "required",
-            "city" => "required",
-            "cp" => "required|int|max:5",
-            "province" => "required",
-            "email" => "required|email",
-            "password" => "required|password",
-            "phone" => "required",
-            "role" => "nullable"
+            "name" => "string|nullable",
+            "surname" => "string|nullable",
+            "company" => "string|nullable",
+            "comercial_name" => "string|nullable",
+            "CIF" => "string|nullable",
+            "adress" => "string|nullable",
+            "city" => "string|nullable",
+            "cp" => "string|max:5|regex:/(\d{5})/i|nullable",
+            "province" => "string|nullable",
+            "email" => "email|nullable",
+            "password" => "password|nullable",
+            "phone" => "string|max:5|regex:/(\d{9})/i|nullable",
+            "tipo_usuario" => "nullable"
         ]);
+        $updateFields = array_filter($validated, null);
+        // dd($updateFields);
+        $user = User::find($user);
+        foreach( $updateFields as $key => $value){
+            $user->$key = $value;
+            $user->save();
+        }
 
-        $user->update($validated);
-
-        return back()->with('message', 'item updated successfully');
+        return redirect()->route('users.index')->with('message', 'item updated successfully');
     }
 
     /**

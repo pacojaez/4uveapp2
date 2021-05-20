@@ -76,7 +76,10 @@ Route::get('/user/create', [UserController::class, 'createUser'])->middleware('i
 Route::post('/user/store',[UserController::class, 'store'])->middleware('isAdmin')->name('user.store');
 // Show all users
 Route::get('/users/index', [UserController::class, 'index'])->middleware('isAdmin')->name('users.index');
-
+// Show one user
+Route::get('/user/edit/{user}', [UserController::class, 'edit'])->middleware('isAdmin')->name('user.edit');
+// Store One user
+Route::put('/user/update/{id}',[UserController::class, 'update'])->middleware('isAdmin')->name('user.update');
 
 //************************RUTAS PRODUCTOS*****************/
 // Show all products
