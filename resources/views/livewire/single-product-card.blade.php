@@ -106,8 +106,8 @@
                     {{-- </button> --}}
                 </div>
             </div>
-            <img alt="ecommerce" class="object-cover object-center w-full h-64 rounded lg:w-1/2 lg:h-auto"
-                src="{{ $product->product_image}}">
+            <img alt="{{ $product->name }}" class="object-cover object-center w-full h-64 rounded lg:w-1/2 lg:h-auto"
+                src="{{asset('storage/images/products/'.$product->product_image)}}" />
         </div>
     </div>
 </section>
@@ -116,10 +116,10 @@
     <h2 class="flex justify-center w-full text-2xl font-bold body-font">FOTOS DEL PRODUCTO</h2>
     <div class="container px-5 py-6 mx-auto">
         <div class="flex flex-wrap justify-between mx-auto lg:w-4/5">
-            <img alt="ecommerce" class="object-cover object-center w-1/3 h-64 m-2 rounded lg:w-1/3 lg:h-80"
-                src="{{ $product->product_image_2}}">
-            <img alt="ecommerce" class="object-cover object-center w-1/3 h-64 m-2 rounded lg:w-1/3 lg:h-80"
-                src="{{ $product->product_image_3}}">
+            <img alt="{{ $product->name }}" class="object-cover object-center w-1/3 h-64 m-2 rounded lg:w-1/3 lg:h-80"
+                src="{{asset('storage/images/products/'.$product->product_image_2)}}">
+            <img alt="{{ $product->name }}" class="object-cover object-center w-1/3 h-64 m-2 rounded lg:w-1/3 lg:h-80"
+                src="{{asset('storage/images/products/'.$product->product_image_2)}}">
         </div>
     </div>
 </section>
@@ -127,12 +127,12 @@
     <h2 class="flex justify-center text-2xl font-bold body-font">FOTOS DEL LOTE</h2>
     <div class="container px-5 py-6 mx-auto">
         <div class="flex flex-wrap justify-between mx-auto lg:w-full">
-            <img alt="ecommerce" class="object-cover object-center w-1/4 h-64 m-2 rounded lg:w-1/4 lg:h-auto"
-                src="{{ $product->user_image}}">
-            <img alt="ecommerce" class="object-cover object-center w-1/4 h-64 m-2 rounded lg:w-1/4 lg:h-auto"
-                src="{{ $product->user_image_2}}">
-            <img alt="ecommerce" class="object-cover object-center w-1/4 h-64 m-2 rounded lg:w-1/4 lg:h-auto"
-                src="{{ $product->user_image_3}}">
+            <img alt="{{ $product->name }}" class="object-cover object-center w-1/4 h-64 m-2 rounded lg:w-1/4 lg:h-auto"
+                src="{{asset('storage/images/products/'.$product->user_image)}}" />
+            <img alt="{{ $product->name }}" class="object-cover object-center w-1/4 h-64 m-2 rounded lg:w-1/4 lg:h-auto"
+                src="{{asset('storage/images/products/'.$product->user_image_2)}} /">
+            <img alt="{{ $product->name }}" class="object-cover object-center w-1/4 h-64 m-2 rounded lg:w-1/4 lg:h-auto"
+                src="{{asset('storage/images/products/'.$product->user_image_3)}} /">
         </div>
     </div>
 </section>
