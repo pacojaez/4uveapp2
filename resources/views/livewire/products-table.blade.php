@@ -9,12 +9,23 @@
             @include('livewire.create')
         @endif
     @endif --}}
+    @if (\Session::has('success'))
+    <div class="alert alert-success">
+        <ul>
+            <li>{!! \Session::get('success') !!}</li>
+        </ul>
+    </div>
+    @endif
     <div class="flex w-full pb-10">
         <div class="w-3/6 mx-1">
-            <input wire:model.debounce.500ms="search" type="search" class="block w-full px-4 py-3 leading-tight text-gray-700 bg-gray-200 border border-gray-200 rounded appearance-none focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Search Products...">
+            <input wire:model.debounce.500ms="search" type="search"
+                class="block w-full px-4 py-3 leading-tight text-gray-700 bg-gray-200 border border-gray-200 rounded appearance-none focus:outline-none focus:bg-white focus:border-gray-500"
+                placeholder="Search Products...">
         </div>
         <div class="relative w-1/6 mx-1">
-            <select wire:model="orderBy" class="block w-full px-4 py-3 pr-8 leading-tight text-gray-700 bg-gray-200 border border-gray-200 rounded appearance-none focus:outline-none focus:bg-white focus:border-gray-500" id="grid-state">
+            <select wire:model="orderBy"
+                class="block w-full px-4 py-3 pr-8 leading-tight text-gray-700 bg-gray-200 border border-gray-200 rounded appearance-none focus:outline-none focus:bg-white focus:border-gray-500"
+                id="grid-state">
                 <option value="name" selected="selected">Nombre</option>
                 <option value="id">ID</option>
                 <option value="product_code">Codigo Producto</option>
@@ -31,7 +42,9 @@
             </div>
         </div>
         <div class="relative w-1/6 mx-1">
-            <select wire:model="orderAsc" class="block w-full px-4 py-3 pr-8 leading-tight text-gray-700 bg-gray-200 border border-gray-200 rounded appearance-none focus:outline-none focus:bg-white focus:border-gray-500" id="grid-state">
+            <select wire:model="orderAsc"
+                class="block w-full px-4 py-3 pr-8 leading-tight text-gray-700 bg-gray-200 border border-gray-200 rounded appearance-none focus:outline-none focus:bg-white focus:border-gray-500"
+                id="grid-state">
                 <option value="1">Ascending</option>
                 <option value="0">Descending</option>
             </select>
@@ -40,7 +53,9 @@
             </div>
         </div>
         <div class="relative w-1/6 mx-1">
-            <select wire:model="perPage" class="block w-full px-4 py-3 pr-8 leading-tight text-gray-700 bg-gray-200 border border-gray-200 rounded appearance-none focus:outline-none focus:bg-white focus:border-gray-500" id="grid-state">
+            <select wire:model="perPage"
+                class="block w-full px-4 py-3 pr-8 leading-tight text-gray-700 bg-gray-200 border border-gray-200 rounded appearance-none focus:outline-none focus:bg-white focus:border-gray-500"
+                id="grid-state">
                 <option value="10">10</option>
                 <option value="25">25</option>
                 <option value="50">50</option>
@@ -52,7 +67,7 @@
         </div>
     </div>
     @if($noProducts)
-        <div>No hay Productos con esos términos de búsqueda</div>
+    <div>No hay Productos con esos términos de búsqueda</div>
     @else
     <div class="flex flex-col">
         <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -90,7 +105,7 @@
                                     <div class="flex items-center">
                                         <div class="flex-shrink-0 w-10 h-10">
                                             <img class="w-10 h-10 rounded-full"
-                                            src="{{asset('storage/images/products/'.$product->product_image)}}"
+                                                src="{{asset('storage/images/products/'.$product->product_image)}}"
                                                 alt="{{ $product->name}}" />
                                         </div>
                                         <div class="ml-4">
@@ -110,7 +125,8 @@
                                                 Peso: {{ $product->weight }}
                                             </div>
                                             <div class="text-sm text-gray-500">
-                                                Unidades Embalaje Individual: {{ $product->unidades_embalaje_individual }}
+                                                Unidades Embalaje Individual:
+                                                {{ $product->unidades_embalaje_individual }}
                                                 Unidades Pack: {{ $product->pack_units }}
                                             </div>
                                             <div class="text-sm font-medium text-gray-900">
@@ -122,11 +138,14 @@
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <div class="text-sm text-gray-900">Recogida: {{$product->localidad_recogida }}</div>
                                     <div class="text-sm text-gray-900">CP recogida: {{$product->cp_recogida }}</div>
-                                    <div class="text-sm text-gray-500">Unidades en Oferta: {{$product->offer_units }}</div>
-                                    <div class="text-sm text-gray-900">Cantidad de cajas: {{$product->boxes_quantity }}</div>
+                                    <div class="text-sm text-gray-500">Unidades en Oferta: {{$product->offer_units }}
+                                    </div>
+                                    <div class="text-sm text-gray-900">Cantidad de cajas: {{$product->boxes_quantity }}
+                                    </div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    <div class="text-sm text-gray-900">Precio Coste: {{ $product->invoice_cost_price }}</div>
+                                    <div class="text-sm text-gray-900">Precio Coste: {{ $product->invoice_cost_price }}
+                                    </div>
                                     <div class="text-sm text-gray-900">Precio Oferta: {{ $product->offer_price }}</div>
                                     <div class="text-sm text-gray-900">Fecha Compra: {{ $product->buyed_date }}</div>
                                     <div class="text-sm text-gray-900">Oferta hasta: {{ $product->offer_until }}</div>
@@ -142,23 +161,26 @@
                                         Embalaje Original
                                     </span>
                                     @endif
-                                    {{-- <div class="text-sm text-gray-900">Embalaje Original: {{ $product->embalaje_original }}</div> --}}
-                                    <div class="text-sm text-gray-900">Portes: {{ $product->porte->tipo }}</div>
-                                </td>
-                                <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
-                                    <a href="{{ route( 'products.show', $product->id ) }}" class="px-2 py-1 text-blue-500 bg-blue-200 rounded hover:bg-blue-500 hover:text-white">Editar</a>
-                                    {{-- <button class="px-2 py-1 text-blue-500 bg-blue-200 rounded hover:bg-blue-500 hover:text-white">Editar</button> --}}
+                                    {{-- <div class="text-sm text-gray-900">Embalaje Original: {{ $product->embalaje_original }}
+                </div> --}}
+                <div class="text-sm text-gray-900">Portes: {{ $product->porte->tipo }}</div>
+                </td>
+                <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
+                    <a href="{{ route( 'products.show', $product->id ) }}"
+                        class="px-2 py-1 text-blue-500 bg-blue-200 rounded hover:bg-blue-500 hover:text-white">Editar</a>
+                    {{-- <button class="px-2 py-1 text-blue-500 bg-blue-200 rounded hover:bg-blue-500 hover:text-white">Editar</button> --}}
 
-                                    <button wire:click="destroy({{$product->id}})" class="px-2 py-1 text-red-500 bg-red-200 rounded hover:bg-red-500 hover:text-white">Borrar</button>
-                                </td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                    <div class="p-2 m-auto bg-gray-200"> {!! $products->links() !!} </div>
-                </div>
+                    <button wire:click="destroy({{$product->id}})"
+                        class="px-2 py-1 text-red-500 bg-red-200 rounded hover:bg-red-500 hover:text-white">Borrar</button>
+                </td>
+                </tr>
+                @endforeach
+                </tbody>
+                </table>
+                <div class="p-2 m-auto bg-gray-200"> {!! $products->links() !!} </div>
             </div>
         </div>
     </div>
-    @endif
+</div>
+@endif
 </div>

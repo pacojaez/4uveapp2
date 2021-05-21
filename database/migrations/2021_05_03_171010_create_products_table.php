@@ -19,7 +19,7 @@ class CreateProductsTable extends Migration
             $table->string('name');
             $table->string('description');
             $table->string('short_description')->nullable();
-            $table->string('product_image');
+            $table->string('product_image')->nullable();
             $table->string('lote_image')->nullable();
             $table->string('part_number')->nullable();
             $table->string('cb_unit')->nullable();

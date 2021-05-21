@@ -127,7 +127,7 @@ class UserController extends Controller
             $user->save();
         }
 
-        return redirect()->route('users.index')->with('message', 'item updated successfully');
+        return redirect()->route('users.index')->with('message', 'Usuario actualizado correctamente');
     }
 
     /**
