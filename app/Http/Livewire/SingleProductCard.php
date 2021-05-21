@@ -3,10 +3,10 @@
 namespace App\Http\Livewire;
 
 use App\Models\Product;
-// use App\Facades\Cart;
+use App\Facades\Cart;
 use Illuminate\View\View;
 use Livewire\Component;
-use App\Models\Cart;
+// use App\Models\Cart;
 
 class SingleProductCard extends Component
 {

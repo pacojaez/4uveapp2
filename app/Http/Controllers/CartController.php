@@ -20,6 +20,13 @@ class CartController extends Controller
         ]);
     }
 
+    public function removeFromCart($productId): void
+    {
+        CartFacade::remove($productId);
+        $this->cart = CartFacade::get();
+        $this->emit('productRemoved');
+    }
+
     /**
      * Show the form for creating a new resource.
      *
