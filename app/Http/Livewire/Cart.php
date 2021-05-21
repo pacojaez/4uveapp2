@@ -12,13 +12,15 @@ class Cart extends Component
     public function mount(): void
     {
         $this->cart = CartFacade::get();
-        // dd($this->cart);
+        dd($this->cart);
     }
 
     public function render()
     {
+        // $this->cart = CartFacade::get();
+        $this->cart = ['product', 1];
         return view('livewire.cart', [
-            'cart' => 1,
+            'cart' => $this->cart,
         ]);
     }
 

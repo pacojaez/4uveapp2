@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
@@ -26,7 +27,7 @@ Route::get('categorie/{id}', function($id) {
     return view('categorieproducts', compact('id'));
 })->name('categorieproducts');
 
-Route::resource('/cart', 'CartController');
+Route::get('/cart', [CartController::class, 'index'])->name('cart');
 
 // Route::get('cart', function(){
 //     return view('livewire.cart');

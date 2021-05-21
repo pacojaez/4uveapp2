@@ -25,13 +25,14 @@ class GuestNavbar extends Component
     public function show(Request $request, $id)
     {
         $value = $request->session()->get('key');
-        dd($value);
-        //
+
     }
 
     public function render()
     {
-        return view('livewire.guest-navbar');
+        return view('livewire.guest-navbar', [
+            'count' => $this->cartTotal,
+            ]);
     }
 
     public function updateCartTotal(): void
