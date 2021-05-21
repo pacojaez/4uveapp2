@@ -60,8 +60,7 @@ class Product extends Model
         $result = empty($search) ? static::query()
                                 : static::query()
                                         ->where('name', 'like', '%'.$search.'%')
-                                        ->orWhere('id', 'like', '%'.$search.'%')
-                                        ->orWhere('product_code', 'like', '%'.$search.'%')
+                                        ->orWhere('localidad_recogida', 'like', '%'.$search.'%')
                                         ->orWhere('part_number', 'like', '%'.$search.'%')
                                         ->orWhere('brand', 'like', '%'.$search.'%')
                                         ->orWhere('EAN13_individual', 'like', '%'.$search.'%');

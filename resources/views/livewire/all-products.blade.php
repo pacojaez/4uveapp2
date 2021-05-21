@@ -5,18 +5,55 @@
                 {{ __('Todos nuestros Productos')  }}
             </h2>
              <!-- BUSCADOR -->
-             <div class="space-x-8 text-center justify-items-center sm:-my-px sm:ml-10 sm:flex sm:w-full">
+             <div class="flex w-full pb-10">
+                <div class="w-3/6 mx-1">
+                    <input wire:model.debounce.500ms="search" type="search" class="block w-full px-4 py-3 leading-tight text-gray-700 bg-gray-200 border border-gray-200 rounded appearance-none focus:outline-none focus:bg-white focus:border-gray-500"placeholder="Buscar Producto, Localidad de recogida, Marca...">
+                </div>
+                <div class="relative w-1/6 mx-1">
+                    <select wire:model="orderBy" class="block w-full px-4 py-3 pr-8 leading-tight text-gray-700 bg-gray-200 border border-gray-200 rounded appearance-none focus:outline-none focus:bg-white focus:border-gray-500" id="grid-state">
+                        <option value="name" >Producto</option>
+                        <option value="description">Descripción</option>
+                        <option value="localidad_recogida">Localidad Recogida</option>
+                        <option value="EAN13_individual">EAN13</option>
+                        <option value="brand">Marca</option>
+                    </select>
+                    <div class="absolute inset-y-0 right-0 flex items-center px-2 text-gray-700 pointer-events-none">
+                        {{-- <svg class="w-4 h-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg> --}}
+                    </div>
+                </div>
+                <div class="relative w-1/6 mx-1">
+                    <select wire:model="orderAsc" class="block w-full px-4 py-3 pr-8 leading-tight text-gray-700 bg-gray-200 border border-gray-200 rounded appearance-none focus:outline-none focus:bg-white focus:border-gray-500" id="grid-state">
+                        <option value="1">Ascending</option>
+                        <option value="0">Descending</option>
+                    </select>
+                    <div class="absolute inset-y-0 right-0 flex items-center px-2 text-gray-700 pointer-events-none">
+                        {{-- <svg class="w-4 h-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg> --}}
+                    </div>
+                </div>
+                <div class="relative w-1/6 mx-1">
+                    <select wire:model="perPage" class="block w-full px-4 py-3 pr-8 leading-tight text-gray-700 bg-gray-200 border border-gray-200 rounded appearance-none focus:outline-none focus:bg-white focus:border-gray-500" id="grid-state">
+                        <option value="10">10</option>
+                        <option value="25">25</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                    </select>
+                    <div class="absolute inset-y-0 right-0 flex items-center px-2 text-gray-700 pointer-events-none">
+                        {{-- <svg class="w-4 h-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg> --}}
+                    </div>
+                </div>
+            </div>
+             {{-- <div class="space-x-8 text-center justify-items-center sm:-my-px sm:ml-10 sm:flex sm:w-full">
                 <div class="relative w-1/2">
                     <input wire:model.debounce.500ms="search" type="search" class="w-full p-2 pl-8 bg-gray-200 border border-gray-200 rounded focus:bg-white focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent" placeholder="Buscar Productos..." />
                     {{-- <svg class="w-4 h-4 absolute left-2.5 top-3.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
                     </svg> --}}
-                </div>
+                {{-- </div> --}}
                 {{-- <input wire:model.debounce.500ms="search" type="search" class="max-w-md px-3 mt-2 mb-2 ml-20 text-xl rounded shadow-lg sm:max-w-1/2 h-5/6 focus:outline-none focus:shadow-outline" placeholder="Buscar Productos...">
                 <svg class="w-4 h-4 absolute left-2.5 top-3.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
                 </svg> --}}
-             </div>
+             {{-- </div> --}}
         </div>
         <div class="p-2 mx-8 font-semibold bg-gray-300 justify-items-center">
             {{ $products->links() }}
@@ -50,7 +87,7 @@
                             @endif
                             <div class="flex h-8 p-2 text-xs font-semibold text-white bg-green-500 rounded-full justify-items-center">
                                 <span class="flex items-center">
-                                    {!! number_format((float)(($product->offer_prize*100)/$product->invoice_cost_price), 2) !!} %
+                                    {!! number_format((float)(100 - ($product->offer_prize*100)/$product->invoice_cost_price), 2) !!} %
                                 </span>
                             </div>
 

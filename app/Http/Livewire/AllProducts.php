@@ -12,15 +12,21 @@ class AllProducts extends Component
     use WithPagination;
 
     protected $products;
-    public $search = '';
+    public $perPage= 20;
+    public $search;
+    public $orderBy = 'id';
+    public $orderAsc = false;
 
     public function mount(){
-        $this->products = Product::search($this->search)->paginate(15);
     }
 
     public function render()
     {
-        // dd($this->search);
+
+        $this->products =  Product::search($this->search)
+                ->orderBy($this->orderBy, $this->orderAsc ? 'asc' : 'desc')
+                ->paginate($this->perPage);
+
         return view('livewire.all-products', [
             'products' => $this->products,
         ]);
