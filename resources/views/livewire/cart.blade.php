@@ -1,5 +1,12 @@
 
     <div class="w-5/6 m-auto">
+        <div class="max-w-full p-5 mx-2 my-2 text-4xl font-bold text-center border-2 rounded">
+            @if(Auth::user())
+            <h3>TU COMPRA {{ Auth::user()->name }}</h3>
+            @else
+            <h3>TU COMPRA</h3>
+            @endif
+        </div>
         <div class="max-w-full p-5 mx-2 my-2 border-2 rounded">
             {{-- @if ($content->count() > 0) --}}
             @if( count($content) > 0 )
@@ -64,10 +71,20 @@
             </table>
             <hr class="my-2">
             <p class="mb-2 text-xl font-semibold text-center">Total: <span class="mb-2 text-2xl font-bold">{{ $total }}</span>  €</p>
+            @if(Auth::user())
             <div class="mb-2 -mx-3 md:flex">
                 <button class="w-1/2 p-2 mx-2 bg-red-500 border-2 border-red-500 rounded hover:border-red-600 hover:bg-red-600" wire:click="clearCart">Vaciar el carrito</button>
                 <button class="w-1/2 p-2 mx-2 bg-green-500 border-2 border-green-500 rounded hover:border-green-600 hover:bg-green-600" wire:click="clearCart">Realizar el pedido</button>
             </div>
+            @else
+            <div class="max-w-full p-5 mx-2 my-2 text-2xl text-center border-2 rounded">
+            {{-- <div class="mb-2 -mx-3 text-center md:flex"> --}}
+              <h4 class="font-semibold ">Debes estar registrado para formalizar el pedido.</h4>
+              <x-jet-nav-link href="{{ route('register') }}" class="px-8 py-4 mt-2 font-normal tracking-wide text-white transition duration-200 ease-in-out rounded-full outline-none bg-gradient-to-b from-blue-600 to-blue-700 focus:outline-none hover:shadow-lg hover:from-blue-700">
+                {{ __('Registrate') }}
+            </x-jet-nav-link>
+            </div>
+            @endif
             {{-- <button class="w-1/2 p-2 bg-red-500 border-2 border-red-500 rounded hover:border-red-600 hover:bg-red-600" wire:click="clearCart">Vaciar el carrito</button>
             <button class="w-1/2 p-2 bg-green-500 border-2 border-green-500 rounded hover:border-green-600 hover:bg-green-600" wire:click="clearCart">Realizar el pedido</button> --}}
             @else

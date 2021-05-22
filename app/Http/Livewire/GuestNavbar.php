@@ -21,8 +21,7 @@ class GuestNavbar extends Component
 
     public function updateCartTotal(): void
     {
-        dd($this->cartCount = Cart::items());
-        $this->cartCount = Cart::items();
+        // $this->cartCount = Cart::items();
     }
 
     public function show(Request $request, $id)
@@ -38,7 +37,7 @@ class GuestNavbar extends Component
 
     public function render()
     {
-        $this->cartCount = Cart::items();
+        // $this->cartCount = Cart::items();
 
         return view('livewire.guest-navbar', [
             'count' => $this->cartCount,
