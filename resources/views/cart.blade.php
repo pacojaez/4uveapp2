@@ -1,5 +1,8 @@
 <x-guest-layout>
-    <div>
+    @livewire('guest-navbar')
+    @livewire('cart-component')
+</x-guest-layout>
+{{-- <div>
         <div class="w-2/3 mx-auto">
             <div class="my-6 bg-white rounded shadow-md">
                 @if(count($cart['products']) > 0)
@@ -24,7 +27,9 @@
                             <td class="px-6 py-4 border-b border-grey-light">{{ $product->description }}</td>
                             <td class="px-6 py-4 border-b border-grey-light">
                                 <a wire:click="removeFromCart({{ $product->id }})"
-                                    class="px-3 py-1 text-xs font-bold text-green-600 rounded cursor-pointer bg-green hover:bg-green-dark">Remove</a>
+                                    class="px-3 py-1 text-xs font-bold text-green-600 rounded cursor-pointer bg-green hover:bg-green-dark">
+                                Remove
+                                </a>
                             </td>
                         </tr>
                         @endforeach
@@ -44,4 +49,4 @@
             </div>
         </div>
     </div>
-</x-guest-layout>
+ --}}

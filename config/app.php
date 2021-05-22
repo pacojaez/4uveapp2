@@ -232,8 +232,8 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-        'CartLivewire'=> App\Facades\Cart::class,
-        'Cart' => Darryldecode\Cart\Facades\CartFacade::class,
+        // 'CartLivewire'=> App\Facades\Cart::class,
+        'Cart' => App\Facades\Cart::class,
         'Image' => Intervention\Image\Facades\Image::class,
 
     ],

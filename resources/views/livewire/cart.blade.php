@@ -1,6 +1,81 @@
-<x-guest-layout>
-    @livewire('guest-navbar')
-    <div>
+
+    <div class="w-5/6 m-auto">
+        <div class="max-w-full p-5 mx-2 my-2 border-2 rounded">
+            {{-- @if ($content->count() > 0) --}}
+            @if( count($content) > 0 )
+            <table class="min-w-full divide-y divide-gray-200">
+                <thead class="bg-gray-50">
+                    <tr>
+                        <th scope="col"
+                            class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                           PRODUCTO
+                        </th>
+                        <th scope="col"
+                            class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                            PRECIO UNIDAD
+                        </th>
+                        <th scope="col"
+                            class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                            UNIDADES
+                        </th>
+                        <th scope="col"
+                            class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                            SUBTOTAL
+                        </th>
+                        <th scope="col" class="relative px-6 py-3">
+                            Acciones<span class="sr-only">Edit</span>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($content as $id => $item)
+                    <tr>
+                        <td><p class="m-2 text-xl text-left">
+                            {{ $item->get('name') }}
+                            </p>
+                        </td>
+                        <td><p class="m-2 text-xl text-center">
+                            {{ $item->get('price') }} €
+                            </p>
+                        </td>
+                        <td><p class="m-2 text-xl text-center">
+                            {{ $item->get('quantity') }}
+                            </p>
+                        </td>
+                        <td><p class="m-2 text-xl text-center">
+                            {{ $item->get('quantity')*$item->get('price') }} €
+                            </p>
+                        </td>
+                        <td>
+                            <button class="p-2 text-sm bg-gray-200 border-2 border-gray-200 rounded hover:border-gray-300 hover:bg-gray-300" wire:click="updateCartItem({{ $id }}, 'minus')"> - </button>
+                            <button class="p-2 text-sm bg-gray-200 border-2 border-gray-200 rounded hover:border-gray-300 hover:bg-gray-300" wire:click="updateCartItem({{ $id }}, 'plus')"> + </button>
+                            <button class="p-2 text-sm bg-red-500 border-2 border-red-500 rounded hover:border-red-600 hover:bg-red-600" wire:click="removeFromCart({{ $id }})">Eliminar</button>
+                        </td>
+                    </tr>
+                    {{-- <p class="m-4 text-2xl text-right">
+                        {{ $item->get('name') }} x {{ $item->get('quantity') }}
+                        <button class="p-2 text-sm bg-gray-200 border-2 border-gray-200 rounded hover:border-gray-300 hover:bg-gray-300" wire:click="updateCartItem({{ $id }}, 'minus')"> - </button>
+                        <button class="p-2 text-sm bg-gray-200 border-2 border-gray-200 rounded hover:border-gray-300 hover:bg-gray-300" wire:click="updateCartItem({{ $id }}, 'plus')"> + </button>
+                        <button class="p-2 text-sm bg-red-500 border-2 border-red-500 rounded hover:border-red-600 hover:bg-red-600" wire:click="removeFromCart({{ $id }})">Remove</button>
+                    </p>
+                    <hr> --}}
+                    @endforeach
+                </tbody>
+            </table>
+            <hr class="my-2">
+            <p class="mb-2 text-xl font-semibold text-center">Total: <span class="mb-2 text-2xl font-bold">{{ $total }}</span>  €</p>
+            <div class="mb-2 -mx-3 md:flex">
+                <button class="w-1/2 p-2 mx-2 bg-red-500 border-2 border-red-500 rounded hover:border-red-600 hover:bg-red-600" wire:click="clearCart">Vaciar el carrito</button>
+                <button class="w-1/2 p-2 mx-2 bg-green-500 border-2 border-green-500 rounded hover:border-green-600 hover:bg-green-600" wire:click="clearCart">Realizar el pedido</button>
+            </div>
+            {{-- <button class="w-1/2 p-2 bg-red-500 border-2 border-red-500 rounded hover:border-red-600 hover:bg-red-600" wire:click="clearCart">Vaciar el carrito</button>
+            <button class="w-1/2 p-2 bg-green-500 border-2 border-green-500 rounded hover:border-green-600 hover:bg-green-600" wire:click="clearCart">Realizar el pedido</button> --}}
+            @else
+            <p class="mb-2 text-3xl text-center">El carrito está vacio!</p>
+            @endif
+        </div>
+    </div>
+    {{-- <div>
         <div class="w-5/6 mx-auto">
             <div class="my-6 bg-white rounded shadow-md">
                 @if( count($cart['products']) > 0)
@@ -39,8 +114,14 @@
                             </td>
                             <td class="px-6 py-4 border-b border-grey-light">{{ $product->EAN13_individual }}</td>
                             <td class="px-6 py-4 border-b border-grey-light">{{ $product->dimensions_boxes }} mm </td>
-                            <td class="px-6 py-4 border-b border-grey-light"><span>Unidades: {{ $product->pack_units }}</span><br>Peso:{{ $product->weight }} Kgs</td>
-                            <td class="px-6 py-4 border-b border-grey-light">{{ $product->dimensions_boxes }} mm </td>
+                            <td class="px-6 py-4 border-b border-grey-light">
+                                <span>Unidades: {{ $product->pack_units }}</span>
+                                <br>
+                                Peso: {{ $product->weight }} Kgs
+                                <br>
+                                Dimesiones: {{ $product->dimensions_boxes }} mm
+                            </td>
+                            <td class="px-6 py-4 border-b border-grey-light"> {{ $product->invoice_cost_price }} € </td>
                             <td class="px-6 py-4 border-b border-grey-light">
                                 <a wire:click="removeFromCart({{ $product->id }})"
                                     class="px-3 py-1 text-xs font-bold text-green-600 rounded cursor-pointer bg-green hover:bg-green-dark">Remove</a>
@@ -62,5 +143,4 @@
                 @endif
             </div>
         </div>
-    </div>
-</x-guest-layout>
+    </div> --}}

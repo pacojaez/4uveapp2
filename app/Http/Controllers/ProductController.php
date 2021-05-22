@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Facades\Cart;
 
 class ProductController extends Controller
 {
@@ -97,5 +98,16 @@ class ProductController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * Adds an item to cart.
+     *
+     * @return void
+     */
+    public function addToCart(): void
+    {
+        Cart::add($this->product->id, $this->product->name, $this->product->getRawOriginal('invoice_cost_price'), $this->quantity);
+        $this->emit('productAddedToCart');
     }
 }

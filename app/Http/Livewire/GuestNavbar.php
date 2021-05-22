@@ -4,12 +4,14 @@ namespace App\Http\Livewire;
 
 use Illuminate\View\View;
 use Livewire\Component;
-use App\Facades\Cart;
+use App\Facades\Cart as CartOne;
 use Illuminate\Http\Request;
+use App\Facades\Cart;
 
 class GuestNavbar extends Component
 {
     public $cartTotal = 0;
+    public $cartCount = 0;
 
     protected $listeners = [
         'productAdded' => 'updateCartTotal',
@@ -17,9 +19,10 @@ class GuestNavbar extends Component
         'clearCart' => 'updateCartTotal'
     ];
 
-    public function mount(): void
+    public function updateCartTotal(): void
     {
-        $this->cartTotal = count(Cart::get()['products']);
+        dd($this->cartCount = Cart::items());
+        $this->cartCount = Cart::items();
     }
 
     public function show(Request $request, $id)
@@ -28,15 +31,19 @@ class GuestNavbar extends Component
 
     }
 
+    public function mount(): void
+    {
+        // $this->cartCount = Cart::items();
+    }
+
     public function render()
     {
+        $this->cartCount = Cart::items();
+
         return view('livewire.guest-navbar', [
-            'count' => $this->cartTotal,
+            'count' => $this->cartCount,
             ]);
     }
 
-    public function updateCartTotal(): void
-    {
-        $this->cartTotal = count(Cart::get()['products']);
-    }
+
 }

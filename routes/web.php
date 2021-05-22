@@ -29,13 +29,14 @@ Route::get('categorie/{id}', function($id) {
 
 Route::get('/cart', [CartController::class, 'index'])->name('cart');
 
-// Route::get('cart', function(){
+Route::get('cart2', function(){
+    return view('livewire.cart', compact('content',));
+})->name('cart2');
+
+// Route::get('/cart', function () {
 //     return view('livewire.cart');
 // })->name('cart');
 
-// Route::get('/cart', function () {
-//     return view('livewire.shopping-cart');
-// })->name('cart');
 // Route::get('/cart', Cart::class );
 // After
 // Route::get('/cart', Cart::class);

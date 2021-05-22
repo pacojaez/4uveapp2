@@ -57,7 +57,8 @@
                 </h2>
                 {{-- <h1 class="mb-4 text-3xl font-medium text-gray-900 title-font">{{ $product->name }}</h1> --}}
                 <div class="flex mb-4">
-                    <h3 class="flex-grow px-1 py-2 text-lg text-indigo-500 border-b-2 border-indigo-500">Descripción</h3>
+                    <h3 class="flex-grow px-1 py-2 text-lg text-indigo-500 border-b-2 border-indigo-500">Descripción
+                    </h3>
                     {{-- <a class="flex-grow px-1 py-2 text-lg border-b-2 border-gray-300">Reviews</a>
                     <a class="flex-grow px-1 py-2 text-lg border-b-2 border-gray-300">Details</a> --}}
                 </div>
@@ -81,7 +82,8 @@
                 <div class="flex p-2 mb-2 border-t border-gray-200">
                     <span class="text-2xl font-extrabold text-gray-500">Porcentaje de Ahorro</span>
                     <span class="ml-auto text-2xl font-extrabold text-gray-900">{!!
-                        number_format((float)(100- ($product->offer_prize*100)/$product->invoice_cost_price), 2) !!} %</span>
+                        number_format((float)(100- ($product->offer_prize*100)/$product->invoice_cost_price), 2) !!}
+                        %</span>
                 </div>
                 <div class="flex p-2 mb-2 border-t border-gray-200">
                     <span class="text-4xl font-extrabold text-gray-500">Oferta: </span>
@@ -89,13 +91,28 @@
                         {{ $product->offer_prize}} €</span>
                 </div>
                 <div class="flex">
-                    {{-- <span class="text-2xl font-medium text-gray-900 title-font">Oferta: {{ $product->offer_prize}} €</span> --}}
+                    {{-- <span class="text-2xl font-medium text-gray-900 title-font">Oferta: {{ $product->offer_prize}}
+                    €</span> --}}
                     <div class="bottom-0 flex w-full pb-5 mt-5">
-                        <button wire:click="addToCart({{ $product->id }})"
-                            class="flex px-6 py-2 ml-auto mr-4 font-bold text-white uppercase bg-indigo-500 border-0 rounded focus:outline-none hover:bg-indigo-600">
-                            Add to cart
-                        </button>
+                        {{-- <button wire:click="addToCart({{ $product->id }})"
+                        class="flex px-6 py-2 ml-auto mr-4 font-bold text-white uppercase bg-indigo-500 border-0 rounded focus:outline-none hover:bg-indigo-600">
+                        Add to cart
+                        </button> --}}
+                        {{-- <button wire:click="addToCart({{ $product->id }})"
+                        class="flex px-6 py-2 ml-auto mr-4 font-bold text-white uppercase bg-indigo-500 border-0 rounded focus:outline-none hover:bg-indigo-600">
+                        Add to cart
+                        </button> --}}
+                        <input class="mb-2 border-2 rounded" type="number" min="1" wire:model="quantity">
+                        <button
+                            class="p-2 bg-blue-500 border-2 border-blue-500 rounded hover:border-blue-600 hover:bg-blue-600"
+                            wire:click="addToCart">Add To Cart</button>
+                        <button wire:click="$emitTo('cart', 'productAddedToCart')">add to cart en minusculas </button>
                     </div>
+                    {{-- <script>
+                        Livewire.on('productAddedToCart', product_id => {
+                            alert('A product was added with the id: ' + product_id);
+                        })
+                    </script> --}}
                     {{-- <button
                         class="flex px-6 py-2 ml-auto text-white bg-indigo-500 border-0 rounded focus:outline-none hover:bg-indigo-600">AÑADIR
                         AL CARRO</button> --}}
@@ -183,38 +200,38 @@
                 {{-- <div class="flex p-2 border-t border-gray-200">
                     <span class="text-gray-500">EAN-13 CAJA 1</span>
                     <span class="ml-auto text-gray-900">{{ $product->EAN13_box_1 }}</span>
-                </div> --}}
-                <div class="flex p-2 bg-gray-200 border-t border-gray-200">
-                    <span class="text-gray-500">Unidades Embalaje 1</span>
-                    <span class="ml-auto text-gray-900">{{$product->unidades_embalaje_2}}</span>
-                </div>
-                <div class="flex p-2 border-t border-gray-200">
-                    <span class="text-gray-500">DIMENSIONES CAJA 1 (LxAxH)</span>
-                    <span class="ml-auto text-gray-900">{{ $product->dimensions_boxes_2 }} mm</span>
-                </div>
-                <div class="flex p-2 mb-6 bg-gray-200 border-b border-gray-500">
-                    <span class="text-gray-500">Peso Embalaje 1</span>
-                    <span class="ml-auto text-gray-900">{{ $product->weight_2 }} Kg</span>
-                </div>
-                <h3 class="font-bold">CAJA 2:</h3>
-                {{-- <div class="flex p-2 border-t border-gray-200">
+            </div> --}}
+            <div class="flex p-2 bg-gray-200 border-t border-gray-200">
+                <span class="text-gray-500">Unidades Embalaje 1</span>
+                <span class="ml-auto text-gray-900">{{$product->unidades_embalaje_2}}</span>
+            </div>
+            <div class="flex p-2 border-t border-gray-200">
+                <span class="text-gray-500">DIMENSIONES CAJA 1 (LxAxH)</span>
+                <span class="ml-auto text-gray-900">{{ $product->dimensions_boxes_2 }} mm</span>
+            </div>
+            <div class="flex p-2 mb-6 bg-gray-200 border-b border-gray-500">
+                <span class="text-gray-500">Peso Embalaje 1</span>
+                <span class="ml-auto text-gray-900">{{ $product->weight_2 }} Kg</span>
+            </div>
+            <h3 class="font-bold">CAJA 2:</h3>
+            {{-- <div class="flex p-2 border-t border-gray-200">
                     <span class="text-gray-500">EAN-13 CAJA 2</span>
                     <span class="ml-auto text-gray-900">{{ $product->EAN13_box_2 }}</span>
-                </div> --}}
-                <div class="flex p-2 bg-gray-200 border-t border-gray-200">
-                    <span class="text-gray-500">Unidades Embalaje 2</span>
-                    <span class="ml-auto text-gray-900">{{$product->unidades_embalaje_3}}</span>
-                </div>
-                <div class="flex p-2 border-t border-gray-200">
-                    <span class="text-gray-500">DIMENSIONES CAJA 2 (LxAxH)</span>
-                    <span class="ml-auto text-gray-900">{{ $product->dimensions_boxes_3 }} mm</span>
-                </div>
-                <div class="flex p-2 mb-6 bg-gray-200 border-b border-gray-500">
-                    <span class="text-gray-500">Peso Embalaje 2</span>
-                    <span class="ml-auto text-gray-900">{{ $product->weight_3 }} Kg</span>
-                </div>
-            </div>
+        </div> --}}
+        <div class="flex p-2 bg-gray-200 border-t border-gray-200">
+            <span class="text-gray-500">Unidades Embalaje 2</span>
+            <span class="ml-auto text-gray-900">{{$product->unidades_embalaje_3}}</span>
         </div>
+        <div class="flex p-2 border-t border-gray-200">
+            <span class="text-gray-500">DIMENSIONES CAJA 2 (LxAxH)</span>
+            <span class="ml-auto text-gray-900">{{ $product->dimensions_boxes_3 }} mm</span>
+        </div>
+        <div class="flex p-2 mb-6 bg-gray-200 border-b border-gray-500">
+            <span class="text-gray-500">Peso Embalaje 2</span>
+            <span class="ml-auto text-gray-900">{{ $product->weight_3 }} Kg</span>
+        </div>
+    </div>
+    </div>
     </div>
 </section>
 <!-- SECCIÓN ENVIO -->
@@ -367,7 +384,8 @@
             <div class="flex p-2 border-t border-gray-200">
                 <span class="text-2xl font-extrabold text-gray-500">Porcentaje de Ahorro</span>
                 <span class="ml-auto text-2xl font-extrabold text-gray-900">{!!
-                    number_format((float)(100 - ($product->offer_prize*100)/$product->invoice_cost_price), 2) !!} %</span>
+                    number_format((float)(100 - ($product->offer_prize*100)/$product->invoice_cost_price), 2) !!}
+                    %</span>
                 {{-- <span class="ml-auto text-gray-900">{{ ($product->offer_prize*100)/$product->invoice_cost_price }}
                 %</span> --}}
             </div>
