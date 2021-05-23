@@ -50,9 +50,10 @@ class SingleProductCard extends Component
     {
         Cart::add($this->product->id, $this->product->name, $this->product->getRawOriginal('invoice_cost_price'), $this->quantity);
         // dd($one);
-        $this->emitUp('productAddedToCart');
-        $this->emitTo('guest-nav-bar', 'productAdded');
-        $this->emitTo('cart', 'productAdded');
+        // $this->emitUp('productAddedToCart');
+        // $this->emitTo('guest-nav-bar', 'productAdded');
+        // $this->emitTo('cart', 'productAdded');
+        $this->emitTo('nav-cart', 'refresh');
         // dd($this->quantity);
     }
 }

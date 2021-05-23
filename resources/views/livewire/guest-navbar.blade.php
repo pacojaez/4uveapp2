@@ -15,9 +15,10 @@
                     <x-jet-nav-link href="{{ route('allproducts') }}" class="m-5 font-bold">
                         {{ __('All Products') }}
                     </x-jet-nav-link>
-                    <x-jet-nav-link href="{{ route('cart') }}" class="m-5 font-bold">
+                    {{-- <x-jet-nav-link href="{{ route('cart') }}" class="m-5 font-bold">
                         {{ __('Cart') }} ({{ $count }})
-                    </x-jet-nav-link>
+                    </x-jet-nav-link> --}}
+                    @livewire('nav-cart')
                     {{-- <x-jet-nav-link href="{{ route('cart') }}" data-turbolinks-action="replace" class="m-5 font-bold">
                         Cart ({{ $cartTotal }})
                     </x-jet-nav-link> --}}

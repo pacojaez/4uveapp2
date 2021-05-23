@@ -15,12 +15,13 @@
         @livewireStyles
 
         <!-- Scripts -->
+        <script src="{{ mix('js/app.js') }}" defer></script>
         <!-- Alpine CDN -->
         <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
-        <script src="{{ mix('js/app.js') }}" defer></script>
+
     </head>
     <body>
-        <div class="font-sans text-gray-900 antialiased">
+        <div class="font-sans antialiased text-gray-900">
             {{ $slot }}
         </div>
         @livewire('footer')

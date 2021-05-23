@@ -34,12 +34,10 @@ class CartComponent extends Component
      */
     public function render(): View
     {
-        // dd($this->content);
 
         return view('livewire.cart', [
             'total' => $this->total,
             'content' => $this->content,
-            // 'product' => Product::first()->get()
         ]);
     }
 
@@ -53,8 +51,8 @@ class CartComponent extends Component
     {
         Cart::remove($id);
         $this->updateCart();
-        $this->emitTo('guest-nav-bar', 'productAdded');
-        Cart::items();
+        $this->emitTo('nav-cart', 'refresh');
+
     }
 
     /**
@@ -66,7 +64,8 @@ class CartComponent extends Component
     {
         Cart::clear();
         $this->updateCart();
-        Cart::items();
+        $this->emitTo('nav-cart', 'refresh');
+
     }
 
     /**
@@ -79,10 +78,9 @@ class CartComponent extends Component
     public function updateCartItem(string $id, string $action): void
     {
         Cart::update($id, $action);
-        // dd($one);
         $this->updateCart();
-        $this->emitTo('guest-nav-bar', 'productAdded');
-        Cart::items();
+        $this->emitTo('nav-cart', 'refresh');
+
     }
 
     /**
@@ -95,8 +93,8 @@ class CartComponent extends Component
 
         $this->total = Cart::total();
         $this->content = Cart::content();
-        Cart::items();
-        // dd(Cart::content());
+        $this->emitTo('nav-cart', 'refresh');
+
     }
 }
 

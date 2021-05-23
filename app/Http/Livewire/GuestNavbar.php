@@ -16,7 +16,8 @@ class GuestNavbar extends Component
     protected $listeners = [
         'productAdded' => 'updateCartTotal',
         'productRemoved' => 'updateCartTotal',
-        'clearCart' => 'updateCartTotal'
+        'clearCart' => 'updateCartTotal',
+        'refresh' => 'mount'
     ];
 
     public function updateCartTotal(): void
@@ -32,7 +33,9 @@ class GuestNavbar extends Component
 
     public function mount(): void
     {
-        // $this->cartCount = Cart::items();
+        $this->cartCount = Cart::items();
+        $this->render();
+        // dd($this->cartCount = Cart::items());
     }
 
     public function render()
