@@ -12,13 +12,19 @@
                     {{-- <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <input class="max-w-md px-3 mt-2 mb-2 ml-20 text-xl rounded shadow-lg sm:max-w-1/2 h-5/6 focus:outline-none focus:shadow-outline" type="search" placeholder="Buscar Productos...">
                     </div> --}}
-                    <x-jet-nav-link href="{{ route('allproducts') }}" class="m-5 font-bold">
-                        {{ __('Todos nuestros Productos') }}
+                    <x-jet-nav-link href="{{ route('allproducts') }}" class="m-2 font-bold">
+                        {{ __('Productos') }}
                     </x-jet-nav-link>
                     {{-- <x-jet-nav-link href="{{ route('cart') }}" class="m-5 font-bold">
                         {{ __('Cart') }} ({{ $count }})
                     </x-jet-nav-link> --}}
                     @livewire('nav-cart')
+
+                    <div class="justify-end flex-grow hidden sm:flex sm:items-center sm:ml-6 place-items-center">
+                        <x-jet-nav-link href="{{ route('contact') }}" class="m-2 font-bold">
+                            {{ __('Contacto') }}
+                        </x-jet-nav-link>
+                    </div>
                     {{-- <x-jet-nav-link href="{{ route('cart') }}" data-turbolinks-action="replace" class="m-5 font-bold">
                         Cart ({{ $cartTotal }})
                     </x-jet-nav-link> --}}
@@ -141,6 +147,16 @@
         <div class="pt-4 pb-1 border-t border-gray-200">
             <div class="flex items-center px-4">
                 <div class="pt-2 pb-3 space-y-1">
+                    <x-jet-nav-link href="{{ route('contact') }}" class="m-5 font-bold">
+                        {{ __('Contacto') }}
+                    </x-jet-nav-link>
+                   {{-- <a href="{{route('contact')}}" >Contact</a> --}}
+                </div>
+            </div>
+        </div>
+        {{-- <div class="pt-4 pb-1 border-t border-gray-200">
+            <div class="flex items-center px-4">
+                <div class="pt-2 pb-3 space-y-1">
                     @if(Auth::user())
                     <div class="justify-end flex-grow hidden sm:flex sm:items-center sm:ml-6 place-items-center">
                         <!-- Settings Dropdown -->
@@ -212,9 +228,21 @@
                         </x-jet-nav-link>
                     </div>
                     @endif
+                   {{-- <a href="{{route('contact')}}" >Contact</a>
+                </div>
+            </div>
+        </div> --}}
+        @if(Auth::user())
+        <div class="pt-4 pb-1 border-t border-gray-200">
+            <div class="flex items-center px-4">
+                <div class="pt-2 pb-3 space-y-1">
+                    <x-jet-nav-link href="{{ route('dashboard') }}" class="m-5 font-bold">
+                        {{ __('Panel de Control') }}
+                    </x-jet-nav-link>
                 </div>
             </div>
         </div>
+        @endif
         <div class="pt-4 pb-1 border-t border-gray-200">
             <div class="flex items-center px-4">
                 <div class="pt-2 pb-3 space-y-1">

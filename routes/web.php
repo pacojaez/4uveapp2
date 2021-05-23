@@ -90,3 +90,10 @@ Route::put('/user/update/{id}',[UserController::class, 'update'])->middleware('i
 // Route::get('/products/show/{product_id }', [ProductController::class, 'show'])->name('products.show');
 
 Route::resource('products', 'ProductController');
+
+
+//*******CONTACT */
+
+Route::get('/contact', function () {
+    return view('contact');
+})->name('contact');

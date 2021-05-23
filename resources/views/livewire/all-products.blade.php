@@ -85,11 +85,21 @@
                                 </span>
                             </div>
                             @endif
+
+                            @if(!$product->offer_prize)
+                            <div class="flex h-8 p-2 text-xs font-semibold text-white bg-green-500 rounded-full justify-items-center">
+                                <span class="flex items-center">
+                                   No hay precio de Oferta
+                                </span>
+                            </div>
+                            @else
                             <div class="flex h-8 p-2 text-xs font-semibold text-white bg-green-500 rounded-full justify-items-center">
                                 <span class="flex items-center">
                                     {!! number_format((float)(100 - ($product->offer_prize*100)/$product->invoice_cost_price), 2) !!} %
                                 </span>
                             </div>
+                            @endif
+
 
 
                             {{-- <div class="flex p-2 mb-2 border-t border-gray-200">

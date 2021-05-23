@@ -1,7 +1,7 @@
 <div>
     {{-- <form method="POST" {{ action('ProductController@update', ['product'=> $product]) }} enctype="multipart/form-data"> --}}
-        <form wire:submit.prevent="update" enctype="multipart/form-data">
-        @method('PUT')
+        <form wire:submit.prevent="store" enctype="multipart/form-data">
+        @method('post')
         @csrf
         <div class="flex items-center justify-center mt-4 mb-2 bg-gray-200">
             <div class="grid w-11/12 bg-white rounded-lg shadow-xl md:w-1/12 lg:w-10/12">
@@ -11,7 +11,7 @@
                             class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">Producto:</label>
                         <input wire:model='name' id='name' name="name"
                             class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
-                            type="text" placeholder="{{$product->name}}" />
+                            type="text" placeholder="Ej: Caja de Bolígrafos BIC. Color Rojo" />
                     </div>
                     <div class="grid grid-cols-1">
                         <label class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">Descripción
@@ -19,14 +19,16 @@
                         <input
                             wire:model='short_description' id='short_description' name="short_description"
                             class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
-                            type="text" placeholder="{{$product->short_description}}" />
+                            type="text" placeholder="Ej: El Bic Naranja de toda la vida" />
                     </div>
                 </div>
                 <div class="grid grid-cols-1 mt-5 mx-7">
                     <label
                         class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">Descripción:</label>
-                        <textarea wire:model='description' name="description" id='description' cols="2" rows="2" placeholder="{{ $product->description}}"
-                        class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"></textarea>
+                        <textarea wire:model='description' name="description" id='description' cols="2" rows="2"
+                                    placeholder="Ej: El clasico BIC Cristal Original, es el bolígrafo más vendido del mundo.Su punta media de 1mm se desliza por el papel con suavidad para ofrecer una escritura sin manchas. Tiene un cuerpo transparente que permite comprobar en todo momento el nivel de tinta."
+                                    class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent">
+                        </textarea>
                 </div>
                 <div class="grid grid-cols-1 gap-5 mt-5 md:grid-cols-2 md:gap-8 mx-7">
                     <div class="grid grid-cols-1">
@@ -35,7 +37,7 @@
                         <input
                             wire:model='product_code' id='product_code' name="product_code"
                             class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
-                            type="text" placeholder="{{ $product->product_code}}" />
+                            type="text" placeholder="Ej: 8373609" />
                     </div>
                     <div class="grid grid-cols-1">
                         <label class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">Part Number:
@@ -43,7 +45,7 @@
                         <input
                             wire:model='part_number' id='part_number' name="part_number"
                             class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
-                            type="text" placeholder="{{ $product->part_number}}" />
+                            type="text" placeholder="Ej: 8373609" />
                     </div>
                 </div>
                 <div class="grid grid-cols-1 gap-5 mt-5 md:grid-cols-2 md:gap-8 mx-7">
@@ -53,7 +55,7 @@
                         <input
                             wire:model='brand' id='brand' name="brand"
                             class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
-                            type="text" placeholder="{{ $product->brand}}" />
+                            type="text" placeholder="Ej: BIC" />
                     </div>
                     <div class="grid grid-cols-1">
                         <label class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">EAN-13:
@@ -61,7 +63,7 @@
                         <input
                             wire:model='EAN13_individual' id='EAN13_individual' name="EAN13_individual"
                             class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
-                            type="text" placeholder="{{ $product->EAN13_individual}}" />
+                            type="text" placeholder="Ej: 0070330129627" />
                     </div>
                 </div>
                 <div class="grid grid-cols-1 gap-5 mt-5 md:grid-cols-2 md:gap-8 mx-7">
@@ -71,7 +73,7 @@
                         <input
                             wire:model='dimensions_boxes' id='dimensions_boxes' name="dimensions_boxes"
                             class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
-                            type="text" placeholder="{{ $product->dimensions_boxes}} mm" />
+                            type="text" placeholder="Ej: 13x13x13 mm" />
                     </div>
                     <div class="grid grid-cols-1">
                         <label class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">Unidades
@@ -80,7 +82,7 @@
                         <input
                             wire:model='unidades_embalaje_individual' id='unidades_embalaje_individual' name="unidades_embalaje_individual"
                             class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
-                            type="text" placeholder="{{ $product->unidades_embalaje_individual}}" />
+                            type="text" placeholder="Ej: 1" />
                     </div>
                 </div>
                 <div class="grid grid-cols-1 gap-5 mt-5 md:grid-cols-2 md:gap-8 mx-7">
@@ -89,7 +91,7 @@
                         <input
                             wire:model='weight' id='weight' name="weight"
                             class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
-                            type="text" placeholder="{{ $product->weight}} Kgs" />
+                            type="text" placeholder="Ej: 0.250 Kgs" />
                     </div>
                     <div class="grid grid-cols-1">
                         <label class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">Unidades
@@ -98,7 +100,7 @@
                         <input
                             wire:model='pack_units' id='pack_units' name="pack_units"
                             class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
-                            type="text" placeholder="{{ $product->pack_units}}" />
+                            type="text" placeholder="Ej: 3" />
                     </div>
                 </div>
                 <div class="grid grid-cols-1 gap-5 mt-5 md:grid-cols-2 md:gap-8 mx-7">
@@ -109,7 +111,7 @@
                         <input
                             wire:model='dimensions_boxes_2' id='dimensions_boxes_2' name="dimensions_boxes_2"
                             class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
-                            type="text" placeholder="{{ $product->dimensions_boxes_2}} mm" />
+                            type="text" placeholder="Ej: 26 x 30 x 45 mm" />
                     </div>
                     <div class="grid grid-cols-1">
                         <label class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">Peso Caja 1:
@@ -117,7 +119,7 @@
                         <input
                             wire:model='weight_2' id='weight_2' name="weight_2"
                             class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
-                            type="text" placeholder="{{ $product->weight_2}} Kgs" />
+                            type="text" placeholder=" Ej: 1.2 Kgs" />
                     </div>
                 </div>
                 <div class="grid grid-cols-1 gap-5 mt-5 md:grid-cols-2 md:gap-8 mx-7">
@@ -128,7 +130,7 @@
                         <input
                             wire:model='dimensions_boxes_3' id='dimensions_boxes_3' name="dimensions_boxes_3"
                             class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
-                            type="text" placeholder="{{ $product->dimensions_boxes_3}} mm" />
+                            type="text" placeholder="Ej: 200 x 200 x 200 mm" />
                     </div>
                     <div class="grid grid-cols-1">
                         <label class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">Peso Caja 2:
@@ -136,7 +138,7 @@
                         <input
                             wire:model='weight_3' id='weight_3' name="weight_3"
                             class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
-                            type="text" placeholder="{{ $product->weight_3}} Kgs" />
+                            type="text" placeholder="Ej: 9 Kgs" />
                     </div>
                 </div>
                 <div class="grid grid-cols-1 gap-5 mt-5 md:grid-cols-2 md:gap-8 mx-7">
@@ -147,7 +149,7 @@
                         <input
                             wire:model='plazo_preparacion_pedido' id='plazo_preparacion_pedido' name="plazo_preparacion_pedido"
                             class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
-                            type="date" placeholder="{{ $product->plazo_preparacion_pedido}}" />
+                            type="date" placeholder=" " />
                     </div>
                     <div class="grid grid-cols-1">
                         <label class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">ACEPTA
@@ -167,7 +169,7 @@
                         <input
                             wire:model='offer_units' id='offer_units' name="offer_units"
                             class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
-                            type="text" placeholder="{{ $product->offer_units}}" />
+                            type="text" placeholder="Ej: 2" />
                     </div>
                     <div class="grid grid-cols-1">
                         <label class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">NÚMERO DE
@@ -176,7 +178,7 @@
                         <input
                             wire:model='boxes_quantity' id='boxes_quantity' name="boxes_quantity"
                             class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
-                            type="text" placeholder="{{ $product->boxes_quantity}} Kgs" />
+                            type="text" placeholder="Ej: 9.250 Kgs" />
                     </div>
                 </div>
                 <div class="grid grid-cols-1 gap-5 mt-5 md:grid-cols-2 md:gap-8 mx-7">
@@ -186,7 +188,7 @@
                         <input
                             wire:model='whole_boxe_dimensions' id='whole_boxe_dimensions' name="whole_box_dimensions"
                             class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
-                            type="text" placeholder="{{ $product->whole_box_dimensions }} mm" />
+                            type="text" placeholder="Ej: 100 x 80 x 40 mm" />
                     </div>
                     {{-- <div class="grid grid-cols-1">
                         <label class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">NÚMERO DE
@@ -205,7 +207,7 @@
                         <input
                             wire:model='provider' id='provider' name="provider"
                             class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
-                            type="text" placeholder="{{ $product->provider }}" />
+                            type="text" placeholder="Ej: Fabricante" />
                     </div>
                     <div class="grid grid-cols-1">
                         <label class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">COSTE COMPRA:
@@ -213,7 +215,7 @@
                         <input
                             wire:model='invoice_cost_price' id='invoice_cost_price' name="invoice_cost_price"
                             class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
-                            type="text" placeholder="{{ $product->invoice_cost_price}} €" />
+                            type="text" placeholder="Ej: 200 €" />
                     </div>
                 </div>
                 <div class="grid grid-cols-1 gap-5 mt-5 md:grid-cols-2 md:gap-8 mx-7">
@@ -223,7 +225,7 @@
                         <input
                             wire:model='buyed_date' id='buyed_date' name="buyed_date"
                             class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
-                            type="date" placeholder="{{ $product->buyed_date }}" />
+                            type="date" placeholder="" />
                     </div>
                     <div class="grid grid-cols-1">
                         <label class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">OFERTA HASTA:
@@ -231,7 +233,7 @@
                         <input
                             wire:model='offer_until' id='offer_until' name="offer_until"
                             class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
-                            type="date" placeholder="{{ $product->offer_until }}" />
+                            type="date" placeholder="" />
                     </div>
                 </div>
                 <div class="grid grid-cols-1 gap-5 mt-5 md:grid-cols-3 md:gap-8 mx-7">
@@ -241,7 +243,7 @@
                         <input
                             wire:model='localidad_recogida' id='localidad_recogida' name="localidad_recogida"
                             class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
-                            type="text" placeholder="{{ $product->localidad_recogida }}" />
+                            type="text" placeholder="Ej: Terrassa" />
                     </div>
                     <div class="grid grid-cols-1">
                         <label class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">CODIGO
@@ -250,7 +252,7 @@
                         <input
                             wire:model='cp_recogida' id='cp_recogida' name="cp_recogida"
                             class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
-                            type="text" placeholder="{{ $product->cp_recogida }}" />
+                            type="text" placeholder="Ej: 08226" />
                     </div>
                     <div class="grid grid-cols-1">
                         <label class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">PROVINCIA:
@@ -258,7 +260,7 @@
                         <input
                             wire:model='provincia_recogida' id='provincia_recogida' name="provincia_recogida"
                             class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
-                            type="text" placeholder="{{ $product->provincia_recogida }}" />
+                            type="text" placeholder="Ej: Barcelona" />
                     </div>
                 </div>
                 <div class="grid grid-cols-1 gap-5 mt-5 md:grid-cols-2 md:gap-8 mx-7">
@@ -266,7 +268,7 @@
                         <label class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">PORTES:
                         </label>
                         <select
-                            wire:model='porte_tipo' id='porte_tipo' name="porte_id"
+                            wire:model='porte_id' id='porte_id' name="porte_id"
                             class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent">
                             @foreach ($portes as $porte )
                             <option value="{{ $porte->id }}">{{ $porte->tipo}}</option>
@@ -274,7 +276,7 @@
                         </select>
                     </div>
                     <div class="grid grid-cols-1">
-                        <label class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">PORTES:
+                        <label class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">CATEGORÍA:
                         </label>
                         <select
                             wire:model='subcategorie_id' id='subcategorie_id' name="subcategorie_id"
@@ -314,7 +316,7 @@
                     class="p-2 mt-12 text-4xl font-bold text-center text-gray-500 uppercase bg-gray-300 md:text-4xl text-light">
                     AÑADIR FOTOS DEL PRODUCTO
                 </label>
-                <div class="grid justify-between grid-cols-3 mt-5 bg-gray-200 mx-7">
+                {{-- <div class="grid justify-between grid-cols-3 mt-5 bg-gray-200 mx-7">
                     <div class='flex items-center justify-center w-5/6'>
                         <label
                             class='flex flex-col w-full h-32 border-4 border-dashed hover:bg-gray-100 hover:border-purple-300 group'>
@@ -323,13 +325,8 @@
                                     <p
                                         class='pt-1 text-sm tracking-wider text-gray-400 lowercase group-hover:text-purple-600'>
                                         FOTO ACTUAL #1</p>
-                                        @if(!$product->product_image)
-                                        <img src="{{asset('storage/images/elementos/no-image-icon.png')}}"
+                                    <img src="{{asset('storage/images/products/'.$product->product_image)}}"
                                         class="w-20 h-20" />
-                                        @else
-                                        <img src="{{asset('storage/images/products/'.$product->product_image)}}"
-                                        class="w-20 h-20" />
-                                        @endif
                                 </div>
                             </div>
                         </label>
@@ -342,13 +339,8 @@
                                     <p
                                         class='pt-1 text-sm tracking-wider text-gray-400 lowercase group-hover:text-purple-600'>
                                         FOTO ACTUAL #2</p>
-                                        @if(!$product->product_image_2)
-                                        <img src="{{asset('storage/images/elementos/no-image-icon.png')}}"
+                                    <img src="{{asset('storage/images/products/'.$product->product_image_2)}}"
                                         class="w-20 h-20" />
-                                        @else
-                                        <img src="{{asset('storage/images/products/'.$product->product_image_2)}}"
-                                        class="w-20 h-20" />
-                                        @endif
                                 </div>
                             </div>
                         </label>
@@ -361,18 +353,13 @@
                                     <p
                                         class='pt-1 text-sm tracking-wider text-gray-400 lowercase group-hover:text-purple-600'>
                                         FOTO ACTUAL #3</p>
-                                        @if(!$product->product_image_3)
-                                        <img src="{{asset('storage/images/elementos/no-image-icon.png')}}"
+                                    <img src="{{asset('storage/images/products/'.$product->product_image_3)}}"
                                         class="w-20 h-20" />
-                                        @else
-                                        <img src="{{asset('storage/images/products/'.$product->product_image_3)}}"
-                                        class="w-20 h-20" />
-                                        @endif
                                 </div>
                             </div>
                         </label>
                     </div>
-                </div>
+                </div> --}}
                 <div class="grid justify-between grid-cols-3 mt-5 bg-gray-200 mx-7">
                     <div class='flex items-center justify-center w-5/6'>
                         @if (!$product_image)
@@ -559,7 +546,7 @@
                         type="reset">CANCELAR</button>
                     <button
                         class='w-auto px-4 py-2 font-medium text-white bg-purple-500 rounded-lg shadow-xl hover:bg-purple-700'
-                        type="submit">ACTUALIZAR</button>
+                        type="submit">CREAR NUEVO PRODUCTO</button>
                 </div>
 
             </div>

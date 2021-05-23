@@ -104,9 +104,15 @@
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <div class="flex items-center">
                                         <div class="flex-shrink-0 w-10 h-10">
-                                            <img class="w-10 h-10 rounded-full"
+                                            @if(!$product->product_image)
+                                            <img class="w-10 h-10"
+                                                src="{{asset('storage/images/elementos/no-image-icon.png')}}"
+                                                alt="Producto sin imagen" />
+                                            @else
+                                            <img class="w-10 h-10"
                                                 src="{{asset('storage/images/products/'.$product->product_image)}}"
                                                 alt="{{ $product->name}}" />
+                                            @endif
                                         </div>
                                         <div class="ml-4">
                                             <div class="text-sm font-medium text-gray-900">
@@ -163,6 +169,9 @@
                                     @endif
                                     {{-- <div class="text-sm text-gray-900">Embalaje Original: {{ $product->embalaje_original }}
                 </div> --}}
+                <div class="text-sm text-gray-900">Subido por:</div>
+                <div class="text-sm text-gray-900"> {{ $product->user->name }}</div>
+
                 <div class="text-sm text-gray-900">Portes: {{ $product->porte->tipo }}</div>
                 </td>
                 <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">

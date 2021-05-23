@@ -65,7 +65,7 @@ class Product extends Model
                                         ->orWhere('brand', 'like', '%'.$search.'%')
                                         ->orWhere('EAN13_individual', 'like', '%'.$search.'%');
 
-        // dd($result);
+        $result->where('active', 1);
         return $result;
 
     }

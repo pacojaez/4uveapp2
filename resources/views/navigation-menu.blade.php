@@ -13,7 +13,7 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
+                        {{ __('Panel de Control') }}
                     </x-jet-nav-link>
                 </div>
             </div>
@@ -93,22 +93,26 @@
                         <x-slot name="content">
                             <!-- Account Management -->
                             <div class="block px-4 py-2 text-xs text-gray-400">
-                                {{ __('Manage Account') }}
+                                {{ __('Gestionar tu Cuenta') }}
                             </div>
 
                             <x-jet-dropdown-link href="{{ route('profile.show') }}">
-                                {{ __('Profile') }}
+                                {{ __('Perfil') }}
                             </x-jet-dropdown-link>
-
+                            @if(Auth::user())
+                            <x-jet-dropdown-link href="{{ route('products.create') }}">
+                                {{ __('Añadir Producto') }}
+                            </x-jet-dropdown-link>
+                            @endif
                             @if(Auth::user()->isAdmin())
                             <x-jet-dropdown-link href="{{ route('products.index') }}">
-                                {{ __('Show All Products') }}
+                                {{ __('Todos los Productos') }}
                             </x-jet-dropdown-link>
                                 <x-jet-dropdown-link href="{{ route('user.create') }}">
-                                    {{ __('Add User') }}
+                                    {{ __('Añadir Usuario') }}
                                 </x-jet-dropdown-link>
                                 <x-jet-dropdown-link href="{{ route('users.index') }}">
-                                    {{ __('Show All Users') }}
+                                    {{ __('Todos los Usuarios') }}
                                 </x-jet-dropdown-link>
                             @endif
 
@@ -151,7 +155,7 @@
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
             <x-jet-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                {{ __('Dashboard') }}
+                {{ __('Panel de Control') }}
             </x-jet-responsive-nav-link>
         </div>
 
@@ -173,7 +177,7 @@
             <div class="mt-3 space-y-1">
                 <!-- Account Management -->
                 <x-jet-responsive-nav-link href="{{ route('profile.show') }}" :active="request()->routeIs('profile.show')">
-                    {{ __('Profile') }}
+                    {{ __('Tu Perfil') }}
                 </x-jet-responsive-nav-link>
 
                 @if (Laravel\Jetstream\Jetstream::hasApiFeatures())

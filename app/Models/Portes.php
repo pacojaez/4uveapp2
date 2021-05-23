@@ -15,7 +15,7 @@ class Portes extends Model
      * @var array
      */
     protected $fillable = [
-        'name',
+        'tipo',
     ];
 
     /**

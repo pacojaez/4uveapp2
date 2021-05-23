@@ -29,11 +29,21 @@ class ProductsTable extends Component
     public function toggleContent(){
         $this->contentIsVisible = !$this->contentIsVisible;
     }
+
+
+    public function mount(){
+
+    }
+
+
     public function render()
     {
         $this->products =  Product::search($this->search)
                             ->orderBy($this->orderBy, $this->orderAsc ? 'asc' : 'desc')
                             ->paginate($this->perPage);
+
+        // $one = Product::where('id', '=', '5582')->get();
+        // dd($one->user()->name);
 
         return view('livewire.products-table',[
             'products' => $this->products
