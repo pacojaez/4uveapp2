@@ -306,14 +306,14 @@
                             <div class="flex justify-start">
                                 <label class="items-center block my-4 font-bold text-gray-500">
                                     <input class="top-0 leading-loose text-pink-600" type="checkbox" required />
-                                    <span class="py-2 ml-2 text-sm text-left text-gray-600">Accept the
+                                    <span class="py-2 ml-2 text-sm text-left text-gray-600">Aceptar los
                                           <a href="#"
                                              class="font-semibold text-black border-b-2 border-gray-200 hover:border-gray-500">
-                                           Terms and Conditions of the site
-                                          </a>and
+                                           Términos y Condiciones del sitio web
+                                          </a>y
                                           <a href="#"
                                              class="font-semibold text-black border-b-2 border-gray-200 hover:border-gray-500">
-                                            the information data policy.</a>
+                                            política de privacidad.</a>
                                     </span>
                                 </label>
                             </div>
@@ -321,7 +321,7 @@
                                 {{ __('REGISTRAR') }}
                             </x-jet-button> --}}
                             <button class="block w-full px-6 py-3 mt-3 text-lg font-semibold text-white bg-gray-800 rounded-lg shadow-xl hover:text-white hover:bg-black">
-                                Register
+                                Registro
                             </button>
                         </div>
                     </form>
