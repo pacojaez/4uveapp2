@@ -141,8 +141,11 @@ class CartService
         $this->items = $content->reduce(function ($quantity, $item ){
             return $quantity += $item->get('quantity');
         });
-
-        return $this->items;
+        if($this->items == null){
+            return $this->items = 0;
+        }else{
+            return $this->items;
+        }
     }
 
     /**
