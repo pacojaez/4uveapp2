@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Facades\Cart;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -54,13 +55,17 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    // public function show($product_id)
-    // {
+    public function inactive( )
+    {
+        // dd('Hello world');
+        $products = Product::all();
+        // $products = DB::table('products')->where('active', 1)->get();
+        dd($products);
+        return view('products.inactive', compact('products'));
 
-    //     $product = Product::findOrFail($product_id);
-    //     return view('products.show', compact('product'));
+    }
 
-    // }
+
     public function show(Product $product)
     {
         return view('products.show', compact('product'));

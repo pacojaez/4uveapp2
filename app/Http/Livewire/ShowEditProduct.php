@@ -103,6 +103,9 @@ class ShowEditProduct extends Component
 
         ]);
 
+        //  dd($data['product_image']);
+        // dd('$this '.$this->product_image);
+
 
         //PROCESAMIENTO IMAGEN 1:
         if($data['product_image']){
@@ -135,7 +138,7 @@ class ShowEditProduct extends Component
             $this->product->product_image_2 = $data['product_image_2'];
         }
 
-        if($data['product_image']){
+        if($data['product_image_3']){
             //mandamos un messaje al usuario de que la imagen se esta procesando
             $this->processing = true;
             $image = $this->product_image_3;
@@ -146,7 +149,7 @@ class ShowEditProduct extends Component
             });
             $img->stream();
             Storage::disk('local')->put('public/images/products'.'/'.$name, $img, 'public');
-            $data['product_image'] = $name;
+            $data['product_image_3'] = $name;
             $this->product->product_image_3 = $data['product_image_3'];
         }
 
@@ -190,7 +193,7 @@ class ShowEditProduct extends Component
             });
             $img->stream();
             Storage::disk('local')->put('public/images/products'.'/'.$name, $img, 'public');
-            $data['user_image_2'] = $name;
+            $data['user_image_3'] = $name;
             $this->product->user_image_3 = $data['user_image_3'];
         }
 
@@ -278,6 +281,14 @@ class ShowEditProduct extends Component
         }
 
         $this->processing = false;
+
+        return redirect()->route('products.index');
+    }
+
+
+    public function delete($id)
+    {
+        Product::find($id)->delete();
 
         return redirect()->route('products.index');
     }

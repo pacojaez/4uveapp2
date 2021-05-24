@@ -21,11 +21,14 @@ class NewProduct extends Component
     public $product_image, $product_image_2, $product_image_3, $user_image, $user_image_2, $user_image_3;
 
     public $name, $description, $short_description, $product_code, $lote_image, $cb_unit, $part_number, $brand,
-        $EAN13_individual, $unidades_embalaje_individual, $dimensions_boxes, $weight, $pack_units,
+        $EAN13_individual, $unidades_embalaje_original, $dimensions_boxes, $weight, $pack_units,
         $unidades_embalaje_2, $dimensions_boxes_2, $weight_2, $unidades_embalaje_3, $dimensions_boxes_3, $weight_3,
         $plazo_preparacion_pedido, $contraoferta, $localidad_recogida, $cp_recogida, $provincia_recogida, $offer_units,
         $boxes_quantity, $whole_box_dimensions, $embalaje_original, $provider, $invoice_cost_price,
-        $buyed_date, $boxes, $offer, $new, $offer_until, $offer_prize, $porte_id, $subcategorie_id;
+        $buyed_date, $boxes, $offer, $new, $offer_until, $offer_prize, $subcategorie_id, $net_price,
+        $EAN13_box_1, $EAN13_box_2, $categoria_oferta;
+
+    public $porte_id = 1;
 
     public $isOpen = false;
 
@@ -55,7 +58,7 @@ class NewProduct extends Component
             'brand' => 'string|nullable',
             'EAN13_individual' =>'string|nullable',
             'dimensions_boxes' => 'string|nullable',
-            'unidades_embalaje_individual' => 'string|nullable',
+            'unidades_embalaje_original' => 'string|nullable',
             'weight' => 'string|nullable',
             'pack_units' => 'string|nullable',
             'dimensions_boxes_2' => 'string|nullable',
@@ -76,10 +79,15 @@ class NewProduct extends Component
             'provincia_recogida' => 'string|nullable',
             'porte_id' => 'int|nullable',
             'subcategorie_id' => 'int|nullable',
+            'net_price' => 'int|nullable',
+            'EAN13_box_1' => 'string|nullable',
+            'EAN13_box_2' => 'string|nullable',
+            'categoria_oferta' => 'string|nullable',
+
 
         ]);
 
-
+            //  dd($data['product_image']);
         //PROCESAMIENTO IMAGEN 1:
         if($data['product_image']){
             //mandamos un messaje al usuario de que la imagen se esta procesando
@@ -111,7 +119,7 @@ class NewProduct extends Component
             $this->product->product_image_2 = $data['product_image_2'];
         }
 
-        if($data['product_image']){
+        if($data['product_image_3']){
             //mandamos un messaje al usuario de que la imagen se esta procesando
             $this->processing = true;
             $image = $this->product_image_3;
@@ -175,15 +183,24 @@ class NewProduct extends Component
         if( $data['porte_id'] == null){
             $data['porte_id'] = 1;
         }
-    //    dd(    $data['porte_id']);
+
+        $this->product->subcategorie_id = $this->subcategorie_id;
+
+        //***ojo solo para pruebas*/
+        $this->product->active = 1;
+        //***ojo solo para pruebas*/
+
+        // dd($data);
 
         $createFields = array_filter($data, null);
-        // dd($updateFields);
+        // dd($createFields['subcategorie_id']);
         // $product = Product::find($this->product);
         foreach( $createFields as $key => $value){
             $this->product->$key = $value;
             $this->product->save();
         }
+
+        // dd($this->product);
 
         $this->processing = false;
 

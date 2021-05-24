@@ -81,9 +81,11 @@
                 </div>
                 <div class="flex p-2 mb-2 border-t border-gray-200">
                     <span class="text-2xl font-extrabold text-gray-500">Porcentaje de Ahorro</span>
+                    @if($product->invoice_cost_price)
                     <span class="ml-auto text-2xl font-extrabold text-gray-900">{!!
                         number_format((float)(100- ($product->offer_prize*100)/$product->invoice_cost_price), 2) !!}
                         %</span>
+                    @endif
                 </div>
                 <div class="flex p-2 mb-2 border-t border-gray-200">
                     <span class="text-4xl font-extrabold text-gray-500">Oferta: </span>
@@ -382,10 +384,12 @@
                 <span class="ml-auto text-2xl font-extrabold text-gray-900">{{ $product->offer_prize }} €</span>
             </div>
             <div class="flex p-2 border-t border-gray-200">
+                @if($product->invoice_cost_price)
                 <span class="text-2xl font-extrabold text-gray-500">Porcentaje de Ahorro</span>
                 <span class="ml-auto text-2xl font-extrabold text-gray-900">{!!
                     number_format((float)(100 - ($product->offer_prize*100)/$product->invoice_cost_price), 2) !!}
                     %</span>
+                @endif
                 {{-- <span class="ml-auto text-gray-900">{{ ($product->offer_prize*100)/$product->invoice_cost_price }}
                 %</span> --}}
             </div>

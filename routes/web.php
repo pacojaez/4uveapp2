@@ -5,6 +5,9 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\Cart;
+use App\Http\Livewire\InactiveProducts;
+use App\Http\Controllers\PruebaController;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -91,6 +94,12 @@ Route::put('/user/update/{id}',[UserController::class, 'update'])->middleware('i
 
 Route::resource('products', 'ProductController');
 
+// Route::get('products/inactive', App\Http\Livewire\InactiveProducts::class)->middleware('isAdmin')->name('products.inactive');
+// Route::get('products/inactive', function () {
+//     return view('livewire.inactive-products');
+//  })->name('products.inactive');
+// Show all users
+Route::get('/products/inactive', [PruebaController::class, 'inactive'])->middleware('isAdmin')->name('products.inactive');
 
 //*******CONTACT */
 

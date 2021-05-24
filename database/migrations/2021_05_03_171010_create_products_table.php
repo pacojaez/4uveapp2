@@ -36,6 +36,7 @@ class CreateProductsTable extends Migration
             $table->boolean('new')->default(false);
             $table->boolean('original_box')->default(false);
             $table->date('offer_until');
+            $table->tinyInteger('porte_id')->default(1);
 
             $table->uuid('user_id')->onUpdate('cascade')->onDelete('cascade');
             $table->unsignedBigInteger('subcategorie_id')->onUpdate('cascade')->onDelete('cascade');
