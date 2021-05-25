@@ -34,6 +34,7 @@ class CartComponent extends Component
      */
     public function render(): View
     {
+        $this->dispatchBrowserEvent('refresh-page');
 
         return view('livewire.cart', [
             'total' => $this->total,

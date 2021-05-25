@@ -26,6 +26,8 @@ class InactiveProducts extends Component
     {
 
         $this->products =  Product::where('active', 'like', 0)->paginate(10);
+        // dd(gettype($this->products));
+        // dd($this->products['items']);
 
         return view('livewire.inactive-products', [
             'products' => $this->products,

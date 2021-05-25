@@ -27,7 +27,7 @@ class ShowEditProduct extends Component
         $unidades_embalaje_2, $dimensions_boxes_2, $weight_2, $unidades_embalaje_3, $dimensions_boxes_3, $weight_3,
         $plazo_preparacion_pedido, $contraoferta, $localidad_recogida, $cp_recogida, $provincia_recogida, $offer_units,
         $boxes_quantity, $whole_box_dimensions, $embalaje_original, $provider, $invoice_cost_price,
-        $buyed_date, $boxes, $offer, $new, $offer_until, $offer_prize, $porte_id, $subcategorie_id;
+        $buyed_date, $boxes, $offer, $new, $offer_until, $offer_prize, $porte_id, $subcategorie_id, $active, $net_price;
 
     public $isOpen = false;
 
@@ -36,34 +36,7 @@ class ShowEditProduct extends Component
     public $portes;
     public $subcategories;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    public function openModal()
-    {
-        $this->isOpen = true;
-    }
-
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    public function closeModal()
-    {
-        $this->isOpen = false;
-    }
-
-    // public function mount($product){
-    //     $this->product = Product::findOrFail($id);
-    // }
-    public function update(Request $request)
-    {
-
-        $data =  $this->validate([
-            // Images:
+    protected $rules = [
             'product_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048|nullable',
             'product_image_2' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048|nullable',
             'product_image_3' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048|nullable',
@@ -100,12 +73,37 @@ class ShowEditProduct extends Component
             'provincia_recogida' => 'string|nullable',
             'porte_id' => 'int|nullable',
             'subcategorie_id' => 'int|nullable',
+            'active' => 'int|nullable',
+            'net_price' => 'int|nullable',
+    ];
 
-        ]);
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    public function openModal()
+    {
+        $this->isOpen = true;
+    }
 
-        //  dd($data['product_image']);
-        // dd('$this '.$this->product_image);
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    public function closeModal()
+    {
+        $this->isOpen = false;
+    }
 
+    // public function mount($product){
+    //     $this->product = Product::findOrFail($id);
+    // }
+    public function update()
+    {
+
+        $data =  $this->validate();
 
         //PROCESAMIENTO IMAGEN 1:
         if($data['product_image']){

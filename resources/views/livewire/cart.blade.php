@@ -91,6 +91,11 @@
             <p class="mb-2 text-3xl text-center">El carrito está vacio!</p>
             @endif
         </div>
+        <script>
+            window.addEventListener('refresh-page', event => {
+               window.location.reload(true);
+            })
+          </script>
     </div>
     {{-- <div>
         <div class="w-5/6 mx-auto">

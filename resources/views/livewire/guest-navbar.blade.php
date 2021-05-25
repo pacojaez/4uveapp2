@@ -75,15 +75,23 @@
                                 </x-jet-dropdown-link>
 
                                 @if(Auth::user()->isAdmin())
+                                <x-jet-dropdown-link href="{{ route('products.create') }}">
+                                    {{ __('Añadir Producto') }}
+                                </x-jet-dropdown-link>
+                                @endif
+                                @if(Auth::user()->isAdmin())
                                 <x-jet-dropdown-link href="{{ route('products.index') }}">
-                                    {{ __('Lista de Productos') }}
+                                    {{ __('Todos los Productos') }}
                                 </x-jet-dropdown-link>
-                                <x-jet-dropdown-link href="{{ route('user.create') }}">
-                                    {{ __('Añadir Usuario') }}
+                                <x-jet-dropdown-link href="{{ url('inactive') }}">
+                                    {{ __('Productos INACTIVOS') }}
                                 </x-jet-dropdown-link>
-                                <x-jet-dropdown-link href="{{ route('users.index') }}">
-                                    {{ __('Lista de Usuarios') }}
-                                </x-jet-dropdown-link>
+                                    <x-jet-dropdown-link href="{{ route('user.create') }}">
+                                        {{ __('Añadir Usuario') }}
+                                    </x-jet-dropdown-link>
+                                    <x-jet-dropdown-link href="{{ route('users.index') }}">
+                                        {{ __('Todos los Usuarios') }}
+                                    </x-jet-dropdown-link>
                                 @endif
 
                                 @if (Laravel\Jetstream\Jetstream::hasApiFeatures())

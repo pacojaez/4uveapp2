@@ -66,8 +66,14 @@
             </div>
         </div>
     </div> --}}
-    @if(!$products)
-    <div>Buen trabajo, llevas al día la actualización de los Productos</div>
+    @if( !$products['items'] )
+    <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+        <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+            <div class="p-2 m-auto bg-gray-200">
+                <h4 class="text-xl font-semibold">Buen trabajo, {{ Auth::user()->name}}, llevas al día la actualización de los Productos</h4>
+            </div>
+        </div>
+    </div>
     @else
     <div class="flex flex-col">
         <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -190,6 +196,6 @@
             </div>
         </div>
     </div>
+    @endif
 </div>
-@endif
 </div>

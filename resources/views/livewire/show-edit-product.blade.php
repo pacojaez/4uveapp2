@@ -14,6 +14,9 @@
                         <input wire:model='name' id='name' name="name"
                             class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
                             type="text" placeholder="{{$product->name}}" />
+                            @error('name')
+                            <span class="error">{{ $message }}</span>
+                            @enderror
                     </div>
                     <div class="grid grid-cols-1">
                         <label class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">
@@ -103,10 +106,10 @@
                         <label class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">
                             Unidades Embalaje Original:
                         </label>
-                        <input wire:model='unidades_embalaje_original' id='unidades_embalaje_original'
-                            name="unidades_embalaje_original"
+                        <input wire:model='unidades_embalaje_individual' id='unidades_embalaje_individual'
+                            name="unidades_embalaje_individual"
                             class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
-                            type="int" placeholder="{{ $product->unidades_embalaje_original }}" />
+                            type="int" placeholder="{{ $product->unidades_embalaje_individual }}" />
                     </div>
                     <div class="grid grid-cols-1">
                         <label class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">
@@ -363,6 +366,18 @@
                         <input wire:model='offer_prize' id='offer_prize' name="offer_prize"
                             class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
                             type="int" placeholder="{{ $product->offer_prize }} €" />
+                    </div>
+                    <div class="grid grid-cols-1">
+                    </div>
+                    <div class="grid grid-cols-1">
+                        <label class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">
+                            ¿ACTIVAR PRODUCTO?:</label>
+                            <select
+                            wire:model='active' id='active' name="active"
+                            class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent">
+                            <option value="0">NO</option>
+                            <option value="1">SI</option>
+                        </select>
                     </div>
                 </div>
 
