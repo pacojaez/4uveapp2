@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
 
-class Prueba extends Controller
+class PruebaController extends Controller
 {
     public function inactive( )
     {

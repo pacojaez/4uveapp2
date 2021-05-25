@@ -43,6 +43,17 @@ class Product extends Model
         return $this->belongsTo(Subcategorie::class);
     }
 
+    // /**
+    //  * Get the Categorie.
+    //  */
+    // public function categorieProduct()
+    // {
+    //     return $this->hasOneThrough(
+    //                     Subcategorie::class,
+    //                     Categorie::class,
+    //                 );
+    // }
+
     /**
      * Get the subcategorie.
      */
@@ -70,15 +81,11 @@ class Product extends Model
 
     }
 
-    // public static function inactive($searchInactive)
+    // public static function inactive( $searchInactive )
     // {
     //     $result = empty($searchInactive) ? static::query()
-    //             : static::query()
-    //             ->where('name', 'like', '%'.$searchInactive.'%')
-    //             ->orWhere('localidad_recogida', 'like', '%'.$searchInactive.'%')
-    //             ->orWhere('part_number', 'like', '%'.$searchInactive.'%')
-    //             ->orWhere('brand', 'like', '%'.$searchInactive.'%')
-    //             ->orWhere('EAN13_individual', 'like', '%'.$searchInactive.'%');
+    //             : static::query();
+
 
     //             $result->where('active', 'like', '0');
 

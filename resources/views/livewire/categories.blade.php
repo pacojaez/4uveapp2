@@ -32,19 +32,27 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
                     </svg>
-
-                    <div
-                        class="flex h-6 px-2 text-sm font-semibold text-white bg-green-500 rounded-full justify-items-center">
+                    @if($product->invoice_cost_price)
+                    <div class="flex h-6 px-2 text-sm font-semibold text-white bg-green-500 rounded-full justify-items-center">
                         <span class="flex items-center">
                             {!! number_format((float)(($product->offer_prize*100)/$product->invoice_cost_price), 2) !!} %
                         </span>
                     </div>
+                    @endif
                 </div>
+                @if($product->product_image)
                 <div class="md:flex-shrink-0">
                     <img class="object-cover w-full h-48 md:w-48"
                         src="{{asset('storage/images/products/'.$product->product_image)}}"
                         alt="Man looking at item at a store">
                 </div>
+                @else
+                <div class="md:flex-shrink-0">
+                    <img class="object-cover w-full h-48 md:w-48"
+                        src="{{asset('storage/images/elementos/no-image-icon.png')}}"
+                        alt="Man looking at item at a store">
+                </div>
+                @endif
                 <div class="flex-1 w-full ml-2">
                     <div>
                         <div class="mt-3 text-xl font-bold leading-8">Precio Venta: {{$product->invoice_cost_price}} €</div>

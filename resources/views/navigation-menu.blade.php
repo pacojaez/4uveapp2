@@ -108,7 +108,7 @@
                             <x-jet-dropdown-link href="{{ route('products.index') }}">
                                 {{ __('Todos los Productos') }}
                             </x-jet-dropdown-link>
-                            <x-jet-dropdown-link href="{{ route('products.inactive') }}">
+                            <x-jet-dropdown-link href="{{ url('inactive') }}">
                                 {{ __('Productos INACTIVOS') }}
                             </x-jet-dropdown-link>
                                 <x-jet-dropdown-link href="{{ route('user.create') }}">

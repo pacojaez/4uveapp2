@@ -25,4 +25,12 @@ class Subcategorie extends Model
     {
         return $this->hasMany(Product::class);
     }
+
+    /**
+     * Get the product of this subcategorie.
+     */
+    public function categorie()
+    {
+        return $this->belongsTo(Categorie::class);
+    }
 }

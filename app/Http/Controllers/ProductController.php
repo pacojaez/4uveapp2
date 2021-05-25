@@ -58,10 +58,10 @@ class ProductController extends Controller
     public function inactive( )
     {
         // dd('Hello world');
-        $products = Product::all();
+        // $products = Product::where('active', 0);
         // $products = DB::table('products')->where('active', 1)->get();
-        dd($products);
-        return view('products.inactive', compact('products'));
+        // dd($products);
+        return view('products.inactive');
 
     }
 

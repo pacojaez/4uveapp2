@@ -109,8 +109,12 @@
                             </div> --}}
                         </div>
                         <div class="md:flex-shrink-0">
-                            {{-- <img class="w-10 h-10" src="{{asset('storage/images/products/'.$product->product_image)}}" alt="{{ $product->name}}" /> --}}
+                            @if($product->product_image)
                             <img class="object-cover w-full h-48 md:w-48" src="{{asset('storage/images/products/'.$product->product_image)}}" alt="{{ $product->name}}" />
+                            @else
+                            <img class="object-cover w-full h-48 md:w-48" src="{{asset('storage/images/elementos/no-image-icon.png')}}" alt="{{ $product->name}}" />
+                            @endif
+                            {{-- <img class="w-10 h-10" src="{{asset('storage/images/products/'.$product->product_image)}}" alt="{{ $product->name}}" /> --}}
                           </div>
                         <div class="flex-1 w-full ml-2">
                             <div>

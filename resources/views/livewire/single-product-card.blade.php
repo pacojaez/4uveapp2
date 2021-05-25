@@ -1,51 +1,13 @@
-{{-- <div class="md:container md:mx-auto">
-    <h2 class="mt-4 ml-12 text-xl font-semibold leading-tight text-gray-800">
-        Producto: {{ __($product->name)  }}
-</h2>
-<a class="col-span-12 transition duration-300 transform bg-white rounded-lg shadow-xl hover:scale-105 sm:col-span-6 xl:col-span-3 intro-y"
-    href="">
-    <div class="p-5 bg-red-400">
-        <div class="justify-between mb-2 bg-green-500 md:flex-shrink-0">
-            <div class="object-cover h-2/3 md:w-48">
-                <img src="https://images.unsplash.com/photo-1557154683-264bf969e849?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8c3RhdGlvbmVyeXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
-                    alt="Man looking at item at a store">
-            </div>
-            <div class="h-1/2 md:w-48 bg-blue">
-            </div>
-        </div>
-        <div class="flex justify-between mb-2 bg-green-100">
-            <svg xmlns="http://www.w3.org/2000/svg" class="text-blue-400 h-7 w-7" fill="none" viewBox="0 0 24 24"
-                stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-            </svg>
-            <div class="flex h-6 px-2 text-sm font-semibold text-white bg-green-500 rounded-full justify-items-center">
-                <span class="flex items-center">30%</span>
-            </div>
-        </div>
-        <div class="bg-green-500 md:flex-shrink-0">
-            <img class="object-cover w-full h-48 md:w-48"
-                src="https://images.unsplash.com/photo-1557154683-264bf969e849?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8c3RhdGlvbmVyeXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
-                alt="Man looking at item at a store">
-        </div>
-        <div class="flex-1 w-full mb-3 ml-2 bg-green-100">
-            <div>
-                <div class="mt-3 text-3xl font-bold leading-8">{{$product->invoice_cost_price}} €</div>
-                <div class="mt-1 text-base text-gray-600">{{$product->name}}</div>
-            </div>
-        </div>
 
-    </div>
-</a>
-</div> --}}
 <section class="overflow-hidden text-gray-600 body-font">
     <div class="container px-5 py-2 mx-auto">
         <div class="flex flex-wrap m-2 mx-auto lg:w-4/5">
-            <x-jet-nav-link href="{{ route('categorieproducts', ['id' => $subcategorie->id] ) }}" class="m-5 font-bold">
-                Categoría: {{ $subcategorie->name }}
+            <x-jet-nav-link class="m-5 font-bold">
+                Categoría: {{ $category }}
             </x-jet-nav-link>
-            {{-- <h2 class="text-sm font-semibold tracking-widest text-gray-600 title-font">Categoría: {{ $subcategorie }}
-            </h2> --}}
+            <x-jet-nav-link href="{{ route('categorieproducts', ['id' => $subcategorie->id] ) }}" class="m-5 font-bold">
+                Subcategoría: {{ $subcategorie->name }}
+            </x-jet-nav-link>
         </div>
         <div class="flex flex-wrap m-2 mx-auto lg:w-4/5">
             <h1 class="mb-4 text-3xl font-medium text-gray-900 title-font">{{ $product->name }}</h1>

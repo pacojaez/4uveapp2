@@ -6,6 +6,7 @@ use App\Models\Product;
 use App\Facades\Cart;
 use Illuminate\View\View;
 use Livewire\Component;
+use App\Models\Categorie;
 // use App\Models\Cart;
 
 class SingleProductCard extends Component
@@ -13,6 +14,7 @@ class SingleProductCard extends Component
 
     public $product;
     public $subcategorie;
+    public $category;
     public $porte;
     public $quantity = 1;
     // public $cart;
@@ -25,8 +27,9 @@ class SingleProductCard extends Component
         $this->quantity;
         $this->product = Product::findOrFail($id);
         $this->subcategorie = $this->product->subcategorie;
+        $this->category = Categorie::where('id', '=', $this->subcategorie->category_id)->first()->name;
         $this->porte = $this->product->porte;
-        // dd($this->porte);
+        // dd($this->category->name);
     }
 
     public function render(): View
@@ -36,7 +39,8 @@ class SingleProductCard extends Component
             'product' => $this->product,
             'subcategorie' => $this->subcategorie,
             'porte' => $this->porte,
-            'quantity' => $this->quantity
+            'quantity' => $this->quantity,
+            'category' => $this->category,
             // 'cart' => $this->cart
             ]);
     }

@@ -99,7 +99,10 @@ Route::resource('products', 'ProductController');
 //     return view('livewire.inactive-products');
 //  })->name('products.inactive');
 // Show all users
-Route::get('/products/inactive', [PruebaController::class, 'inactive'])->middleware('isAdmin')->name('products.inactive');
+// Route::get('/products/inactive', [PruebaController::class, 'inactive'])->middleware('isAdmin')->name('products.inactive');
+Route::get('inactive', function () {
+    return view('products.inactive');
+});
 
 //*******CONTACT */
 

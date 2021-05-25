@@ -25,9 +25,7 @@ class InactiveProducts extends Component
     public function render()
     {
 
-        $this->products =  Product::inactive($this->searchInactive)
-                ->orderBy($this->orderBy, $this->orderAsc ? 'asc' : 'desc')
-                ->paginate($this->perPage);
+        $this->products =  Product::where('active', 'like', 0)->paginate(10);
 
         return view('livewire.inactive-products', [
             'products' => $this->products,
