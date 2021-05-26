@@ -18,9 +18,11 @@ class CreateOrderItemsTable extends Migration
             $table->id();
             $table->decimal('total_items', 4, 2);
             $table->decimal('units', 3, 2);
+            $table->decimal('unit_price', 3, 2);
             $table->uuidMorphs('user');
             $table->unsignedBigInteger('order_id');
-            $table->unsignedBigInteger('product_id');
+            $table->uuidMorphs('product');
+            // $table->unsignedBigInteger('user_id');
             $table->timestamps();
         });
     }

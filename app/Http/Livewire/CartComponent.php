@@ -3,14 +3,21 @@
 namespace App\Http\Livewire;
 
 use App\Facades\Cart;
-use App\Models\Product;
+use App\Models\CartItem;
+use App\Models\Order;
+use App\Models\OrderItem;
 use Livewire\Component;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\Auth;
 
 class CartComponent extends Component
 {
     protected $total;
     protected $content;
+    protected $orderItem;
+    protected $newOrder;
+
+    public $confirmedMessage = false;
 
     protected $listeners = [
         'productAddedToCart' => 'updateCart',
@@ -23,7 +30,7 @@ class CartComponent extends Component
      */
     public function mount(): void
     {
-
+        $this->confirmedMessage = true;
         $this->updateCart();
     }
 
@@ -95,6 +102,54 @@ class CartComponent extends Component
         $this->total = Cart::total();
         $this->content = Cart::content();
         $this->emitTo('nav-cart', 'refresh');
+
+    }
+
+    /**
+     * RSend a mail to customer and admin to fionish the checkout.
+     *
+     * @return void
+     */
+    public function checkOut()
+    {
+        $user_id = Auth::user()->id;
+        $total_units = Cart::items();
+
+        // dd($total_units);
+
+        $this->total = Cart::total();
+        $this->content = Cart::content();
+        $this->emitTo('nav-cart', 'refresh');
+
+        // dd($this->content);
+
+        $this->newOrder = Order::create([
+            'status' => 'Pendiente de confirmación',
+            'user_id' => $user_id,
+            'units' => $total_units,
+        ]);
+
+        //
+         foreach( $this->content as $key => $value ){
+            // dd(($value['name']));
+            OrderItem::create([
+                'order_id' => $this->newOrder->id,
+                'product_id' => $key,
+                // 'name' => $value['name'],
+                'units' => $value['quantity'],
+                'total_items' => $value['quantity'],
+                'unit_price' => $value['price'],
+                'user_id' => $user_id,
+           ]);
+        };
+
+        $this->clearCart();
+
+        $this->confirmedMessage = true;
+
+        //Mandar Mail de confirmacion de recepción del pedido
+
+
 
     }
 }

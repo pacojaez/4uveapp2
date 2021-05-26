@@ -74,7 +74,7 @@
             @if(Auth::user())
             <div class="mb-2 -mx-3 md:flex">
                 <button class="w-1/2 p-2 mx-2 bg-red-500 border-2 border-red-500 rounded hover:border-red-600 hover:bg-red-600" wire:click="clearCart">Vaciar el carrito</button>
-                <button class="w-1/2 p-2 mx-2 bg-green-500 border-2 border-green-500 rounded hover:border-green-600 hover:bg-green-600" wire:click="clearCart">Realizar el pedido</button>
+                <button class="w-1/2 p-2 mx-2 bg-green-500 border-2 border-green-500 rounded hover:border-green-600 hover:bg-green-600" wire:click="checkOut">Realizar el pedido</button>
             </div>
             @else
             <div class="max-w-full p-5 mx-2 my-2 text-2xl text-center border-2 rounded">
@@ -89,6 +89,10 @@
             <button class="w-1/2 p-2 bg-green-500 border-2 border-green-500 rounded hover:border-green-600 hover:bg-green-600" wire:click="clearCart">Realizar el pedido</button> --}}
             @else
             <p class="mb-2 text-3xl text-center">El carrito está vacio!</p>
+                @if($confirmedMessage)
+                    <p class="mb-2 text-3xl text-center">Hemos recibido tu pedido. En breve recibirás un mail con las condicones más favorables que hemos obtenido para el envio!</p>
+                    <p class="mb-2 text-3xl text-center">Muchas Gracias por confiar en 4uve!</p>
+                @endif
             @endif
         </div>
         <script>
