@@ -10,6 +10,8 @@ use Livewire\Component;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Auth;
 
+use App\Http\Controllers\SendEMailController;
+
 class CartComponent extends Component
 {
     protected $total;
@@ -113,6 +115,7 @@ class CartComponent extends Component
     public function checkOut()
     {
         $user_id = Auth::user()->id;
+        $userEmail = Auth::user()->email;
         $total_units = Cart::items();
 
         // dd($total_units);
@@ -144,6 +147,8 @@ class CartComponent extends Component
         };
 
         $this->clearCart();
+
+        SendEMailController::orderCreated($this->content, $userEmail, $this->newOrder);
 
         $this->confirmedMessage = true;
 

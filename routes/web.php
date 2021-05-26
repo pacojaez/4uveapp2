@@ -6,7 +6,7 @@ use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\Cart;
 use App\Http\Livewire\InactiveProducts;
-use App\Http\Controllers\PruebaController;
+use App\Http\Controllers\SendEMailController;
 
 
 Route::get('/', function () {
@@ -103,3 +103,17 @@ Route::get('inactive', function () {
 Route::get('/contact', function () {
     return view('contact');
 })->name('contact');
+
+
+//******MAIL ROUTES  */
+Route::get('email-test', function(){
+
+    $details['email'] = 'your_email@gmail.com';
+
+    dispatch(new App\Jobs\SendEmailJob($details));
+
+    dd('done');
+    });
+
+Route::get('welcome-email', [SendEmailController::class, 'welcomeMail'])->name('welcomeMail');
+Route::get('order-created', [SendEmailController::class, 'orderCreated']);

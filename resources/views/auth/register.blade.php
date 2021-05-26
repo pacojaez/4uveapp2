@@ -359,10 +359,13 @@
                                     {{-- <x-jet-button class="mt-3 ml-4">
                                 {{ __('REGISTRAR') }}
                                     </x-jet-button> --}}
-                                    <button
+                                    {{-- <a href="{{ route('welcomeMail')}}"> --}}
+                                        <button
                                         class="block w-full px-6 py-3 mt-3 text-lg font-semibold text-white bg-gray-800 rounded-lg shadow-xl hover:text-white hover:bg-black">
                                         Registro
                                     </button>
+                                    {{-- </a> --}}
+
                             </div>
                             </form>
 
