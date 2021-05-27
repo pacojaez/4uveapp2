@@ -43,6 +43,15 @@ class Product extends Model
         return $this->belongsTo(Subcategorie::class);
     }
 
+    /**
+     * Get the order items
+     */
+    public function orderItems()
+    {
+        return $this->hasMany(OrderItem::class);
+    }
+
+
     // /**
     //  * Get the Categorie.
     //  */

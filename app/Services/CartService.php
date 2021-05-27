@@ -38,7 +38,7 @@ class CartService
      */
     public function add ($id, $name, $price, $quantity, $options = []): void
     {
-        $cartItem = $this->createCartItem($name, $price, $quantity, $options);
+        $cartItem = $this->createCartItem($name, $price, $quantity, $options, $id);
 
         $content = $this->getContent();
         // dd($content);
@@ -47,7 +47,7 @@ class CartService
         }
 
         $content->put($id, $cartItem);
-        // dd($content);
+        dd($content);
         $this->session->put(self::DEFAULT_INSTANCE, $content);
 
         $this->items();
@@ -189,7 +189,7 @@ class CartService
      * @param array $options
      * @return Illuminate\Support\Collection
      */
-    protected function createCartItem(string $name, string $price, string $quantity, array $options): Collection
+    protected function createCartItem(string $name, string $price, string $quantity, array $options, string $id): Collection
     {
         $price = floatval($price);
         $quantity = intval($quantity);
@@ -203,6 +203,7 @@ class CartService
             'price' => $price,
             'quantity' => $quantity,
             'options' => $options,
+            'id' => $id
         ]);
 
         $this->items();

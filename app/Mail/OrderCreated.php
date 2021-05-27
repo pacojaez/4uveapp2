@@ -9,6 +9,7 @@ use Illuminate\Queue\SerializesModels;
 
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Models\Product;
 
 class OrderCreated extends Mailable
 {
@@ -27,7 +28,12 @@ class OrderCreated extends Mailable
      * @var \App\Models\Order
      */
     protected $orderItems;
-
+/**
+     * The order instance.
+     *
+     * @var \App\Models\Order
+     */
+    protected $product;
     /**
      * Create a new message instance.
      *
@@ -37,7 +43,8 @@ class OrderCreated extends Mailable
     {
         $this->order = $order;
         $this->orderItems = OrderItem::where('order_id', 'like', $this->order->id)->get();
-        // dd($this->orderItems);
+        $this->product = Product::where('id', 'like', $this->orderItems->product_id)->get();
+        dd($this->orderItems);
     }
 
     /**
@@ -47,6 +54,7 @@ class OrderCreated extends Mailable
      */
     public function build()
     {
+        // dd($this->orderItems->product->name);
         return $this->view('emails.order-created')
         ->with([
             'order' => $this->order,
