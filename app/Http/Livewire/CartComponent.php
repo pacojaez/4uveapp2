@@ -124,12 +124,13 @@ class CartComponent extends Component
         $this->content = Cart::content();
         $this->emitTo('nav-cart', 'refresh');
 
-        // dd($this->content);
+        // dd($this->total);
 
         $this->newOrder = Order::create([
             'status' => 'Pendiente de confirmación',
             'user_id' => $user_id,
             'units' => $total_units,
+            'total_factura' => $this->total
         ]);
 
         //
@@ -138,11 +139,11 @@ class CartComponent extends Component
             OrderItem::create([
                 'order_id' => $this->newOrder->id,
                 'product_id' => $key,
-                // 'name' => $value['name'],
                 'units' => $value['quantity'],
                 'total_items' => $value['quantity'],
                 'unit_price' => $value['price'],
                 'user_id' => $user_id,
+                'subtotal' => $value['quantity'] * $value['price']
            ]);
         };
 

@@ -39,12 +39,12 @@ class OrderCreated extends Mailable
      *
      * @return void
      */
-    public function __construct( Order $order)
+    public function __construct( Order $order )
     {
         $this->order = $order;
+        // dd($order);
         $this->orderItems = OrderItem::where('order_id', 'like', $this->order->id)->get();
-        $this->product = Product::where('id', 'like', $this->orderItems->product_id)->get();
-        dd($this->orderItems);
+        //
     }
 
     /**

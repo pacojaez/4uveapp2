@@ -47,7 +47,7 @@ class CartService
         }
 
         $content->put($id, $cartItem);
-        dd($content);
+        // dd($content);
         $this->session->put(self::DEFAULT_INSTANCE, $content);
 
         $this->items();
