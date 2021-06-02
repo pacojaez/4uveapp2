@@ -1,4 +1,22 @@
 <div>
+    <div class="w-5/6 mx-1">
+        <label>
+            NOMBRE o EAN13
+        </label>
+        <input wire:model.debounce.500ms="search" type="search" class="flex w-1/2 px-4 py-3 m-2 leading-tight text-gray-700 bg-gray-200 border border-gray-200 rounded appearance-none focus:outline-none focus:bg-white focus:border-gray-500"placeholder="Buscar Producto...">
+        {{-- <input wire:model.debounce.500ms="search" type="search" class="flex w-1/2 px-4 py-3 leading-tight text-gray-700 bg-gray-200 border border-gray-200 rounded appearance-none focus:outline-none focus:bg-white focus:border-gray-500"placeholder="Buscar Producto..."> --}}
+    </div>
+    <div wire:ignore>
+        <select class="select2" name="state">
+
+            <option value="AL">Alabama</option>
+            <option value="WY">Wyoming</option>
+        </select>
+        <!-- Select2 will insert its DOM here. -->
+    </div>
+    {{-- <div class="w-3/6 mx-1">
+        <input wire:model.debounce.500ms="search" type="search" class="block w-1/2 px-4 py-3 leading-tight text-gray-700 bg-gray-200 border border-gray-200 rounded appearance-none focus:outline-none focus:bg-white focus:border-gray-500"placeholder="Buscar Producto...">
+    </div> --}}
     {{-- <form method="POST" {{ action('ProductController@update', ['product'=> $product]) }}
     enctype="multipart/form-data"> --}}
     <form wire:submit.prevent="store" enctype="multipart/form-data">

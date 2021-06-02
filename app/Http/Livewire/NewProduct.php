@@ -16,7 +16,7 @@ class NewProduct extends Component
 {
     use WithFileUploads;
 
-    public $product;
+    protected $product;
 
     public $product_image, $product_image_2, $product_image_3, $user_image, $user_image_2, $user_image_3;
 
@@ -36,6 +36,8 @@ class NewProduct extends Component
 
     public $portes;
     public $subcategories;
+
+    public $search;
 
     public function store()
     {
@@ -219,6 +221,10 @@ class NewProduct extends Component
 
     public function render()
     {
-        return view('livewire.new-product');
+        $this->product =  Product::search($this->search)->first();
+
+        return view('livewire.new-product', [
+            'product' => $this->product,
+        ]);
     }
 }
