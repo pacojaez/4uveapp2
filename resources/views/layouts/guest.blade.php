@@ -21,7 +21,7 @@
 
     </head>
     <body>
-        <div class="font-sans antialiased text-gray-900">
+        <div class="font-sans antialiased text-gray-900 bg-yellow-300">
             {{ $slot }}
         </div>
         @livewire('footer')

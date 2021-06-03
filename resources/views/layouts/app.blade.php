@@ -21,7 +21,7 @@
         <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
 
     </head>
-    <body class="font-sans antialiased">
+    <body class="font-sans antialiased bg-yellow-300">
         <x-jet-banner />
 
         <div class="min-h-screen bg-gray-100">
@@ -42,8 +42,8 @@
             </main>
         </div>
 
-        @stack('modals')
-
+        @livewire('livewire-ui-modal')
+        @livewireUIScripts
         @livewireScripts
     </body>
 </html>
