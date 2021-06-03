@@ -16,7 +16,7 @@ class OrderModal extends ModalComponent
 
         $this->order = $order;
 
-        dd($this->order);
+        // dd($this->order);
     }
 
     public function render()
