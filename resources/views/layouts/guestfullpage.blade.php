@@ -17,6 +17,7 @@
         <!-- Scripts -->
         <script src="{{ mix('js/app.js') }}" defer></script>
         <!-- Alpine CDN -->
+
         <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
 
     </head>
@@ -24,6 +25,8 @@
         <div class="font-sans antialiased text-gray-900 bg-yellow-300">
             {{ $slot }}
         </div>
+        @livewire('livewire-ui-modal')
+        @livewireUIScripts
         @livewireScripts
     </body>
 </html>

@@ -6,13 +6,19 @@ use LivewireUI\Modal\ModalComponent;
 use App\Models\OrderItem;
 use App\Models\Order;
 
+
 class OrderModal extends ModalComponent
 {
 
-    protected $listeners = ['openModal'];
     public $order;
 
-    public function mount( $order ){
+    public static function modalMaxWidth(): string
+    {
+        return '5xl';
+    }
+
+    public function mount($order)
+    {
 
         $this->order = $order;
 
@@ -21,12 +27,11 @@ class OrderModal extends ModalComponent
 
     public function render()
     {
-        // $orderItems = OrderItem::where('order_id', 'like', $id)->get();
-        // $order = Order::where('id', 'like', $id);
+        $orderItems = OrderItem::where('order_id', 'like', $this->order['id'])->get();
 
         return view('livewire.order-modal', [
-            // 'orderItems' => $orderItems,
-            // 'order' => $order
+            'orderItems' => $orderItems,
+            'order' => $this->order
         ]);
     }
 }

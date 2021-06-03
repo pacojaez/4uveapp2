@@ -25,7 +25,13 @@
 
                 <tr class="flex w-full mb-4">
                     <td class="w-1/4 p-4">
-                        <button wire:click="$emit('openModal', 'order-modal', ['order', {{ $order }}])">VER</button></td>
+                        <button wire:click="$emit('openModal', 'order-modal', {{ json_encode(["order" => $order]) }})"
+                                class="p-2 m-2 bg-green-300 rounded">
+                                DETALLES
+                        </button>
+                        {{-- <button wire:click="$emit('openModal', 'order-modal', ['order', {{ $order }}])">VER</button> --}}
+
+                    </td>
                     <td class="w-1/4 p-4"># {{ $order->id}}</td>
                     <td class="w-1/4 p-4">{{ $order->status}}</td>
                     <td class="w-1/4 p-4">{{ $order->total_factura}} €</td>

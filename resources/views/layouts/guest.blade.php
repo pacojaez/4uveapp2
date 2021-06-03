@@ -25,6 +25,8 @@
             {{ $slot }}
         </div>
         @livewire('footer')
+        @livewire('livewire-ui-modal')
+        @livewireUIScripts
         @livewireScripts
     </body>
 </html>
