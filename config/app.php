@@ -180,6 +180,7 @@ return [
         App\Providers\CartFacadeServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         Spatie\CookieConsent\CookieConsentServiceProvider::class,
+        Anhskohbo\NoCaptcha\NoCaptchaServiceProvider::class,
 
     ],
 
@@ -236,6 +237,7 @@ return [
         // 'CartLivewire'=> App\Facades\Cart::class,
         'Cart' => App\Facades\Cart::class,
         'Image' => Intervention\Image\Facades\Image::class,
+        'NoCaptcha' => Anhskohbo\NoCaptcha\Facades\NoCaptcha::class,
 
     ],
 

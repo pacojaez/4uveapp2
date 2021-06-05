@@ -7,7 +7,8 @@
         @endif
     </div>
     <div class="w-5/6 p-6 m-auto border-t border-gray-200 dark:border-gray-700 md:border-l">
-        <form wire:submit.prevent="submit" class="flex flex-col">
+        <form wire:submit.prevent="submit" class="flex flex-col" id="contact-form">
+            {{-- <input type="hidden" name="recaptcha" id="recaptcha"> --}}
             <label for="name" class="block">
                 <span class="text-gray-700">Nombre</span>
                 <input class="block w-full mt-1 form-input" wire:model="name" placeholder="Tu nombre" id="name"
@@ -52,10 +53,41 @@
             </label>
             @error('message') <span class="mt-1 ml-1 text-sm text-red-700">{{ $message }}</span> @enderror
 
-            <button
+            {{-- <button
                 class="px-4 py-2 mt-8 font-semibold text-gray-800 bg-white border border-gray-300 rounded shadow hover:bg-gray-100">
                 Enviar
-            </button>
+            </button> --}}
+            {!! NoCaptcha::renderJs() !!}
+            {!! NoCaptcha::renderJs('es', true, 'recaptchaCallback') !!}
+            {!! NoCaptcha::displaySubmit('contact-form', 'submit now!') !!}
+            {!! NoCaptcha::display() !!}
+
+            @if ($errors->has('g-recaptcha-response'))
+            <span class="help-block">
+                <strong>{{ $errors->first('g-recaptcha-response') }}</strong>
+            </span>
+            @endif
+
+            {{-- <button class="g-recaptcha" data-sitekey="6LcSUhQbAAAAADz9NUIlcAE5atKkdHHcLZLVOPmT" data-callback='onSubmit'
+                data-action='submit'>
+                ENVIAR
+            </button> --}}
+            {{-- <div class="g-recaptcha" data-sitekey="6LcSUhQbAAAAADz9NUIlcAE5atKkdHHcLZLVOPmT"></div> --}}
+            <button
+                class="px-4 py-2 mt-8 font-semibold text-gray-800 bg-white border border-gray-300 rounded shadow g-recaptcha hover:bg-gray-100"
+                data-action='submit'>Submit</button>
         </form>
     </div>
+    {{-- @push('scripts')
+    <script src="https://www.google.com/recaptcha/api.js?render={{ config('services.recaptcha.sitekey') }}"></script>
+    <script>
+        grecaptcha.ready(function() {
+                 grecaptcha.execute('{{ config('services.recaptcha.sitekey') }}', {action: 'contact'}).then(function(token) {
+                    if (token) {
+                      document.getElementById('recaptcha').value = token;
+                    }
+                 });
+             });
+    </script>
+    @endpush --}}
 </div>
