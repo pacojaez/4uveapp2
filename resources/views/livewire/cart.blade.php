@@ -95,11 +95,11 @@
                 @endif
             @endif
         </div>
-        <script>
+        {{-- <script>
             window.addEventListener('refresh-page', event => {
                window.location.reload(true);
             })
-          </script>
+          </script> --}}
     </div>
     {{-- <div>
         <div class="w-5/6 mx-auto">
