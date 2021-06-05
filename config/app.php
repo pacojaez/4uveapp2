@@ -179,6 +179,7 @@ return [
         Darryldecode\Cart\CartServiceProvider::class,
         App\Providers\CartFacadeServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
+        Spatie\CookieConsent\CookieConsentServiceProvider::class,
 
     ],
 

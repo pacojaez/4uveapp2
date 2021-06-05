@@ -25,6 +25,8 @@
             {{ $slot }}
         </div>
         @livewire('footer')
+        <!--Cookie Consent-->
+        @include('cookie-consent::index')
         @livewire('livewire-ui-modal')
         @livewireUIScripts
         @livewireScripts

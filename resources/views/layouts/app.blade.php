@@ -41,6 +41,8 @@
                 {{ $slot }}
             </main>
         </div>
+        <!--Cookie Consent-->
+        @include('cookie-consent::index')
 
         @livewire('livewire-ui-modal')
         @livewireUIScripts
