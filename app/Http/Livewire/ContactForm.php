@@ -5,6 +5,8 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use App\Actions\EmailContactLeadAction;
 use Illuminate\Http\Request;
+use Validator;
+
 class ContactForm extends Component
 {
     public string $name = '';
@@ -19,12 +21,12 @@ class ContactForm extends Component
         'phone' => 'nullable|min:4|required_if:preferred,1',
         'message' => 'nullable',
         'preferred' => 'required|min:0|max:1',
-        'g-recaptcha-response' => 'required|captcha'
+        // 'g-recaptcha-response' => 'required|captcha'
 
     ];
 
     protected $messages = [
-        'phone.required_if' => 'Necesitamos tu teléfono para ponersnos en contacto contigo.',
+        'phone.required_if' => 'Necesitamos tu teléfono para ponernos en contacto contigo.',
     ];
 
     public function submit(Request $request)
@@ -63,16 +65,21 @@ class ContactForm extends Component
         // dd($resultJson);
         /**
          * end RECAPTCHA
-        */
+         */
 
+        // $validate = Validator::make(Input::all(), [
+        //     'g-recaptcha-response' => 'required|captcha'
+        // ]);
+            // dd($request);
+        // $validated = $this->validate($request, $this->rules);
         $validated = $this->validate();
+
 
         (new EmailContactLeadAction)($validated);
 
         session()->flash('contact-lead-message', 'Mensaje recibido, nos pondremos en contacto contigo.');
 
         redirect()->to('/contact');
-
     }
 
     public function render()

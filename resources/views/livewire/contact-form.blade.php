@@ -7,7 +7,7 @@
         @endif
     </div>
     <div class="w-5/6 p-6 m-auto border-t border-gray-200 dark:border-gray-700 md:border-l">
-        <form wire:submit.prevent="submit" class="flex flex-col" id="contact-form">
+        <form wire:submit.prevent="submit" class="flex flex-col" id="contact-form" method="POST">
             {{-- <input type="hidden" name="recaptcha" id="recaptcha"> --}}
             <label for="name" class="block">
                 <span class="text-gray-700">Nombre</span>
@@ -53,14 +53,15 @@
             </label>
             @error('message') <span class="mt-1 ml-1 text-sm text-red-700">{{ $message }}</span> @enderror
 
-            {{-- <button
-                class="px-4 py-2 mt-8 font-semibold text-gray-800 bg-white border border-gray-300 rounded shadow hover:bg-gray-100">
-                Enviar
-            </button> --}}
-            {!! NoCaptcha::renderJs() !!}
-            {!! NoCaptcha::renderJs('es', true, 'recaptchaCallback') !!}
+            <div
+                class="px-4 py-2 m-auto mt-8 font-semibold text-center text-gray-800 bg-white border border-gray-300 rounded shadow hover:bg-gray-100 ">
+                {!! NoCaptcha::displaySubmit('contact-form', 'ENVIAR', ['data-theme' => 'dark']) !!}
+            </div>
+
+            {{-- {!! NoCaptcha::display() !!} --}}
+            {{-- {!! NoCaptcha::renderJs('es', true, 'recaptchaCallback') !!}
             {!! NoCaptcha::displaySubmit('contact-form', 'submit now!') !!}
-            {!! NoCaptcha::display() !!}
+            {!! NoCaptcha::display() !!} --}}
 
             @if ($errors->has('g-recaptcha-response'))
             <span class="help-block">
@@ -73,9 +74,9 @@
                 ENVIAR
             </button> --}}
             {{-- <div class="g-recaptcha" data-sitekey="6LcSUhQbAAAAADz9NUIlcAE5atKkdHHcLZLVOPmT"></div> --}}
-            <button
+            {{-- <button
                 class="px-4 py-2 mt-8 font-semibold text-gray-800 bg-white border border-gray-300 rounded shadow g-recaptcha hover:bg-gray-100"
-                data-action='submit'>Submit</button>
+                data-action='submit'>Submit</button> --}}
         </form>
     </div>
     {{-- @push('scripts')
