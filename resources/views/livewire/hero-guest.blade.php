@@ -1,12 +1,12 @@
-<div>
-    <div class="mt-20 text-center lg:5/6 xl:w-3/4 lg:mt-20 lg:ml-6">
-        <div class="text-6xl font-bold leading-none text-gray-900">Si no se vende, !SÚBELO!</div>
-        <div class="mt-6 text-2xl antialiased font-light text-true-gray-500">
+<div class="h-screen">
+    <div class="mt-auto text-center lg:6/6 xl:w-4/4 lg:mt-20 lg:ml-6">
+        <div class="mt-16 text-6xl font-bold leading-none text-gray-900">Si no se vende, !SÚBELO!</div>
+        <div class="mt-16 text-2xl antialiased font-light text-true-gray-500">
             Cóbralo al contado, y encuentra los artículos que necesitas al mejor precio.
         </div>
-        <div  class="flex items-center justify-center text-center">
+        <div  class="flex items-center justify-center mt-16 text-center">
             <x-jet-nav-link href="{{ route('register') }}"
-                class="px-8 py-6 m-2 font-bold tracking-wide uppercase transition duration-200 ease-in-out rounded-full outline-none bg-gradient-to-b from-blue-500 to-blue-900 focus:outline-none hover:shadow-lg hover:from-blue-700">
+                class="px-8 py-8 m-2 font-bold tracking-wide uppercase transition duration-200 ease-in-out rounded-full outline-none bg-gradient-to-b from-blue-500 to-blue-900 focus:outline-none hover:shadow-lg hover:from-blue-700">
                 <span class="text-3xl text-white">{{ __('Empieza ahora') }}</span>
             </x-jet-nav-link>
             <x-jet-nav-link href="{{ route('login') }}"

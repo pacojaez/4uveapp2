@@ -11,7 +11,7 @@
 
         <div class="-mt-64 ">
             <div class="w-full text-center">
-                <p class="text-sm tracking-widest text-white">3 SENCILLOS PASOS</p>
+                <p class="text-2xl tracking-widest text-white">3 SENCILLOS PASOS</p>
                 <h1 class="text-5xl font-bold text-white">
                     Y PODRÁS CONVERTIR TU EXCESO DE STOCK EN CASH
                 </h1>
@@ -30,7 +30,7 @@
                                 <div class="space-y-5">
                                     <div class="mb-2 text-xl font-bold">Haz una foto</div>
                                     <p class="text-base text-gray-700">
-                                        Puedes enviarnos hasta 4 fotos para que el comprador compruebe el estado de la mercancía.
+                                        Puedes enviarnos hasta 3 fotos para que el comprador compruebe el estado de la mercancía.
                                     </p>
                                 </div>
                             </div>
@@ -46,9 +46,9 @@
                               </svg>
                             <div class="px-6 py-4">
                                 <div class="space-y-5">
-                                    <div class="mb-2 text-xl font-bold">Localiza la ficha del producto</div>
+                                    <div class="mb-2 text-xl font-bold">Localiza la ficha del producto y publica tu oferta.</div>
                                     <p class="text-base">
-                                        y publica tu oferta.Con el código de barras o con la descripción o marca
+                                        Con el código de barras o con la descripción o marca
                                         encontrarás la ficha de producto en nuestra base de datos.
                                         También puedes crear una nueva ficha muy fácilmente, nosotros te iremos
                                         indicando, paso a paso, como hacerlo.

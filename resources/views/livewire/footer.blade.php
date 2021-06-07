@@ -1,165 +1,124 @@
-<div class="w-full bg-gray-400 mb-0 mt-5">
-    <footer class="mt-16 w-full bg-gray-400">
+<div class="w-full mt-5 mb-0 bg-gray-400">
+    <footer class="w-full mt-16 bg-gray-400">
         <div class="border-t md:px-4 md:pt-10 md:pb-5">
-          <div class="flex flex-wrap md:max-w-screen-lg mx-auto">
-            <section
-              class="relative text-gray-700 font-light font-light border-b px-4 pb-4 md:py-3 w-full md:border-none md:w-1/4"
-            >
-              <div class="md:hidden">
+            <div class="flex flex-wrap mx-auto md:max-w-screen-lg">
+                <section
+                    class="relative w-full px-4 pb-4 font-light text-gray-700 border-b md:py-3 md:border-none md:w-1/4">
+                    <div class="md:hidden">
+                        <button onclick="toggleFooterSection(event)"
+                            class="w-full py-4 text-xs font-bold tracking-wider text-left text-pink-700 uppercase border-t border-white focus:outline-none"
+                            type="button">
+                            CONDICIONES GENERALES
+                        </button>
+                    </div>
+                    <a class="hidden text-xs font-bold tracking-wider text-pink-700 uppercase md:block" href="#">
+                        CONDICIONES GENERALES
+                    </a>
+                    <article class="h-0 -mt-4 overflow-hidden md:h-auto md:mt-0">
+                        <ul class="my-5 text-sm tracking-wide">
+                            <li class="my-3 tracking-wide">
+                                <a href="#">AVISO LEGAL</a>
+                            </li>
+                            <li class="my-3 tracking-wide">
+                                <a href="#">POLÍTICA DE COOKIES</a>
+                            </li>
+                            <li class="my-3 tracking-wide">
+                                <a href="#">CONDICIONES GENERALES</a>
+                            </li>
+                        </ul>
+                    </article>
+                </section>
+                <section
+                    class="relative w-full px-4 pb-4 font-light text-gray-700 border-b md:py-3 md:border-none md:w-1/4">
+                    <div class="md:hidden">
+                        <button onclick="toggleFooterSection(event)"
+                            class="w-full py-4 text-xs font-bold tracking-wider text-left text-pink-700 uppercase border-t border-white focus:outline-none"
+                            type="button">
+                            CORPORATIVO
+                        </button>
+                    </div>
+                    <a class="hidden text-xs font-bold tracking-wider text-pink-700 uppercase md:block" href="#">
+                        CORPORATIVO
+                    </a>
+                    <article class="h-0 -mt-4 overflow-hidden md:h-auto md:mt-0">
+                        <ul class="my-5 text-sm tracking-wide">
+                            <li class="my-3 tracking-wide">
+                                <a href="#">QUIENES SOMOS</a>
+                            </li>
+                            <li class="my-3 tracking-wide">
+                                <a href="#">MAPA WEB</a>
+                            </li>
+                            <li class="my-3 tracking-wide">
+                                <a href="#">CONTACTO</a>
+                            </li>
+                        </ul>
+                    </article>
+                </section>
+                <section
+                    class="relative w-full px-4 pb-4 font-light text-gray-700 border-b md:py-3 md:border-none md:w-1/4">
+                    <div class="md:hidden">
+                        <button onclick="toggleFooterSection(event)"
+                            class="w-full py-4 text-xs font-bold tracking-wider text-left text-pink-700 uppercase border-t border-white focus:outline-none"
+                            type="button">
+                            RRSS
+                        </button>
+                    </div>
+                    <a class="hidden text-xs font-bold tracking-wider text-pink-700 uppercase md:block" href="#">
+                        RRSS
+                    </a>
+                    <article class="h-0 -mt-4 overflow-hidden md:h-auto md:mt-0">
+                        <ul class="my-5 text-sm tracking-wide">
+                            <li class="my-3 tracking-wide">
+                                <a href="#">Enlace a Linkedin</a>
+                            </li>
+                            <li class="my-3 tracking-wide">
+                                <a href="#">MAIL</a>
+                            </li>
+                        </ul>
+                    </article>
+                </section>
+                <section
+                    class="relative w-full px-4 pb-4 font-light text-gray-700 border-b md:py-3 md:border-none md:w-1/4">
+                    <div class="md:hidden">
+                        <button onclick="toggleFooterSection(event)"
+                            class="w-full py-4 text-xs font-bold tracking-wider text-left text-pink-700 uppercase border-t border-white focus:outline-none"
+                            type="button">
+                            CONTACTAR POR TELÉFONO
+                        </button>
+                    </div>
+                    <a class="hidden text-xs font-bold tracking-wider text-pink-700 uppercase md:block" href="#">
+                        CONTACTAR POR TELÉFONO
+                    </a>
+                    <article class="h-0 -mt-4 overflow-hidden md:h-auto md:mt-0">
+                        <ul class="my-5 text-sm tracking-wide">
+                            <li class="my-3 tracking-wide">
+                                <a href="#">TELÉFONO</a>
+                            </li>
+                            <li class="my-3 tracking-wide">
+                                <a href="#">WHATSAPP</a>
+                            </li>
+                        </ul>
+                    </article>
+                </section>
+                {{-- <section
+              class="relative w-full px-4 pb-4 font-light text-gray-700 border-b md:py-3 md:border-none md:w-1/4"
+            > --}}
+                {{-- <div class="md:hidden">
                 <button
                   onclick="toggleFooterSection(event)"
-                  class="uppercase text-xs font-bold tracking-wider text-pink-700 focus:outline-none border-t border-white py-4 w-full text-left"
-                  type="button"
-                >
-                  Lorem ipsum dolor sit amet consectetur adipiscing elit maecenas
-                  mattis
-                </button>
-              </div>
-              <a
-                class="uppercase text-xs font-bold tracking-wider text-pink-700 hidden md:block"
-                href="#"
-              >
-                Lorem ipsum dolor sit amet consectetur adipiscing elit maecenas
-                mattis
-              </a>
-              <article class="h-0 md:h-auto -mt-4 md:mt-0 overflow-hidden">
-                <ul class="my-5 text-sm tracking-wide">
-                  <li class="my-3 tracking-wide">
-                    <a href="#">Fusce vel sem</a>
-                  </li>
-                  <li class="my-3 tracking-wide">
-                    <a href="#">Ut venenatis tellus</a>
-                  </li>
-                  <li class="my-3 tracking-wide">
-                    <a href="#">Vestibulum</a>
-                  </li>
-                  <li class="my-3 tracking-wide">
-                    <a href="#">Nunc at ipsum</a>
-                  </li>
-                </ul>
-              </article>
-            </section>
-            <section
-              class="relative text-gray-700 font-light font-light border-b px-4 pb-4 md:py-3 w-full md:border-none md:w-1/4"
-            >
-              <div class="md:hidden">
-                <button
-                  onclick="toggleFooterSection(event)"
-                  class="uppercase text-xs font-bold tracking-wider text-pink-700 focus:outline-none border-t border-white py-4 w-full text-left"
-                  type="button"
-                >
-                  Ut porta
-                </button>
-              </div>
-              <a
-                class="uppercase text-xs font-bold tracking-wider text-pink-700 hidden md:block"
-                href="#"
-              >
-                Ut porta
-              </a>
-              <article class="h-0 md:h-auto -mt-4 md:mt-0 overflow-hidden">
-                <ul class="my-5 text-sm tracking-wide">
-                  <li class="my-3 tracking-wide">
-                    <a href="#">Pellentesque rhoncus</a>
-                  </li>
-                  <li class="my-3 tracking-wide">
-                    <a href="#">Aenean</a>
-                  </li>
-                  <li class="my-3 tracking-wide">
-                    <a href="#">Curabitur bibendum</a>
-                  </li>
-                  <li class="my-3 tracking-wide">
-                    <a href="#">Phasellus non mi</a>
-                  </li>
-                  <li class="my-3 tracking-wide">
-                    <a href="#">Duis accumsa</a>
-                  </li>
-                  <li class="my-3 tracking-wide">
-                    <a href="#">Curabitur nec enim</a>
-                  </li>
-                  <li class="my-3 tracking-wide">
-                    <a href="#">Fusce ut augue</a>
-                  </li>
-                </ul>
-              </article>
-            </section>
-            <section
-              class="relative text-gray-700 font-light font-light border-b px-4 pb-4 md:py-3 w-full md:border-none md:w-1/4"
-            >
-              <div class="md:hidden">
-                <button
-                  onclick="toggleFooterSection(event)"
-                  class="uppercase text-xs font-bold tracking-wider text-pink-700 focus:outline-none border-t border-white py-4 w-full text-left"
-                  type="button"
-                >
-                  Praesent elementum
-                </button>
-              </div>
-              <a
-                class="uppercase text-xs font-bold tracking-wider text-pink-700 hidden md:block"
-                href="#"
-              >
-                Praesent elementum
-              </a>
-              <article class="h-0 md:h-auto -mt-4 md:mt-0 overflow-hidden">
-                <ul class="my-5 text-sm tracking-wide">
-                  <li class="my-3 tracking-wide">
-                    <a href="#">Mauris mattis nunc</a>
-                  </li>
-                  <li class="my-3 tracking-wide">
-                    <a href="#">Nunc viverra risus</a>
-                  </li>
-                  <li class="my-3 tracking-wide">
-                    <a href="#">Etiam a libero</a>
-                  </li>
-                </ul>
-              </article>
-            </section>
-            <section
-              class="relative text-gray-700 font-light font-light border-b px-4 pb-4 md:py-3 w-full md:border-none md:w-1/4"
-            >
-              <div class="md:hidden">
-                <button
-                  onclick="toggleFooterSection(event)"
-                  class="uppercase text-xs font-bold tracking-wider text-pink-700 focus:outline-none border-t border-white py-4 w-full text-left"
-                  type="button"
-                >
-                  Aenean gravida orci in sem varius
-                </button>
-              </div>
-              <a
-                class="uppercase text-xs font-bold tracking-wider text-pink-700 hidden md:block"
-                href="#"
-              >
-                Aenean gravida orci in sem varius
-              </a>
-              <article class="h-0 md:h-auto -mt-4 md:mt-0 overflow-hidden">
-                <ul class="my-5 text-sm tracking-wide">
-                  <li class="my-3 tracking-wide">
-                    <a href="#">Cras id ipsum</a>
-                  </li>
-                </ul>
-              </article>
-            </section>
-            <section
-              class="relative text-gray-700 font-light font-light border-b px-4 pb-4 md:py-3 w-full md:border-none md:w-1/4"
-            >
-              <div class="md:hidden">
-                <button
-                  onclick="toggleFooterSection(event)"
-                  class="uppercase text-xs font-bold tracking-wider text-pink-700 focus:outline-none border-t border-white py-4 w-full text-left"
+                  class="w-full py-4 text-xs font-bold tracking-wider text-left text-pink-700 uppercase border-t border-white focus:outline-none"
                   type="button"
                 >
                   Donec a lorem
                 </button>
-              </div>
-              <a
-                class="uppercase text-xs font-bold tracking-wider text-pink-700 hidden md:block"
+              </div> --}}
+                {{-- <a
+                class="hidden text-xs font-bold tracking-wider text-pink-700 uppercase md:block"
                 href="#"
               >
                 Donec a lorem
               </a>
-              <article class="h-0 md:h-auto -mt-4 md:mt-0 overflow-hidden">
+              <article class="h-0 -mt-4 overflow-hidden md:h-auto md:mt-0">
                 <ul class="my-5 text-sm tracking-wide">
                   <li class="my-3 tracking-wide">
                     <a href="#">Sed a diam</a>
@@ -174,24 +133,24 @@
               </article>
             </section>
             <section
-              class="relative text-gray-700 font-light font-light border-b px-4 pb-4 md:py-3 w-full md:border-none md:w-1/4"
+              class="relative w-full px-4 pb-4 font-light text-gray-700 border-b md:py-3 md:border-none md:w-1/4"
             >
               <div class="md:hidden">
                 <button
                   onclick="toggleFooterSection(event)"
-                  class="uppercase text-xs font-bold tracking-wider text-pink-700 focus:outline-none border-t border-white py-4 w-full text-left"
+                  class="w-full py-4 text-xs font-bold tracking-wider text-left text-pink-700 uppercase border-t border-white focus:outline-none"
                   type="button"
                 >
                   Integer interdum
                 </button>
               </div>
               <a
-                class="uppercase text-xs font-bold tracking-wider text-pink-700 hidden md:block"
+                class="hidden text-xs font-bold tracking-wider text-pink-700 uppercase md:block"
                 href="#"
               >
                 Integer interdum
               </a>
-              <article class="h-0 md:h-auto -mt-4 md:mt-0 overflow-hidden">
+              <article class="h-0 -mt-4 overflow-hidden md:h-auto md:mt-0">
                 <ul class="my-5 text-sm tracking-wide">
                   <li class="my-3 tracking-wide">
                     <a href="#">Dignissim gravida</a>
@@ -212,24 +171,24 @@
               </article>
             </section>
             <section
-              class="relative text-gray-700 font-light font-light border-b px-4 pb-4 md:py-3 w-full md:border-none md:w-1/4"
+              class="relative w-full px-4 pb-4 font-light text-gray-700 border-b md:py-3 md:border-none md:w-1/4"
             >
               <div class="md:hidden">
                 <button
                   onclick="toggleFooterSection(event)"
-                  class="uppercase text-xs font-bold tracking-wider text-pink-700 focus:outline-none border-t border-white py-4 w-full text-left"
+                  class="w-full py-4 text-xs font-bold tracking-wider text-left text-pink-700 uppercase border-t border-white focus:outline-none"
                   type="button"
                 >
                   Quisque
                 </button>
               </div>
               <a
-                class="uppercase text-xs font-bold tracking-wider text-pink-700 hidden md:block"
+                class="hidden text-xs font-bold tracking-wider text-pink-700 uppercase md:block"
                 href="#"
               >
                 Quisque
               </a>
-              <article class="h-0 md:h-auto -mt-4 md:mt-0 overflow-hidden">
+              <article class="h-0 -mt-4 overflow-hidden md:h-auto md:mt-0">
                 <ul class="my-5 text-sm tracking-wide">
                   <li class="my-3 tracking-wide">
                     <a href="#">Finibus nulla eget</a>
@@ -248,9 +207,9 @@
             </section>
           </div>
         </div>
-        <div class="max-w-screen-lg mx-auto border-none px-4">
+        <div class="max-w-screen-lg px-4 mx-auto border-none">
           <section
-            class="flex flex-col md:flex-row md:justify-between md:border-solid md:border-t text-gray-700 font-light text-sm pt-4 pb-6 md:pt-5 md:pb-6 w-full"
+            class="flex flex-col w-full pt-4 pb-6 text-sm font-light text-gray-700 md:flex-row md:justify-between md:border-solid md:border-t md:pt-5 md:pb-6"
           >
             <div>
               <p class="leading-8 tracking-wide">
@@ -260,11 +219,11 @@
             <div>
               <p class="leading-8 tracking-wide">Privacy Policy</p>
             </div>
-          </section>
-        </div>
-      </footer>
-      @push('scripts')
-      <script>
+          </section> --}}
+            </div>
+    </footer>
+    @push('scripts')
+    <script>
         function toggleFooterSection(e) {
           const list = e.target.parentElement.parentElement.querySelector(
             "article"
@@ -275,6 +234,6 @@
             list.classList.add("h-0");
           }
         }
-      </script>
-      @endpush
+    </script>
+    @endpush
 </div>
