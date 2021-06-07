@@ -17,6 +17,10 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
 
+Route::middleware(['auth:sanctum', 'verified'])->get('/tipousuario', function () {
+    return view('tipousuario');
+})->name('tipousuario');
+
 /************************************ RUTAS DE PRODUCTOS  **************************/
 Route::get('productos', function() {
     return view('allproducts');

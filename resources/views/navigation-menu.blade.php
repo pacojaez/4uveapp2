@@ -13,7 +13,10 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                        {{ __('Panel de Control') }}
+                        {{ __('HISTORICO DE PEDIDOS') }}
+                    </x-jet-nav-link>
+                    <x-jet-nav-link href="{{ route('tipousuario') }}" :active="request()->routeIs('tipousuario')">
+                        {{ __('PEDIDOS POR TIPO DE USUARIO') }}
                     </x-jet-nav-link>
                 </div>
             </div>

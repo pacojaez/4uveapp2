@@ -19,6 +19,8 @@
         <script src="{{ mix('js/app.js') }}" defer></script>
         <!-- Alpine CDN -->
         <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+        <!--Apex Charts -->
+        <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 
     </head>
     <body class="font-sans antialiased bg-yellow-300">
@@ -47,6 +49,7 @@
         @livewire('livewire-ui-modal')
         @livewireUIScripts
         @livewireScripts
+        @livewireChartsScripts
         <script src="https://cdn.jsdelivr.net/gh/livewire/turbolinks@v0.1.x/dist/livewire-turbolinks.js" data-turbolinks-eval="false" data-turbo-eval="false"></script>
     </body>
 </html>
