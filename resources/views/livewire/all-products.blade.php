@@ -1,5 +1,4 @@
 <div>
-
         <div class="p-2 mx-8 font-semibold bg-gray-300 justify-items-center">
             <h2 class="m-4 ml-12 text-xl font-semibold leading-tight text-gray-800">
                 {{ __('Todos nuestros Productos')  }}
