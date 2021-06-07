@@ -17,6 +17,10 @@ class NewProduct extends Component
     use WithFileUploads;
 
     protected $product;
+    public $products;
+    public $productslist;
+
+    public $selectedProduct;
 
     public $product_image, $product_image_2, $product_image_3, $user_image, $user_image_2, $user_image_3;
 
@@ -216,15 +220,54 @@ class NewProduct extends Component
     {
         $this->subcategories = Subcategorie::all();
         $this->portes = Portes::all();
-        // dd($this->portes);
+        // $this->productslist = Product::search($this->search)->get();
+        // dd($this->productslist);
+    }
+
+    public function updateSearch( ){
+        $this->products =  Product::search($this->search)->get();
     }
 
     public function render()
     {
-        $this->product =  Product::search($this->search)->first();
+
+        // AUTORRELLENADO DE LA FICHA DE PRODUCTO;
+        $this->productslist = Product::search($this->search)->get();
+       if($this->selectedProduct){
+           $product = Product::findOrFail($this->selectedProduct);
+        //    $this->product_image = $product->product_image;
+        //    $this->product_image_2 = $product->product_image_2;
+        //    $this->product_image_3 = $product->product_image_3;
+           $this->name = $product->name;
+           $this->short_description = $product->short_description;
+           $this->description = $product->description;
+           $this->product_code = $product->product_code;
+           $this->cb_unit = $product->cb_unit;
+           $this->EAN13_individual = $product->EAN13_individual;
+           $this->unidades_embalaje_original = $product->unidades_embalaje_original;
+           $this->dimensions_boxes = $product->dimensions_boxes;
+           $this->weight = $product->weight;
+           $this->pack_units = $product->pack_units;
+           $this->unidades_embalaje_2 = $product->unidades_embalaje_2;
+           $this->subcategorie_id = $product->subcategorie_id;
+           $this->part_number = $product->part_number;
+           $this->brand = $product->brand;
+           $this->net_price = $product->net_price;
+           $this->EAN13_box_1 = $product->EAN13_box_1;
+           $this->dimensions_boxes_2 = $product->dimensions_boxes_2;
+           $this->weight_2 = $product->weight_2;
+           $this->EAN13_box_2 = $product->EAN13_box_2;
+           $this->unidades_embalaje_3 = $product->unidades_embalaje_3;
+           $this->dimensions_boxes_3 = $product->dimensions_boxes_3;
+           $this->weight_3 = $product->weight_3;
+
+
+       }
 
         return view('livewire.new-product', [
             'product' => $this->product,
+            'products' => $this->products,
+            'productslist' => $this->productslist
         ]);
     }
 }

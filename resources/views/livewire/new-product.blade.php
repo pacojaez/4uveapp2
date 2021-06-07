@@ -1,19 +1,51 @@
 <div>
-    <div class="w-5/6 mx-1">
+    <div>
+        <div class="w-5/6 mx-1">
+            <label>
+                NOMBRE o EAN13
+            </label>
+            {{-- <input wire:model="search" type="search" class="flex w-1/2 px-4 py-3 m-2 leading-tight text-gray-700 bg-gray-200 border border-gray-200 rounded appearance-none focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Buscar Producto por Nombre o EAN13..."> --}}
+            <input wire:model.debounce.500ms="search" type="search" class="flex w-1/2 px-4 py-3 leading-tight text-gray-700 bg-gray-200 border border-gray-200 rounded appearance-none focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Buscar Producto...">
+        </div>
+        <div class="mb-8">
+            <label class="inline-block w-32 font-bold">Producto:</label>
+            <select name="selectedProduct" wire:model="selectedProduct" class="p-2 bg-white border shadow">
+                <option value=''>Elije un producto de nuestra Base de Datos</option>
+                @foreach($productslist as $product)
+                    <option value={{ $product->id }}>{{ $product->name }}</option>
+                @endforeach
+            </select>
+        </div>
+        {{-- @if(count($cities) > 0)
+            <div class="mb-8">
+                <label class="inline-block w-32 font-bold">City:</label>
+                <select name="city" wire:model="city"
+                    class="p-2 px-4 py-2 pr-8 leading-tight bg-white border border-gray-400 rounded shadow appearance-none hover:border-gray-500 focus:outline-none focus:shadow-outline">
+                    <option value=''>Choose a city</option>
+                    @foreach($cities as $city)
+                        <option value={{ $city->id }}>{{ $city->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+        @endif --}}
+    </div>
+    {{-- <div class="w-5/6 mx-1">
         <label>
             NOMBRE o EAN13
         </label>
-        <input wire:model.debounce.500ms="search" type="search" class="flex w-1/2 px-4 py-3 m-2 leading-tight text-gray-700 bg-gray-200 border border-gray-200 rounded appearance-none focus:outline-none focus:bg-white focus:border-gray-500"placeholder="Buscar Producto...">
+        <input wire:model="search" type="search" class="flex w-1/2 px-4 py-3 m-2 leading-tight text-gray-700 bg-gray-200 border border-gray-200 rounded appearance-none focus:outline-none focus:bg-white focus:border-gray-500"placeholder="Buscar Producto por Nombre o EAN13...">
         {{-- <input wire:model.debounce.500ms="search" type="search" class="flex w-1/2 px-4 py-3 leading-tight text-gray-700 bg-gray-200 border border-gray-200 rounded appearance-none focus:outline-none focus:bg-white focus:border-gray-500"placeholder="Buscar Producto..."> --}}
-    </div>
+    {{-- </div>
+    @if($productslist)
     <div wire:ignore>
-        <select class="select2" name="state">
-
-            <option value="AL">Alabama</option>
-            <option value="WY">Wyoming</option>
+        <select class="select2" name="productslist" wire:model="productslist">
+            @foreach ( $products as $product )
+            <option value="{{ $product->id }}">{{ $product->name }}</option>
+            @endforeach
         </select>
         <!-- Select2 will insert its DOM here. -->
     </div>
+    @endif --}}
     {{-- <div class="w-3/6 mx-1">
         <input wire:model.debounce.500ms="search" type="search" class="block w-1/2 px-4 py-3 leading-tight text-gray-700 bg-gray-200 border border-gray-200 rounded appearance-none focus:outline-none focus:bg-white focus:border-gray-500"placeholder="Buscar Producto...">
     </div> --}}
@@ -22,6 +54,8 @@
     <form wire:submit.prevent="store" enctype="multipart/form-data">
         @method('post')
         @csrf
+        <button class='w-auto px-4 py-2 font-medium text-white bg-gray-500 rounded-lg shadow-xl hover:bg-gray-700'
+        type="reset">RESETEAR EL FORMULARIO</button>
         <div class="flex items-center justify-center p-2 mt-4 mb-2 bg-gray-200">
             <div class="grid w-11/12 bg-white rounded-lg shadow-xl md:w-1/12 lg:w-10/12">
                 <div class="grid grid-cols-1 gap-5 mt-5 md:grid-cols-2 md:gap-8 mx-7">
