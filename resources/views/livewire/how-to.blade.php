@@ -5,14 +5,14 @@
         }
     </style>
     <div>
-        <div class="bg-green-800 bg-left-top bg-repeat-x bg-auto bannerFondo"
+        <div class="bg-yellow-300 bg-left-top bg-repeat-x bg-auto bannerFondo"
             style="background-image: url(./img/continuartl_4.png)">
         </div>
 
         <div class="-mt-64 ">
             <div class="w-full text-center">
-                <p class="text-2xl tracking-widest text-white">3 SENCILLOS PASOS</p>
-                <h1 class="text-5xl font-bold text-white">
+                <p class="mt-4 text-2xl tracking-widest text-gray-700">3 SENCILLOS PASOS</p>
+                <h1 class="text-5xl font-bold text-gray-800">
                     Y PODRÁS CONVERTIR TU EXCESO DE STOCK EN CASH
                 </h1>
             </div>
@@ -24,7 +24,8 @@
                         <div class="space-y-10">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 m-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                              </svg>
+                            </svg>
+
 
                             <div class="px-6 py-4">
                                 <div class="space-y-5">
