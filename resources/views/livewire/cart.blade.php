@@ -94,7 +94,7 @@
                     <p class="mb-2 text-2xl text-center">En breve recibirás un mail con las condiciones más favorables que hemos obtenido para el envio!</p>
                     <p class="mb-2 text-2xl text-center">Muchas Gracias por confiar en 4uve!</p>
                 @else
-                <p class="mb-2 text-2xl text-center">Hemos vaciado tu carrito. </p>
+                {{-- <p class="mb-2 text-2xl text-center">Hemos vaciado tu carrito. </p> --}}
                 <p class="mb-2 text-2xl text-center">Muchas Gracias por tu interés en 4uve!</p>
                 @endif
             @endif

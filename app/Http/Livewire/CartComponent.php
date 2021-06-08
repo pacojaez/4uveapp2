@@ -34,7 +34,7 @@ class CartComponent extends Component
      */
     public function mount(): void
     {
-        $this->confirmedMessage = true;
+        $this->confirmedMessage = false;
         $this->abandoned = false;
         $this->updateCart();
     }
@@ -46,7 +46,7 @@ class CartComponent extends Component
      */
     public function render(): View
     {
-        $this->dispatchBrowserEvent('refresh-page');
+        // $this->dispatchBrowserEvent('refresh-page');
 
         return view('livewire.cart', [
             'total' => $this->total,
