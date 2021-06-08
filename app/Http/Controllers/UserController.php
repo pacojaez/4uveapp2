@@ -45,7 +45,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
      {
-    //     dd($request['tipo_usuario']);
+         dd($request['tipo_usuario']);
         $validated = $this->validate($request, [
             "name" => "required|min:3|string",
             "surname" => "required|min:3|string",

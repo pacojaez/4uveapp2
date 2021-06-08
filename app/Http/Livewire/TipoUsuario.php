@@ -10,7 +10,7 @@ use App\Models\User;
 class TipoUsuario extends Component
 {
     public $types = [
-        'Papelería', 'Cadena de Papelerias', 'Suministrador a Oficinas con Punto de Venta', 'Suministrador a Colegios con Almacén',
+        'Papelería', 'Cadena de Papelerías', 'Suministrador a Oficinas con Punto de Venta', 'Suministrador a Colegios con Almacén',
         'Suministrador a Oficinas con Almacén', 'Mayorista', 'Mayorista con Punto de Venta', 'Importador',
         'Fabricante', 'Distribuidor'
     ];
@@ -43,17 +43,17 @@ class TipoUsuario extends Component
 
     public function handleOnPointClick($point)
     {
-        dd($point);
+        // dd($point);
     }
 
     public function handleOnSliceClick($slice)
     {
-        dd($slice);
+        // dd($slice);
     }
 
     public function handleOnColumnClick($column)
     {
-        dd($column);
+        // dd($column);
     }
 
     public function render()
@@ -92,13 +92,17 @@ class TipoUsuario extends Component
             ->reduce(
                 function ($multiColumnChartModel, $data) {
                     $type = $data->tipo_usuario;
-                    // dd($type);
+                    // dd($data->id);
                     $total = Order::where('user_id', 'like', $data->id)->sum('total_factura');
                     // $total = User::where('id', 'like', $type)->orders()->sum('total_factura');
                     // $total = Order::groupBy('user_id')->sum('total_factura');
                     // dd($total);
-                    return $multiColumnChartModel
+                    $result = $multiColumnChartModel
                         ->addSeriesColumn($type, $type, $total);
+
+                    return $result;
+
+
                 },
                 LivewireCharts::multiColumnChartModel()
                     ->setAnimated($this->firstRun)
@@ -114,9 +118,9 @@ class TipoUsuario extends Component
         $columnChartModel = $users
             ->reduce(function ($columnChartModel, $data) {
                 $type = $data->name;
-                // dd($type);
+                // dd($data->tipo_usuario);
                 $value = Order::where('user_id', 'like', $data->id)->sum('total_factura');
-
+                // dd($this->colors[$data->tipo_usuario]);
                 return $columnChartModel->addColumn($type, $value, $this->colors[$data->tipo_usuario]);
             }, LivewireCharts::columnChartModel()
                 ->setTitle('Compras por Usuario')
@@ -132,45 +136,46 @@ class TipoUsuario extends Component
 
         $pieChartModel = $users
             ->reduce(function ($pieChartModel, $data) {
-                $type = $data->tipo_usuario;
+                $type = $data->email;
                 $value = Order::where('user_id', 'like', $data->id)->sum('total_factura');
 
-                return $pieChartModel->addSlice($type, $value, $this->colors[$type]);
+                return $pieChartModel->addSlice($type, $value, $this->colors[$data->tipo_usuario]);
+
             }, LivewireCharts::pieChartModel()
                 //->setTitle('Expenses by Type')
                 ->setAnimated($this->firstRun)
                 ->withOnSliceClickEvent('onSliceClick')
-                //->withoutLegend()
+                ->withLegend()
                 ->legendPositionBottom()
                 ->legendHorizontallyAlignedCenter()
                 ->setDataLabelsEnabled($this->showDataLabels)
-                // ->setColors(['#b01a1b', '#d41b2c', '#ec3c3b', '#f66665'])
             );
 
-        // $lineChartModel = $expenses
-        //     ->reduce(function ($lineChartModel, $data) use ($expenses) {
-        //         $index = $expenses->search($data);
+        $lineChartModel = $users
+            ->reduce(function ($lineChartModel, $data) use ($users) {
+                $index = $users->search($data);
+                // dd($data);
+                $total = Order::where('user_id', 'like', $data->id)->sum('total_factura');
+                $amountSum = $users->take($index + 1)->sum('amount');
+                // if ($index == 6) {
+                //     $lineChartModel->addMarker(7, $total);
+                // }
 
-        //         $amountSum = $expenses->take($index + 1)->sum('amount');
+                // if ($index == 11) {
+                //     $lineChartModel->addMarker(12, $total);
+                // }
 
-        //         if ($index == 6) {
-        //             $lineChartModel->addMarker(7, $amountSum);
-        //         }
+                return $lineChartModel->addPoint($index, $total, ['id' => $data->id]);
 
-        //         if ($index == 11) {
-        //             $lineChartModel->addMarker(12, $amountSum);
-        //         }
-
-        //         return $lineChartModel->addPoint($index, $data->amount, ['id' => $data->id]);
-        //     }, LivewireCharts::lineChartModel()
-        //         //->setTitle('Expenses Evolution')
-        //         ->setAnimated($this->firstRun)
-        //         ->withOnPointClickEvent('onPointClick')
-        //         ->setSmoothCurve()
-        //         ->setXAxisVisible(true)
-        //         ->setDataLabelsEnabled($this->showDataLabels)
-        //         ->sparklined()
-        //     );
+            }, LivewireCharts::lineChartModel()
+                //->setTitle('Expenses Evolution')
+                ->setAnimated($this->firstRun)
+                ->withOnPointClickEvent('onPointClick')
+                ->setSmoothCurve()
+                ->setXAxisVisible(true)
+                ->setDataLabelsEnabled($this->showDataLabels)
+                ->sparklined()
+            );
 
         // $areaChartModel = $expenses
         //     ->reduce(function ($areaChartModel, $data) use ($expenses) {
@@ -210,7 +215,7 @@ class TipoUsuario extends Component
             ->with([
                 'columnChartModel' => $columnChartModel,
                 'pieChartModel' => $pieChartModel,
-                // 'lineChartModel' => $lineChartModel,
+                'lineChartModel' => $lineChartModel,
                 // 'areaChartModel' => $areaChartModel,
                 // 'multiLineChartModel' => $multiLineChartModel,
                 'multiColumnChartModel' => $multiColumnChartModel,

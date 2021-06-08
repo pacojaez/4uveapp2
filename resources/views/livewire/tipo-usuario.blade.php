@@ -40,12 +40,12 @@
                     :pie-chart-model="$pieChartModel" />
         </div>
         {{--
-        </div>
+        </div> --}}
 
         <div class="p-4 bg-white border rounded shadow" style="height: 32rem;">
             <livewire:livewire-line-chart key="{{ $lineChartModel->reactiveKey() }}" :line-chart-model="$lineChartModel" />
         </div>
-
+ {{--
         <div class="p-4 bg-white border rounded shadow" style="height: 32rem;">
             <livewire:livewire-area-chart key="{{ $areaChartModel->reactiveKey() }}" :area-chart-model="$areaChartModel" />
         </div>
