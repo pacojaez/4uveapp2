@@ -91,14 +91,14 @@ class TipoUsuario extends Component
         $multiColumnChartModel = $users
             ->reduce(
                 function ($multiColumnChartModel, $data) {
-                    $type = $data->first()->user_id;
-                    // dd($data);
+                    $type = $data->tipo_usuario;
+                    // dd($type);
                     $total = Order::where('user_id', 'like', $data->id)->sum('total_factura');
                     // $total = User::where('id', 'like', $type)->orders()->sum('total_factura');
                     // $total = Order::groupBy('user_id')->sum('total_factura');
-                    dd($total);
+                    // dd($total);
                     return $multiColumnChartModel
-                        ->addSeriesColumn($type, 1, $total);
+                        ->addSeriesColumn($type, $type, $total);
                 },
                 LivewireCharts::multiColumnChartModel()
                     ->setAnimated($this->firstRun)
@@ -111,40 +111,41 @@ class TipoUsuario extends Component
 
 
 
-        // $columnChartModel = $expenses->groupBy('tipo_usuario')
-        //     ->reduce(function ($columnChartModel, $data) {
-        //         $type = $data->first()->type;
-        //         $value = $data->sum('amount');
+        $columnChartModel = $users
+            ->reduce(function ($columnChartModel, $data) {
+                $type = $data->name;
+                // dd($type);
+                $value = Order::where('user_id', 'like', $data->id)->sum('total_factura');
 
-        //         return $columnChartModel->addColumn($type, $value, $this->colors[$type]);
-        //     }, LivewireCharts::columnChartModel()
-        //         ->setTitle('Expenses by Type')
-        //         ->setAnimated($this->firstRun)
-        //         ->withOnColumnClickEventName('onColumnClick')
-        //         ->setLegendVisibility(false)
-        //         ->setDataLabelsEnabled($this->showDataLabels)
-        //         //->setOpacity(0.25)
-        //         ->setColors(['#b01a1b', '#d41b2c', '#ec3c3b', '#f66665'])
-        //         ->setColumnWidth(90)
-        //         ->withGrid()
-        //     );
+                return $columnChartModel->addColumn($type, $value, $this->colors[$data->tipo_usuario]);
+            }, LivewireCharts::columnChartModel()
+                ->setTitle('Compras por Usuario')
+                ->setAnimated($this->firstRun)
+                ->withOnColumnClickEventName('onColumnClick')
+                ->setLegendVisibility(false)
+                ->setDataLabelsEnabled($this->showDataLabels)
+                //->setOpacity(0.25)
+                ->setColors(['#b01a1b', '#d41b2c', '#ec3c3b', '#f66665'])
+                ->setColumnWidth(90)
+                ->withGrid()
+            );
 
-        // $pieChartModel = $expenses->groupBy('type')
-        //     ->reduce(function ($pieChartModel, $data) {
-        //         $type = $data->first()->type;
-        //         $value = $data->sum('amount');
+        $pieChartModel = $users
+            ->reduce(function ($pieChartModel, $data) {
+                $type = $data->tipo_usuario;
+                $value = Order::where('user_id', 'like', $data->id)->sum('total_factura');
 
-        //         return $pieChartModel->addSlice($type, $value, $this->colors[$type]);
-        //     }, LivewireCharts::pieChartModel()
-        //         //->setTitle('Expenses by Type')
-        //         ->setAnimated($this->firstRun)
-        //         ->withOnSliceClickEvent('onSliceClick')
-        //         //->withoutLegend()
-        //         ->legendPositionBottom()
-        //         ->legendHorizontallyAlignedCenter()
-        //         ->setDataLabelsEnabled($this->showDataLabels)
-        //         ->setColors(['#b01a1b', '#d41b2c', '#ec3c3b', '#f66665'])
-        //     );
+                return $pieChartModel->addSlice($type, $value, $this->colors[$type]);
+            }, LivewireCharts::pieChartModel()
+                //->setTitle('Expenses by Type')
+                ->setAnimated($this->firstRun)
+                ->withOnSliceClickEvent('onSliceClick')
+                //->withoutLegend()
+                ->legendPositionBottom()
+                ->legendHorizontallyAlignedCenter()
+                ->setDataLabelsEnabled($this->showDataLabels)
+                // ->setColors(['#b01a1b', '#d41b2c', '#ec3c3b', '#f66665'])
+            );
 
         // $lineChartModel = $expenses
         //     ->reduce(function ($lineChartModel, $data) use ($expenses) {
@@ -207,8 +208,8 @@ class TipoUsuario extends Component
 
         return view('livewire.tipo-usuario')
             ->with([
-                // 'columnChartModel' => $columnChartModel,
-                // 'pieChartModel' => $pieChartModel,
+                'columnChartModel' => $columnChartModel,
+                'pieChartModel' => $pieChartModel,
                 // 'lineChartModel' => $lineChartModel,
                 // 'areaChartModel' => $areaChartModel,
                 // 'multiLineChartModel' => $multiLineChartModel,

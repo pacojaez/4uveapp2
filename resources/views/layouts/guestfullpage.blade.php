@@ -25,8 +25,9 @@
         <div class="font-sans antialiased text-gray-900 bg-yellow-300">
             {{ $slot }}
         </div>
-        @livewire('livewire-ui-modal')
+
         @livewireUIScripts
+        @livewire('livewire-ui-modal')
         @livewireScripts
         <script src="https://cdn.jsdelivr.net/gh/livewire/turbolinks@v0.1.x/dist/livewire-turbolinks.js" data-turbolinks-eval="false" data-turbo-eval="false"></script>
     </body>

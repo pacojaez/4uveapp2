@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\Product;
+use App\Models\Oferta;
 use App\Models\Subcategorie;
 use App\Models\Portes;
 use Livewire\Component;
@@ -71,6 +72,8 @@ class NewProduct extends Component
             'weight_2' => 'string|nullable',
             'dimensions_boxes_3' => 'string|nullable',
             'weight_3' => 'string|nullable',
+            'EAN13_box_1' => 'string|nullable',
+            'EAN13_box_2' => 'string|nullable',
             'plazo_preparacion_pedido' => 'string|nullable',
             'offer_units' => 'string|nullable',
             'boxes_quantity' => 'string|nullable',
@@ -86,14 +89,10 @@ class NewProduct extends Component
             'porte_id' => 'int|nullable',
             'subcategorie_id' => 'int|nullable',
             'net_price' => 'int|nullable',
-            'EAN13_box_1' => 'string|nullable',
-            'EAN13_box_2' => 'string|nullable',
             'categoria_oferta' => 'string|nullable',
-
-
         ]);
 
-            //  dd($data['product_image']);
+        //dd($data['product_image']);
         //PROCESAMIENTO IMAGEN 1:
         if($data['product_image']){
             //mandamos un messaje al usuario de que la imagen se esta procesando
@@ -260,8 +259,6 @@ class NewProduct extends Component
            $this->unidades_embalaje_3 = $product->unidades_embalaje_3;
            $this->dimensions_boxes_3 = $product->dimensions_boxes_3;
            $this->weight_3 = $product->weight_3;
-
-
        }
 
         return view('livewire.new-product', [

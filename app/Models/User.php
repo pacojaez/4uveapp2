@@ -90,6 +90,14 @@ class User extends Authenticatable
     }
 
     /**
+     * Get the products of the user.
+     */
+    public function oferta()
+    {
+        return $this->hasMany(Oferta::class);
+    }
+
+    /**
      * Get the cartItems of the user.
      */
     public function cartItem()

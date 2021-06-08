@@ -71,6 +71,14 @@ class Product extends Model
         return $this->belongsTo(Portes::class);
     }
 
+    /**
+     * Get the subcategorie.
+     */
+    public function oferta()
+    {
+        return $this->hasMany(Oferta::class);
+    }
+
     public static function search($search){
 
         // dd($search);

@@ -62,12 +62,13 @@ enctype="multipart/form-data"> --}}
 <form wire:submit.prevent="store" enctype="multipart/form-data">
     @method('post')
     @csrf
-    <button class='w-auto px-4 py-2 font-medium text-white bg-gray-500 rounded-lg shadow-xl hover:bg-gray-700'
+    <button class='w-auto px-4 py-2 m-auto font-medium text-center text-white bg-gray-500 rounded-lg shadow-xl hover:bg-gray-700'
         type="reset">
         RESETEAR EL FORMULARIO
     </button>
-    <div class="flex items-center justify-center p-2 mt-4 mb-2 bg-gray-200">
-        <div class="grid w-11/12 bg-white rounded-lg shadow-xl md:w-1/12 lg:w-10/12">
+    <div class="items-center justify-center p-2 mt-4 mb-2 bg-gray-200">
+        <div class="grid w-11/12 mb-4 bg-gray-300 rounded-lg shadow-xl md:w-1/12 lg:w-11/12">
+            <h2 class="p-2 m-auto font-bold text-center bg-white rounded">LOS DATOS DEL PRODUCTO:</h2>
             <div class="grid grid-cols-1 gap-5 mt-5 md:grid-cols-2 md:gap-8 mx-7">
                 <div class="grid grid-cols-1">
                     <label class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">
@@ -256,7 +257,9 @@ enctype="multipart/form-data"> --}}
                         type="text" placeholder="" />
                 </div>
             </div>
-
+        </div>
+        <div class="grid w-11/12 bg-white rounded-lg shadow-xl md:w-1/12 lg:w-11/12">
+            <h2 class="p-2 m-auto font-bold text-center bg-gray-300 rounded">LOS DATOS DE TU OFERTA:</h2>
             <div class="grid grid-cols-1 gap-5 mt-5 md:grid-cols-4 md:gap-8 mx-7">
                 <div class="grid grid-cols-1">
                     <label class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">

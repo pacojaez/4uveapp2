@@ -15,9 +15,11 @@
                     <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                         {{ __('HISTORICO DE PEDIDOS') }}
                     </x-jet-nav-link>
-                    <x-jet-nav-link href="{{ route('tipousuario') }}" :active="request()->routeIs('tipousuario')">
-                        {{ __('PEDIDOS POR TIPO DE USUARIO') }}
-                    </x-jet-nav-link>
+                    @if(Auth::user()->isAdmin())
+                        <x-jet-nav-link href="{{ route('tipousuario') }}" :active="request()->routeIs('tipousuario')">
+                            {{ __('PEDIDOS POR TIPO DE USUARIO') }}
+                        </x-jet-nav-link>
+                    @endif
                 </div>
             </div>
 

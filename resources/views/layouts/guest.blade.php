@@ -28,8 +28,9 @@
     @livewire('footer')
     <!--Cookie Consent-->
     @include('cookie-consent::index')
-    @livewire('livewire-ui-modal')
+
     @livewireUIScripts
+    @livewire('livewire-ui-modal')
     @livewireScripts
     <script src="https://cdn.jsdelivr.net/gh/livewire/turbolinks@v0.1.x/dist/livewire-turbolinks.js" data-turbolinks-eval="false" data-turbo-eval="false"></script>
 </body>
