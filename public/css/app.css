@@ -12720,6 +12720,30 @@ select {
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
+.font-titles {
+  font-family: FuturaBold;
+}
+
+.font-subtitles {
+  font-family: FuturaBook;
+}
+
+.font-light {
+  font-family: FuturaLight;
+}
+
+.font-rale {
+  font-family: Raleway;
+}
+
+.font-body {
+  font-family: FuturaLight;
+}
+
+.font-anton {
+  font-family: Anton;
+}
+
 .font-thin {
   font-weight: 100;
 }
@@ -33382,60 +33406,81 @@ select {
   transform-origin: 0%;
 }
 
-input:not(:-moz-placeholder-shown) ~ label, textarea:not(:-moz-placeholder-shown) ~ label {
+input:not(:-moz-placeholder-shown)~label, textarea:not(:-moz-placeholder-shown)~label {
   /* @apply transform; scale-75; -translate-y-6; */
   --tw-translate-x: 0;
   --tw-translate-y: 0;
   --tw-rotate: 0;
   --tw-skew-x: 0;
   --tw-skew-y: 0;
-  transform: translateX(var(--tw-translate-x)) translateY(var(--tw-translate-y)) rotate(var(--tw-rotate))
-      skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+  transform: translateX(var(--tw-translate-x)) translateY(var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
   --tw-scale-x: 0.75;
   --tw-scale-y: 0.75;
   --tw-translate-y: -1.5rem;
 }
 
-input:not(:-ms-input-placeholder) ~ label, textarea:not(:-ms-input-placeholder) ~ label {
+input:not(:-ms-input-placeholder)~label, textarea:not(:-ms-input-placeholder)~label {
   /* @apply transform; scale-75; -translate-y-6; */
   --tw-translate-x: 0;
   --tw-translate-y: 0;
   --tw-rotate: 0;
   --tw-skew-x: 0;
   --tw-skew-y: 0;
-  transform: translateX(var(--tw-translate-x)) translateY(var(--tw-translate-y)) rotate(var(--tw-rotate))
-      skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+  transform: translateX(var(--tw-translate-x)) translateY(var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
   --tw-scale-x: 0.75;
   --tw-scale-y: 0.75;
   --tw-translate-y: -1.5rem;
 }
 
-input:focus ~ label,
-  input:not(:placeholder-shown) ~ label,
-  textarea:focus ~ label,
-  textarea:not(:placeholder-shown) ~ label,
-  select:focus ~ label,
-  select:not([value='']):valid ~ label {
+input:focus~label,
+input:not(:placeholder-shown)~label,
+textarea:focus~label,
+textarea:not(:placeholder-shown)~label,
+select:focus~label,
+select:not([value='']):valid~label {
   /* @apply transform; scale-75; -translate-y-6; */
   --tw-translate-x: 0;
   --tw-translate-y: 0;
   --tw-rotate: 0;
   --tw-skew-x: 0;
   --tw-skew-y: 0;
-  transform: translateX(var(--tw-translate-x)) translateY(var(--tw-translate-y)) rotate(var(--tw-rotate))
-      skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+  transform: translateX(var(--tw-translate-x)) translateY(var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
   --tw-scale-x: 0.75;
   --tw-scale-y: 0.75;
   --tw-translate-y: -1.5rem;
 }
 
-input:focus ~ label,
-  select:focus ~ label {
+input:focus~label,
+select:focus~label {
   /* @apply text-black; left-0; */
   --tw-text-opacity: 1;
   color: rgba(0, 0, 0, var(--tw-text-opacity));
   left: 0px;
 }
+
+/* @font-face {
+    font-family: FuturaBold;
+    font-weight: 400;
+    src: url(..\fonts\FuturaBold.ttf);
+}
+
+@font-face {
+    font-family: FuturaLight;
+    font-weight: 400;
+    src: url(..\fonts\FuturaLight.ttf);
+}
+
+@font-face {
+    font-family: FuturaBook;
+    font-weight: 400;
+    src: url(..\fonts\FuturaBook.ttf);
+}
+
+@font-face {
+    font-family: Anton;
+    font-weight: 400;
+    src: url(..\fonts\Anton-Regular.ttf);
+} */
 
 @media (min-width: 640px) {
   .sm\:container {
@@ -45441,6 +45486,30 @@ input:focus ~ label,
 
   .sm\:font-mono {
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  }
+
+  .sm\:font-titles {
+    font-family: FuturaBold;
+  }
+
+  .sm\:font-subtitles {
+    font-family: FuturaBook;
+  }
+
+  .sm\:font-light {
+    font-family: FuturaLight;
+  }
+
+  .sm\:font-rale {
+    font-family: Raleway;
+  }
+
+  .sm\:font-body {
+    font-family: FuturaLight;
+  }
+
+  .sm\:font-anton {
+    font-family: Anton;
   }
 
   .sm\:font-thin {
@@ -77933,6 +78002,30 @@ input:focus ~ label,
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   }
 
+  .md\:font-titles {
+    font-family: FuturaBold;
+  }
+
+  .md\:font-subtitles {
+    font-family: FuturaBook;
+  }
+
+  .md\:font-light {
+    font-family: FuturaLight;
+  }
+
+  .md\:font-rale {
+    font-family: Raleway;
+  }
+
+  .md\:font-body {
+    font-family: FuturaLight;
+  }
+
+  .md\:font-anton {
+    font-family: Anton;
+  }
+
   .md\:font-thin {
     font-weight: 100;
   }
@@ -110421,6 +110514,30 @@ input:focus ~ label,
 
   .lg\:font-mono {
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  }
+
+  .lg\:font-titles {
+    font-family: FuturaBold;
+  }
+
+  .lg\:font-subtitles {
+    font-family: FuturaBook;
+  }
+
+  .lg\:font-light {
+    font-family: FuturaLight;
+  }
+
+  .lg\:font-rale {
+    font-family: Raleway;
+  }
+
+  .lg\:font-body {
+    font-family: FuturaLight;
+  }
+
+  .lg\:font-anton {
+    font-family: Anton;
   }
 
   .lg\:font-thin {
@@ -142913,6 +143030,30 @@ input:focus ~ label,
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   }
 
+  .xl\:font-titles {
+    font-family: FuturaBold;
+  }
+
+  .xl\:font-subtitles {
+    font-family: FuturaBook;
+  }
+
+  .xl\:font-light {
+    font-family: FuturaLight;
+  }
+
+  .xl\:font-rale {
+    font-family: Raleway;
+  }
+
+  .xl\:font-body {
+    font-family: FuturaLight;
+  }
+
+  .xl\:font-anton {
+    font-family: Anton;
+  }
+
   .xl\:font-thin {
     font-weight: 100;
   }
@@ -175401,6 +175542,30 @@ input:focus ~ label,
 
   .\32xl\:font-mono {
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  }
+
+  .\32xl\:font-titles {
+    font-family: FuturaBold;
+  }
+
+  .\32xl\:font-subtitles {
+    font-family: FuturaBook;
+  }
+
+  .\32xl\:font-light {
+    font-family: FuturaLight;
+  }
+
+  .\32xl\:font-rale {
+    font-family: Raleway;
+  }
+
+  .\32xl\:font-body {
+    font-family: FuturaLight;
+  }
+
+  .\32xl\:font-anton {
+    font-family: Anton;
   }
 
   .\32xl\:font-thin {

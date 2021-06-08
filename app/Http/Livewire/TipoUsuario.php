@@ -165,7 +165,7 @@ class TipoUsuario extends Component
                 //     $lineChartModel->addMarker(12, $total);
                 // }
 
-                return $lineChartModel->addPoint($index, $total, ['id' => $data->id]);
+                return $lineChartModel->addPoint($index, $total, ['id' => $data->email]);
 
             }, LivewireCharts::lineChartModel()
                 //->setTitle('Expenses Evolution')

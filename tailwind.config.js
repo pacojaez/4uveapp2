@@ -11,8 +11,15 @@ module.exports = {
     theme: {
         extend: {
             fontFamily: {
-                // sans: ['Nunito', ...defaultTheme.fontFamily.sans],
-                custom: ['Inter', 'sans-serif'],
+                sans: ['Nunito', ...defaultTheme.fontFamily.sans],
+                // custom: ['Futura Bold', 'Futura Book', 'Futura Light', 'sans-serif'],
+                titles: ['FuturaBold'],
+                subtitles: ['FuturaBook'],
+                light: ['FuturaLight'],
+                rale: ['Raleway'],
+                body: ['FuturaLight'],
+                anton: ['Anton'],
+
             },
         },
     },
