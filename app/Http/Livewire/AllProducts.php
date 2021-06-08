@@ -24,6 +24,8 @@ class AllProducts extends Component
     {
 
         $this->products =  Product::search($this->search)
+                ->select('id', 'name', 'subcategorie_id', 'provincia_recogida', 'description', 'product_image', 'offer_prize',
+                'embalaje_original', 'porte_id', 'invoice_cost_price', )
                 ->orderBy($this->orderBy, $this->orderAsc ? 'asc' : 'desc')
                 ->paginate($this->perPage);
 
