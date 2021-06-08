@@ -19,6 +19,8 @@ class CartComponent extends Component
     protected $orderItem;
     protected $newOrder;
 
+    // public $abandoned = false;
+
     public $confirmedMessage = false;
 
     protected $listeners = [
@@ -33,6 +35,7 @@ class CartComponent extends Component
     public function mount(): void
     {
         $this->confirmedMessage = true;
+        $this->abandoned = false;
         $this->updateCart();
     }
 
@@ -48,6 +51,7 @@ class CartComponent extends Component
         return view('livewire.cart', [
             'total' => $this->total,
             'content' => $this->content,
+            // 'abandoned' => $this->abandoned,
         ]);
     }
 
@@ -74,6 +78,7 @@ class CartComponent extends Component
     {
         Cart::clear();
         $this->updateCart();
+        $this->confirmedMessage = false;
         $this->emitTo('nav-cart', 'refresh');
 
     }
