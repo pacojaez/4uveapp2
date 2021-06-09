@@ -3,9 +3,12 @@
     <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
         {{-- <div class="grid grid-cols-2 auto-cols-max md:auto-cols-min"> --}}
         <div class="mt-2 text-center lg:6/6 xl:w-4/4 lg:mt-20 lg:ml-6">
-            <div class="mt-10 font-sans text-6xl leading-none text-gray-900">Si no se vende, !SÚBELO!</div>
-            <div class="mt-10 text-3xl antialiased font-rale text-true-gray-500">
-                Cóbralo al contado, y encuentra los artículos que necesitas al mejor precio.
+            <div class="mt-10 text-6xl leading-none text-red-900 font-title">Si no se vende, !SÚBELO!</div>
+            <div class="mt-10 text-4xl antialiased font-title text-true-gray-500">
+                Cóbralo al contado
+            </div>
+            <div class="mt-10 text-5xl antialiased font-title text-true-gray-500">
+                y encuentra los artículos que necesitas al mejor precio.
             </div>
             <div  class="flex items-center justify-center mt-16 text-center">
                 <x-jet-nav-link href="{{ route('register') }}"

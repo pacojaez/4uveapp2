@@ -1,6 +1,6 @@
 <div>
     <div class="mt-20 text-center lg:6/6 xl:w-4/4 lg:mt-20 lg:mx-10">
-        <div class="text-6xl font-bold leading-none text-gray-900">¿Qué es 4uve?</div>
+        <div class="text-6xl font-bold leading-none text-gray-900 font-title">¿Qué es 4uve?</div>
         <div class="mt-6 text-2xl antialiased font-light text-true-gray-500">
             Es una solución desarrollada exclusivamente para los profesionales de la papelería,
             el material de oficina y las manualidades.
@@ -13,7 +13,7 @@
         <div class="mt-6 text-2xl antialiased font-light text-true-gray-500">
             ¿Cómo vender?No puede ser más sencillo, incluso desde tú móvil
         </div>
-        <div class="my-8 text-2xl antialiased font-light text-true-gray-500">
+        <div class="my-8 text-2xl antialiased font-anton text-true-gray-500">
             Es una solución desarrollada exclusivamente para los profesionales de la papelería,
             el material de oficina y las manualidades.
         </div>

@@ -1,0 +1,39 @@
+@font-face {
+    font-family: FuturaBold;
+    font-weight: 400;
+    src: url(FuturaBold.ttf);
+}
+
+@font-face {
+    font-family: FuturaLight;
+    font-weight: 400;
+    src: url(FuturaLight.ttf);
+}
+
+@font-face {
+    font-family: FuturaBook;
+    font-weight: 400;
+    src: url(FuturaBook.ttf);
+}
+
+@font-face {
+    font-family: Anton;
+    font-weight: 400;
+    src: url(Anton-Regular.ttf);
+}
+
+.font-title {
+    font-family: FuturaBold;
+}
+
+.font-subtitle {
+    font-family: FuturaLight;
+}
+
+.font-book {
+    font-family: FuturaBook;
+}
+
+.font-anton {
+    font-family: Anton;
+}

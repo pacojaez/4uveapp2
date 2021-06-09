@@ -11,8 +11,8 @@
 
         <div class="-mt-64 ">
             <div class="w-full text-center">
-                <p class="mt-4 text-2xl tracking-widest text-gray-700">3 SENCILLOS PASOS</p>
-                <h1 class="text-5xl font-bold text-gray-800">
+                <p class="mt-4 text-2xl tracking-widest text-gray-700 font-anton">3 SENCILLOS PASOS</p>
+                <h1 class="text-5xl font-bold text-gray-800 font-anton">
                     Y PODRÁS CONVERTIR TU EXCESO DE STOCK EN CASH
                 </h1>
             </div>

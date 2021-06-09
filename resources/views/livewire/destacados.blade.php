@@ -2,7 +2,7 @@
     <div class="container p-8 mx-auto">
         <div class="flex w-full">
             <div class="flex flex-col items-center max-w-full mx-auto mt-8">
-                <h1 class="w-full text-3xl font-bold text-gray-700">ALGUNAS DE NUESTRAS OFERTAS:</h1>
+                <h1 class="w-full text-3xl font-bold text-gray-700 font-title">ALGUNAS DE NUESTRAS OFERTAS:</h1>
             </div>
         </div>
         <!-- This is an example component -->
