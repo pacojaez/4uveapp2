@@ -3,8 +3,8 @@
     @foreach ($subcategories as $subcategorie)
     <x-jet-dropdown-link href=" ">
     {{-- <a href="{{ route('categorieproducts', ['id' => $categorie->id] ) }}" :active="request()->routeIs('categorieproducts', ['name'=>$categorie->id])"
-                                class="mr-4 hover:text-gray-900 cursor-pointer border-b border-transparent hover:border-indigo-600"> --}}
-            <x-jet-nav-link href="{{ route('categorieproducts', ['id' => $subcategorie->id] ) }}" class="font-bold m-5">
+                                class="mr-4 border-b border-transparent cursor-pointer hover:text-gray-900 hover:border-indigo-600"> --}}
+            <x-jet-nav-link href="{{ route('categorieproducts', ['id' => $subcategorie->id] ) }}" class="m-5 text-base text-red-600 font-tilte">
                 {{ $subcategorie->name }}
             </x-jet-nav-link>
         {{-- {{ $subcategorie->name }} --}}

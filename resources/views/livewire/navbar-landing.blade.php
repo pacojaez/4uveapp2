@@ -11,10 +11,10 @@
                     <h3 class="ml-10 text-xl text-red-500 font-title">la web de las papelerías</h3>
                 </div>
                 <div class="items-center justify-end flex-grow hidden md:flex">
-                    <x-jet-nav-link href="{{ route('register') }}" class="m-5 font-bold">
+                    <x-jet-nav-link href="{{ route('register') }}" class="m-5 font-title">
                         {{ __('VENDER') }}
                     </x-jet-nav-link>
-                    <x-jet-nav-link href="{{ route('allproducts') }}" class="m-5 font-bold">
+                    <x-jet-nav-link href="{{ route('allproducts') }}" class="m-5 font-title">
                         {{ __('COMPRAR') }}
                     </x-jet-nav-link>
                 </div>
