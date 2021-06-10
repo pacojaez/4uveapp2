@@ -1,18 +1,18 @@
 <div>
     <section class="text-gray-700">
-      <div class="container px-5 py-24 mx-auto">
-        <div class="text-center mb-20">
-          <h1 class="sm:text-3xl text-2xl font-medium text-center title-font text-gray-900 mb-4">
+      <div class="container px-5 pt-24 mx-auto font-title">
+        <div class="mb-10 text-center">
+          <h1 class="mb-4 text-2xl font-medium text-center text-gray-900 sm:text-3xl font-title">
             ¿Tienes preguntas? Nuestra FAQs te puede ayudar
           </h1>
-          <p class="text-base leading-relaxed xl:w-2/4 lg:w-3/4 mx-auto">
+          <p class="mx-auto text-xl font-light leading-relaxed xl:w-2/4 lg:w-3/4">
             Y si las FAQS no resuelven tus dudas, no pudes en ponerte en contacto con nosotros
           </p>
         </div>
-        <div class="flex flex-wrap lg:w-4/5 sm:mx-auto sm:mb-2 -mx-2">
-          <div class="w-full lg:w-1/2 px-4 py-2">
+        <div class="flex flex-wrap -mx-2 lg:w-4/5 sm:mx-auto sm:mb-2">
+          <div class="w-full px-4 py-2 lg:w-1/2">
             <details class="mb-4">
-              <summary class="font-semibold  bg-gray-200 rounded-md py-2 px-4">
+              <summary class="px-4 py-2 font-semibold bg-gray-200 rounded-md">
                ¿Los productos que compro son nuevos?
               </summary>
 
@@ -21,7 +21,7 @@
               </span>
             </details>
             <details class="mb-4">
-              <summary class="font-semibold bg-gray-200 rounded-md py-2 px-4">
+              <summary class="px-4 py-2 font-semibold bg-gray-200 rounded-md">
                ¿Realizais envios a toda España?
               </summary>
 
@@ -31,7 +31,7 @@
               </span>
             </details>
             <details class="mb-4">
-              <summary class="font-semibold  bg-gray-200 rounded-md py-2 px-4">
+              <summary class="px-4 py-2 font-semibold bg-gray-200 rounded-md">
                 How can I migrate to another site?
               </summary>
 
@@ -42,9 +42,9 @@
               </span>
             </details>
           </div>
-          <div class="w-full lg:w-1/2 px-4 py-2">
+          <div class="w-full px-4 py-2 lg:w-1/2">
             <details class="mb-4">
-              <summary class="font-semibold  bg-gray-200 rounded-md py-2 px-4">
+              <summary class="px-4 py-2 font-semibold bg-gray-200 rounded-md">
                 Can I change the domain you give me?
               </summary>
 
@@ -55,7 +55,7 @@
               </span>
             </details>
             <details class="mb-4">
-              <summary class="font-semibold  bg-gray-200 rounded-md py-2 px-4">
+              <summary class="px-4 py-2 font-semibold bg-gray-200 rounded-md">
                 How many sites I can create at once?
               </summary>
 
@@ -66,7 +66,7 @@
               </span>
             </details>
             <details class="mb-4">
-              <summary class="font-semibold  bg-gray-200 rounded-md py-2 px-4">
+              <summary class="px-4 py-2 font-semibold bg-gray-200 rounded-md">
                 How can I communicate with you?
               </summary>
 
