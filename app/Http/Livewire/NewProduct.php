@@ -74,11 +74,12 @@ class NewProduct extends Component
             'weight_3' => 'string|nullable',
             'EAN13_box_1' => 'string|nullable',
             'EAN13_box_2' => 'string|nullable',
+            'boxes_quantity' => 'string|nullable',
+
             'plazo_preparacion_pedido' => 'string|nullable',
             'offer_units' => 'string|nullable',
             'boxes_quantity' => 'string|nullable',
             'whole_box_dimensions' => 'string|nullable',
-            'boxes_quantity' => 'string|nullable',
             'provider' => 'string|nullable',
             'invoice_cost_price' => 'string|nullable',
             'buyed_date' => 'date|nullable',
@@ -215,12 +216,16 @@ class NewProduct extends Component
         ]);
     }
 
+    public function resetImage(){
+        $this->product_image = '';
+        // dd($this->product_image);
+    }
+
     public function mount()
     {
         $this->subcategories = Subcategorie::all();
         $this->portes = Portes::all();
-        // $this->productslist = Product::search($this->search)->get();
-        // dd($this->productslist);
+
     }
 
     public function updateSearch( ){
@@ -232,11 +237,14 @@ class NewProduct extends Component
 
         // AUTORRELLENADO DE LA FICHA DE PRODUCTO;
         $this->productslist = Product::search($this->search)->get();
-       if($this->selectedProduct){
+
+        if($this->selectedProduct){
            $product = Product::findOrFail($this->selectedProduct);
-        //    $this->product_image = $product->product_image;
-        //    $this->product_image_2 = $product->product_image_2;
-        //    $this->product_image_3 = $product->product_image_3;
+
+           $this->product_image = $product->product_image;
+           $this->product_image_2 = $product->product_image_2;
+           $this->product_image_3 = $product->product_image_3;
+
            $this->name = $product->name;
            $this->short_description = $product->short_description;
            $this->description = $product->description;
@@ -259,10 +267,20 @@ class NewProduct extends Component
            $this->unidades_embalaje_3 = $product->unidades_embalaje_3;
            $this->dimensions_boxes_3 = $product->dimensions_boxes_3;
            $this->weight_3 = $product->weight_3;
+
+           $this->product = $product;
+       }else{
+        $this->product_image = '';
+        $this->product_image_2 = '';
+        $this->product_image_3 = '';
        }
 
         return view('livewire.new-product', [
             'product' => $this->product,
+            'image' => $this->product_image,
+            'image_2' => $this->product_image_2,
+            'image_3' => $this->product_image_3,
+
             'products' => $this->products,
             'productslist' => $this->productslist
         ]);

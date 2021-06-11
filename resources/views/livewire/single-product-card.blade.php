@@ -67,10 +67,14 @@
                         Add to cart
                         </button> --}}
                         <input class="mb-2 border-2 rounded" type="number" min="1" wire:model="quantity">
-                        <button
+                        <button wire:click="addToCart"
+                            class="flex px-6 py-2 ml-auto mr-4 font-bold text-white uppercase bg-indigo-500 border-0 rounded focus:outline-none hover:bg-indigo-600">
+                            AÑADIR AL CARRITO
+                        </button>
+                        {{-- <button
                             class="p-2 bg-blue-500 border-2 border-blue-500 rounded hover:border-blue-600 hover:bg-blue-600"
                             wire:click="addToCart">Add To Cart</button>
-                        <button wire:click="$emitTo('cart', 'productAddedToCart')">add to cart en minusculas </button>
+                        <button wire:click="$emitTo('cart', 'productAddedToCart')">add to cart en minusculas </button> --}}
                     </div>
                     {{-- <script>
                         Livewire.on('productAddedToCart', product_id => {
@@ -359,7 +363,7 @@
                 <div class="bottom-0 flex w-full pb-5 mt-5">
                     <button wire:click="addToCart({{ $product->id }})"
                         class="flex px-6 py-2 ml-auto mr-4 font-bold text-white uppercase bg-indigo-500 border-0 rounded focus:outline-none hover:bg-indigo-600">
-                        Add to cart
+                        AÑADIR AL CARRITO
                     </button>
                 </div>
             </div>

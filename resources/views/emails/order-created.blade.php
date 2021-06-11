@@ -161,7 +161,9 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus dolor aliquid om
                                             <p style="font-size: 18px; font-weight: 400; margin: 0; color: #ffffff;"><a href="http://4uve.net" target="_blank" style="color: #ffffff; text-decoration: none;">Tienda &nbsp;</a></p>
                                         </td>
                                         <td style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 400; line-height: 24px;">
-                                            <a href="http://4uve.net" target="_blank" style="color: #ffffff; text-decoration: none;"><img src="shop.png" width="27" height="23" style="display: block; border: 0px;"/></a>
+                                            <a href="http://4uve.net" target="_blank" style="color: #ffffff; text-decoration: none;">
+                                                <img src="{{asset('storage/images/elementos/4uvelogo.jpg')}}" width="27" height="23" style="display: block; border: 0px;"/>
+                                            </a>
                                         </td>
                                     </tr>
                                 </table>
@@ -186,7 +188,7 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus dolor aliquid om
                 <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width:600px;">
                     <tr>
                         <td align="center" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px; padding-top: 25px;">
-                            <img src="hero-image-receipt.png" width="125" height="120" style="display: block; border: 0px;" /><br>
+                            <img src="{{asset('storage/images/elementos/4uvelogo.jpg')}}" width="125" height="120" style="display: block; border: 0px;" /><br>
                             <h2 style="font-size: 30px; font-weight: 800; line-height: 36px; color: #333333; margin: 0;">
                                 Gracias por tu compra!
                             </h2>
@@ -384,7 +386,7 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus dolor aliquid om
                 <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width:600px;">
                     <tr>
                         <td align="center">
-                            <img src="logo-footer.png" width="37" height="37" style="display: block; border: 0px;"/>
+                            <img src="{{asset('storage/images/elementos/4uvelogo.jpg')}}" width="37" height="37" style="display: block; border: 0px;"/>
                         </td>
                     </tr>
                     <tr>

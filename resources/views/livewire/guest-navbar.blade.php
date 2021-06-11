@@ -6,13 +6,13 @@
                 <!-- Logo -->
                 <div class="flex items-center flex-shrink-0">
                     <a href="{{ route('welcome') }}">
-                        <x-jet-application-mark class="block w-auto h-9" />
+                        <x-jet-application-mark class="block w-auto h-12" />
                     </a>
                     <!-- BUSCADOR -->
                     {{-- <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <input class="max-w-md px-3 mt-2 mb-2 ml-20 text-xl rounded shadow-lg sm:max-w-1/2 h-5/6 focus:outline-none focus:shadow-outline" type="search" placeholder="Buscar Productos...">
                     </div> --}}
-                    <x-jet-nav-link href="{{ route('allproducts') }}" class="m-2 text-red-600 font-title">
+                    <x-jet-nav-link href="{{ route('allproducts') }}" class="m-2 text-lg text-red-600 font-title">
                         {{ __('Productos') }}
                     </x-jet-nav-link>
                     {{-- <x-jet-nav-link href="{{ route('cart') }}" class="m-5 font-bold">
@@ -21,7 +21,7 @@
                     @livewire('nav-cart')
 
                     <div class="justify-end flex-grow hidden sm:flex sm:items-center sm:ml-6 place-items-center">
-                        <x-jet-nav-link href="{{ route('contact') }}" class="m-2 text-red-600 font-title">
+                        <x-jet-nav-link href="{{ route('contact') }}" class="m-2 text-lg text-red-600 font-title">
                             {{ __('Contacto') }}
                         </x-jet-nav-link>
                     </div>
@@ -50,7 +50,7 @@
                                 @else
                                 <span class="inline-flex rounded-md">
                                     <button type="button"
-                                        class="inline-flex items-center px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition bg-white border border-transparent rounded-md hover:text-gray-700 focus:outline-none">
+                                        class="inline-flex items-center px-3 py-2 text-lg leading-4 text-red-600 transition bg-white border border-transparent rounded-md font-title hover:text-gray-700 focus:outline-none">
                                         Bienvenido, {{ Auth::user()->name }}
 
                                         <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg"
