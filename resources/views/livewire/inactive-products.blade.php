@@ -66,11 +66,11 @@
             </div>
         </div>
     </div> --}}
-    @if( !$products['items'] )
+    @if( $products->count() == 0 )
     <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
         <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
             <div class="p-2 m-auto bg-gray-200">
-                <h4 class="text-xl font-semibold">Buen trabajo, {{ Auth::user()->name}}, llevas al día la actualización de los Productos</h4>
+                <h4 class="text-xl font-semibold">Buen trabajo, {{ Auth::user()->name }}, llevas al día la actualización de los Productos</h4>
             </div>
         </div>
     </div>
