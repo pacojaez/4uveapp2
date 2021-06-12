@@ -35,29 +35,44 @@ select:focus~label {
     left: 0px;
 }
 
-
-/* @font-face {
-    font-family: FuturaBold;
-    font-weight: 400;
-    src: url(..\fonts\FuturaBold.ttf);
+.display-none {
+    display: none;
 }
 
-@font-face {
-    font-family: FuturaLight;
-    font-weight: 400;
-    src: url(..\fonts\FuturaLight.ttf);
+.multi-wizard-step p {
+    margin-top: 12px;
 }
 
-@font-face {
-    font-family: FuturaBook;
-    font-weight: 400;
-    src: url(..\fonts\FuturaBook.ttf);
+.stepwizard-row {
+    display: table-row;
 }
 
-@font-face {
-    font-family: Anton;
-    font-weight: 400;
-    src: url(..\fonts\Anton-Regular.ttf);
-} */
+.stepwizard {
+    display: table;
+    position: relative;
+    width: 100%;
+}
+
+.multi-wizard-step button[disabled] {
+    filter: alpha(opacity=100) !important;
+    opacity: 1 !important;
+}
+
+.stepwizard-row:before {
+    top: 14px;
+    bottom: 0;
+    content: " ";
+    width: 100%;
+    height: 1px;
+    z-index: 0;
+    position: absolute;
+    background-color: #fefefe;
+}
+
+.multi-wizard-step {
+    text-align: center;
+    position: relative;
+    display: table-cell;
+}
 
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100;400;900&display=swap');

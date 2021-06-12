@@ -26,6 +26,10 @@ Route::get('productos', function() {
     return view('allproducts');
 })->name('allproducts');
 
+Route::get('productos/wizard', function() {
+    return view('products.wizard');
+})->name('products.wizard');
+
 Route::get('product/{id}', function($id) {
     return view('singleproduct', compact('id'));
 })->name('singleproduct');

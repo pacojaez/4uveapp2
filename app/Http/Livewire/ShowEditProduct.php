@@ -303,7 +303,7 @@ class ShowEditProduct extends Component
     {
 
         return view('livewire.show-edit-product', [
-            'product' => $this->product
+            'product' => $this->product,
         ]);
     }
 }

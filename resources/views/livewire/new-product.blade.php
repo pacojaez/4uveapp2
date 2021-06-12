@@ -260,7 +260,45 @@ enctype="multipart/form-data"> --}}
             </div>
             <div class="grid justify-between grid-cols-3 mt-5 bg-gray-200 mx-7">
                 <div class='flex items-center justify-center w-5/6'>
-                    @if (!$image)
+
+                    <!--
+                    prueba
+                    -->
+                    @if (!$product_image)
+                    <label
+                        class='flex flex-col w-full h-32 border-4 border-dashed hover:bg-gray-100 hover:border-purple-300 group'>
+                        <div class='flex flex-col items-center justify-center pt-7'>
+                            <svg class="w-10 h-10 text-purple-400 group-hover:text-purple-600" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z">
+                                </path>
+                            </svg>
+                            <p class='pt-1 text-sm tracking-wider text-gray-400 lowercase group-hover:text-purple-600'>
+                                Select a photo</p>
+                        </div>
+                        <input type='file' class="hidden" wire:model="product_image" name="product_image" />
+                    </label>
+                    @else
+                    <div wire:loading>
+                        Procesando...
+                    </div>
+                    <div class='flex flex-col w-full h-56 hover:bg-gray-100 hover:border-purple-300 group'>
+                        <div class="class='flex flex-col items-center justify-center pt-7'">
+                        Foto #1 del Producto:
+                        <input type="image" wire:model="product_image" name="product_image" src="{{asset('storage/images/products/'.$product->product_image)}}" alt="" class="object-cover w-full h-48 md:w-48">
+
+                            {{-- <img src="{{ $product_image->temporaryUrl() }}" class=""> --}}
+            </div>
+            <div wire:loading>
+                Procesando...
+            </div>
+            </div>
+            @endif
+                    <!--
+                    fin prueba
+                    -->
+                    @if ($product->product_image == null)
                     <label
                         class='flex flex-col w-full h-32 border-4 border-dashed hover:bg-gray-100 hover:border-purple-300 group'>
                         <div class='flex flex-col items-center justify-center pt-7'>
@@ -271,14 +309,11 @@ enctype="multipart/form-data"> --}}
                                 </path>
                             </svg>
                             <p class='pt-1 text-sm tracking-wider text-gray-400 lowercase group-hover:text-purple-600'>
-                                Select a photo
-                            </p>
+                                Select a photo</p>
                         </div>
-                        <div style="background-image: {{asset('storage/images/products/'.$image)}}" class="h-200">
-
-                        </div>
-                        <input type='file' class="hidden" wire:model="product_image" name="product_image" />
                     </label>
+                        <input type='file' class="hidden" wire:model="product_image" name="product_image" />
+
                     @else
                     <div wire:loading>
                         Procesando...
@@ -288,9 +323,11 @@ enctype="multipart/form-data"> --}}
                             <label class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">
                                 Foto #1 del Producto:
                             </label>
-                            <img class="object-cover w-full h-48 md:w-48"
-                                src="{{asset('storage/images/products/'.$image)}}" alt="{{ $image}}" />
-                            <label
+                            <input type="image" wire:model="product_image" name="product_image" src="{{asset('storage/images/products/'.$product->product_image)}}" alt="" class="object-cover w-full h-48 md:w-48">
+                            <input type='file' class="hidden" wire:model="product_image_2" name="product_image_2" />
+                            {{-- <img class="object-cover w-full h-48 md:w-48"
+                                src="{{asset('storage/images/products/'.$product->product_image)}}" alt="{{ $product->name }}" /> --}}
+                            {{-- <label
                                 class='flex flex-col w-full h-32 border-4 border-dashed hover:bg-gray-100 hover:border-purple-300 group'>
                                 <div class='flex flex-col items-center justify-center pt-7'>
                                     <svg class="w-10 h-10 text-purple-400 group-hover:text-purple-600" fill="none"
@@ -304,7 +341,7 @@ enctype="multipart/form-data"> --}}
                                         Select a photo</p>
                                 </div>
                                 <input type='file' class="hidden" wire:model="product_image" name="product_image" />
-                            </label>
+                            </label> --}}
 
 
                             {{-- <img src="{{ $product->product_image }}" class=""> --}}
@@ -316,7 +353,7 @@ enctype="multipart/form-data"> --}}
                     @endif
                 </div>
                 <div class='flex items-center justify-center w-5/6'>
-                    @if (!$product_image_2)
+                    @if ($product->product_image_2 == null)
                     <label
                         class='flex flex-col w-full h-32 border-4 border-dashed hover:bg-gray-100 hover:border-purple-300 group'>
                         <div class='flex flex-col items-center justify-center pt-7'>
@@ -329,13 +366,16 @@ enctype="multipart/form-data"> --}}
                             <p class='pt-1 text-sm tracking-wider text-gray-400 lowercase group-hover:text-purple-600'>
                                 Select a photo</p>
                         </div>
-                        <input type='file' class="hidden" wire:model="product_image_2" name="product_image_2" />
                     </label>
+                        <input type='file' class="hidden" wire:model="product_image_2" name="product_image_2" />
+
                     @else
                     <div class='flex flex-col w-full h-56 hover:bg-gray-100 hover:border-purple-300 group'>
                         <div class="class='flex flex-col items-center justify-center pt-7'">
                             Foto #2 del Producto:
-                            <img src="{{ $product->product_image_2 }}" class="">
+                            <input type="image" wire:model="product_image_2" name="product_image_2" src="{{asset('storage/images/products/'.$product->product_image_2)}}" alt="" class="object-cover w-full h-48 md:w-48">
+
+                            {{-- <img  src="{{asset('storage/images/products/'.$product->product_image_2)}}" alt="{{ $product->name }}"> --}}
                         </div>
                         <div wire:loading>
                             Procesando...
@@ -344,7 +384,7 @@ enctype="multipart/form-data"> --}}
                     @endif
                 </div>
                 <div class='flex items-center justify-center w-5/6'>
-                    @if (!$product_image_3)
+                    @if ($product->product_image_3 == null || $product->product_image_3 == '' )
                     <label
                         class='flex flex-col w-full h-32 border-4 border-dashed hover:bg-gray-100 hover:border-purple-300 group'>
                         <div class='flex flex-col items-center justify-center pt-7'>
@@ -357,13 +397,16 @@ enctype="multipart/form-data"> --}}
                             <p class='pt-1 text-sm tracking-wider text-gray-400 lowercase group-hover:text-purple-600'>
                                 Select a photo</p>
                         </div>
-                        <input type='file' class="hidden" wire:model="product_image_3" name="product_image_3" />
                     </label>
+                        <input type='file' class="hidden" wire:model="product_image_3" name="product_image_3" />
+
                     @else
                     <div class='flex flex-col w-full h-56 hover:bg-gray-100 hover:border-purple-300 group'>
                         <div class="class='flex flex-col items-center justify-center pt-7'">
                             Foto #3 del Producto:
-                            <img src="{{ $product->product_image_3 }}" class="">
+                            <input type="image" wire:model="product_image_3" name="product_image_3" src="{{asset('storage/images/products/'.$product->product_image_3)}}" alt="" class="object-cover w-full h-48 md:w-48">
+
+                            {{-- <img  src="{{asset('storage/images/products/'.$product->product_image_3)}}" alt="{{ $product->name }}"> --}}
                         </div>
                         <div wire:loading>
                             Procesando...
@@ -847,7 +890,7 @@ enctype="multipart/form-data"> --}}
                 <div class="class='flex flex-col items-center justify-center pt-7'">
                     Foto #1 del Producto:
                     <img src="{{ $product_image->temporaryUrl() }}" class="">
-    </div>
+            </div>
     <div wire:loading>
         Procesando...
     </div>

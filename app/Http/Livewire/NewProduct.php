@@ -33,6 +33,8 @@ class NewProduct extends Component
         $buyed_date, $boxes, $offer, $new, $offer_until, $offer_prize, $subcategorie_id, $net_price,
         $EAN13_box_1, $EAN13_box_2, $categoria_oferta;
 
+    public $image;
+
     public $porte_id = 1;
 
     public $isOpen = false;
@@ -217,7 +219,7 @@ class NewProduct extends Component
     }
 
     public function resetImage(){
-        $this->product_image = '';
+        $this->image = null;
         // dd($this->product_image);
     }
 
@@ -270,10 +272,11 @@ class NewProduct extends Component
 
            $this->product = $product;
        }else{
-        $this->product_image = '';
-        $this->product_image_2 = '';
-        $this->product_image_3 = '';
+        // $this->product_image = null;
+        // $this->product_image_2 = null;
+        // $this->product_image_3 = null;
        }
+    //    dd($this->product_image);
 
         return view('livewire.new-product', [
             'product' => $this->product,
