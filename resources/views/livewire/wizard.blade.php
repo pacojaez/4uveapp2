@@ -362,6 +362,7 @@
                                             <h2 class="p-2 m-auto font-bold text-center bg-white rounded">
                                                 LOS DATOS DEL PRODUCTO:
                                             </h2>
+                                            <!-- BLOQUE 1 -->
                                             <div class="grid grid-cols-1 gap-5 mt-5 md:grid-cols-2 md:gap-8 mx-7">
                                                 <div class="grid grid-cols-1">
                                                     <label
@@ -384,6 +385,7 @@
                                                         type="text" placeholder="Ej: El Bic Naranja de toda la vida" />
                                                 </div>
                                             </div>
+                                            <!-- BLOQUE 2 -->
                                             <div class="grid grid-cols-1 mt-5 mx-7">
                                                 <label
                                                     class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">
@@ -395,6 +397,7 @@
                                                     class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent">
                                                         </textarea>
                                             </div>
+                                            <!-- BLOQUE 3 -->
                                             <div class="grid grid-cols-1 gap-5 mt-5 md:grid-cols-2 md:gap-8 mx-7">
                                                 <div class="grid grid-cols-1">
                                                     <label
@@ -420,7 +423,7 @@
                                                     </select>
                                                 </div>
                                             </div>
-
+                                            <!-- BLOQUE 4 -->
                                             <div class="grid grid-cols-1 gap-5 mt-5 md:grid-cols-4 md:gap-8 mx-7">
                                                 <div class="grid grid-cols-1">
                                                     <label
@@ -460,7 +463,7 @@
                                                         type="text" placeholder="Ej: 5.6845 €" />
                                                 </div>
                                             </div>
-
+                                            <!-- BLOQUE 5 -->
                                             <div class="grid grid-cols-1 gap-5 mt-5 md:grid-cols-4 md:gap-8 mx-7">
                                                 <div class="grid grid-cols-1">
                                                     <label
@@ -502,7 +505,7 @@
                                                         type="text" placeholder="" />
                                                 </div>
                                             </div>
-
+                                            <!-- BLOQUE 6 -->
                                             <div class="grid grid-cols-1 gap-5 mt-5 md:grid-cols-4 md:gap-8 mx-7">
                                                 <div class="grid grid-cols-1">
                                                     <label
@@ -543,8 +546,9 @@
                                                         type="text" placeholder="" />
                                                 </div>
                                             </div>
-
-                                            <div class="grid grid-cols-1 gap-5 mt-5 md:grid-cols-4 md:gap-8 mx-7">
+                                            <!-- BLOQUE 7 -->
+                                            <div
+                                                class="grid h-auto grid-cols-1 gap-5 mt-5 md:grid-cols-4 md:gap-8 mx-7">
                                                 <div class="grid grid-cols-1">
                                                     <label
                                                         class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">
@@ -585,169 +589,155 @@
                                                 </div>
                                             </div>
                                             <!--FOTOS-->
-                                            <div class="grid justify-between grid-cols-3 mt-5 bg-gray-200 mx-7">
-                                                <!--FOTO 1-->
-                                                <div class='flex items-center justify-center w-5/6'>
-                                                    <!--
-                                                    prueba
-                                                    -->
-                                                    @if (!$selected)
-                                                    <label
-                                                        class='flex flex-col w-full h-32 border-4 border-dashed hover:bg-gray-100 hover:border-purple-300 group'>
-                                                        <div class='flex flex-col items-center justify-center pt-7'>
-                                                            <svg class="w-10 h-10 text-purple-400 group-hover:text-purple-600"
-                                                                fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                                                xmlns="http://www.w3.org/2000/svg">
-                                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                                    stroke-width="2"
-                                                                    d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z">
-                                                                </path>
-                                                            </svg>
-                                                            <p
-                                                                class='pt-1 text-sm tracking-wider text-gray-400 lowercase group-hover:text-purple-600'>
-                                                                Select a photo
-                                                            </p>
-                                                        </div>
-                                                        <input type='file' class="hidden" wire:model="product_image"
-                                                            name="product_image" />
-                                                    </label>
-                                                    @else
-                                                    <div wire:loading>
-                                                        Procesando...
-                                                    </div>
-                                                    <div class="class='flex flex-col items-center justify-center pt-7'">
+                                            <div class="grid grid-cols-1 gap-5 mt-5 mb-10 md:grid-cols-3 md:gap-8 mx-7">
+                                                <!--FOTO 1 -->
+                                                <div class="grid grid-cols-1">
+                                                    <div class='flex items-center justify-center w-5/6'>
+                                                        @if (!$product_image)
                                                         <label
-                                                            class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">
-                                                            Foto #1 del Producto:
-                                                        </label>
-
-                                                        <div
-                                                            class='flex flex-col w-full h-56 hover:bg-gray-100 hover:border-purple-300 group'>
-                                                            <div
-                                                                class="class='flex flex-col items-center justify-center pt-7'">
-                                                                <img src="{{asset('storage/images/products/'.$selected->product_image)}}"
-                                                                    alt="{{ $selected->name }}"
-                                                                    class="object-cover w-full h-48 md:w-48">
+                                                            class='flex flex-col w-full h-32 border-4 border-dashed hover:bg-gray-100 hover:border-purple-300 group'>
+                                                            <div class='flex flex-col items-center justify-center pt-7'>
+                                                                <svg class="w-10 h-10 text-purple-400 group-hover:text-purple-600"
+                                                                    fill="none" stroke="currentColor"
+                                                                    viewBox="0 0 24 24"
+                                                                    xmlns="http://www.w3.org/2000/svg">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                                        stroke-width="2"
+                                                                        d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z">
+                                                                    </path>
+                                                                </svg>
+                                                                <p
+                                                                    class='pt-1 text-sm tracking-wider text-gray-400 lowercase group-hover:text-purple-600'>
+                                                                    Select a photo
+                                                                </p>
                                                             </div>
+                                                            <input type='file' class="hidden" wire:model="product_image"
+                                                                name="product_image" />
+                                                        </label>
+                                                        @else
+                                                        <div class='flex w-full h-56 hover:border-purple-300 group'>
+                                                            <div class="class='flex flex-col items-center justify-center w-60 h-60 pt-7'">
+                                                                <p
+                                                                    class='pt-1 text-sm tracking-wider text-gray-400 lowercase'>
+                                                                    Foto #1 del Producto:</p>
+                                                                <img src="{{ $product_image->temporaryUrl() }}"
+                                                                    class="">
+                                                            </div>
+                                                            <div wire:loading>
+                                                                Procesando...
+                                                            </div>
+                                                            <button wire:click="clearPhoto1" type="reset"
+                                                                class="class='w-auto px-4 py-2 m-auto font-medium text-center text-white bg-red-600 rounded-lg shadow-xl hover:bg-gray-700'">
+                                                                Eliminar Foto 1
+                                                            </button>
                                                         </div>
+                                                        @endif
                                                     </div>
-
-                                                    @endif
-                                                    <!--
-                                                    fin prueba
-                                                    -->
                                                 </div>
-                                                <!--FOTO 2-->
-                                                <div class='flex items-center justify-center w-5/6'>
-                                                    <!--
-                                                    prueba
-                                                    -->
-                                                    @if (!$selected)
-                                                    <label
-                                                        class='flex flex-col w-full h-32 border-4 border-dashed hover:bg-gray-100 hover:border-purple-300 group'>
-                                                        <div class='flex flex-col items-center justify-center pt-7'>
-                                                            <svg class="w-10 h-10 text-purple-400 group-hover:text-purple-600"
-                                                                fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                                                xmlns="http://www.w3.org/2000/svg">
-                                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                                    stroke-width="2"
-                                                                    d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z">
-                                                                </path>
-                                                            </svg>
-                                                            <p
-                                                                class='pt-1 text-sm tracking-wider text-gray-400 lowercase group-hover:text-purple-600'>
-                                                                Select a photo
-                                                            </p>
-                                                        </div>
-                                                        <input type='file' class="hidden" wire:model="product_image"
-                                                            name="product_image" />
-                                                    </label>
-                                                    @else
-                                                    <div wire:loading>
-                                                        Procesando...
-                                                    </div>
-                                                    <div class="class='flex flex-col items-center justify-center pt-7'">
+                                                <!--FOTO 2 -->
+                                                <div class="grid grid-cols-1">
+                                                    <div class='flex items-center justify-center w-5/6'>
+                                                        @if (!$product_image_2)
                                                         <label
-                                                            class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">
-                                                            Foto #2 del Producto:
-                                                        </label>
-                                                        <div
-                                                            class='flex flex-col w-full h-56 hover:bg-gray-100 hover:border-purple-300 group'>
-                                                            <div
-                                                                class="class='flex flex-col items-center justify-center pt-7'">
-                                                                <img src="{{asset('storage/images/products/'.$selected->product_image_2)}}"
-                                                                    alt="{{ $selected->name }}"
-                                                                    class="object-cover w-full h-48 md:w-48">
+                                                            class='flex flex-col w-full h-32 border-4 border-dashed hover:bg-gray-100 hover:border-purple-300 group'>
+                                                            <div class='flex items-center justify-center pt-7'>
+                                                                <svg class="w-10 h-10 text-purple-400 group-hover:text-purple-600"
+                                                                    fill="none" stroke="currentColor"
+                                                                    viewBox="0 0 24 24"
+                                                                    xmlns="http://www.w3.org/2000/svg">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                                        stroke-width="2"
+                                                                        d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z">
+                                                                    </path>
+                                                                </svg>
+                                                                <p
+                                                                    class='pt-1 text-sm tracking-wider text-gray-400 lowercase group-hover:text-purple-600'>
+                                                                    Select a photo
+                                                                </p>
                                                             </div>
+                                                            <input type='file' class="hidden" wire:model="product_image_2"
+                                                                name="product_image_2" />
+                                                        </label>
+                                                        @else
+                                                        <div class='flex w-full h-56 hover:border-purple-300 group'>
+                                                            <div class="class='flex flex-col items-center justify-center w-60 h-60 pt-7'">
+                                                                <p
+                                                                    class='pt-1 text-sm tracking-wider text-gray-400 lowercase'>
+                                                                    Foto #2 del Producto:</p>
+                                                                <img src="{{ $product_image_2->temporaryUrl() }}"
+                                                                    class="">
+                                                            </div>
+                                                            <div wire:loading>
+                                                                Procesando...
+                                                            </div>
+                                                            <button wire:click="clearPhoto2" type="reset"
+                                                                class="class='w-auto px-4 py-2 m-auto font-medium text-center text-white bg-red-600 rounded-lg shadow-xl hover:bg-gray-700'">
+                                                                Eliminar Foto 2
+                                                            </button>
                                                         </div>
+                                                        @endif
                                                     </div>
-
-                                                    @endif
-                                                    <!--
-                                                    fin prueba
-                                                    -->
                                                 </div>
-                                                <!--FOTO 3-->
-                                                <div class='flex items-center justify-center w-5/6'>
-                                                    <!--
-                                                    prueba
-                                                    -->
-                                                    @if (!$selected)
-                                                    <label
-                                                        class='flex flex-col w-full h-32 border-4 border-dashed hover:bg-gray-100 hover:border-purple-300 group'>
-                                                        <div class='flex flex-col items-center justify-center pt-7'>
-                                                            <svg class="w-10 h-10 text-purple-400 group-hover:text-purple-600"
-                                                                fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                                                xmlns="http://www.w3.org/2000/svg">
-                                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                                    stroke-width="2"
-                                                                    d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z">
-                                                                </path>
-                                                            </svg>
-                                                            <p
-                                                                class='pt-1 text-sm tracking-wider text-gray-400 lowercase group-hover:text-purple-600'>
-                                                                Select a photo
-                                                            </p>
-                                                        </div>
-                                                        <input type='file' class="hidden" wire:model="product_image"
-                                                            name="product_image" />
-                                                    </label>
-                                                    @else
-                                                    <div wire:loading>
-                                                        Procesando...
-                                                    </div>
-                                                    <div class="class='flex flex-col items-center justify-center pt-7'">
+                                                <!--FOTO 3 -->
+                                                <div class="grid grid-cols-1">
+                                                    <div class='flex items-center justify-center w-5/6'>
+                                                        @if (!$product_image_3)
                                                         <label
-                                                            class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">
-                                                            Foto #3 del Producto:
-                                                        </label>
-                                                        <div
-                                                            class='flex flex-col w-full h-56 hover:bg-gray-100 hover:border-purple-300 group'>
-                                                            <div
-                                                                class="class='flex flex-col items-center justify-center pt-7'">
-                                                                <img src="{{asset('storage/images/products/'.$selected->product_image_3)}}"
-                                                                    alt="{{ $selected->name }}"
-                                                                    class="object-cover w-full h-48 md:w-48">
+                                                            class='flex flex-col w-full h-32 border-4 border-dashed hover:bg-gray-100 hover:border-purple-300 group'>
+                                                            <div class='flex items-center justify-center pt-7'>
+                                                                <svg class="w-10 h-10 text-purple-400 group-hover:text-purple-600"
+                                                                    fill="none" stroke="currentColor"
+                                                                    viewBox="0 0 24 24"
+                                                                    xmlns="http://www.w3.org/2000/svg">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                                        stroke-width="2"
+                                                                        d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z">
+                                                                    </path>
+                                                                </svg>
+                                                                <p
+                                                                    class='pt-1 text-sm tracking-wider text-gray-400 lowercase group-hover:text-purple-600'>
+                                                                    Select a photo
+                                                                </p>
                                                             </div>
+                                                            <input type='file' class="hidden" wire:model="product_image_3"
+                                                                name="product_image_3" />
+                                                        </label>
+                                                        @else
+                                                        <div class='flex w-full h-56 hover:border-purple-300 group'>
+                                                            <div class="class='flex items-center justify-center w-60 h-60 pt-7'">
+                                                                <p
+                                                                    class='pt-1 text-base tracking-wider text-gray-400 lowercase'>
+                                                                    Foto #3 del Producto:</p>
+                                                                <img src="{{ $product_image_3->temporaryUrl() }}"
+                                                                    class="">
+                                                            </div>
+                                                            <div wire:loading>
+                                                                Procesando...
+                                                            </div>
+                                                            <button wire:click="clearPhoto3" type="reset"
+                                                                class="class='w-auto px-4 py-2 m-auto font-medium text-center text-white bg-red-600 rounded-lg shadow-xl hover:bg-gray-700'">
+                                                                Eliminar Foto 3
+                                                            </button>
                                                         </div>
+                                                        @endif
                                                     </div>
-
-                                                    @endif
-                                                    <!--
-                                                    fin prueba
-                                                    -->
                                                 </div>
+
                                             </div>
+                                            <div>
+                                            </div>
+
                                         </div>
-                                        <button wire:click="clearSearch" type="reset"
-                                            class="class='w-auto px-4 py-2 m-auto font-medium text-center text-white bg-red-600 rounded-lg shadow-xl hover:bg-gray-700'">
-                                            Limpiar el Formulario
-                                        </button>
-                                        <button
-                                            class='w-auto px-4 py-2 m-auto font-medium text-center text-white bg-blue-500 rounded-lg shadow-xl hover:bg-gray-700'
-                                            type="submit" wire:click="storeProduct">
-                                            GUARDAR EL PRODUCTO
-                                        </button>
+                                    </div>
+                                    <button wire:click="clearSearch" type="reset"
+                                        class="class='w-auto px-4 py-2 m-auto font-medium text-center text-white bg-red-600 rounded-lg shadow-xl hover:bg-gray-700'">
+                                        Limpiar el Formulario
+                                    </button>
+                                    <button
+                                        class='w-auto px-4 py-2 m-auto font-medium text-center text-white bg-blue-500 rounded-lg shadow-xl hover:bg-gray-700'
+                                        type="submit" wire:click="storeProduct">
+                                        GUARDAR EL PRODUCTO
+                                    </button>
                                 </form>
                             </div>
                         </div>

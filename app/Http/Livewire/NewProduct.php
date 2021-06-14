@@ -46,53 +46,61 @@ class NewProduct extends Component
 
     public $search;
 
+    protected $rules = [
+        'name' => 'string|nullable|min:6',
+    ];
+
     public function store()
     {
         $this->product = new Product;
 
-        $data =  $this->validate([
-            // Images:
-            'product_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048|nullable',
-            'product_image_2' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048|nullable',
-            'product_image_3' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048|nullable',
-            'user_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048|nullable',
-            'user_image_2' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048|nullable',
-            'user_image_3' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048|nullable',
-            //rest of the fields:
-            'name' => 'string|nullable',
-            'short_description' => 'string|nullable',
-            'description' => 'string|nullable',
-            'product_code' => 'string|nullable',
-            'part_number'=> 'string|nullable',
-            'brand' => 'string|nullable',
-            'EAN13_individual' =>'string|nullable',
-            'dimensions_boxes' => 'string|nullable',
-            'unidades_embalaje_original' => 'string|nullable',
-            'weight' => 'string|nullable',
-            'pack_units' => 'string|nullable',
-            'dimensions_boxes_2' => 'string|nullable',
-            'weight_2' => 'string|nullable',
-            'dimensions_boxes_3' => 'string|nullable',
-            'weight_3' => 'string|nullable',
-            'EAN13_box_1' => 'string|nullable',
-            'EAN13_box_2' => 'string|nullable',
-            'boxes_quantity' => 'string|nullable',
+        $validatedData = $this->validate();
 
-            'plazo_preparacion_pedido' => 'string|nullable',
-            'offer_units' => 'string|nullable',
-            'boxes_quantity' => 'string|nullable',
-            'whole_box_dimensions' => 'string|nullable',
-            'provider' => 'string|nullable',
-            'invoice_cost_price' => 'string|nullable',
-            'buyed_date' => 'date|nullable',
-            'offer_until' => 'string|nullable',
-            'localidad_recogida' => 'string|nullable',
-            'cp_recogida' => 'string|nullable',
-            'provincia_recogida' => 'string|nullable',
-            'porte_id' => 'int|nullable',
-            'subcategorie_id' => 'int|nullable',
-            'net_price' => 'int|nullable',
-            'categoria_oferta' => 'string|nullable',
+        dd($validatedData);
+
+        $data =  $this->validate( $this->rules, [
+            // Images:
+            // 'product_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048|nullable',
+            // 'product_image_2' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048|nullable',
+            // 'product_image_3' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048|nullable',
+            // 'user_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048|nullable',
+            // 'user_image_2' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048|nullable',
+            // 'user_image_3' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048|nullable',
+            // //rest of the fields:
+            // 'name' => 'string|nullable',
+            // 'short_description' => 'string|nullable',
+            // 'description' => 'string|nullable',
+            // 'product_code' => 'string|nullable',
+            // 'part_number'=> 'string|nullable',
+            // 'brand' => 'string|nullable',
+            // 'EAN13_individual' =>'string|nullable',
+            // 'dimensions_boxes' => 'string|nullable',
+            // 'unidades_embalaje_original' => 'string|nullable',
+            // 'weight' => 'string|nullable',
+            // 'pack_units' => 'string|nullable',
+            // 'dimensions_boxes_2' => 'string|nullable',
+            // 'weight_2' => 'string|nullable',
+            // 'dimensions_boxes_3' => 'string|nullable',
+            // 'weight_3' => 'string|nullable',
+            // 'EAN13_box_1' => 'string|nullable',
+            // 'EAN13_box_2' => 'string|nullable',
+            // 'boxes_quantity' => 'string|nullable',
+
+            // 'plazo_preparacion_pedido' => 'string|nullable',
+            // 'offer_units' => 'string|nullable',
+            // 'boxes_quantity' => 'string|nullable',
+            // 'whole_box_dimensions' => 'string|nullable',
+            // 'provider' => 'string|nullable',
+            // 'invoice_cost_price' => 'string|nullable',
+            // 'buyed_date' => 'date|nullable',
+            // 'offer_until' => 'string|nullable',
+            // 'localidad_recogida' => 'string|nullable',
+            // 'cp_recogida' => 'string|nullable',
+            // 'provincia_recogida' => 'string|nullable',
+            // 'porte_id' => 'int|nullable',
+            // 'subcategorie_id' => 'int|nullable',
+            // 'net_price' => 'int|nullable',
+            // 'categoria_oferta' => 'string|nullable',
         ]);
 
         //dd($data['product_image']);
