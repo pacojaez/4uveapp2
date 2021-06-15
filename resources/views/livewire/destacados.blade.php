@@ -15,12 +15,11 @@
 
                         <img src="{{asset('storage/images/products/'.$product->product_image)}}" alt="{{ $product->name}}" class="object-fill w-full rounded-lg rounded-b-none md:h-56" />
                     </div>
-                    <div class="flex items-center justify-between px-4 py-2 overflow-hidden">
+                    {{-- <div class="flex items-center justify-between px-4 py-2 overflow-hidden">
                         <span class="text-xs font-medium text-blue-600 uppercase">
                             {{ $product->subcategorie->name }}
                         </span>
-
-                    </div>
+                    </div> --}}
                     <hr class="border-gray-300" />
                     <div class="flex flex-wrap items-center flex-1 px-4 py-1 mx-auto text-center">
                         <a href="#" class="hover:underline">

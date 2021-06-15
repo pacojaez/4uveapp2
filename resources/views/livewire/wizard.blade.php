@@ -64,31 +64,50 @@
         </style>
 
         <div x-data="app()" x-cloak>
-            <div class="px-4 py-10 mx-auto max-w-4/6">
+            <div class="px-4 py-10 mx-auto max-w-5/6">
                 <!-- pantalla final-->
                 <div x-show.transition="step === 'complete'">
-                    <div class="flex items-center justify-between p-10 bg-white rounded-lg shadow">
+                    <div class="flex flex-row items-center justify-between p-10 bg-white rounded-lg shadow">
                         <div>
                             <svg class="w-20 h-20 mx-auto mb-4 text-green-500" viewBox="0 0 20 20" fill="currentColor">
                                 <path fill-rule="evenodd"
                                     d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
                                     clip-rule="evenodd" /></svg>
-
-                            <h2 class="mb-4 text-2xl font-bold text-center text-gray-800">Registration Success</h2>
+                            <h2 class="mb-4 text-2xl font-bold text-center text-gray-800">Oferta Subida Correctamente</h2>
 
                             <div class="mb-8 text-gray-600">
-                                Thank you. We have sent you an email to demo@demo.test. Please click the link in the
-                                message to activate your account.
+                                Gracias. Te enviaremos un mail cuando hayamos validado tu Oferta.
                             </div>
-
                             <button @click="step = 1"
-                                class="block w-40 px-5 py-2 mx-auto font-medium text-center text-gray-600 bg-white border rounded-lg shadow-sm focus:outline-none hover:bg-gray-100">Back
-                                to home</button>
+                                class="block w-40 px-5 py-2 mx-auto font-medium text-center text-gray-600 bg-white border rounded-lg shadow-sm focus:outline-none hover:bg-gray-100">
+                                VOLVER A CREAR OTRA OFERTA
+                            </button>
                         </div>
                     </div>
                 </div>
                 <!-- Pasos para rellenar el form-->
                 <div x-show.transition="step != 'complete'">
+                    <!-- Top Steps Navigation -->
+                    <div class="left-0 right-0 py-5 bg-white shadow-md" x-show="step != 'complete'">
+                        <div class="max-w-3xl px-4 mx-auto">
+                            <div class="flex justify-between">
+                                <div class="w-1/2">
+                                    <button x-show="step > 1" @click="step--"
+                                        class="w-32 px-5 py-2 font-medium text-center text-gray-600 bg-white border rounded-lg shadow-sm focus:outline-none hover:bg-gray-100">Previous</button>
+                                </div>
+
+                                <div class="w-1/2 text-right">
+                                    <button x-show="step < 3" @click="step++"
+                                        class="w-32 px-5 py-2 font-medium text-center text-white bg-blue-500 border border-transparent rounded-lg shadow-sm focus:outline-none hover:bg-blue-600">Next</button>
+                                    @if($storedOferta)
+                                    <button @click="step = 'complete'" x-show="step === 3"
+                                        class="w-32 px-5 py-2 font-medium text-center text-white bg-blue-500 border border-transparent rounded-lg shadow-sm focus:outline-none hover:bg-blue-600">Complete</button>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- / Top Steps Navigation -->
                     <!-- Top Navigation -->
                     <div class="py-4 border-b-2">
                         <div class="mb-1 text-xs font-bold leading-tight tracking-wide text-gray-500 uppercase"
@@ -124,7 +143,7 @@
                             </div>
                         </div>
                     </div>
-                    <!-- /Top Navigation -->
+                    <!-- / Top Navigation -->
 
                     <!-- Step Content -->
                     <div class="py-6">
@@ -343,15 +362,18 @@
                                 @endif
                             </div>
                         </div>
+                        <!-- / Step 1 Buscar Producto -->
                         <!-- Step 2 Crear producto IfnotExists -->
                         <div x-show.transition.in="step === 2">
                             <div class="p-10 mb-2 text-center bg-gray-300">
+                                @if(!$selected)
                                 <div class="w-1/3 mx-1 text-center">
                                     <button wire:click="clearSearch" type="reset"
                                         class="class='w-auto px-4 py-2 m-auto font-medium text-center text-white bg-red-600 rounded-lg shadow-xl hover:bg-gray-700'">
                                         Reiniciar el Formulario
                                     </button>
                                 </div>
+                                @endif
                                 <!--Product FORM -->
                                 <form wire:submit.prevent="storeProduct" enctype="multipart/form-data">
                                     @method('post')
@@ -373,6 +395,8 @@
                                                         class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
                                                         type="text"
                                                         placeholder="Ej: Caja de Bolígrafos BIC. Color Rojo" />
+                                                    @error('name') <span
+                                                        class="text-red-600 error">{{ $message }}</span> @enderror
                                                 </div>
                                                 <div class="grid grid-cols-1">
                                                     <label
@@ -383,6 +407,8 @@
                                                         name="short_description"
                                                         class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
                                                         type="text" placeholder="Ej: El Bic Naranja de toda la vida" />
+                                                    @error('short_description') <span
+                                                        class="text-red-600 error">{{ $message }}</span> @enderror
                                                 </div>
                                             </div>
                                             <!-- BLOQUE 2 -->
@@ -396,6 +422,8 @@
                                                     placeholder="Ej: El clasico BIC Cristal Original, es el bolígrafo más vendido del mundo.Su punta media de 1mm se desliza por el papel con suavidad para ofrecer una escritura sin manchas. Tiene un cuerpo transparente que permite comprobar en todo momento el nivel de tinta."
                                                     class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent">
                                                         </textarea>
+                                                @error('description') <span
+                                                    class="text-red-600 error">{{ $message }}</span> @enderror
                                             </div>
                                             <!-- BLOQUE 3 -->
                                             <div class="grid grid-cols-1 gap-5 mt-5 md:grid-cols-2 md:gap-8 mx-7">
@@ -408,6 +436,9 @@
                                                         name="product_code"
                                                         class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
                                                         type="text" placeholder="Ej: 8373609" />
+                                                    @error('product_code') <span
+                                                        class="text-red-600 error">{{ $message }}</span> @enderror
+
                                                 </div>
                                                 <div class="grid grid-cols-1">
                                                     <label
@@ -433,6 +464,8 @@
                                                     <input wire:model='part_number' id='part_number' name="part_number"
                                                         class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
                                                         type="text" placeholder="Ej: 8373609" />
+                                                    @error('part_number') <span
+                                                        class="text-red-600 error">{{ $message }}</span> @enderror
                                                 </div>
                                                 <div class="grid grid-cols-1">
                                                     <label
@@ -442,6 +475,8 @@
                                                     <input wire:model='brand' id='brand' name="brand"
                                                         class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
                                                         type="text" placeholder="Ej: BIC" />
+                                                    @error('brand') <span
+                                                        class="text-red-600 error">{{ $message }}</span> @enderror
                                                 </div>
                                                 <div class="grid grid-cols-1">
                                                     <label
@@ -452,6 +487,8 @@
                                                         name="EAN13_individual"
                                                         class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
                                                         type="text" placeholder="Ej: 0070330129627" />
+                                                    @error('EAN13_individual') <span
+                                                        class="text-red-600 error">{{ $message }}</span> @enderror
                                                 </div>
                                                 <div class="grid grid-cols-1">
                                                     <label
@@ -461,6 +498,8 @@
                                                     <input wire:model='net_price' id='net_price' name="net_price"
                                                         class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
                                                         type="text" placeholder="Ej: 5.6845 €" />
+                                                    @error('net_price') <span
+                                                        class="text-red-600 error">{{ $message }}</span> @enderror
                                                 </div>
                                             </div>
                                             <!-- BLOQUE 5 -->
@@ -475,6 +514,8 @@
                                                         name="unidades_embalaje_original"
                                                         class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
                                                         type="int" placeholder="Ej: 1" />
+                                                    @error('unidades_embalaje_original') <span
+                                                        class="text-red-600 error">{{ $message }}</span> @enderror
                                                 </div>
                                                 <div class="grid grid-cols-1">
                                                     <label
@@ -485,6 +526,8 @@
                                                         name="dimensions_boxes"
                                                         class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
                                                         type="text" placeholder="Ej: 13x10,3x14,8 mm" />
+                                                    @error('dimensions_boxes') <span
+                                                        class="text-red-600 error">{{ $message }}</span> @enderror
                                                 </div>
                                                 <div class="grid grid-cols-1">
                                                     <label
@@ -494,6 +537,8 @@
                                                     <input wire:model='weight' id='weight' name="weight"
                                                         class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
                                                         type="text" placeholder="Ej: 0.300 kgs" />
+                                                    @error('weight') <span
+                                                        class="text-red-600 error">{{ $message }}</span> @enderror
                                                 </div>
                                                 <div class="grid grid-cols-1">
                                                     <label
@@ -503,6 +548,8 @@
                                                     <input wire:model='EAN13_box_1' id='EAN13_box_1' name="EAN13_box_1"
                                                         class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
                                                         type="text" placeholder="" />
+                                                    @error('EAN13_box_1') <span
+                                                        class="text-red-600 error">{{ $message }}</span> @enderror
                                                 </div>
                                             </div>
                                             <!-- BLOQUE 6 -->
@@ -516,6 +563,8 @@
                                                         name="unidades_embalaje_2"
                                                         class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
                                                         type="int" placeholder="Ej: 100" />
+                                                    @error('unidades_embalaje_2') <span
+                                                        class="text-red-600 error">{{ $message }}</span> @enderror
                                                 </div>
                                                 <div class="grid grid-cols-1">
                                                     <label
@@ -526,6 +575,8 @@
                                                         name="dimensions_boxes_2"
                                                         class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
                                                         type="text" placeholder="Ej: 13x10,3x14,8 mm" />
+                                                    @error('dimensions_boxes_2') <span
+                                                        class="text-red-600 error">{{ $message }}</span> @enderror
                                                 </div>
                                                 <div class="grid grid-cols-1">
                                                     <label
@@ -535,6 +586,8 @@
                                                     <input wire:model='weight_2' id='weight_2' name="weight_2"
                                                         class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
                                                         type="text" placeholder="Ej: 0.300 kgs" />
+                                                    @error('weight_2') <span
+                                                        class="text-red-600 error">{{ $message }}</span> @enderror
                                                 </div>
                                                 <div class="grid grid-cols-1">
                                                     <label
@@ -544,6 +597,8 @@
                                                     <input wire:model='EAN13_box_2' id='EAN13_box_2' name="EAN13_box_2"
                                                         class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
                                                         type="text" placeholder="" />
+                                                    @error('EAN13_box_2') <span
+                                                        class="text-red-600 error">{{ $message }}</span> @enderror
                                                 </div>
                                             </div>
                                             <!-- BLOQUE 7 -->
@@ -558,6 +613,8 @@
                                                         name="unidades_embalaje_3"
                                                         class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
                                                         type="int" placeholder="Ej: 30" />
+                                                    @error('unidades_embalaje_3') <span
+                                                        class="text-red-600 error">{{ $message }}</span> @enderror
                                                 </div>
                                                 <div class="grid grid-cols-1">
                                                     <label
@@ -568,6 +625,8 @@
                                                         name="dimensions_boxes_3"
                                                         class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
                                                         type="text" placeholder="Ej: 165x80x65 mm" />
+                                                    @error('dimensions_boxes_3') <span
+                                                        class="text-red-600 error">{{ $message }}</span> @enderror
                                                 </div>
                                                 <div class="grid grid-cols-1">
                                                     <label
@@ -577,6 +636,8 @@
                                                     <input wire:model='weight_3' id='weight_3' name="weight_3"
                                                         class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
                                                         type="text" placeholder="Ej: 9.000 kgs" />
+                                                    @error('weight_3') <span
+                                                        class="text-red-600 error">{{ $message }}</span> @enderror
                                                 </div>
                                                 <div class="grid grid-cols-1">
                                                     <label
@@ -586,6 +647,8 @@
                                                     <input wire:model='EAN13_box_3' id='EAN13_box_3' name="EAN13_box_3"
                                                         class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
                                                         type="text" placeholder="" />
+                                                    @error('EAN13_box_3') <span
+                                                        class="text-red-600 error">{{ $message }}</span> @enderror
                                                 </div>
                                             </div>
                                             <!--FOTOS-->
@@ -613,15 +676,21 @@
                                                             </div>
                                                             <input type='file' class="hidden" wire:model="product_image"
                                                                 name="product_image" />
+                                                            @error('product_image') <span
+                                                                class="text-red-600 error">{{ $message }}</span>
+                                                            @enderror
                                                         </label>
                                                         @else
                                                         <div class='flex w-full h-56 hover:border-purple-300 group'>
-                                                            <div class="class='flex flex-col items-center justify-center w-60 h-60 pt-7'">
+                                                            @if($temp_url_1)
+                                                            <div
+                                                                class="class='flex flex-col items-center justify-center w-60 h-60 pt-7'">
+
                                                                 <p
                                                                     class='pt-1 text-sm tracking-wider text-gray-400 lowercase'>
                                                                     Foto #1 del Producto:</p>
-                                                                <img src="{{ $product_image->temporaryUrl() }}"
-                                                                    class="">
+                                                                {{-- <input type="image" wire:model="temp_url_1" name="temp_url_1"> --}}
+                                                                <img src="{{ $temp_url_1 }}" class="">
                                                             </div>
                                                             <div wire:loading>
                                                                 Procesando...
@@ -630,6 +699,17 @@
                                                                 class="class='w-auto px-4 py-2 m-auto font-medium text-center text-white bg-red-600 rounded-lg shadow-xl hover:bg-gray-700'">
                                                                 Eliminar Foto 1
                                                             </button>
+                                                            @else
+                                                            <div
+                                                                class="class='flex flex-col items-center justify-center w-60 h-60 pt-7'">
+                                                                <p
+                                                                    class='pt-1 text-sm tracking-wider text-gray-400 lowercase'>
+                                                                    Foto #1 del Producto:</p>
+                                                                {{-- <input type="image" wire:model="temp_url_1" name="temp_url_1"> --}}
+                                                                <img
+                                                                    src="{{asset('storage/images/products/'.$selected->product_image)}}" />
+                                                            </div>
+                                                            @endif
                                                         </div>
                                                         @endif
                                                     </div>
@@ -655,17 +735,22 @@
                                                                     Select a photo
                                                                 </p>
                                                             </div>
-                                                            <input type='file' class="hidden" wire:model="product_image_2"
-                                                                name="product_image_2" />
+                                                            <input type='file' class="hidden"
+                                                                wire:model="product_image_2" name="product_image_2" />
+                                                            @error('product_image_2') <span
+                                                                class="text-red-600 error">{{ $message }}</span>
+                                                            @enderror
+
                                                         </label>
                                                         @else
                                                         <div class='flex w-full h-56 hover:border-purple-300 group'>
-                                                            <div class="class='flex flex-col items-center justify-center w-60 h-60 pt-7'">
+                                                            @if($tempUrl2)
+                                                            <div
+                                                                class="class='flex flex-col items-center justify-center w-60 h-60 pt-7'">
                                                                 <p
                                                                     class='pt-1 text-sm tracking-wider text-gray-400 lowercase'>
                                                                     Foto #2 del Producto:</p>
-                                                                <img src="{{ $product_image_2->temporaryUrl() }}"
-                                                                    class="">
+                                                                <img src="{{ $tempUrl2 }}" class="">
                                                             </div>
                                                             <div wire:loading>
                                                                 Procesando...
@@ -674,6 +759,17 @@
                                                                 class="class='w-auto px-4 py-2 m-auto font-medium text-center text-white bg-red-600 rounded-lg shadow-xl hover:bg-gray-700'">
                                                                 Eliminar Foto 2
                                                             </button>
+                                                            @else
+                                                            <div
+                                                                class="class='flex flex-col items-center justify-center w-60 h-60 pt-7'">
+                                                                <p
+                                                                    class='pt-1 text-sm tracking-wider text-gray-400 lowercase'>
+                                                                    Foto #2 del Producto:</p>
+                                                                {{-- <input type="image" wire:model="temp_url_1" name="temp_url_1"> --}}
+                                                                <img
+                                                                    src="{{asset('storage/images/products/'.$selected->product_image_2)}}" />
+                                                            </div>
+                                                            @endif
                                                         </div>
                                                         @endif
                                                     </div>
@@ -699,17 +795,21 @@
                                                                     Select a photo
                                                                 </p>
                                                             </div>
-                                                            <input type='file' class="hidden" wire:model="product_image_3"
-                                                                name="product_image_3" />
+                                                            <input type='file' class="hidden"
+                                                                wire:model="product_image_3" name="product_image_3" />
+                                                            @error('product_image_3') <span
+                                                                class="text-red-600 error">{{ $message }}</span>
+                                                            @enderror
                                                         </label>
                                                         @else
                                                         <div class='flex w-full h-56 hover:border-purple-300 group'>
-                                                            <div class="class='flex items-center justify-center w-60 h-60 pt-7'">
+                                                            @if($tempUrl3)
+                                                            <div
+                                                                class="class='flex items-center justify-center w-60 h-60 pt-7'">
                                                                 <p
                                                                     class='pt-1 text-base tracking-wider text-gray-400 lowercase'>
                                                                     Foto #3 del Producto:</p>
-                                                                <img src="{{ $product_image_3->temporaryUrl() }}"
-                                                                    class="">
+                                                                <img src="{{ $tempUrl3 }}" class="">
                                                             </div>
                                                             <div wire:loading>
                                                                 Procesando...
@@ -718,6 +818,17 @@
                                                                 class="class='w-auto px-4 py-2 m-auto font-medium text-center text-white bg-red-600 rounded-lg shadow-xl hover:bg-gray-700'">
                                                                 Eliminar Foto 3
                                                             </button>
+                                                            @else
+                                                            <div
+                                                                class="class='flex flex-col items-center justify-center w-60 h-60 pt-7'">
+                                                                <p
+                                                                    class='pt-1 text-sm tracking-wider text-gray-400 lowercase'>
+                                                                    Foto #3 del Producto:</p>
+                                                                {{-- <input type="image" wire:model="temp_url_1" name="temp_url_1"> --}}
+                                                                <img
+                                                                    src="{{asset('storage/images/products/'.$selected->product_image_3)}}" />
+                                                            </div>
+                                                            @endif
                                                         </div>
                                                         @endif
                                                     </div>
@@ -729,20 +840,469 @@
 
                                         </div>
                                     </div>
-                                    <button wire:click="clearSearch" type="reset"
-                                        class="class='w-auto px-4 py-2 m-auto font-medium text-center text-white bg-red-600 rounded-lg shadow-xl hover:bg-gray-700'">
-                                        Limpiar el Formulario
-                                    </button>
-                                    <button
-                                        class='w-auto px-4 py-2 m-auto font-medium text-center text-white bg-blue-500 rounded-lg shadow-xl hover:bg-gray-700'
-                                        type="submit" wire:click="storeProduct">
-                                        GUARDAR EL PRODUCTO
-                                    </button>
+                                    <div class="flex justify-between">
+                                        <div class="max-w-3xl px-4 mx-auto">
+                                            <div class="flex justify-between">
+                                                @if(!$storedProduct)
+                                                @if(!$selected)
+                                                <div class="w-1/2">
+                                                    <button wire:click="clearSearch" type="reset"
+                                                        class="class='w-auto px-4 py-2 m-auto font-medium text-center text-white bg-red-600 rounded-lg shadow-xl hover:bg-gray-700'">
+                                                        Limpiar el Formulario
+                                                    </button>
+                                                </div>
+                                                <div class="w-1/2 text-right">
+                                                    <button
+                                                        class='w-auto px-4 py-2 m-auto font-medium text-center text-white bg-blue-500 rounded-lg shadow-xl hover:bg-gray-700'
+                                                        wire:click="storeProduct">
+                                                        GUARDAR EL PRODUCTO
+                                                    </button>
+                                                </div>
+                                                @else
+                                                <div class="w-full text-center">
+                                                    <p class="p-4 text-xl text-white uppercase bg-green-600 rounded">
+                                                        PRODUCTO YA CREADO, YA PUEDES RELLENAR LA OFERTA en el siguiente
+                                                        paso
+                                                    </p>
+                                                </div>
+                                                @endif
+                                                @else
+                                                <div class="w-full">
+                                                    <p class="p-4 text-xl text-white uppercase bg-green-300 rounded">
+                                                        PRODUCTO GUARDADO, YA PUEDES RELLENAR LA OFERTA en el siguiente
+                                                        paso</p>
+                                                </div>
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </div>
                                 </form>
                             </div>
                         </div>
+                        <!--/ Step 2 Crear producto IfnotExists -->
                         <!-- Step 3 Crear Oferta y Validar -->
                         <div x-show.transition.in="step === 3">
+                            <div class="p-10 mb-2 text-center bg-gray-300">
+
+                                <div class="w-1/3 mx-1 text-center">
+                                    <button wire:click="clearOfferForm" type="reset"
+                                        class="class='w-auto px-4 py-2 m-auto font-medium text-center text-white bg-red-600 rounded-lg shadow-xl hover:bg-gray-700'">
+                                        Limpiar el Formulario
+                                    </button>
+                                </div>
+
+                                <!--OFFER FORM -->
+                                <form wire:submit.prevent="storeOffer" enctype="multipart/form-data">
+                                    @method('post')
+                                    @csrf
+                                    <div class="items-center justify-center p-2 mt-4 mb-2 bg-gray-200">
+                                        <div
+                                            class="grid w-11/12 mb-4 bg-gray-300 rounded-lg shadow-xl md:w-1/12 lg:w-11/12">
+                                            <h2 class="p-2 m-auto font-bold text-center bg-white rounded">
+                                                LOS DATOS DE LA OFERTA:
+                                            </h2>
+                                            <!-- BLOQUE 1 -->
+                                            <div class="grid grid-cols-1 gap-5 mt-5 md:grid-cols-4 md:gap-8 mx-7">
+                                                <div class="grid grid-cols-1">
+                                                    <label
+                                                        class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">
+                                                        Localidad de Recogida:
+                                                    </label>
+                                                    <input wire:model='localidad_recogida' id='localidad_recogida'
+                                                        name="localidad_recogida"
+                                                        class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                                                        type="text" placeholder="Ej: Fuenlabrada" />
+                                                    @error('localidad_recogida') <span
+                                                        class="text-red-600 error">{{ $message }}</span> @enderror
+                                                </div>
+                                                <div class="grid grid-cols-1">
+                                                    <label
+                                                        class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">
+                                                        Provincia de Recogida:
+                                                    </label>
+                                                    <input wire:model='provincia_recogida' id='provincia_recogida'
+                                                        name="provincia_recogida"
+                                                        class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                                                        type="text" placeholder="Ej: Madrid" />
+                                                    @error('provincia_recogida') <span
+                                                        class="text-red-600 error">{{ $message }}</span> @enderror
+                                                </div>
+                                                <div class="grid grid-cols-1">
+                                                    <label
+                                                        class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">
+                                                        Código Postal Recogida:
+                                                    </label>
+                                                    <input wire:model='cp_recogida' id='cp_recogida' name="cp_recogida"
+                                                        class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                                                        type="text" placeholder="EJ: 28024" />
+                                                    @error('cp_recogida') <span
+                                                        class="text-red-600 error">{{ $message }}</span> @enderror
+                                                </div>
+                                                <div class="grid grid-cols-1">
+                                                    <label
+                                                        class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">
+                                                        Categoría Oferta: select con 4 opciones
+                                                    </label>
+                                                    <select wire:model='categoria_oferta' id='categoria_oferta'
+                                                        name="categoria_oferta"
+                                                        class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent">
+                                                        <option value="Venta Unitaria">VENTA UNITARIA</option>
+                                                        <option value="Venta Por Lotes">VENTA POR LOTES</option>
+                                                        <option value="Liquidación Lote">LIQUIDACIÓN LOTE</option>
+                                                        <option value="Liquidación Total">LIQUIDACIÓN TOTAL</option>
+                                                    </select>
+                                                    @error('categoria_oferta') <span
+                                                        class="text-red-600 error">{{ $message }}</span> @enderror
+                                                </div>
+                                            </div>
+                                            <!-- BLOQUE 2 -->
+                                            <div class="grid grid-cols-1 gap-5 mt-5 md:grid-cols-4 md:gap-8 mx-7">
+                                                <div class="grid grid-cols-1">
+                                                    <label
+                                                        class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">
+                                                        Unidades en Oferta:
+                                                    </label>
+                                                    <input wire:model='offer_units' id='offer_units' name="offer_units"
+                                                        class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                                                        type="number" placeholder="" />
+                                                    @error('offer_units') <span
+                                                        class="text-red-600 error">{{ $message }}</span> @enderror
+                                                </div>
+                                                <div class="grid grid-cols-1">
+                                                    <label
+                                                        class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">
+                                                        Número de cajas:
+                                                    </label>
+                                                    <input wire:model='boxes' id='boxes' name="boxes"
+                                                        class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                                                        type="number" placeholder="" />
+                                                    @error('boxes') <span
+                                                        class="text-red-600 error">{{ $message }}</span> @enderror
+                                                </div>
+                                                <div class="grid grid-cols-1">
+                                                    <label
+                                                        class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">
+                                                        Dimensiones Embalaje:
+                                                    </label>
+                                                    <input wire:model='boxes_dimensions' id='boxes_dimensions'
+                                                        name="boxes_dimensions"
+                                                        class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                                                        type="text" placeholder="EJ: 65x20x30" />
+                                                    @error('boxes_dimensions') <span
+                                                        class="text-red-600 error">{{ $message }}</span> @enderror
+                                                </div>
+                                                <div class="grid grid-cols-1">
+                                                    <label
+                                                        class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">
+                                                        ¿Embalaje Original?
+                                                    </label>
+                                                    <div class="flex">
+                                                        <label
+                                                            class="flex items-center justify-start py-3 pl-4 pr-6 mr-4 bg-white rounded-lg shadow-sm text-truncate">
+                                                            <div class="mr-3 text-teal-600">
+                                                                <input type="radio" x-model="gender" value="Y"
+                                                                    class="form-radio focus:outline-none focus:shadow-outline" />
+                                                            </div>
+                                                            <div class="text-gray-700 select-none">SI</div>
+                                                        </label>
+
+                                                        <label
+                                                            class="flex items-center justify-start py-3 pl-4 pr-6 bg-white rounded-lg shadow-sm text-truncate">
+                                                            <div class="mr-3 text-teal-600">
+                                                                <input type="radio" x-model="gender" value="N"
+                                                                    class="form-radio focus:outline-none focus:shadow-outline" />
+                                                            </div>
+                                                            <div class="text-gray-700 select-none">NO</div>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- BLOQUE 3 -->
+                                            <div class="grid grid-cols-1 gap-5 mt-5 md:grid-cols-4 md:gap-8 mx-7">
+                                                <div class="grid grid-cols-1">
+                                                    <label
+                                                        class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">
+                                                        Proveedor:
+                                                    </label>
+                                                    <input wire:model='provider' id='provider' name="provider"
+                                                        class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                                                        type="text" placeholder="Ej: No se" />
+                                                    @error('provider') <span
+                                                        class="text-red-600 error">{{ $message }}</span> @enderror
+                                                </div>
+
+                                                <div class="grid grid-cols-1">
+                                                    <label
+                                                        class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">
+                                                        PORTES:
+                                                    </label>
+                                                    <select wire:model='porte_id' id='porte_id' name="porte_id"
+                                                        class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent">
+                                                        <option value="1">PORTES PAGADOS</option>
+                                                        <option value="2s">PORTES DEBIDOS</option>
+                                                        <option value="3">PORTES COMPARTIDOS</option>
+                                                    </select>
+                                                    @error('porte_id') <span
+                                                        class="text-red-600 error">{{ $message }}</span> @enderror
+                                                </div>
+
+                                                <div class="grid grid-cols-1">
+                                                    <label
+                                                        class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">
+                                                        Precio Compra:
+                                                    </label>
+                                                    <input wire:model='invoice_cost_price' id='invoice_cost_price'
+                                                        name="invoice_cost_price"
+                                                        class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                                                        type="text" placeholder="EJ: 6.25" />
+                                                    @error('invoice_cost_price') <span
+                                                        class="text-red-600 error">{{ $message }}</span> @enderror
+                                                </div>
+                                                <div class="grid grid-cols-1">
+                                                    <label
+                                                        class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">
+                                                        Fecha Compra:
+                                                    </label>
+                                                    <input wire:model='buyed_date' id='buyed_date' name="buyed_date"
+                                                        class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                                                        type="date" />
+                                                    @error('buyed_date') <span
+                                                        class="text-red-600 error">{{ $message }}</span> @enderror
+                                                </div>
+                                            </div>
+                                            <!-- BLOQUE 4 -->
+                                            <div class="grid grid-cols-1 gap-5 mt-5 md:grid-cols-4 md:gap-8 mx-7">
+                                                <div class="grid grid-cols-1">
+                                                    <label
+                                                        class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">
+                                                        Plazo Preparación Pedido:
+                                                    </label>
+                                                    <input wire:model='plazo_preparacion_pedido'
+                                                        id='plazo_preparacion_pedido' name="plazo_preparacion_pedido"
+                                                        class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                                                        type="date" />
+                                                    @error('plazo_preparacion_pedido') <span
+                                                        class="text-red-600 error">{{ $message }}</span> @enderror
+                                                </div>
+                                                <div class="grid grid-cols-1">
+
+                                                </div>
+                                                <div class="grid grid-cols-1">
+                                                    <label
+                                                        class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">
+                                                        Porcentaje Ahorro:
+                                                    </label>
+                                                    @if($ahorro)
+                                                    <div wire:model='ahorro' id='ahorro'
+                                                        class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent">
+                                                        {{ $ahorro }} %
+                                                    </div>
+                                                    @endif
+                                                    @error('') <span class="text-red-600 error">{{ $message }}</span>
+                                                    @enderror
+                                                </div>
+                                                <div class="grid grid-cols-1">
+                                                    <label
+                                                        class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">
+                                                        PRECIO OFERTA:
+                                                    </label>
+                                                    <input wire:model='offer_prize' id='offer_prize' name="offer_prize"
+                                                        class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                                                        type="text" placeholder="Ej: 5.6845 €" />
+                                                    @error('offer_prize') <span
+                                                        class="text-red-600 error">{{ $message }}</span> @enderror
+                                                </div>
+                                            </div>
+
+                                            <!--FOTOS-->
+                                            <h2 class="p-2 m-auto font-bold text-center bg-white rounded">
+                                                FOTOS DEL LOTE:
+                                            </h2>
+                                            <div class="grid grid-cols-1 gap-5 mt-5 mb-10 md:grid-cols-3 md:gap-8 mx-7">
+                                                <!--FOTO 1 -->
+                                                <div class="grid grid-cols-1">
+                                                    <div class='flex items-center justify-center w-5/6'>
+                                                        @if (!$user_image)
+                                                        <label
+                                                            class='flex flex-col w-full h-32 border-4 border-dashed hover:bg-gray-100 hover:border-purple-300 group'>
+                                                            <div class='flex flex-col items-center justify-center pt-7'>
+                                                                <svg class="w-10 h-10 text-purple-400 group-hover:text-purple-600"
+                                                                    fill="none" stroke="currentColor"
+                                                                    viewBox="0 0 24 24"
+                                                                    xmlns="http://www.w3.org/2000/svg">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                                        stroke-width="2"
+                                                                        d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z">
+                                                                    </path>
+                                                                </svg>
+                                                                <p
+                                                                    class='pt-1 text-sm tracking-wider text-gray-400 lowercase group-hover:text-purple-600'>
+                                                                    Select a photo
+                                                                </p>
+                                                            </div>
+                                                            <input type='file' class="hidden" wire:model="user_image"
+                                                                name="user_image" />
+                                                            @error('user_image') <span
+                                                                class="text-red-600 error">{{ $message }}</span>
+                                                            @enderror
+                                                        </label>
+                                                        @else
+                                                        <div class='flex w-full h-56 hover:border-purple-300 group'>
+                                                            @if($user_image->temporaryUrl())
+                                                            <div
+                                                                class="class='flex flex-col items-center justify-center w-60 h-60 pt-7'">
+
+                                                                <p
+                                                                    class='pt-1 text-sm tracking-wider text-gray-400 lowercase'>
+                                                                    Foto #1 del Lote:</p>
+                                                                {{-- <input type="image" wire:model="temp_url_1" name="temp_url_1"> --}}
+                                                                <img src="{{ $user_image->temporaryUrl() }}" class="">
+                                                            </div>
+                                                            <div wire:loading>
+                                                                Procesando...
+                                                            </div>
+                                                            <button wire:click="clearPhotoUser1" type="reset"
+                                                                class="class='w-auto px-4 py-2 m-auto font-medium text-center text-white bg-red-600 rounded-lg shadow-xl hover:bg-gray-700'">
+                                                                Eliminar Foto 1
+                                                            </button>
+                                                            @endif
+                                                        </div>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                                <!--FOTO 2 -->
+                                                <div class="grid grid-cols-1">
+                                                    <div class='flex items-center justify-center w-5/6'>
+                                                        @if (!$user_image_2)
+                                                        <label
+                                                            class='flex flex-col w-full h-32 border-4 border-dashed hover:bg-gray-100 hover:border-purple-300 group'>
+                                                            <div class='flex items-center justify-center pt-7'>
+                                                                <svg class="w-10 h-10 text-purple-400 group-hover:text-purple-600"
+                                                                    fill="none" stroke="currentColor"
+                                                                    viewBox="0 0 24 24"
+                                                                    xmlns="http://www.w3.org/2000/svg">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                                        stroke-width="2"
+                                                                        d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z">
+                                                                    </path>
+                                                                </svg>
+                                                                <p
+                                                                    class='pt-1 text-sm tracking-wider text-gray-400 lowercase group-hover:text-purple-600'>
+                                                                    Select a photo
+                                                                </p>
+                                                            </div>
+                                                            <input type='file' class="hidden"
+                                                                wire:model="user_image_2" name="user_image_2" />
+                                                            @error('user_image_2') <span
+                                                                class="text-red-600 error">{{ $message }}</span>
+                                                            @enderror
+
+                                                        </label>
+                                                        @else
+                                                        <div class='flex w-full h-56 hover:border-purple-300 group'>
+                                                            @if($user_image_2->temporaryUrl())
+                                                            <div
+                                                                class="class='flex flex-col items-center justify-center w-60 h-60 pt-7'">
+                                                                <p
+                                                                    class='pt-1 text-sm tracking-wider text-gray-400 lowercase'>
+                                                                    Foto #2 del Lote:</p>
+                                                                <img src="{{ $user_image_2->temporaryUrl() }}" class="">
+                                                            </div>
+                                                            <div wire:loading>
+                                                                Procesando...
+                                                            </div>
+                                                            <button wire:click="clearPhotoUser2" type="reset"
+                                                                class="class='w-auto px-4 py-2 m-auto font-medium text-center text-white bg-red-600 rounded-lg shadow-xl hover:bg-gray-700'">
+                                                                Eliminar Foto 2
+                                                            </button>
+                                                            @endif
+                                                        </div>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                                <!--FOTO 3 -->
+                                                <div class="grid grid-cols-1">
+                                                    <div class='flex items-center justify-center w-5/6'>
+                                                        @if (!$user_image_3)
+                                                        <label
+                                                            class='flex flex-col w-full h-32 border-4 border-dashed hover:bg-gray-100 hover:border-purple-300 group'>
+                                                            <div class='flex items-center justify-center pt-7'>
+                                                                <svg class="w-10 h-10 text-purple-400 group-hover:text-purple-600"
+                                                                    fill="none" stroke="currentColor"
+                                                                    viewBox="0 0 24 24"
+                                                                    xmlns="http://www.w3.org/2000/svg">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                                        stroke-width="2"
+                                                                        d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z">
+                                                                    </path>
+                                                                </svg>
+                                                                <p
+                                                                    class='pt-1 text-sm tracking-wider text-gray-400 lowercase group-hover:text-purple-600'>
+                                                                    Select a photo
+                                                                </p>
+                                                            </div>
+                                                            <input type='file' class="hidden"
+                                                                wire:model="user_image_3" name="user_image_3" />
+                                                            @error('user_image_3') <span
+                                                                class="text-red-600 error">{{ $message }}</span>
+                                                            @enderror
+                                                        </label>
+                                                        @else
+                                                        <div class='flex w-full h-56 hover:border-purple-300 group'>
+                                                            @if($user_image_3->temporaryUrl())
+                                                            <div
+                                                                class="class='flex items-center justify-center w-60 h-60 pt-7'">
+                                                                <p
+                                                                    class='pt-1 text-base tracking-wider text-gray-400 lowercase'>
+                                                                    Foto #3 del Lote:</p>
+                                                                <img src="{{ $user_image_3->temporaryUrl() }}" class="">
+                                                            </div>
+                                                            <div wire:loading>
+                                                                Procesando...
+                                                            </div>
+                                                            <button wire:click="clearPhotoUser3" type="reset"
+                                                                class="class='w-auto px-4 py-2 m-auto font-medium text-center text-white bg-red-600 rounded-lg shadow-xl hover:bg-gray-700'">
+                                                                Eliminar Foto 3
+                                                            </button>
+                                                            @endif
+                                                        </div>
+                                                        @endif
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <div class="max-w-3xl px-4 mx-auto">
+                                            <div class="flex justify-between">
+                                                <div class="w-1/2">
+                                                    <button wire:click="clearOfferForm" type="reset"
+                                                        class="class='w-auto px-4 py-2 m-auto font-medium text-center text-white bg-red-600 rounded-lg shadow-xl hover:bg-gray-700'">
+                                                        Limpiar el Formulario
+                                                    </button>
+                                                </div>
+                                                @if(!$storedOferta)
+                                                <div class="w-1/2 text-right">
+                                                    <button
+                                                        class='w-auto px-4 py-2 m-auto font-medium text-center text-white bg-blue-500 rounded-lg shadow-xl hover:bg-gray-700'
+                                                        wire:click="storeOffer">
+                                                        GUARDAR LA OFERTA
+                                                    </button>
+                                                </div>
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- / Step 3 Crear Oferta y Validar -->
+                        <!-- Step 3 Crear Oferta y Validar -->
+                        {{-- <div x-show.transition.in="step === 3">
                             <div class="mb-5">
                                 <label for="email" class="block mb-1 font-bold text-gray-700">Gender</label>
 
@@ -773,7 +1333,8 @@
                                     class="w-full px-4 py-3 font-medium text-gray-600 rounded-lg shadow-sm focus:outline-none focus:shadow-outline"
                                     placeholder="eg. Web Developer">
                             </div>
-                        </div>
+                        </div> --}}
+                        <!-- / Step 3 Crear Oferta y Validar -->
                     </div>
                     <!-- / Step Content -->
                 </div>
@@ -791,16 +1352,17 @@
                         <div class="w-1/2 text-right">
                             <button x-show="step < 3" @click="step++"
                                 class="w-32 px-5 py-2 font-medium text-center text-white bg-blue-500 border border-transparent rounded-lg shadow-sm focus:outline-none hover:bg-blue-600">Next</button>
-
+                            @if($storedOferta)
                             <button @click="step = 'complete'" x-show="step === 3"
+                                wire:click="storeProduct"
                                 class="w-32 px-5 py-2 font-medium text-center text-white bg-blue-500 border border-transparent rounded-lg shadow-sm focus:outline-none hover:bg-blue-600">Complete</button>
+                            @endif
                         </div>
                     </div>
                 </div>
             </div>
             <!-- / Bottom Navigation https://placehold.co/300x300/e2e8f0/cccccc -->
         </div>
-
         <script>
             function app() {
 			return {
@@ -829,9 +1391,5 @@
 			}
 		}
         </script>
-
-
-
-
     </div>
 </div>

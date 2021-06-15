@@ -22,35 +22,51 @@ class Wizard extends Component
     public $price, $detail, $status = 1;
     public $successMsg = '';
 
+    public $storedProduct = false;
+    public $storedOferta = false;
+
     public $productslist;
     public $search;
 
     public $product;
+    public $oferta;
 
     public $selectedProduct;
+    public $product_id;
     public $subcategories;
     public $portes;
 
     public $product_image, $product_image_2, $product_image_3, $user_image, $user_image_2, $user_image_3;
 
+    public $temp_url_1 = false;
+    public $temp_url_2 = false;
+    public $temp_url_3 = false;
+
     public $name, $description, $short_description, $product_code, $lote_image, $cb_unit, $part_number, $brand,
-        $EAN13_individual, $unidades_embalaje_original, $dimensions_boxes, $weight, $pack_units,
-        $unidades_embalaje_2, $dimensions_boxes_2, $weight_2, $unidades_embalaje_3, $dimensions_boxes_3, $weight_3,
-        $plazo_preparacion_pedido, $contraoferta, $localidad_recogida, $cp_recogida, $provincia_recogida, $offer_units,
-        $boxes_quantity, $whole_box_dimensions, $embalaje_original, $provider, $invoice_cost_price,
-        $buyed_date, $boxes, $offer, $new, $offer_until, $offer_prize, $subcategorie_id, $net_price,
-        $EAN13_box_1, $EAN13_box_2, $categoria_oferta, $EAN13_box_3;
+        $EAN13_individual, $unidades_embalaje_original, $dimensions_boxes, $weight, $pack_units, $subcategorie_id,
+        $unidades_embalaje_2, $dimensions_boxes_2, $weight_2, $unidades_embalaje_3, $dimensions_boxes_3, $weight_3, $EAN13_box_1, $EAN13_box_2, $EAN13_box_3;
+
+    public $plazo_preparacion_pedido, $contraoferta, $localidad_recogida, $cp_recogida, $provincia_recogida, $offer_units,
+        $boxes_quantity, $boxes_dimensions, $embalaje_original_oferta, $provider, $invoice_cost_price,
+        $buyed_date, $boxes, $offer, $new, $offer_until, $offer_prize, $net_price,
+        $categoria_oferta, $porte_id ;
+
+    public $ahorro;
+
+    //esta propiedad equivale al embalaje_original mientras averiguo porque se rompe la vista con embalaje_original
+    public $gender;
 
         protected $rules = [
+            // Producto: Imagenes
             'product_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048|nullable',
             'product_image_2' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048|nullable',
             'product_image_3' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048|nullable',
             'user_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048|nullable',
             'user_image_2' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048|nullable',
             'user_image_3' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048|nullable',
-            //rest of the fields:
-            'name' => 'string|required',
-            'short_description' => 'string|nullable',
+            //Product: rest of the fields:
+            'name' => 'string|required|min:5',
+            'short_description' => 'string|nullable|min:5',
             'description' => 'string|nullable',
             'product_code' => 'string|nullable',
             'part_number'=> 'string|nullable',
@@ -63,23 +79,28 @@ class Wizard extends Component
             'weight_2' => 'string|nullable',
             'dimensions_boxes_3' => 'string|nullable',
             'weight_3' => 'string|nullable',
-            'plazo_preparacion_pedido' => 'string|nullable',
-            'offer_units' => 'string|nullable',
-            'boxes_quantity' => 'string|nullable',
-            'whole_box_dimensions' => 'string|nullable',
-            'boxes_quantity' => 'string|nullable',
-            'provider' => 'string|nullable',
-            'invoice_cost_price' => 'string|nullable',
-            'buyed_date' => 'date|nullable',
-            'offer_until' => 'string|nullable',
-            'localidad_recogida' => 'string|nullable',
-            'cp_recogida' => 'string|nullable',
-            'provincia_recogida' => 'string|nullable',
-            // 'porte_id' => 'int|nullable',
             'subcategorie_id' => 'int|nullable',
-            // 'active' => 'int|nullable',
-            'net_price' => 'decimal|nullable',
-            'unidades_embalaje_original' => 'string|nullable'
+            'net_price' => 'string|nullable|regex:/^\d*\.?\d+$/',
+            'unidades_embalaje_original' => 'string|nullable|regex:/^\d*\.?\d+$/',
+    ];
+
+    protected $rulesOffer = [
+        // Lote: Imagenes
+        'user_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048|nullable',
+        'user_image_2' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048|nullable',
+        'user_image_3' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048|nullable',
+        // Oferta:
+        'plazo_preparacion_pedido' => 'string|nullable',
+        'offer_units' => 'int|nullable|regex:/^\d*\.?\d+$/',
+        'boxes' => 'int|nullable|regex:/^\d*\.?\d+$/',
+        'provider' => 'string|nullable',
+        'invoice_cost_price' => 'string|nullable|regex:/^\d*\.?\d+$/',
+        'buyed_date' => 'date|nullable',
+        'localidad_recogida' => 'string|nullable',
+        'cp_recogida' => 'string|nullable',
+        'provincia_recogida' => 'string|nullable',
+        'porte_id' => 'nullable|int'
+
     ];
 
 
@@ -88,6 +109,8 @@ class Wizard extends Component
 
         $this->subcategories = Subcategorie::all();
         $this->portes = Portes::all();
+        $this->temp_url_1;
+
     }
 
     public function clearSearch(){
@@ -117,6 +140,40 @@ class Wizard extends Component
         $this->product_image_3 = '';
         // $this->porte_id = 1;
 
+        $this->storedProduct = false;
+        $this->storedOferta = false;
+
+        $this->resetErrorBag();
+
+    }
+
+    public function clearSearchOffer(){
+        $this->gender = null;
+        $this->resetErrorBag();
+    }
+
+    public function clearOfferForm(){
+
+        $this->localidad_recogida = '';
+        $this->provincia_recogida = '';
+        $this->cp_recogida = '';
+        $this->categoria_oferta = 1;
+        $this->units_offer = '';
+        $this->boxes = '';
+        $this->boxes_dimensions = '';
+        $this->gender = '';
+        $this->provider = '';
+        $this->porte_id = 1;
+        $this->invoice_cost_price = 0;
+        $this->buyed_date = '';
+        $this->user_image = '';
+        $this->user_image_2 = '';
+        $this->user_image_3 = '';
+        $this->ahorro = 0 ;
+        $this->offer_prize = 0;
+
+        $this->storedOferta = false;
+
     }
 
     public function clearPhoto1(){
@@ -130,13 +187,113 @@ class Wizard extends Component
         $this->product_image_3 = '';
     }
 
+    public function clearPhotoUser1(){
+        $this->user_image = '';
+    }
+
+    public function clearPhotoUser2(){
+        $this->user_image_2 = '';
+    }
+
+    public function clearPhotoUser3(){
+        $this->user_image_3 = '';
+    }
+
+    public function storeOffer(){
+
+        $this->oferta = new Oferta;
+        $data = $this->validate($this->rulesOffer);
+
+
+        //PROCESAMIENTO IMAGEN 1:
+        if($data['user_image']){
+            //mandamos un messaje al usuario de que la imagen se esta procesando
+            $this->processing = true;
+            $image = $this->user_image;
+            $name = substr( uniqid(rand(), true), 8,8 ).'.'.$image->getClientOriginalExtension();
+            $img = Image::make($image->getRealPath())->encode('jpg', 65)->resize(600, null, function($c){
+                $c->aspectRatio();
+                $c->upsize();
+            });
+            $img->stream();
+            Storage::disk('local')->put('public/images/products'.'/'.$name, $img, 'public');
+            $data['user_image'] = $name;
+
+            $this->oferta->user_image = $name;
+            // $this->user_temp_url_1 = $image->temporaryUrl();
+        }
+
+        //PROCESAMIENTO IMAGEN 2:
+        if($data['user_image_2']){
+            //mandamos un messaje al usuario de que la imagen se esta procesando
+            $this->processing = true;
+            $image = $this->user_image_2;
+            $name = substr( uniqid(rand(), true), 8,8 ).'.'.$image->getClientOriginalExtension();
+            $img = Image::make($image->getRealPath())->encode('jpg', 65)->resize(600, null, function($c){
+                $c->aspectRatio();
+                $c->upsize();
+            });
+            $img->stream();
+            Storage::disk('local')->put('public/images/products'.'/'.$name, $img, 'public');
+            $data['user_image_2'] = $name;
+
+            $this->oferta->user_image_2 = $name;
+            // $this->user_temp_url_1 = $image->temporaryUrl();
+        }
+
+        //PROCESAMIENTO IMAGEN 1:
+        if($data['user_image_3']){
+            //mandamos un messaje al usuario de que la imagen se esta procesando
+            $this->processing = true;
+            $image = $this->user_image_3;
+            $name = substr( uniqid(rand(), true), 8,8 ).'.'.$image->getClientOriginalExtension();
+            $img = Image::make($image->getRealPath())->encode('jpg', 65)->resize(600, null, function($c){
+                $c->aspectRatio();
+                $c->upsize();
+            });
+            $img->stream();
+            Storage::disk('local')->put('public/images/products'.'/'.$name, $img, 'public');
+            $data['user_image_3'] = $name;
+
+            $this->oferta->user_image_3 = $name;
+            // $this->user_temp_url_1 = $image->temporaryUrl();
+        }
+
+        $this->oferta->user_id = Auth::user()->id;
+
+        $id = '';
+
+        if($this->selectedProduct){
+            $id = $this->selectedProduct;
+        }else{
+           $id = $this->product_id;
+        }
+
+        $this->oferta->product_id = $id;
+
+        //***ojo solo para pruebas*/
+        $this->oferta->active = 1;
+        //***ojo solo para pruebas*/
+
+        $createFields = array_filter($data, null);
+
+        foreach( $createFields as $key => $value){
+            $this->oferta->$key = $value;
+            $this->oferta->save();
+
+        }
+
+        $this->processing = false;
+
+        $this->storedOferta = true;
+
+    }
+
     public function storeProduct(){
 
         $this->product = new Product;
-
         $data =  $this->validate($this->rules);
 
-        //PROCESAMIENTO IMAGEN 1:
         if($data['product_image']){
             //mandamos un messaje al usuario de que la imagen se esta procesando
             $this->processing = true;
@@ -150,7 +307,10 @@ class Wizard extends Component
             Storage::disk('local')->put('public/images/products'.'/'.$name, $img, 'public');
             $data['product_image'] = $name;
             $this->product->product_image = $data['product_image'];
+
+            $this->temp_url_1 = $image->temporaryUrl();
         }
+
 
         if($data['product_image_2']){
             //mandamos un messaje al usuario de que la imagen se esta procesando
@@ -165,6 +325,8 @@ class Wizard extends Component
             Storage::disk('local')->put('public/images/products'.'/'.$name, $img, 'public');
             $data['product_image_2'] = $name;
             $this->product->product_image_2 = $data['product_image_2'];
+
+            $this->temp_url_2 = $image->temporaryUrl();
         }
 
         if($data['product_image_3']){
@@ -180,6 +342,8 @@ class Wizard extends Component
             Storage::disk('local')->put('public/images/products'.'/'.$name, $img, 'public');
             $data['product_image'] = $name;
             $this->product->product_image_3 = $data['product_image_3'];
+
+            $this->temp_url_3 = $image->temporaryUrl();
         }
 
         //END IMAGE PROCESSING
@@ -196,24 +360,19 @@ class Wizard extends Component
         //***ojo solo para pruebas*/
 
         $createFields = array_filter($data, null);
-        dd($createFields);
-        // $product = Product::find($this->product);
+
         foreach( $createFields as $key => $value){
             $this->product->$key = $value;
             $this->product->save();
 
         }
-        // dd($this->product->name);
+
         $this->processing = false;
 
-        $this->currentStep = 3;
+        $this->storedProduct = true;
 
-        return $message = 'Producto guardado';
+        $this->product_id = $this->product->id;
 
-        // return redirect()->route('products.index', [
-        //     'subcategorie' => Subcategorie::all(),
-        //     'portes' => Portes::all(),
-        // ]);
 
     }
 
@@ -250,6 +409,8 @@ class Wizard extends Component
             $this->product_image_2 = $selected->product_image_2;
             $this->product_image_3 = $selected->product_image_3;
 
+            $this->product_id = $selected->id;
+
         }else{
             $selected = '';
         }
@@ -259,6 +420,10 @@ class Wizard extends Component
         if($this->productslist == ''){
             $this->clearSearch();
         }
+        if($this->invoice_cost_price != 0){
+            $this->ahorro = 100 - ($this->offer_prize * 100) / $this->invoice_cost_price;
+        }
+
         // $selected = Product::findOrFail($this->selectedProduct);
         // dd($selected);
         return view('livewire.wizard', [
@@ -266,6 +431,10 @@ class Wizard extends Component
             'selected' => $selected,
             'subcategories' => $this->subcategories,
             'portes' => $this->portes,
+            'temp_url_1' => $this->temp_url_1,
+            'tempUrl2' => $this->temp_url_2,
+            'tempUrl3' => $this->temp_url_3,
+            'ahorro' => $this->ahorro,
         ]);
     }
 
@@ -309,8 +478,9 @@ class Wizard extends Component
         // ]);
 
         $this->successMsg = 'Team successfully created.';
-
-        $this->clearForm();
+        dd($this->successMsg);
+        $this->clearSearch();
+        $this->clearOfferForm();
 
         $this->currentStep = 1;
     }

@@ -23,7 +23,7 @@ class CreateOfertasTable extends Migration
             $table->date('plazo_preparacion_pedido');
             $table->string('localidad_recogida');
             $table->string('cp_recogida');
-            $table->boolean('embalaje_original');
+            $table->enum('embalaje_original', ['Y', 'N']);
             $table->string('provider');
             $table->string('portes');
             $table->double('invoice_cost_price');
