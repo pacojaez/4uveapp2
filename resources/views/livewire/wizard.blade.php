@@ -883,14 +883,14 @@
                         <!-- Step 3 Crear Oferta y Validar -->
                         <div x-show.transition.in="step === 3">
                             <div class="p-10 mb-2 text-center bg-gray-300">
-
+                                @if(!$storedOferta)
                                 <div class="w-1/3 mx-1 text-center">
                                     <button wire:click="clearOfferForm" type="reset"
                                         class="class='w-auto px-4 py-2 m-auto font-medium text-center text-white bg-red-600 rounded-lg shadow-xl hover:bg-gray-700'">
                                         Limpiar el Formulario
                                     </button>
                                 </div>
-
+                                @endif
                                 <!--OFFER FORM -->
                                 <form wire:submit.prevent="storeOffer" enctype="multipart/form-data">
                                     @method('post')
@@ -1279,13 +1279,13 @@
                                     <div class="flex justify-between">
                                         <div class="max-w-3xl px-4 mx-auto">
                                             <div class="flex justify-between">
+                                                @if(!$storedOferta)
                                                 <div class="w-1/2">
                                                     <button wire:click="clearOfferForm" type="reset"
                                                         class="class='w-auto px-4 py-2 m-auto font-medium text-center text-white bg-red-600 rounded-lg shadow-xl hover:bg-gray-700'">
                                                         Limpiar el Formulario
                                                     </button>
                                                 </div>
-                                                @if(!$storedOferta)
                                                 <div class="w-1/2 text-right">
                                                     <button
                                                         class='w-auto px-4 py-2 m-auto font-medium text-center text-white bg-blue-500 rounded-lg shadow-xl hover:bg-gray-700'
