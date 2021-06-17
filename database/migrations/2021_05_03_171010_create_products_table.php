@@ -19,24 +19,33 @@ class CreateProductsTable extends Migration
             $table->string('name');
             $table->string('description');
             $table->string('short_description')->nullable();
+
             $table->string('product_image')->nullable();
-            $table->string('lote_image')->nullable();
+            $table->string('product_image_2')->nullable();
+            $table->string('product_image_3')->nullable();
+
             $table->string('part_number')->nullable();
-            $table->string('cb_unit')->nullable();
             $table->string('brand')->nullable();
+            $table->string('EAN13_individual')->nullable();
+            $table->double('net_price')->nullable();
+
             $table->string('pack_units')->nullable();
-            $table->date('buyed_date')->nullable();
-            $table->decimal('invoice_cost_price', 8, 2)->nullable();
+            $table->string('dimensions')->nullable();
             $table->string('weight')->nullable();
-            $table->string('provider')->nullable();
-            $table->decimal('boxes')->nullable();
-            $table->string('dimensions_boxes')->nullable();
+            $table->string('EAN13_box_1')->nullable();
+
+            $table->string('pack_unit_box_2')->nullable();
+            $table->string('dimensions_box_2')->nullable();
+            $table->decimal('wieght_box_2')->nullable();
+            $table->string('EAN13_box_2')->nullable();
+
+            $table->string('pack_unit_box_3')->nullable();
+            $table->string('dimensions_box_3')->nullable();
+            $table->decimal('wieght_box_3')->nullable();
+            $table->string('EAN13_box_3')->nullable();
+
             $table->string('portes')->nullable();
-            $table->boolean('offer')->default(false);
-            $table->boolean('new')->default(false);
-            $table->boolean('original_box')->default(false);
-            $table->date('offer_until');
-            $table->tinyInteger('porte_id')->default(1);
+            $table->boolean('active')->default(0);
 
             $table->uuid('user_id')->onUpdate('cascade')->onDelete('cascade');
             $table->unsignedBigInteger('subcategorie_id')->onUpdate('cascade')->onDelete('cascade');

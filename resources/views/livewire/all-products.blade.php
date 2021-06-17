@@ -70,14 +70,16 @@
                                     stroke-width="2"
                                     d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
                             </svg> --}}
-                            @if ($product->porte_id == 1 )
+                            {{-- @if ($product->oferta->user_image == "PAGADOS" ) --}}
+                            @if(!$product->oferta)
                             <div class="flex h-8 p-2 text-xs font-thin text-white bg-green-600 rounded-full justify-items-center">
                                 <span class="flex items-center">
                                     PORTES PAGADOS
                                 </span>
                             </div>
                             @endif
-                            @if ($product->embalaje_original == 'Y')
+                            @if(!$product->oferta)
+                            {{-- @if ($product->oferta->embalaje_original == 'Y') --}}
                             <div class="flex h-8 p-2 text-xs font-thin text-white bg-blue-400 rounded-full justify-items-center">
                                 <span class="flex items-center">
                                     Embalaje Original
@@ -85,7 +87,7 @@
                             </div>
                             @endif
 
-                            @if(!$product->offer_prize)
+                            @if(!$product->oferta)
                             <div class="flex h-8 p-2 text-xs font-semibold text-white bg-green-500 rounded-full justify-items-center">
                                 <span class="flex items-center">
                                    No hay precio de Oferta
@@ -94,7 +96,7 @@
                             @else
                             <div class="flex h-8 p-2 text-xs font-semibold text-white bg-green-500 rounded-full justify-items-center">
                                 <span class="flex items-center">
-                                    {!! number_format((float)(100 - ($product->offer_prize*100)/$product->invoice_cost_price), 2) !!} %
+                                    {{-- {!! number_format((float)(100 - ($product->offer_prize*100)/$product->invoice_cost_price), 2) !!} % --}}
                                 </span>
                             </div>
                             @endif

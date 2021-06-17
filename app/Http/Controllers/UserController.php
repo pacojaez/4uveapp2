@@ -45,7 +45,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
      {
-         dd($request['tipo_usuario']);
+        //  dd($request['tipo_usuario']);
         $validated = $this->validate($request, [
             "name" => "required|min:3|string",
             "surname" => "required|min:3|string",
@@ -64,8 +64,8 @@ class UserController extends Controller
 
         $validated['password'] = Hash::make($validated['password']);
 
-        User::create($validated);
-
+        $user = User::create($validated);
+        // dd($user);
         // $this->emit('alert_remove');
         return redirect()->route('users.index')->with('message', 'Usuario añadido correctamente');
         // return back()->with('message', 'Usuario añadido correctamente');

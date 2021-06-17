@@ -21,7 +21,7 @@ class Oferta extends Model
         'embalaje_original', 'provider', 'portes', 'invoice_cost_price', 'buyed_date',
         'boxes', 'offer', 'new', 'offer_until', 'offer_prize', 'definition',
         'porte_id', 'subcategorie_id', 'net_price', 'categoria_oferta', 'active',
-        'product_id', 'user_id'
+        'product_id', 'user_id', 'portes'
     ];
 
     /**

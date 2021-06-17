@@ -28,10 +28,12 @@ class Wizard extends Component
     public $productslist;
     public $search;
 
-    public $product;
+    // public $product;
     public $oferta;
 
     public $selectedProduct;
+    public $selected;
+
     public $product_id;
     public $subcategories;
     public $portes;
@@ -43,45 +45,45 @@ class Wizard extends Component
     public $temp_url_3 = false;
 
     public $name, $description, $short_description, $product_code, $lote_image, $cb_unit, $part_number, $brand,
-        $EAN13_individual, $unidades_embalaje_original, $dimensions_boxes, $weight, $pack_units, $subcategorie_id,
+        $EAN13_individual, $unidades_embalaje_original, $dimensions, $weight, $subcategorie_id,
         $unidades_embalaje_2, $dimensions_boxes_2, $weight_2, $unidades_embalaje_3, $dimensions_boxes_3, $weight_3, $EAN13_box_1, $EAN13_box_2, $EAN13_box_3;
 
     public $plazo_preparacion_pedido, $contraoferta, $localidad_recogida, $cp_recogida, $provincia_recogida, $offer_units,
         $boxes_quantity, $boxes_dimensions, $embalaje_original_oferta, $provider, $invoice_cost_price,
         $buyed_date, $boxes, $offer, $new, $offer_until, $offer_prize, $net_price,
-        $categoria_oferta, $porte_id ;
+        $categoria_oferta, $porte_id;
 
     public $ahorro;
 
     //esta propiedad equivale al embalaje_original mientras averiguo porque se rompe la vista con embalaje_original
     public $gender;
 
-        protected $rules = [
-            // Producto: Imagenes
-            'product_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048|nullable',
-            'product_image_2' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048|nullable',
-            'product_image_3' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048|nullable',
-            'user_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048|nullable',
-            'user_image_2' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048|nullable',
-            'user_image_3' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048|nullable',
-            //Product: rest of the fields:
-            'name' => 'string|required|min:5',
-            'short_description' => 'string|nullable|min:5',
-            'description' => 'string|nullable',
-            'product_code' => 'string|nullable',
-            'part_number'=> 'string|nullable',
-            'brand' => 'string|nullable',
-            'EAN13_individual' =>'string|nullable',
-            'dimensions_boxes' => 'string|nullable',
-            'weight' => 'string|nullable',
-            'pack_units' => 'string|nullable',
-            'dimensions_boxes_2' => 'string|nullable',
-            'weight_2' => 'string|nullable',
-            'dimensions_boxes_3' => 'string|nullable',
-            'weight_3' => 'string|nullable',
-            'subcategorie_id' => 'int|nullable',
-            'net_price' => 'string|nullable|regex:/^\d*\.?\d+$/',
-            'unidades_embalaje_original' => 'string|nullable|regex:/^\d*\.?\d+$/',
+    protected $rules = [
+        // Producto: Imagenes
+        'product_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048|nullable',
+        'product_image_2' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048|nullable',
+        'product_image_3' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048|nullable',
+        'user_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048|nullable',
+        'user_image_2' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048|nullable',
+        'user_image_3' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048|nullable',
+        //Product: rest of the fields:
+        'name' => 'string|required|min:5',
+        'short_description' => 'string|nullable|min:5',
+        'description' => 'string|nullable',
+        'product_code' => 'string|nullable',
+        'part_number' => 'string|nullable',
+        'brand' => 'string|nullable',
+        'EAN13_individual' => 'string|nullable',
+        'dimensions' => 'string|nullable',
+        'weight' => 'string|nullable',
+        'unidades_embalaje_original' => 'string|nullable',
+        'dimensions_boxes_2' => 'string|nullable',
+        'weight_2' => 'string|nullable',
+        'dimensions_boxes_3' => 'string|nullable',
+        'weight_3' => 'string|nullable',
+        'subcategorie_id' => 'int|required',
+        'net_price' => 'string|nullable|regex:/^\d*\.?\d+$/',
+        'unidades_embalaje_original' => 'string|nullable|regex:/^\d*\.?\d+$/',
     ];
 
     protected $rulesOffer = [
@@ -99,29 +101,34 @@ class Wizard extends Component
         'localidad_recogida' => 'string|nullable',
         'cp_recogida' => 'string|nullable',
         'provincia_recogida' => 'string|nullable',
-        'porte_id' => 'nullable|int'
+        'porte_id' => 'required|int',
+        'new' => 'nullable|int',
+        'categoria_oferta' => 'required|string'
 
     ];
 
 
 
-    public function mount(){
+    public function mount()
+    {
 
         $this->subcategories = Subcategorie::all();
         $this->portes = Portes::all();
-        $this->temp_url_1;
+        // $this->temp_url_1;
 
     }
 
-    public function clearSearch(){
+    public function clearSearch()
+    {
         $this->selectedProduct = null;
+        $this->selected = '';
         $this->name = '';
         $this->short_description = '';
         $this->description = '';
         $this->product_code = '';
         $this->subcategorie_id = 1;
         $this->part_number = '';
-        $this->EAN13_individual ='';
+        $this->EAN13_individual = '';
         $this->net_price = '';
         $this->unidades_embalaje_original = '';
         $this->dimensions_boxes = '';
@@ -144,15 +151,16 @@ class Wizard extends Component
         $this->storedOferta = false;
 
         $this->resetErrorBag();
-
     }
 
-    public function clearSearchOffer(){
+    public function clearSearchOffer()
+    {
         $this->gender = null;
         $this->resetErrorBag();
     }
 
-    public function clearOfferForm(){
+    public function clearOfferForm()
+    {
 
         $this->localidad_recogida = '';
         $this->provincia_recogida = '';
@@ -169,54 +177,61 @@ class Wizard extends Component
         $this->user_image = '';
         $this->user_image_2 = '';
         $this->user_image_3 = '';
-        $this->ahorro = 0 ;
+        $this->ahorro = 0;
         $this->offer_prize = 0;
 
         $this->storedOferta = false;
-
+        $this->resetErrorBag();
     }
 
-    public function clearPhoto1(){
+    public function clearPhoto1()
+    {
         $this->product_image = '';
     }
 
-    public function clearPhoto2(){
+    public function clearPhoto2()
+    {
         $this->product_image_2 = '';
     }
-    public function clearPhoto3(){
+    public function clearPhoto3()
+    {
         $this->product_image_3 = '';
     }
 
-    public function clearPhotoUser1(){
+    public function clearPhotoUser1()
+    {
         $this->user_image = '';
     }
 
-    public function clearPhotoUser2(){
+    public function clearPhotoUser2()
+    {
         $this->user_image_2 = '';
     }
 
-    public function clearPhotoUser3(){
+    public function clearPhotoUser3()
+    {
         $this->user_image_3 = '';
     }
 
-    public function storeOffer(){
+    public function storeOffer()
+    {
 
         $this->oferta = new Oferta;
         $data = $this->validate($this->rulesOffer);
 
 
         //PROCESAMIENTO IMAGEN 1:
-        if($data['user_image']){
+        if ($data['user_image']) {
             //mandamos un messaje al usuario de que la imagen se esta procesando
             $this->processing = true;
             $image = $this->user_image;
-            $name = substr( uniqid(rand(), true), 8,8 ).'.'.$image->getClientOriginalExtension();
-            $img = Image::make($image->getRealPath())->encode('jpg', 65)->resize(600, null, function($c){
+            $name = substr(uniqid(rand(), true), 8, 8) . '.' . $image->getClientOriginalExtension();
+            $img = Image::make($image->getRealPath())->encode('jpg', 65)->resize(600, null, function ($c) {
                 $c->aspectRatio();
                 $c->upsize();
             });
             $img->stream();
-            Storage::disk('local')->put('public/images/products'.'/'.$name, $img, 'public');
+            Storage::disk('local')->put('public/images/products' . '/' . $name, $img, 'public');
             $data['user_image'] = $name;
 
             $this->oferta->user_image = $name;
@@ -224,17 +239,17 @@ class Wizard extends Component
         }
 
         //PROCESAMIENTO IMAGEN 2:
-        if($data['user_image_2']){
+        if ($data['user_image_2']) {
             //mandamos un messaje al usuario de que la imagen se esta procesando
             $this->processing = true;
             $image = $this->user_image_2;
-            $name = substr( uniqid(rand(), true), 8,8 ).'.'.$image->getClientOriginalExtension();
-            $img = Image::make($image->getRealPath())->encode('jpg', 65)->resize(600, null, function($c){
+            $name = substr(uniqid(rand(), true), 8, 8) . '.' . $image->getClientOriginalExtension();
+            $img = Image::make($image->getRealPath())->encode('jpg', 65)->resize(600, null, function ($c) {
                 $c->aspectRatio();
                 $c->upsize();
             });
             $img->stream();
-            Storage::disk('local')->put('public/images/products'.'/'.$name, $img, 'public');
+            Storage::disk('local')->put('public/images/products' . '/' . $name, $img, 'public');
             $data['user_image_2'] = $name;
 
             $this->oferta->user_image_2 = $name;
@@ -242,17 +257,17 @@ class Wizard extends Component
         }
 
         //PROCESAMIENTO IMAGEN 1:
-        if($data['user_image_3']){
+        if ($data['user_image_3']) {
             //mandamos un messaje al usuario de que la imagen se esta procesando
             $this->processing = true;
             $image = $this->user_image_3;
-            $name = substr( uniqid(rand(), true), 8,8 ).'.'.$image->getClientOriginalExtension();
-            $img = Image::make($image->getRealPath())->encode('jpg', 65)->resize(600, null, function($c){
+            $name = substr(uniqid(rand(), true), 8, 8) . '.' . $image->getClientOriginalExtension();
+            $img = Image::make($image->getRealPath())->encode('jpg', 65)->resize(600, null, function ($c) {
                 $c->aspectRatio();
                 $c->upsize();
             });
             $img->stream();
-            Storage::disk('local')->put('public/images/products'.'/'.$name, $img, 'public');
+            Storage::disk('local')->put('public/images/products' . '/' . $name, $img, 'public');
             $data['user_image_3'] = $name;
 
             $this->oferta->user_image_3 = $name;
@@ -263,10 +278,10 @@ class Wizard extends Component
 
         $id = '';
 
-        if($this->selectedProduct){
-            $id = $this->selectedProduct;
-        }else{
-           $id = $this->product_id;
+        if ($this->selectedProduct) {
+            $id = $this->selectedProduct->id;
+        } else {
+            $id = $this->product_id;
         }
 
         $this->oferta->product_id = $id;
@@ -277,81 +292,183 @@ class Wizard extends Component
 
         $createFields = array_filter($data, null);
 
-        foreach( $createFields as $key => $value){
+        foreach ($createFields as $key => $value) {
             $this->oferta->$key = $value;
-            $this->oferta->save();
 
         }
+        $done = $this->oferta->saveOrFail();
 
-        $this->processing = false;
+        if($done){
+            $this->processing = false;
+            $this->clearOfferForm();
 
-        $this->storedOferta = true;
+            $this->storedOferta = true;
+        }
 
     }
 
-    public function storeProduct(){
+    // public function storeProduct(){
 
+    //     $this->product = new Product;
+    //     $guardarProducto = new Product;
+
+    //     $data =  $this->validate($this->rules);
+    //
+    //     if($data['product_image']){
+    //         //mandamos un messaje al usuario de que la imagen se esta procesando
+    //         $this->processing = true;
+    //         $image = $this->product_image;
+    //         $name = substr( uniqid(rand(), true), 8,8 ).'.'.$image->getClientOriginalExtension();
+    //         $img = Image::make($image->getRealPath())->encode('jpg', 65)->resize(600, null, function($c){
+    //             $c->aspectRatio();
+    //             $c->upsize();
+    //         });
+    //         $img->stream();
+    //         Storage::disk('local')->put('public/images/products'.'/'.$name, $img, 'public');
+    //         $data['product_image'] = $name;
+    //         $this->product->product_image = $data['product_image'];
+
+    //         $this->temp_url_1 = $image->temporaryUrl();
+    //         // dd($this->temp_url_1);
+    //     }
+
+
+    //     if($data['product_image_2']){
+    //         //mandamos un messaje al usuario de que la imagen se esta procesando
+    //         $this->processing = true;
+    //         $image = $this->product_image_2;
+    //         $name = substr( uniqid(rand(), true), 8,8 ).'.'.$image->getClientOriginalExtension();
+    //         $img = Image::make($image->getRealPath())->encode('jpg', 65)->resize(600, null, function($c){
+    //             $c->aspectRatio();
+    //             $c->upsize();
+    //         });
+    //         $img->stream();
+    //         Storage::disk('local')->put('public/images/products'.'/'.$name, $img, 'public');
+    //         $data['product_image_2'] = $name;
+    //         $this->product->product_image_2 = $data['product_image_2'];
+
+    //         $this->temp_url_2 = $image->temporaryUrl();
+    //     }
+
+    //     if($data['product_image_3']){
+    //         //mandamos un messaje al usuario de que la imagen se esta procesando
+    //         $this->processing = true;
+    //         $image = $this->product_image_3;
+    //         $name = substr( uniqid(rand(), true), 8,8 ).'.'.$image->getClientOriginalExtension();
+    //         $img = Image::make($image->getRealPath())->encode('jpg', 65)->resize(600, null, function($c){
+    //             $c->aspectRatio();
+    //             $c->upsize();
+    //         });
+    //         $img->stream();
+    //         Storage::disk('local')->put('public/images/products'.'/'.$name, $img, 'public');
+    //         $data['product_image_3'] = $name;
+    //         $this->product->product_image_3 = $data['product_image_3'];
+
+    //         $this->temp_url_3 = $image->temporaryUrl();
+    //     }
+
+    //     //END IMAGE PROCESSING
+
+    //     $this->product->user_id = Auth::user()->id;
+    //     $guardarProducto->user_id = Auth::user()->id;
+    //     // if( $data['porte_id'] == null){
+    //     //     $data['porte_id'] = 1;
+    //     // }
+
+    //     $this->product->subcategorie_id = $this->subcategorie_id;
+    //     $guardarProducto->subcategorie_id = $this->subcategorie_id;
+    //     // dd($this->product->subcategorie_id);
+
+    //     //***ojo solo para pruebas*/
+    //     $this->product->active = 1;
+    //     $guardarProducto->active = 0;
+    //     //***ojo solo para pruebas*/
+
+    //     $createFields = array_filter($data, null);
+    //         // dd($createFields);
+    //     foreach( $createFields as $key => $value){
+    //         $this->product->$key = $value;
+    //         $guardarProducto->$key = $value;
+
+    //         // $this->product->save();
+    //         // $this->product->fresh();
+    //     }
+    //     $this->processing = false;
+
+    //     $this->storedProduct = true;
+
+    //     $this->product_id = $this->product->id;
+
+    //     // dd($guardarProducto->id);
+    //     $guardarProducto->save();
+    //     // $this->product->save();
+    //     // $guardarProducto->save();
+    //     // dd($guardarProducto);
+
+    // }
+
+    public function storeProduct()
+    {
         $this->product = new Product;
+
         $data =  $this->validate($this->rules);
 
-        if($data['product_image']){
+        //INIT IMAGE PROCESSING
+        if ($data['product_image']) {
             //mandamos un messaje al usuario de que la imagen se esta procesando
             $this->processing = true;
             $image = $this->product_image;
-            $name = substr( uniqid(rand(), true), 8,8 ).'.'.$image->getClientOriginalExtension();
-            $img = Image::make($image->getRealPath())->encode('jpg', 65)->resize(600, null, function($c){
+            $name = substr(uniqid(rand(), true), 8, 8) . '.' . $image->getClientOriginalExtension();
+            $img = Image::make($image->getRealPath())->encode('jpg', 65)->resize(600, null, function ($c) {
                 $c->aspectRatio();
                 $c->upsize();
             });
             $img->stream();
-            Storage::disk('local')->put('public/images/products'.'/'.$name, $img, 'public');
+            Storage::disk('local')->put('public/images/products' . '/' . $name, $img, 'public');
             $data['product_image'] = $name;
             $this->product->product_image = $data['product_image'];
 
             $this->temp_url_1 = $image->temporaryUrl();
+            // dd($this->temp_url_1);
         }
 
 
-        if($data['product_image_2']){
+        if ($data['product_image_2']) {
             //mandamos un messaje al usuario de que la imagen se esta procesando
             $this->processing = true;
             $image = $this->product_image_2;
-            $name = substr( uniqid(rand(), true), 8,8 ).'.'.$image->getClientOriginalExtension();
-            $img = Image::make($image->getRealPath())->encode('jpg', 65)->resize(600, null, function($c){
+            $name = substr(uniqid(rand(), true), 8, 8) . '.' . $image->getClientOriginalExtension();
+            $img = Image::make($image->getRealPath())->encode('jpg', 65)->resize(600, null, function ($c) {
                 $c->aspectRatio();
                 $c->upsize();
             });
             $img->stream();
-            Storage::disk('local')->put('public/images/products'.'/'.$name, $img, 'public');
+            Storage::disk('local')->put('public/images/products' . '/' . $name, $img, 'public');
             $data['product_image_2'] = $name;
             $this->product->product_image_2 = $data['product_image_2'];
 
             $this->temp_url_2 = $image->temporaryUrl();
         }
 
-        if($data['product_image_3']){
+        if ($data['product_image_3']) {
             //mandamos un messaje al usuario de que la imagen se esta procesando
             $this->processing = true;
             $image = $this->product_image_3;
-            $name = substr( uniqid(rand(), true), 8,8 ).'.'.$image->getClientOriginalExtension();
-            $img = Image::make($image->getRealPath())->encode('jpg', 65)->resize(600, null, function($c){
+            $name = substr(uniqid(rand(), true), 8, 8) . '.' . $image->getClientOriginalExtension();
+            $img = Image::make($image->getRealPath())->encode('jpg', 65)->resize(600, null, function ($c) {
                 $c->aspectRatio();
                 $c->upsize();
             });
             $img->stream();
-            Storage::disk('local')->put('public/images/products'.'/'.$name, $img, 'public');
-            $data['product_image'] = $name;
+            Storage::disk('local')->put('public/images/products' . '/' . $name, $img, 'public');
+            $data['product_image_3'] = $name;
             $this->product->product_image_3 = $data['product_image_3'];
 
             $this->temp_url_3 = $image->temporaryUrl();
         }
-
         //END IMAGE PROCESSING
 
         $this->product->user_id = Auth::user()->id;
-        // if( $data['porte_id'] == null){
-        //     $data['porte_id'] = 1;
-        // }
 
         $this->product->subcategorie_id = $this->subcategorie_id;
 
@@ -361,66 +478,69 @@ class Wizard extends Component
 
         $createFields = array_filter($data, null);
 
-        foreach( $createFields as $key => $value){
+        foreach ($createFields as $key => $value) {
             $this->product->$key = $value;
-            $this->product->save();
-
+            $this->product->saveOrFail();
         }
 
-        $this->processing = false;
+        $done = $this->product->saveOrFail();
+        // dd($done);
 
-        $this->storedProduct = true;
+        if($done){
+            $this->clearSearch();
 
-        $this->product_id = $this->product->id;
+            $this->product_id = $this->product->id;
+            $this->product = '';
+            $this->processing = false;
+            $this->storedProduct = true;
 
-
+        }
+        // dd($this->product_id);
+        return;
     }
+
 
     public function render()
     {
         $this->productslist = Product::search($this->search)->get();
 
+        if ($this->selected != null) {
 
-        if($this->selectedProduct != null){
+            $this->selectedProduct = Product::findOrFail($this->selected);
 
-            $selected = Product::findOrFail($this->selectedProduct);
+            $this->name = $this->selectedProduct->name;
+            $this->short_description = $this->selectedProduct->short_description;
+            $this->description = $this->selectedProduct->description;
+            $this->product_code = $this->selectedProduct->product_code;
+            $this->subcategorie_id = $this->selectedProduct->subcategorie_id;
+            $this->part_number = $this->selectedProduct->part_number;
+            $this->EAN13_individual = $this->selectedProduct->EAN13_individual;
+            $this->net_price = $this->selectedProduct->net_price;
+            $this->unidades_embalaje_original = $this->selectedProduct->unidades_embalaje_original;
+            $this->dimensions_boxes = $this->selectedProduct->dimensions_boxes;
+            $this->weight = $this->selectedProduct->weight;
+            $this->EAN13_box_1 = $this->selectedProduct->EAN13_box_1;
+            $this->unidades_embalaje_2 = $this->selectedProduct->unidades_embalaje_2;
+            $this->dimensions_boxes_2 = $this->selectedProduct->dimensions_boxes_2;
+            $this->weight_2 = $this->selectedProduct->weight_2;
+            $this->EAN13_box_2 = $this->selectedProduct->EAN13_box_2;
+            $this->unidades_embalaje_3 = $this->selectedProduct->unidades_embalaje_3;
+            $this->dimensions_boxes_3 = $this->selectedProduct->dimensions_boxes_3;
+            $this->weight_3 = $this->selectedProduct->weight_3;
 
-            $this->name = $selected->name;
-            $this->short_description = $selected->short_description;
-            $this->description = $selected->description;
-            $this->product_code = $selected->product_code;
-            $this->subcategorie_id = $selected->subcategorie_id;
-            $this->part_number = $selected->part_number;
-            $this->EAN13_individual = $selected->EAN13_individual;
-            $this->net_price = $selected->net_price;
-            $this->unidades_embalaje_original = $selected->unidades_embalaje_original;
-            $this->dimensions_boxes = $selected->dimensions_boxes;
-            $this->weight = $selected->weight;
-            $this->EAN13_box_1 = $selected->EAN13_box_1;
-            $this->unidades_embalaje_2 = $selected->unidades_embalaje_2;
-            $this->dimensions_boxes_2 = $selected->dimensions_boxes_2;
-            $this->weight_2 = $selected->weight_2;
-            $this->EAN13_box_2 = $selected->EAN13_box_2;
-            $this->unidades_embalaje_3 = $selected->unidades_embalaje_3;
-            $this->dimensions_boxes_3 = $selected->dimensions_boxes_3;
-            $this->weight_3 = $selected->weight_3;
+            $this->product_image = $this->selectedProduct->product_image;
+            $this->product_image_2 = $this->selectedProduct->product_image_2;
+            $this->product_image_3 = $this->selectedProduct->product_image_3;
 
-            $this->product_image = $selected->product_image;
-            $this->product_image_2 = $selected->product_image_2;
-            $this->product_image_3 = $selected->product_image_3;
-
-            $this->product_id = $selected->id;
-
-        }else{
-            $selected = '';
+            $this->product_id = $this->selectedProduct->id;
+        } else {
+            $this->selectedProduct = null;
         }
 
-
-
-        if($this->productslist == ''){
+        if ($this->productslist == '') {
             $this->clearSearch();
         }
-        if($this->invoice_cost_price != 0){
+        if ($this->invoice_cost_price != 0) {
             $this->ahorro = 100 - ($this->offer_prize * 100) / $this->invoice_cost_price;
         }
 
@@ -428,7 +548,7 @@ class Wizard extends Component
         // dd($selected);
         return view('livewire.wizard', [
             'productslist' => $this->productslist,
-            'selected' => $selected,
+            'selectedProduct' => $this->selectedProduct,
             'subcategories' => $this->subcategories,
             'portes' => $this->portes,
             'temp_url_1' => $this->temp_url_1,
@@ -443,12 +563,12 @@ class Wizard extends Component
      */
     public function firstStepSubmit()
     {
-        // dd($this->selectedProduct);
-        $validatedData = $this->validate([
-            'name' => 'required',
-            'price' => 'required|numeric',
-            'detail' => 'required',
-        ]);
+        // // dd($this->selectedProduct);
+        // $validatedData = $this->validate([
+        //     'name' => 'required',
+        //     'price' => 'required|numeric',
+        //     'detail' => 'required',
+        // ]);
 
         $this->currentStep = 2;
     }
@@ -458,9 +578,9 @@ class Wizard extends Component
      */
     public function secondStepSubmit()
     {
-        $validatedData = $this->validate([
-            'status' => 'required',
-        ]);
+        // $validatedData = $this->validate([
+        //     'status' => 'required',
+        // ]);
 
         $this->currentStep = 3;
     }
@@ -468,22 +588,22 @@ class Wizard extends Component
     /**
      * Write code on Method
      */
-    public function submitForm()
-    {
-        // Team::create([
-        //     'name' => $this->name,
-        //     'price' => $this->price,
-        //     'detail' => $this->detail,
-        //     'status' => $this->status,
-        // ]);
+    // public function submitForm()
+    // {
+    //     // Team::create([
+    //     //     'name' => $this->name,
+    //     //     'price' => $this->price,
+    //     //     'detail' => $this->detail,
+    //     //     'status' => $this->status,
+    //     // ]);
 
-        $this->successMsg = 'Team successfully created.';
-        dd($this->successMsg);
-        $this->clearSearch();
-        $this->clearOfferForm();
+    //     $this->successMsg = 'Team successfully created.';
+    //     dd($this->successMsg);
+    //     $this->clearSearch();
+    //     $this->clearOfferForm();
 
-        $this->currentStep = 1;
-    }
+    //     $this->currentStep = 1;
+    // }
 
     /**
      * Write code on Method
@@ -498,10 +618,9 @@ class Wizard extends Component
      */
     public function clearForm()
     {
-        $this->name = '';
-        $this->price = '';
-        $this->detail = '';
-        $this->status = 1;
+        // $this->name = '';
+        // $this->price = '';
+        // $this->detail = '';
+        // $this->status = 1;
     }
-
 }

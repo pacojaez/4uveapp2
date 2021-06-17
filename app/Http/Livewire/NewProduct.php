@@ -50,7 +50,7 @@ class NewProduct extends Component
         'name' => 'string|nullable|min:6',
     ];
 
-    public function store()
+    public function storePrueba()
     {
         $this->product = new Product;
 

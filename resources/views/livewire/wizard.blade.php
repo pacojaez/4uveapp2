@@ -73,7 +73,8 @@
                                 <path fill-rule="evenodd"
                                     d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
                                     clip-rule="evenodd" /></svg>
-                            <h2 class="mb-4 text-2xl font-bold text-center text-gray-800">Oferta Subida Correctamente</h2>
+                            <h2 class="mb-4 text-2xl font-bold text-center text-gray-800">Oferta Subida Correctamente
+                            </h2>
 
                             <div class="mb-8 text-gray-600">
                                 Gracias. Te enviaremos un mail cuando hayamos validado tu Oferta.
@@ -160,7 +161,7 @@
                                     </div>
                                     <div class="w-1/3 mx-1">
                                         <label class="w-16 font-bold"> Seleccionar producto:</label>
-                                        <select name="selectedProduct" wire:model="selectedProduct"
+                                        <select name="selected" wire:model="selected"
                                             class="w-full p-2 px-4 py-3 leading-tight bg-white border shadow">
                                             <option value=''>Elije un producto de nuestra Base de Datos</option>
                                             @foreach($productslist as $product)
@@ -169,193 +170,199 @@
                                         </select>
                                     </div>
                                     <div class="w-1/3 mx-1 text-center">
-                                        <label class="w-16 font-bold"> Limpiar el Formulario:</label>
+                                        {{-- <label class="w-16 font-bold"> Seleccionar Producto</label>
+                                        <button wire:click="selectProduct"
+                                            class="w-1/2 px-4 py-3 leading-tight text-center text-gray-200 bg-blue-400 border border-gray-200 rounded text-centerflex text-white-700">
+                                            Select
+                                        </button> --}}
+                                        <label class="w-16 font-bold"> Limpiar el Formulario</label>
                                         <button wire:click="clearSearch"
-                                            class="flex w-full px-4 py-3 leading-tight text-center text-gray-200 bg-blue-400 border border-gray-200 rounded text-white-700">
+                                            class="w-full px-4 py-3 leading-tight text-center text-gray-200 bg-blue-400 border border-gray-200 rounded w-1/2flex text-white-700">
                                             Clear
                                         </button>
+
                                     </div>
                                 </div>
                             </div>
                             <!-- producto Step 1-->
                             <div class="p-10 mb-2 text-center bg-gray-300">
 
-                                @if($selected != '')
+                                @if($selectedProduct != '')
                                 <div class="inline-flex justify-between w-full p-10 m-2 bg-gray-200">
                                     <div class="mb-5">
-                                        <label for="firstname"
+                                        <label for="name"
                                             class="block mb-1 font-bold text-gray-700">Producto:</label>
                                         <div
                                             class="w-full px-4 py-3 font-medium text-gray-600 rounded-lg shadow-sm focus:outline-none focus:shadow-outline">
-                                            <h3>{{ $selected->name }}</h3>
+                                            <h3>{{ $selectedProduct->name }}</h3>
                                         </div>
                                     </div>
                                     <div class="mb-5">
-                                        <label for="firstname" class="block mb-1 font-bold text-gray-700">EAN13:</label>
+                                        <label for="EAN13_individual" class="block mb-1 font-bold text-gray-700">EAN13:</label>
                                         <div
                                             class="w-full px-4 py-3 font-medium text-gray-600 rounded-lg shadow-sm focus:outline-none focus:shadow-outline">
-                                            <h3>{{ $selected->EAN13_individual }}</h3>
+                                            <h3>{{ $selectedProduct->EAN13_individual }}</h3>
                                         </div>
                                     </div>
                                     <div class="mb-5">
-                                        <label for="firstname"
+                                        <label for="product_image"
                                             class="block mb-1 font-bold text-gray-700">IMAGENES:</label>
                                         <div
                                             class="w-full px-4 py-3 font-medium text-gray-600 rounded-lg shadow-sm focus:outline-none focus:shadow-outline">
                                             {{-- <h3>{{ $selected->name }}</h3> --}}
                                             <img class="w-40 h-40"
-                                                src="{{asset('storage/images/products/'.$selected->product_image)}}"
-                                                alt="{{ $product->name }}">
+                                                src="{{asset('storage/images/products/'.$selectedProduct->product_image)}}"
+                                                alt="{{ $product->description }}">
                                         </div>
                                     </div>
 
                                 </div>
                                 <div class="inline-flex justify-center w-full p-10 m-2 bg-gray-100">
                                     <div class="mb-5">
-                                        <label for="firstname"
+                                        <label for="description"
                                             class="block mb-1 font-bold text-gray-700">Descripción:</label>
                                         <div
                                             class="w-full px-4 py-3 font-medium text-gray-600 rounded-lg shadow-sm focus:outline-none focus:shadow-outline">
-                                            <h3>{{ $selected->description }} Kgs</h3>
+                                            <h3>{{ $selectedProduct->description }} Kgs</h3>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="inline-flex justify-between w-full p-10 m-2 bg-gray-200">
                                     <div class="mb-5">
-                                        <label for="firstname" class="block mb-1 font-bold text-gray-700">Part
+                                        <label for="part_number" class="block mb-1 font-bold text-gray-700">Part
                                             Number:</label>
                                         <div
                                             class="w-full px-4 py-3 font-medium text-gray-600 rounded-lg shadow-sm focus:outline-none focus:shadow-outline">
-                                            <h3>{{ $selected->part_number }}</h3>
+                                            <h3>{{ $selectedProduct->part_number }}</h3>
                                         </div>
                                     </div>
                                     <div class="mb-5">
-                                        <label for="firstname" class="block mb-1 font-bold text-gray-700">Marca:</label>
+                                        <label for="brand" class="block mb-1 font-bold text-gray-700">Marca:</label>
                                         <div
                                             class="w-1/3 px-4 py-3 font-medium text-gray-600 rounded-lg shadow-sm focus:outline-none focus:shadow-outline">
-                                            <h3>{{ $selected->brand }}</h3>
+                                            <h3>{{ $selectedProduct->brand }}</h3>
                                         </div>
                                     </div>
                                     <div class="mb-5">
-                                        <label for="firstname" class="block mb-1 font-bold text-gray-700">EAN13
+                                        <label for="EAN13_individual" class="block mb-1 font-bold text-gray-700">EAN13
                                             individual:</label>
                                         <div
                                             class="w-1/3 px-4 py-3 font-medium text-gray-600 rounded-lg shadow-sm focus:outline-none focus:shadow-outline">
-                                            <h3>{{ $selected->EAN13_individual }}</h3>
+                                            <h3>{{ $selectedProduct->EAN13_individual }}</h3>
                                         </div>
                                     </div>
                                     <div class="mb-5">
-                                        <label for="firstname" class="block mb-1 font-bold text-gray-700">Peso
+                                        <label for="net_price" class="block mb-1 font-bold text-gray-700">Peso
                                             neto:</label>
                                         <div
                                             class="w-5/6 px-4 py-3 font-medium text-gray-600 rounded-lg shadow-sm focus:outline-none focus:shadow-outline">
-                                            <h3>{{ $selected->net_price }} €</h3>
+                                            <h3>{{ $selectedProduct->net_price }} €</h3>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="inline-flex justify-between w-full p-10 m-2 bg-gray-100">
                                     <div class="mb-5">
-                                        <label for="firstname" class="block mb-1 font-bold text-gray-700">Unidades
+                                        <label for="unidades_embalaje_original" class="block mb-1 font-bold text-gray-700">Unidades
                                             embalaje
                                             original:</label>
                                         <div
                                             class="w-full px-4 py-3 font-medium text-gray-600 rounded-lg shadow-sm focus:outline-none focus:shadow-outline">
-                                            <h3>{{ $selected->unidades_embalaje_original }}</h3>
+                                            <h3>{{ $selectedProduct->unidades_embalaje_original }}</h3>
                                         </div>
                                     </div>
                                     <div class="mb-5">
-                                        <label for="firstname"
+                                        <label for="dimensions"
                                             class="block mb-1 font-bold text-gray-700">Dimensiones:</label>
                                         <div
                                             class="w-1/3 px-4 py-3 font-medium text-gray-600 rounded-lg shadow-sm focus:outline-none focus:shadow-outline">
-                                            <h3>{{ $selected->dimensions }}</h3>
+                                            <h3>{{ $selectedProduct->dimensions }}</h3>
                                         </div>
                                     </div>
                                     <div class="mb-5">
-                                        <label for="firstname" class="block mb-1 font-bold text-gray-700">Peso:</label>
+                                        <label for="weight" class="block mb-1 font-bold text-gray-700">Peso:</label>
                                         <div
                                             class="w-1/3 px-4 py-3 font-medium text-gray-600 rounded-lg shadow-sm focus:outline-none focus:shadow-outline">
-                                            <h3>{{ $selected->weight }} Kgs</h3>
+                                            <h3>{{ $selectedProduct->weight }} Kgs</h3>
                                         </div>
                                     </div>
                                     <div class="mb-5">
-                                        <label for="firstname" class="block mb-1 font-bold text-gray-700">EAN Caja
+                                        <label for="EAN13_box_2" class="block mb-1 font-bold text-gray-700">EAN Caja
                                             1:</label>
                                         <div
                                             class="w-5/6 px-4 py-3 font-medium text-gray-600 rounded-lg shadow-sm focus:outline-none focus:shadow-outline">
-                                            <h3>{{ $selected->EAN13_box_2 }}</h3>
+                                            <h3>{{ $selectedProduct->EAN13_box_2 }}</h3>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="inline-flex justify-between w-full p-10 m-2 bg-gray-200">
                                     <div class="mb-5">
-                                        <label for="firstname" class="block mb-1 font-bold text-gray-700">Unidades
+                                        <label for="unidades_embalaje_2" class="block mb-1 font-bold text-gray-700">Unidades
                                             embalaje
                                             2:</label>
                                         <div
                                             class="w-full px-4 py-3 font-medium text-gray-600 rounded-lg shadow-sm focus:outline-none focus:shadow-outline">
-                                            <h3>{{ $selected->unidades_embalaje_2 }}</h3>
+                                            <h3>{{ $selectedProduct->unidades_embalaje_2 }}</h3>
                                         </div>
                                     </div>
                                     <div class="mb-5">
-                                        <label for="firstname" class="block mb-1 font-bold text-gray-700">Dimensiones
+                                        <label for="dimensions_boxes_2" class="block mb-1 font-bold text-gray-700">Dimensiones
                                             Caja
                                             2:</label>
                                         <div
                                             class="w-1/3 px-4 py-3 font-medium text-gray-600 rounded-lg shadow-sm focus:outline-none focus:shadow-outline">
-                                            <h3>{{ $selected->dimensions_boxes_2 }} mm</h3>
+                                            <h3>{{ $selectedProduct->dimensions_boxes_2 }} mm</h3>
                                         </div>
                                     </div>
                                     <div class="mb-5">
-                                        <label for="firstname" class="block mb-1 font-bold text-gray-700">Peso Caja
+                                        <label for="weight_2" class="block mb-1 font-bold text-gray-700">Peso Caja
                                             2:</label>
                                         <div
                                             class="w-1/3 px-4 py-3 font-medium text-gray-600 rounded-lg shadow-sm focus:outline-none focus:shadow-outline">
-                                            <h3>{{ $selected->weight_2 }} Kgs</h3>
+                                            <h3>{{ $selectedProduct->weight_2 }} Kgs</h3>
                                         </div>
                                     </div>
                                     <div class="mb-5">
-                                        <label for="firstname" class="block mb-1 font-bold text-gray-700">EAN Caja
+                                        <label for="EAN13_box_2" class="block mb-1 font-bold text-gray-700">EAN Caja
                                             2:</label>
                                         <div
                                             class="w-5/6 px-4 py-3 font-medium text-gray-600 rounded-lg shadow-sm focus:outline-none focus:shadow-outline">
-                                            <h3>{{ $selected->EAN13_box_3 }}</h3>
+                                            <h3>{{ $selectedProduct->EAN13_box_2 }}</h3>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="inline-flex justify-between w-full p-10 m-2 bg-gray-100">
                                     <div class="mb-5">
-                                        <label for="firstname" class="block mb-1 font-bold text-gray-700">Unidades
+                                        <label for="unidades_embalaje_3" class="block mb-1 font-bold text-gray-700">Unidades
                                             embalaje
                                             3:</label>
                                         <div
                                             class="w-full px-4 py-3 font-medium text-gray-600 rounded-lg shadow-sm focus:outline-none focus:shadow-outline">
-                                            <h3>{{ $selected->unidades_embalaje_3 }}</h3>
+                                            <h3>{{ $selectedProduct->unidades_embalaje_3 }}</h3>
                                         </div>
                                     </div>
                                     <div class="mb-5">
-                                        <label for="firstname" class="block mb-1 font-bold text-gray-700">Dimensiones
+                                        <label for="dimensions_boxes_3" class="block mb-1 font-bold text-gray-700">Dimensiones
                                             Caja
                                             3:</label>
                                         <div
                                             class="w-1/3 px-4 py-3 font-medium text-gray-600 rounded-lg shadow-sm focus:outline-none focus:shadow-outline">
-                                            <h3>{{ $selected->dimensions_boxes_3 }} mm</h3>
+                                            <h3>{{ $selectedProduct->dimensions_boxes_3 }} mm</h3>
                                         </div>
                                     </div>
                                     <div class="mb-5">
-                                        <label for="firstname" class="block mb-1 font-bold text-gray-700">Peso Caja
+                                        <label for="weight_3" class="block mb-1 font-bold text-gray-700">Peso Caja
                                             3:</label>
                                         <div
                                             class="w-1/3 px-4 py-3 font-medium text-gray-600 rounded-lg shadow-sm focus:outline-none focus:shadow-outline">
-                                            <h3>{{ $selected->weight_3 }} Kgs</h3>
+                                            <h3>{{ $selectedProduct->weight_3 }} Kgs</h3>
                                         </div>
                                     </div>
                                     <div class="mb-5">
-                                        <label for="firstname" class="block mb-1 font-bold text-gray-700">EAN Caja
+                                        <label for="EAN13_box_3" class="block mb-1 font-bold text-gray-700">EAN Caja
                                             3:</label>
                                         <div
                                             class="w-5/6 px-4 py-3 font-medium text-gray-600 rounded-lg shadow-sm focus:outline-none focus:shadow-outline">
-                                            <h3>{{ $selected->EAN13_box_3 }}</h3>
+                                            <h3>{{ $selectedProduct->EAN13_box_3 }}</h3>
                                         </div>
                                     </div>
                                 </div>
@@ -366,7 +373,7 @@
                         <!-- Step 2 Crear producto IfnotExists -->
                         <div x-show.transition.in="step === 2">
                             <div class="p-10 mb-2 text-center bg-gray-300">
-                                @if(!$selected)
+                                @if(!$selectedProduct)
                                 <div class="w-1/3 mx-1 text-center">
                                     <button wire:click="clearSearch" type="reset"
                                         class="class='w-auto px-4 py-2 m-auto font-medium text-center text-white bg-red-600 rounded-lg shadow-xl hover:bg-gray-700'">
@@ -447,11 +454,13 @@
                                                     <select wire:model='subcategorie_id' id='subcategorie_id'
                                                         name="subcategorie_id"
                                                         class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent">
+                                                        <option value="" selected = 'selected'>---elije una categoría---</option>
                                                         @foreach ($subcategories as $subcategorie )
                                                         <option value="{{ $subcategorie->id }}">{{ $subcategorie->name}}
                                                         </option>
                                                         @endforeach
                                                     </select>
+                                                    @error('subcategorie_id') <span class="text-red-600 error">{{ $message }}</span> @enderror
                                                 </div>
                                             </div>
                                             <!-- BLOQUE 4 -->
@@ -522,11 +531,11 @@
                                                         class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">
                                                         Dimensiones (LxAxH):
                                                     </label>
-                                                    <input wire:model='dimensions_boxes' id='dimensions_boxes'
-                                                        name="dimensions_boxes"
+                                                    <input wire:model='dimensions' id='dimensions'
+                                                        name="dimensions"
                                                         class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
                                                         type="text" placeholder="Ej: 13x10,3x14,8 mm" />
-                                                    @error('dimensions_boxes') <span
+                                                    @error('dimensions') <span
                                                         class="text-red-600 error">{{ $message }}</span> @enderror
                                                 </div>
                                                 <div class="grid grid-cols-1">
@@ -602,8 +611,7 @@
                                                 </div>
                                             </div>
                                             <!-- BLOQUE 7 -->
-                                            <div
-                                                class="grid h-auto grid-cols-1 gap-5 mt-5 md:grid-cols-4 md:gap-8 mx-7">
+                                            <div class="grid h-auto grid-cols-1 gap-5 mt-5 md:grid-cols-4 md:gap-8 mx-7">
                                                 <div class="grid grid-cols-1">
                                                     <label
                                                         class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">
@@ -656,9 +664,10 @@
                                                 <!--FOTO 1 -->
                                                 <div class="grid grid-cols-1">
                                                     <div class='flex items-center justify-center w-5/6'>
-                                                        @if (!$product_image)
+                                                        @if (!$selectedProduct)
                                                         <label
-                                                            class='flex flex-col w-full h-32 border-4 border-dashed hover:bg-gray-100 hover:border-purple-300 group'>
+                                                            class='flex flex-col justify-center w-full border-4 border-dashed hover:bg-gray-100 hover:border-purple-300 group'>
+                                                            @if(!$product_image)
                                                             <div class='flex flex-col items-center justify-center pt-7'>
                                                                 <svg class="w-10 h-10 text-purple-400 group-hover:text-purple-600"
                                                                     fill="none" stroke="currentColor"
@@ -674,23 +683,19 @@
                                                                     Select a photo
                                                                 </p>
                                                             </div>
-                                                            <input type='file' class="hidden" wire:model="product_image"
-                                                                name="product_image" />
+                                                            <input type='file' class="hidden" wire:model="product_image" name="product_image" />
                                                             @error('product_image') <span
                                                                 class="text-red-600 error">{{ $message }}</span>
                                                             @enderror
-                                                        </label>
-                                                        @else
-                                                        <div class='flex w-full h-56 hover:border-purple-300 group'>
-                                                            @if($temp_url_1)
-                                                            <div
-                                                                class="class='flex flex-col items-center justify-center w-60 h-60 pt-7'">
 
-                                                                <p
-                                                                    class='pt-1 text-sm tracking-wider text-gray-400 lowercase'>
-                                                                    Foto #1 del Producto:</p>
+                                                            @else
+                                                            <div class="class='flex flex-col items-center justify-center w-60 h-60 pt-7'">
+                                                                <p class='pt-1 text-sm tracking-wider text-gray-400 lowercase'>
+                                                                    Foto #1 del Producto:
+                                                                </p>
                                                                 {{-- <input type="image" wire:model="temp_url_1" name="temp_url_1"> --}}
-                                                                <img src="{{ $temp_url_1 }}" class="">
+                                                                <img src="{{ $product_image->temporaryUrl() }}"
+                                                                    class="">
                                                             </div>
                                                             <div wire:loading>
                                                                 Procesando...
@@ -699,7 +704,11 @@
                                                                 class="class='w-auto px-4 py-2 m-auto font-medium text-center text-white bg-red-600 rounded-lg shadow-xl hover:bg-gray-700'">
                                                                 Eliminar Foto 1
                                                             </button>
-                                                            @else
+                                                            @endif
+                                                        </label>
+                                                        @else
+                                                        <div class='flex w-full h-56 hover:border-purple-300 group'>
+                                                            @if( $selectedProduct->product_image)
                                                             <div
                                                                 class="class='flex flex-col items-center justify-center w-60 h-60 pt-7'">
                                                                 <p
@@ -707,7 +716,7 @@
                                                                     Foto #1 del Producto:</p>
                                                                 {{-- <input type="image" wire:model="temp_url_1" name="temp_url_1"> --}}
                                                                 <img
-                                                                    src="{{asset('storage/images/products/'.$selected->product_image)}}" />
+                                                                    src="{{asset('storage/images/products/'.$selectedProduct->product_image)}}" />
                                                             </div>
                                                             @endif
                                                         </div>
@@ -717,10 +726,11 @@
                                                 <!--FOTO 2 -->
                                                 <div class="grid grid-cols-1">
                                                     <div class='flex items-center justify-center w-5/6'>
-                                                        @if (!$product_image_2)
+                                                        @if (!$selectedProduct)
                                                         <label
-                                                            class='flex flex-col w-full h-32 border-4 border-dashed hover:bg-gray-100 hover:border-purple-300 group'>
-                                                            <div class='flex items-center justify-center pt-7'>
+                                                            class='flex flex-col justify-center w-full border-4 border-dashed hover:bg-gray-100 hover:border-purple-300 group'>
+                                                            @if(!$product_image_2)
+                                                            <div class='flex flex-col items-center justify-center pt-7'>
                                                                 <svg class="w-10 h-10 text-purple-400 group-hover:text-purple-600"
                                                                     fill="none" stroke="currentColor"
                                                                     viewBox="0 0 24 24"
@@ -735,22 +745,19 @@
                                                                     Select a photo
                                                                 </p>
                                                             </div>
-                                                            <input type='file' class="hidden"
-                                                                wire:model="product_image_2" name="product_image_2" />
+                                                            <input type='file' class="hidden" wire:model="product_image_2" name="product_image_2" />
                                                             @error('product_image_2') <span
                                                                 class="text-red-600 error">{{ $message }}</span>
                                                             @enderror
 
-                                                        </label>
-                                                        @else
-                                                        <div class='flex w-full h-56 hover:border-purple-300 group'>
-                                                            @if($tempUrl2)
-                                                            <div
-                                                                class="class='flex flex-col items-center justify-center w-60 h-60 pt-7'">
-                                                                <p
-                                                                    class='pt-1 text-sm tracking-wider text-gray-400 lowercase'>
-                                                                    Foto #2 del Producto:</p>
-                                                                <img src="{{ $tempUrl2 }}" class="">
+                                                            @else
+                                                            <div class="class='flex flex-col items-center justify-center w-60 h-60 pt-7'">
+                                                                <p class='pt-1 text-sm tracking-wider text-gray-400 lowercase'>
+                                                                    Foto #2 del Producto:
+                                                                </p>
+                                                                {{-- <input type="image" wire:model="temp_url_1" name="temp_url_1"> --}}
+                                                                <img src="{{ $product_image_2->temporaryUrl() }}"
+                                                                    class="">
                                                             </div>
                                                             <div wire:loading>
                                                                 Procesando...
@@ -759,15 +766,19 @@
                                                                 class="class='w-auto px-4 py-2 m-auto font-medium text-center text-white bg-red-600 rounded-lg shadow-xl hover:bg-gray-700'">
                                                                 Eliminar Foto 2
                                                             </button>
-                                                            @else
+                                                            @endif
+                                                        </label>
+                                                        @else
+                                                        <div class='flex w-full h-56 hover:border-purple-300 group'>
+                                                            @if( $selectedProduct->product_image_2)
                                                             <div
                                                                 class="class='flex flex-col items-center justify-center w-60 h-60 pt-7'">
                                                                 <p
                                                                     class='pt-1 text-sm tracking-wider text-gray-400 lowercase'>
-                                                                    Foto #2 del Producto:</p>
+                                                                    Foto #1 del Producto:</p>
                                                                 {{-- <input type="image" wire:model="temp_url_1" name="temp_url_1"> --}}
                                                                 <img
-                                                                    src="{{asset('storage/images/products/'.$selected->product_image_2)}}" />
+                                                                    src="{{asset('storage/images/products/'.$selectedProduct->product_image_2)}}" />
                                                             </div>
                                                             @endif
                                                         </div>
@@ -777,10 +788,11 @@
                                                 <!--FOTO 3 -->
                                                 <div class="grid grid-cols-1">
                                                     <div class='flex items-center justify-center w-5/6'>
-                                                        @if (!$product_image_3)
+                                                        @if (!$selectedProduct)
                                                         <label
-                                                            class='flex flex-col w-full h-32 border-4 border-dashed hover:bg-gray-100 hover:border-purple-300 group'>
-                                                            <div class='flex items-center justify-center pt-7'>
+                                                            class='flex flex-col justify-center w-full border-4 border-dashed hover:bg-gray-100 hover:border-purple-300 group'>
+                                                            @if(!$product_image_3)
+                                                            <div class='flex flex-col items-center justify-center pt-7'>
                                                                 <svg class="w-10 h-10 text-purple-400 group-hover:text-purple-600"
                                                                     fill="none" stroke="currentColor"
                                                                     viewBox="0 0 24 24"
@@ -795,30 +807,32 @@
                                                                     Select a photo
                                                                 </p>
                                                             </div>
-                                                            <input type='file' class="hidden"
-                                                                wire:model="product_image_3" name="product_image_3" />
+                                                            <input type='file' class="hidden" wire:model="product_image_3" name="product_image_3" />
                                                             @error('product_image_3') <span
                                                                 class="text-red-600 error">{{ $message }}</span>
                                                             @enderror
-                                                        </label>
-                                                        @else
-                                                        <div class='flex w-full h-56 hover:border-purple-300 group'>
-                                                            @if($tempUrl3)
-                                                            <div
-                                                                class="class='flex items-center justify-center w-60 h-60 pt-7'">
-                                                                <p
-                                                                    class='pt-1 text-base tracking-wider text-gray-400 lowercase'>
-                                                                    Foto #3 del Producto:</p>
-                                                                <img src="{{ $tempUrl3 }}" class="">
+
+                                                            @else
+                                                            <div class="class='flex flex-col items-center justify-center w-60 h-60 pt-7'">
+                                                                <p class='pt-1 text-sm tracking-wider text-gray-400 lowercase'>
+                                                                    Foto #3 del Producto:
+                                                                </p>
+                                                                {{-- <input type="image" wire:model="temp_url_1" name="temp_url_1"> --}}
+                                                                <img src="{{ $product_image_3->temporaryUrl() }}"
+                                                                    class="">
                                                             </div>
                                                             <div wire:loading>
                                                                 Procesando...
                                                             </div>
                                                             <button wire:click="clearPhoto3" type="reset"
                                                                 class="class='w-auto px-4 py-2 m-auto font-medium text-center text-white bg-red-600 rounded-lg shadow-xl hover:bg-gray-700'">
-                                                                Eliminar Foto 3
+                                                                Eliminar Foto 1
                                                             </button>
-                                                            @else
+                                                            @endif
+                                                        </label>
+                                                        @else
+                                                        <div class='flex w-full h-56 hover:border-purple-300 group'>
+                                                            @if( $selectedProduct->product_image_3)
                                                             <div
                                                                 class="class='flex flex-col items-center justify-center w-60 h-60 pt-7'">
                                                                 <p
@@ -826,7 +840,7 @@
                                                                     Foto #3 del Producto:</p>
                                                                 {{-- <input type="image" wire:model="temp_url_1" name="temp_url_1"> --}}
                                                                 <img
-                                                                    src="{{asset('storage/images/products/'.$selected->product_image_3)}}" />
+                                                                    src="{{asset('storage/images/products/'.$selectedProduct->product_image_3)}}" />
                                                             </div>
                                                             @endif
                                                         </div>
@@ -890,7 +904,7 @@
                                         Limpiar el Formulario
                                     </button>
                                 </div>
-                                @endif
+
                                 <!--OFFER FORM -->
                                 <form wire:submit.prevent="storeOffer" enctype="multipart/form-data">
                                     @method('post')
@@ -946,6 +960,7 @@
                                                     <select wire:model='categoria_oferta' id='categoria_oferta'
                                                         name="categoria_oferta"
                                                         class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent">
+                                                        <option value="" selected>---elije una categoría de venta---</option>
                                                         <option value="Venta Unitaria">VENTA UNITARIA</option>
                                                         <option value="Venta Por Lotes">VENTA POR LOTES</option>
                                                         <option value="Liquidación Lote">LIQUIDACIÓN LOTE</option>
@@ -1038,6 +1053,7 @@
                                                     </label>
                                                     <select wire:model='porte_id' id='porte_id' name="porte_id"
                                                         class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent">
+                                                        <option value="" selected>---elije un tipo de porte---</option>
                                                         <option value="1">PORTES PAGADOS</option>
                                                         <option value="2s">PORTES DEBIDOS</option>
                                                         <option value="3">PORTES COMPARTIDOS</option>
@@ -1191,8 +1207,8 @@
                                                                     Select a photo
                                                                 </p>
                                                             </div>
-                                                            <input type='file' class="hidden"
-                                                                wire:model="user_image_2" name="user_image_2" />
+                                                            <input type='file' class="hidden" wire:model="user_image_2"
+                                                                name="user_image_2" />
                                                             @error('user_image_2') <span
                                                                 class="text-red-600 error">{{ $message }}</span>
                                                             @enderror
@@ -1241,8 +1257,8 @@
                                                                     Select a photo
                                                                 </p>
                                                             </div>
-                                                            <input type='file' class="hidden"
-                                                                wire:model="user_image_3" name="user_image_3" />
+                                                            <input type='file' class="hidden" wire:model="user_image_3"
+                                                                name="user_image_3" />
                                                             @error('user_image_3') <span
                                                                 class="text-red-600 error">{{ $message }}</span>
                                                             @enderror
@@ -1298,6 +1314,15 @@
                                         </div>
                                     </div>
                                 </form>
+                                @else
+                                <div class="flex justify-between">
+                                    <div class="max-w-3xl px-4 mx-auto">
+                                        <div class="flex justify-between">
+                                            Oferta guardada
+                                        </div>
+                                    </div>
+                                </div>
+                                @endif
                             </div>
                         </div>
                         <!-- / Step 3 Crear Oferta y Validar -->
@@ -1353,8 +1378,7 @@
                             <button x-show="step < 3" @click="step++"
                                 class="w-32 px-5 py-2 font-medium text-center text-white bg-blue-500 border border-transparent rounded-lg shadow-sm focus:outline-none hover:bg-blue-600">Next</button>
                             @if($storedOferta)
-                            <button @click="step = 'complete'" x-show="step === 3"
-                                wire:click="storeProduct"
+                            <button @click="step = 'complete'" x-show="step === 3" wire:click="storeProduct"
                                 class="w-32 px-5 py-2 font-medium text-center text-white bg-blue-500 border border-transparent rounded-lg shadow-sm focus:outline-none hover:bg-blue-600">Complete</button>
                             @endif
                         </div>
