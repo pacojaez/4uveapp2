@@ -153,7 +153,7 @@ class CartComponent extends Component
         };
 
         $this->clearCart();
-
+        // dd($userEmail);
         SendEMailController::orderCreated($this->content, $userEmail, $this->newOrder);
 
         $this->confirmedMessage = true;

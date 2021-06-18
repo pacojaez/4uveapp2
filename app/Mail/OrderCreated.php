@@ -44,6 +44,7 @@ class OrderCreated extends Mailable
         $this->order = $order;
         // dd($order);
         $this->orderItems = OrderItem::where('order_id', 'like', $this->order->id)->get();
+        // dd($this->orderItems);
         //
     }
 

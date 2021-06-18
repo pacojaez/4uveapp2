@@ -21,38 +21,8 @@ class AllProducts extends Component
     public function mount(){
     }
 
-    public function buscar( ){
-        // $search = $this->search;
-        // // $ofertas =  Oferta::with(array('product' => function($query){
-        // //     $query
-        // //     ->where('name', 'like', '%'.$search.'%')
-        // //     ->orWhere('part_number', 'like', '%'.$search.'%')
-        // //     ->orWhere('brand', 'like', '%'.$search.'%')
-        // //     ->orWhere('EAN13_individual', 'like', '%'.$search.'%')
-        // //     ->select('id', 'name', 'description', 'product_image', 'brand');
-        // //     }))
-        // //     ->with('porte')
-        // //     ->orderBy('created_at', 'desc')
-        // //     ->paginate();
-        // $ofertas = Oferta::join("products", "ofertas.product_id", "=", "products.id")
-        // ->select('ofertas.*',"products.name", "products.product_image", "products.id", "products.brand", "products.EAN13_individual" )
-        // // ->where("alumnos.nombre", "=", $this->search)
-        // ->where('products.brand', 'like', '%'.$search.'%')
-        // ->get();
-
-        // dd($ofertas);
-    }
-
     public function render()
     {
-        // $ofertas = Oferta::with(array('product'=>function($query){
-        //     $query->select('id','name', 'product_image', 'brand', );
-        //     }))
-        //     ->with('porte')
-        //     ->orderBy($this->orderBy, $this->orderAsc ? 'asc' : 'desc')
-        //     ->paginate($this->perPage);
-
-        // $this->products =  Product::search($this->search);
 
         $ofertas = Oferta::join("products", "ofertas.product_id", "=", "products.id")
         ->select('ofertas.*',"products.name", "products.product_image", "products.brand", "products.EAN13_individual" )

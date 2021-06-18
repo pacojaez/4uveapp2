@@ -47,6 +47,15 @@ class Oferta extends Model
         return $this->belongsTo(Product::class);
     }
 
+     /**
+     * Get the product.
+     */
+    public function orderItems()
+    {
+        return $this->hasMany(OrderItem::class);
+    }
+
+
     /**
      * Buscador de ofertas con variable que viene de la vista
      */

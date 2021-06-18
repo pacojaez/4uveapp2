@@ -34,7 +34,16 @@ class OrderItem extends Model
     }
 
     /**
-     * Get the user.
+     * Get the oferta.
+     */
+    public function oferta()
+    {
+        return $this->belongsTo(Oferta::class);
+    }
+
+
+    /**
+     * Get the order.
      */
     public function order()
     {

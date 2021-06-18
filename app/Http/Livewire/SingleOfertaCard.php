@@ -28,7 +28,7 @@ class SingleOfertaCard extends Component
      */
     public function addToCart(): void
     {
-        Cart::add($this->product->id, $this->product->name, $this->oferta->getRawOriginal('invoice_cost_price'), $this->quantity);
+        Cart::add($this->oferta->id, $this->product->name, $this->oferta->getRawOriginal('offer_prize'), $this->quantity);
         $this->emitTo('nav-cart', 'refresh');
     }
 
