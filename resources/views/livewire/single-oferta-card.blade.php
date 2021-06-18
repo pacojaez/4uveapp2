@@ -3,7 +3,7 @@
         <div class="container px-5 py-2 mx-auto">
             <div class="flex flex-wrap m-2 mx-auto lg:w-4/5">
                 <x-jet-nav-link class="m-5 font-bold">
-                    Categoría: {{ $category }}
+                    Categoría: {{ $category->name }}
                 </x-jet-nav-link>
                 <x-jet-nav-link href="{{ route('categorieproducts', ['id' => $subcategorie->id] ) }}" class="m-5 font-bold">
                     Subcategoría: {{ $subcategorie->name }}
@@ -39,20 +39,20 @@
                     </div>
                     <div class="flex py-2 mb-6 border-t border-b border-gray-200">
                         <span class="text-gray-500">Precio Coste: </span>
-                        <span class="ml-auto text-gray-900">{{ $product->invoice_cost_price }}</span>
+                        <span class="ml-auto text-gray-900">{{ $oferta->invoice_cost_price }}</span>
                     </div>
                     <div class="flex p-2 mb-2 border-t border-gray-200">
                         <span class="text-2xl font-extrabold text-gray-500">Porcentaje de Ahorro</span>
-                        @if($product->invoice_cost_price)
-                        <span class="ml-auto text-2xl font-extrabold text-gray-900">{!!
-                            number_format((float)(100- ($product->offer_prize*100)/$product->invoice_cost_price), 2) !!}
+                        @if($oferta->invoice_cost_price)
+                        <span class="ml-auto text-2xl font-extrabold text-gray-900">
+                            {!! number_format((float)(100- ($oferta->offer_prize*100)/$oferta->invoice_cost_price), 2) !!}
                             %</span>
                         @endif
                     </div>
                     <div class="flex p-2 mb-2 border-t border-gray-200">
                         <span class="text-4xl font-extrabold text-gray-500">Oferta: </span>
                         <span class="ml-auto text-4xl font-extrabold text-gray-900">
-                            {{ $product->offer_prize}} €</span>
+                            {{ $oferta->offer_prize}} €</span>
                     </div>
                     <div class="flex">
                         {{-- <span class="text-2xl font-medium text-gray-900 title-font">Oferta: {{ $product->offer_prize}}
@@ -112,12 +112,18 @@
         <h2 class="flex justify-center text-2xl font-bold body-font">FOTOS DEL LOTE</h2>
         <div class="container px-5 py-6 mx-auto">
             <div class="flex flex-wrap justify-between mx-auto lg:w-full">
+                @if($oferta->user_image)
                 <img alt="{{ $product->name }}" class="object-cover object-center w-1/4 h-64 m-2 rounded lg:w-1/4 lg:h-auto"
-                    src="{{asset('storage/images/products/'.$product->user_image)}}" />
+                    src="{{asset('storage/images/products/'.$oferta->user_image)}}" />
+                @endif
+                @if($oferta->user_image_2)
                 <img alt="{{ $product->name }}" class="object-cover object-center w-1/4 h-64 m-2 rounded lg:w-1/4 lg:h-auto"
-                    src="{{asset('storage/images/products/'.$product->user_image_2)}} /">
+                src="{{asset('storage/images/products/'.$oferta->user_image_2)}} /">
+                @endif
+                @if($oferta->user_image_3)
                 <img alt="{{ $product->name }}" class="object-cover object-center w-1/4 h-64 m-2 rounded lg:w-1/4 lg:h-auto"
-                    src="{{asset('storage/images/products/'.$product->user_image_3)}} /">
+                    src="{{asset('storage/images/products/'.$oferta->user_image_3)}} /">
+                @endif
             </div>
         </div>
     </section>
@@ -215,34 +221,34 @@
                     </div>
                     <div class="flex p-2 border-t border-gray-200">
                         <span class="text-gray-500">Plazo de preparación</span>
-                        <span class="ml-auto text-gray-900">{{ $product->plazo_preparacion_pedido }}</span>
+                        <span class="ml-auto text-gray-900">{{ $oferta->plazo_preparacion_pedido }}</span>
                     </div>
                     <div class="flex p-2 bg-gray-200 border-t border-gray-200">
                         <span class="text-gray-500">Localidad de Origen</span>
-                        <span class="ml-auto text-gray-900">{{$product->localidad_recogida}}</span>
+                        <span class="ml-auto text-gray-900">{{$oferta->localidad_recogida}}</span>
                     </div>
                     <div class="flex p-2 border-t border-gray-200">
                         <span class="text-gray-500">Provincia de Origen</span>
-                        <span class="ml-auto text-gray-900">{{$product->provincia_recogida}}</span>
+                        <span class="ml-auto text-gray-900">{{$oferta->provincia_recogida}}</span>
                     </div>
                     <div class="flex p-2 mb-6 bg-gray-200 border-t border-b border-gray-200">
                         <span class="text-gray-500">CP Origen Producto</span>
-                        <span class="ml-auto text-gray-900">{{ $product->cp_recogida }}</span>
+                        <span class="ml-auto text-gray-900">{{ $oferta->cp_recogida }}</span>
                     </div>
                     <h3 class="font-bold">DATOS DE LA OFERTA:</h3>
                     <div class="flex p-2 bg-gray-200 border-t border-gray-200">
                         <span class="text-gray-500">UNIDADES EN OFERTA</span>
-                        <span class="ml-auto text-gray-900">{{ $product->offer_units }}</span>
+                        <span class="ml-auto text-gray-900">{{ $oferta->offer_units }}</span>
                     </div>
                     <div class="flex p-2 border-t border-gray-200">
                         <span class="text-gray-500">NÚMERO DE CAJAS</span>
-                        <span class="ml-auto text-gray-900">{{$product->boxes_quantity}}</span>
+                        <span class="ml-auto text-gray-900">{{$oferta->boxes}}</span>
                     </div>
                     <div class="flex p-2 bg-gray-200 border-t border-gray-200">
                         <span class="text-gray-500">DIMENSIONES DEL EMBALAJE</span>
-                        <span class="ml-auto text-gray-900">{{$product->whole_box_dimensions}} mm</span>
+                        <span class="ml-auto text-gray-900">{{$oferta->whole_box_dimensions}} mm</span>
                     </div>
-                    @if ($product->original_box)
+                    @if ($product->embalaje_original)
                     <div class="flex p-2 mb-6 border-t border-b border-gray-200">
                         <span class="text-gray-500">EMBALAJE ORIGINAL</span>
                         <svg width="20" height="20" fill="currentColor" viewBox="0 0 1024 1024"
@@ -267,15 +273,15 @@
                     {{-- <h3 class="font-bold">CAJA 1:</h3> --}}
                     <div class="flex p-2 border-t border-gray-200">
                         <span class="text-gray-500">PROVEEDOR</span>
-                        <span class="ml-auto text-gray-900">{{ $product->provider }}</span>
+                        <span class="ml-auto text-gray-900">{{ $oferta->provider }}</span>
                     </div>
                     <div class="flex p-2 bg-gray-200 border-t border-gray-200">
                         <span class="text-gray-500">Precio Compra</span>
-                        <span class="ml-auto text-gray-900">{{$product->invoice_cost_price}} €</span>
+                        <span class="ml-auto text-gray-900">{{$oferta->invoice_cost_price}} €</span>
                     </div>
                     <div class="flex p-2 border-t border-gray-200">
                         <span class="text-gray-500">Fecha de Compra</span>
-                        <span class="ml-auto text-gray-900">{{ $product->buyed_date }}</span>
+                        <span class="ml-auto text-gray-900">{{ $oferta->buyed_date }}</span>
                     </div>
                     {{-- <div class="flex p-2 mb-6 bg-gray-200 border-b border-gray-500">
                         <span class="text-gray-500">Peso Embalaje 1</span>
@@ -284,7 +290,7 @@
                 <h3 class="font-bold">OPCIONES DE LA OFERTA:</h3>
                 <div class="flex p-2 border-t border-gray-200">
                     <div class="w-full mb-2 lg:w-1/2 lg:pr-10 lg:py-6 lg:mb-0">
-                        @if ($product->original_box)
+                        @if ($oferta->embalaje_original)
                         <div class="flex p-2 mb-2 border-t border-b border-gray-200">
                             <span class="text-gray-500">EMBALAJE ORIGINAL</span>
                             <svg width="20" height="20" fill="currentColor" viewBox="0 0 1024 1024"
@@ -298,7 +304,7 @@
                         @endif
                     </div>
                     <div class="w-full mb-2 lg:w-1/2 lg:pr-10 lg:py-6 lg:mb-0">
-                        @if ($product->new)
+                        @if ($oferta->new)
                         <div class="flex p-2 mb-2 border-t border-b border-gray-200">
                             <span class="text-gray-500">PRODUCTO NUEVO</span>
                             <svg width="20" height="20" fill="currentColor" viewBox="0 0 1024 1024"
@@ -334,7 +340,7 @@
                                     fill="currentColor">
                                 </path>
                             </svg>
-                            {{-- <span class="ml-auto text-gray-900">{{ $product->original_box }} </span> --}}
+
                         </div>
 
                         @endif
@@ -343,17 +349,17 @@
                 </div>
                 <div class="flex p-2 mb-4 bg-gray-200 border-t border-gray-200">
                     <span class="text-gray-500">PORTES</span>
-                    <span class="ml-auto text-gray-900">{{$porte->tipo}}</span>
+                    <span class="ml-auto text-gray-900">{{$porte->name}}</span>
                 </div>
                 <div class="flex p-2 border-t border-gray-200">
                     <span class="text-2xl font-extrabold text-gray-500">Precio Oferta</span>
-                    <span class="ml-auto text-2xl font-extrabold text-gray-900">{{ $product->offer_prize }} €</span>
+                    <span class="ml-auto text-2xl font-extrabold text-gray-900">{{ $oferta->offer_prize }} €</span>
                 </div>
                 <div class="flex p-2 border-t border-gray-200">
                     @if($product->invoice_cost_price)
                     <span class="text-2xl font-extrabold text-gray-500">Porcentaje de Ahorro</span>
                     <span class="ml-auto text-2xl font-extrabold text-gray-900">{!!
-                        number_format((float)(100 - ($product->offer_prize*100)/$product->invoice_cost_price), 2) !!}
+                        number_format((float)(100 - ($oferta->offer_prize*100)/$oferta->invoice_cost_price), 2) !!}
                         %</span>
                     @endif
                     {{-- <span class="ml-auto text-gray-900">{{ ($product->offer_prize*100)/$product->invoice_cost_price }}
@@ -361,7 +367,7 @@
                 </div>
                 <div class="flex">
                     <div class="bottom-0 flex w-full pb-5 mt-5">
-                        <button wire:click="addToCart({{ $product->id }})"
+                        <button wire:click="addToCart({{ $oferta->id }})"
                             class="flex px-6 py-2 ml-auto mr-4 font-bold text-white uppercase bg-indigo-500 border-0 rounded focus:outline-none hover:bg-indigo-600">
                             AÑADIR AL CARRITO
                         </button>
@@ -377,4 +383,3 @@
         </div>
     </section>
 </div>
-

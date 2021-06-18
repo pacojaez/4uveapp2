@@ -34,6 +34,10 @@ Route::get('product/{id}', function($id) {
     return view('singleproduct', compact('id'));
 })->name('singleproduct');
 
+Route::get('oferta/{id}', function($id) {
+    return view('singleoferta', compact('id'));
+})->name('singleoferta');
+
 Route::get('categorie/{id}', function($id) {
     return view('categorieproducts', compact('id'));
 })->name('categorieproducts');

@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Product;
 use App\Models\Oferta;
 use App\Models\Subcategorie;
-use App\Models\Portes;
+use App\Models\Porte;
 
 class Wizard extends Component
 {
@@ -113,7 +113,7 @@ class Wizard extends Component
     {
 
         $this->subcategories = Subcategorie::all();
-        $this->portes = Portes::all();
+        $this->portes = Porte::all();
         // $this->temp_url_1;
 
     }

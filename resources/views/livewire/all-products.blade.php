@@ -50,7 +50,7 @@
         <div class="grid grid-cols-12 gap-6 p-2 m-5">
             @foreach($ofertas as $oferta)
                 <a class="col-span-12 transition duration-300 transform bg-white rounded-lg shadow-xl hover:scale-105 sm:col-span-6 xl:col-span-3 intro-y"
-                    href="{{ route('singleproduct', ['id' => $oferta->id]) }}">
+                    href="{{ route('singleoferta', ['id' => $oferta->id]) }}">
 
                     <div class="p-2">
                         <div class="flex justify-end">
