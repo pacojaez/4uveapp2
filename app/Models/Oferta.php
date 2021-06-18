@@ -25,15 +25,15 @@ class Oferta extends Model
     ];
 
     /**
-     * Get the product of this subcategorie.
+     * Get the product of this porte.
      */
     public function porte()
     {
-        return $this->hasMany(Portes::class);
+        return $this->belongsTo(Porte::class);
     }
 
     /**
-     * Get the product of this subcategorie.
+     * Get the product of this user.
      */
     public function user()
     {
@@ -46,4 +46,29 @@ class Oferta extends Model
     {
         return $this->belongsTo(Product::class);
     }
+
+    /**
+     * Buscador de ofertas con variable que viene de la vista
+     */
+
+    public static function search($search){
+
+        // dd($search);
+        /**
+        *The function get a parameter from the View and retrieve the query from the DB
+        */
+        $result = empty($search) ? static::query()
+                                : static::query()
+                                        ->where('provincia_recogida', 'like', '%'.$search.'%')
+                                        // ->orWhere('localidad_recogida', 'like', '%'.$search.'%')
+                                        ->orWhere('categoria_oferta', 'like', '%'.$search.'%')
+                                        ->orWhere('brand', 'like', '%'.$search.'%')
+                                        ->orWhere('EAN13_individual', 'like', '%'.$search.'%');
+
+        $result->where('active', 1);
+        // dd($result);
+        return $result;
+
+    }
+
 }

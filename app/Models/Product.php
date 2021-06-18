@@ -64,15 +64,15 @@ class Product extends Model
     // }
 
     /**
-     * Get the subcategorie.
+     * Get the porte.
      */
     public function porte()
     {
-        return $this->belongsTo(Portes::class);
+        return $this->belongsTo(Porte::class);
     }
 
     /**
-     * Get the subcategorie.
+     * Get the oferta.
      */
     public function oferta()
     {
@@ -81,7 +81,6 @@ class Product extends Model
 
     public static function search($search){
 
-        // dd($search);
         /**
         *The function get a parameter from the View and retrieve the query from the DB
         */

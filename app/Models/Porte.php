@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Portes extends Model
+class Porte extends Model
 {
     use HasFactory;
 
@@ -19,9 +19,17 @@ class Portes extends Model
     ];
 
     /**
-     * Get the product of this subcategorie.
+     * Get the product of this product.
      */
     public function product()
+    {
+        return $this->hasMany(Product::class);
+    }
+
+     /**
+     * Get the product of this product.
+     */
+    public function oferta()
     {
         return $this->hasMany(Product::class);
     }
