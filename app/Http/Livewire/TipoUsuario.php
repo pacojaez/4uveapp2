@@ -4,8 +4,13 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use Asantibanez\LivewireCharts\Facades\LivewireCharts;
+
+use Illuminate\Support\Facades\DB;
+
 use App\Models\Order;
+use App\Models\OrderItem;
 use App\Models\User;
+use App\Models\Oferta;
 
 class TipoUsuario extends Component
 {
@@ -35,6 +40,8 @@ class TipoUsuario extends Component
 
     public $showDataLabels = false;
 
+    public $productos_mas_vendidos;
+
     protected $listeners = [
         'onPointClick' => 'handleOnPointClick',
         'onSliceClick' => 'handleOnSliceClick',
@@ -58,8 +65,35 @@ class TipoUsuario extends Component
 
     public function render()
     {
+
+        // $grouped = OrderItem::groupBy('product_id')->take(1);
+        // $grouped = DB::table('order_items')
+        //     ->join('ofertas', 'ofertas.id', '=', 'order_items.oferta_id')
+        //     ->join('products', 'products.id', '=', 'ofertas.product_id')
+        //     ->select('order_items.subtotal', 'ofertas.*', 'products.name')
+        //     ->get();
+        // dd($grouped);
+
+        // $this->productos_mas_vendidos = $grouped->groupBy(function($data) {
+        //     return $data->product_id;
+        // });
+
+        // $keyed = $this->productos_mas_vendidos->mapWithKeys(function ($item, $key) {
+        //     return [$item['id'] => $item['subtotal']];
+        // });
+
+        // // $keyed->all();
+
+        // // dd($keyed);
+
+        // $cantidad = $this->productos_mas_vendidos->map(function ($row) {
+        //     return $row->sum('subtotal');
+        //     // $this->productos_mas_vendidos
+        // });
+        // dd($cantidad);
+        // dd( $this->productos_mas_vendidos);
         // $orders = Order::all()->groupBy('user_id');
-        // dd($orders);
+        //
         $users = User::all();
         // $count = $expenses->count();
         // $total = Order::groupBy('user_id')->sum('total_factura');
@@ -219,6 +253,7 @@ class TipoUsuario extends Component
                 // 'areaChartModel' => $areaChartModel,
                 // 'multiLineChartModel' => $multiLineChartModel,
                 'multiColumnChartModel' => $multiColumnChartModel,
+                'productos_mas_vendidos' => $this->productos_mas_vendidos,
             ]);
     }
 
