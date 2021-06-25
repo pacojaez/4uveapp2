@@ -75,7 +75,7 @@ class Wizard extends Component
         'brand' => 'string|nullable',
         'EAN13_individual' => 'string|nullable',
         'dimensions' => 'string|nullable',
-        'weight' => 'string|nullable',
+        'weight' => 'string|nullable|regex:/^\d*\.?\d+$/',
         'unidades_embalaje_original' => 'string|nullable',
         'dimensions_boxes_2' => 'string|nullable',
         'weight_2' => 'string|nullable',

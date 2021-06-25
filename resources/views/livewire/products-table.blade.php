@@ -83,15 +83,15 @@
                                 </th>
                                 <th scope="col"
                                     class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                                    Recogida
+                                    CÓDIGOS
                                 </th>
                                 <th scope="col"
                                     class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                                    PRECIO
+                                    DIMENSIONES
                                 </th>
                                 <th scope="col"
                                     class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                                    Condiciones
+                                    DATOS USUARIO
                                 </th>
                                 <th scope="col" class="relative px-6 py-3">
                                     <span class="sr-only">Edit</span>
@@ -121,12 +121,12 @@
                                             <div class="text-sm font-medium text-gray-900">
                                                 Marca: {{$product->brand }}
                                             </div>
-                                            <div class="text-sm text-gray-500">
+                                            {{-- <div class="text-sm text-gray-500">
                                                 Codigo: {{ $product->product_code }}
                                                 EAN-13: {{ $product->EAN13_individual }}
                                                 Part Number: {{ $product->part_number }}
-                                            </div>
-                                            <div class="text-sm text-gray-500">
+                                            </div> --}}
+                                            {{-- <div class="text-sm text-gray-500">
                                                 Dimensiones: {{ $product->dimensions_boxes }}
                                                 Peso: {{ $product->weight }}
                                             </div>
@@ -134,27 +134,42 @@
                                                 Unidades Embalaje Individual:
                                                 {{ $product->unidades_embalaje_individual }}
                                                 Unidades Pack: {{ $product->pack_units }}
-                                            </div>
-                                            <div class="text-sm font-medium text-gray-900">
+                                            </div> --}}
+                                            {{-- <div class="text-sm font-medium text-gray-900">
                                                 Contacto Vendedor: {{ $product->user->email }}
-                                            </div>
+                                            </div> --}}
                                         </div>
                                     </div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    <div class="text-sm text-gray-900">Recogida: {{$product->localidad_recogida }}</div>
-                                    <div class="text-sm text-gray-900">CP recogida: {{$product->cp_recogida }}</div>
-                                    <div class="text-sm text-gray-500">Unidades en Oferta: {{$product->offer_units }}
+                                    <div class="text-sm text-gray-500">
+                                        Codigo: {{ $product->product_code }}
                                     </div>
-                                    <div class="text-sm text-gray-900">Cantidad de cajas: {{$product->boxes_quantity }}
+                                    <div class="text-sm text-gray-900">
+                                        EAN-13: {{ $product->EAN13_individual }}
+                                    </div>
+                                    <div class="text-sm text-gray-900">
+                                        Part Number: {{ $product->part_number }}
                                     </div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    <div class="text-sm text-gray-900">Precio Coste: {{ $product->invoice_cost_price }}
+                                    <div class="text-sm text-gray-500">
+                                        Dimensiones: {{ $product->dimensions_boxes }} cms
                                     </div>
+                                    <div class="text-sm text-gray-500">
+                                        Peso: {{ $product->weight }} Kgs
+                                    </div>
+                                    <div class="text-sm text-gray-500">
+                                        Unidades Embalaje Individual:
+                                        {{ $product->unidades_embalaje_individual }}
+                                    </div>
+                                    <div class="text-sm text-gray-500">
+                                        Unidades Pack: {{ $product->pack_units }}
+                                    </div>
+                                    {{-- <div class="text-sm text-gray-900">Precio Coste: {{ $product->invoice_cost_price }}</div>
                                     <div class="text-sm text-gray-900">Precio Oferta: {{ $product->offer_price }}</div>
                                     <div class="text-sm text-gray-900">Fecha Compra: {{ $product->buyed_date }}</div>
-                                    <div class="text-sm text-gray-900">Oferta hasta: {{ $product->offer_until }}</div>
+                                    <div class="text-sm text-gray-900">Oferta hasta: {{ $product->offer_until }}</div> --}}
                                     {{-- <span
                                         class="inline-flex px-2 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full">
                                         {{ $user->tipo_usuario }}
@@ -170,9 +185,15 @@
                                     {{-- <div class="text-sm text-gray-900">Embalaje Original: {{ $product->embalaje_original }}
                 </div> --}}
                 <div class="text-sm text-gray-900">Subido por:</div>
-                <div class="text-sm text-gray-900"> {{ $product->user->name }}</div>
+                <div class="text-sm text-gray-900">
+                    {{ $product->user->name.' '. $product->user->surname }}
+                </div>
+                <div class="text-sm text-gray-900">CONTACTO:</div>
+                <div class="text-sm font-medium text-gray-900">
+                    {{ $product->user->email }}
+                </div>
 
-                <div class="text-sm text-gray-900">Portes: {{ $product->porte->tipo }}</div>
+                {{-- <div class="text-sm text-gray-900">Portes: {{ $product->oferta->porte->tipo }}</div> --}}
                 </td>
                 <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
                     <a href="{{ route( 'products.show', $product->id ) }}"

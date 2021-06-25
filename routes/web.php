@@ -3,6 +3,7 @@
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\OfertaController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\Cart;
 use App\Http\Livewire\InactiveProducts;
@@ -22,6 +23,13 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/tipousuario', function ()
 })->name('tipousuario');
 
 /************************************ RUTAS DE PRODUCTOS  **************************/
+
+Route::resource('products', 'ProductController');
+
+Route::get('inactive', function () {
+    return view('products.inactive');
+});
+
 Route::get('productos', function() {
     return view('allproducts');
 })->name('allproducts');
@@ -47,6 +55,14 @@ Route::get('/cart', [CartController::class, 'index'])->name('cart');
 Route::get('cart2', function(){
     return view('livewire.cart', compact('content',));
 })->name('cart2');
+
+/************************************ RUTAS DE OFERTAS  **************************/
+
+Route::resource('ofertas', 'OfertaController');
+
+Route::get('ofertasinactive', function () {
+    return view('ofertas.inactive');
+});
 
 // Route::get('/cart', function () {
 //     return view('livewire.cart');
@@ -103,12 +119,6 @@ Route::put('/user/update/{id}',[UserController::class, 'update'])->middleware('i
 // Route::get('/products/index', [ProductController::class, 'index'])->middleware('isAdmin')->name('products.index');
 // Show edit page one product
 // Route::get('/products/show/{product_id }', [ProductController::class, 'show'])->name('products.show');
-
-Route::resource('products', 'ProductController');
-
-Route::get('inactive', function () {
-    return view('products.inactive');
-});
 
 //*******CONTACT */
 

@@ -4,7 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\Product;
 use App\Models\Subcategorie;
-use App\Models\Portes;
+use App\Models\Porte;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Storage;
@@ -73,7 +73,7 @@ class ShowEditProduct extends Component
             'provincia_recogida' => 'string|nullable',
             'porte_id' => 'int|nullable',
             'subcategorie_id' => 'int|nullable',
-            'active' => 'int|nullable',
+            'active' => 'int|required',
             'net_price' => 'int|nullable',
     ];
 
@@ -104,7 +104,7 @@ class ShowEditProduct extends Component
     {
 
         $data =  $this->validate();
-
+        // dd($data['active']);
         //PROCESAMIENTO IMAGEN 1:
         if($data['product_image']){
             //mandamos un messaje al usuario de que la imagen se esta procesando
@@ -269,7 +269,10 @@ class ShowEditProduct extends Component
         // $this->product->user_image_2 = $data['user_image_2'];
         // $this->product->user_image_3 = $data['user_image_3'];
         // dd($this->product->product_image_3);
-
+        if($data['active'] == 0){
+            $this->product->active = 0;
+            $this->product->save();
+        }
         $updateFields = array_filter($data, null);
         // dd($updateFields);
         // $product = Product::find($this->product);
@@ -295,7 +298,7 @@ class ShowEditProduct extends Component
     {
         $this->product = $product;
         $this->subcategories = Subcategorie::all();
-        $this->portes = Portes::all();
+        $this->portes = Porte::all();
         // dd($this->portes);
     }
 

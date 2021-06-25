@@ -1,0 +1,215 @@
+<?php
+
+namespace App\Http\Livewire;
+
+use Livewire\Component;
+use App\Models\Oferta;
+use App\Models\Subcategorie;
+use App\Models\Porte;
+use Livewire\WithFileUploads;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
+class ShowEditOferta extends Component
+{
+    use WithFileUploads;
+
+    public $oferta;
+
+    public $user_image, $user_image_2, $user_image_3;
+
+    public $name, $description, $short_decsription, $product_code;
+
+    public $plazo_preparacion_pedido, $localidad_recogida, $provincia_recogida, $cp_recogida, $embalaje_original,
+            $provider, $invoice_cost_price, $buyed_date, $boxes, $subcategorie_id,
+            $offer_units, $offer_prize, $categoria_oferta, $active, $user_id, $product_id, $porte_id, $new;
+
+    public $isOpen = false;
+
+    public $processing = false;
+
+    public $portes;
+    public $subcategories;
+
+    protected $rulesOffer = [
+        // Lote: Imagenes
+        'user_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048|nullable',
+        'user_image_2' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048|nullable',
+        'user_image_3' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048|nullable',
+        // Oferta:
+        'plazo_preparacion_pedido' => 'string|nullable',
+        'offer_units' => 'int|nullable|regex:/^\d*\.?\d+$/',
+        'boxes' => 'int|nullable|regex:/^\d*\.?\d+$/',
+        'provider' => 'string|nullable',
+        'invoice_cost_price' => 'string|nullable|regex:/^\d*\.?\d+$/',
+        'buyed_date' => 'date|nullable',
+        'localidad_recogida' => 'string|nullable',
+        'cp_recogida' => 'string|nullable',
+        'provincia_recogida' => 'string|nullable',
+        'porte_id' => 'required|int',
+        'new' => 'nullable|int',
+        'categoria_oferta' => 'required|string',
+        'offer_prize' => 'int|nullable|regex:/^\d*\.?\d+$/',
+
+    ];
+
+    public function mount(Oferta $oferta)
+    {
+        $this->oferta = $oferta;
+        $this->subcategories = Subcategorie::all();
+        $this->portes = Porte::all();
+        // $this->temp_url_1;
+
+    }
+
+    public function clearOfferForm()
+    {
+
+        $this->localidad_recogida = '';
+        $this->provincia_recogida = '';
+        $this->cp_recogida = '';
+        $this->categoria_oferta = 1;
+        $this->units_offer = '';
+        $this->boxes = '';
+        $this->boxes_dimensions = '';
+        $this->gender = '';
+        $this->provider = '';
+        $this->porte_id = 1;
+        $this->invoice_cost_price = 0;
+        $this->buyed_date = '';
+        $this->user_image = '';
+        $this->user_image_2 = '';
+        $this->user_image_3 = '';
+        $this->ahorro = 0;
+        $this->offer_prize = 0;
+
+        $this->storedOferta = false;
+        $this->resetErrorBag();
+    }
+
+    public function clearPhotoUser1()
+    {
+        $this->user_image = '';
+    }
+
+    public function clearPhotoUser2()
+    {
+        $this->user_image_2 = '';
+    }
+
+    public function clearPhotoUser3()
+    {
+        $this->user_image_3 = '';
+    }
+
+    public function storeOffer()
+    {
+
+        $this->oferta = new Oferta;
+        $data = $this->validate($this->rulesOffer);
+
+
+        //PROCESAMIENTO IMAGEN 1:
+        if ($data['user_image']) {
+            //mandamos un messaje al usuario de que la imagen se esta procesando
+            $this->processing = true;
+            $image = $this->user_image;
+            $name = substr(uniqid(rand(), true), 8, 8) . '.' . $image->getClientOriginalExtension();
+            $img = Image::make($image->getRealPath())->encode('jpg', 65)->resize(600, null, function ($c) {
+                $c->aspectRatio();
+                $c->upsize();
+            });
+            $img->stream();
+            Storage::disk('local')->put('public/images/products' . '/' . $name, $img, 'public');
+            $data['user_image'] = $name;
+
+            $this->oferta->user_image = $name;
+            // $this->user_temp_url_1 = $image->temporaryUrl();
+        }
+
+        //PROCESAMIENTO IMAGEN 2:
+        if ($data['user_image_2']) {
+            //mandamos un messaje al usuario de que la imagen se esta procesando
+            $this->processing = true;
+            $image = $this->user_image_2;
+            $name = substr(uniqid(rand(), true), 8, 8) . '.' . $image->getClientOriginalExtension();
+            $img = Image::make($image->getRealPath())->encode('jpg', 65)->resize(600, null, function ($c) {
+                $c->aspectRatio();
+                $c->upsize();
+            });
+            $img->stream();
+            Storage::disk('local')->put('public/images/products' . '/' . $name, $img, 'public');
+            $data['user_image_2'] = $name;
+
+            $this->oferta->user_image_2 = $name;
+            // $this->user_temp_url_1 = $image->temporaryUrl();
+        }
+
+        //PROCESAMIENTO IMAGEN 1:
+        if ($data['user_image_3']) {
+            //mandamos un messaje al usuario de que la imagen se esta procesando
+            $this->processing = true;
+            $image = $this->user_image_3;
+            $name = substr(uniqid(rand(), true), 8, 8) . '.' . $image->getClientOriginalExtension();
+            $img = Image::make($image->getRealPath())->encode('jpg', 65)->resize(600, null, function ($c) {
+                $c->aspectRatio();
+                $c->upsize();
+            });
+            $img->stream();
+            Storage::disk('local')->put('public/images/products' . '/' . $name, $img, 'public');
+            $data['user_image_3'] = $name;
+
+            $this->oferta->user_image_3 = $name;
+            // $this->user_temp_url_1 = $image->temporaryUrl();
+        }
+
+        $this->oferta->user_id = Auth::user()->id;
+
+        $id = '';
+
+        if ($this->selectedProduct) {
+            $id = $this->selectedProduct->id;
+        } else {
+            $id = $this->product_id;
+        }
+
+        $this->oferta->product_id = $id;
+
+        //***ojo solo para pruebas*/
+        $this->oferta->active = 1;
+        //***ojo solo para pruebas*/
+
+        $createFields = array_filter($data, null);
+
+        foreach ($createFields as $key => $value) {
+            $this->oferta->$key = $value;
+
+        }
+        $done = $this->oferta->saveOrFail();
+
+        if($done){
+            $this->processing = false;
+            $this->clearOfferForm();
+
+            $this->storedOferta = true;
+        }
+
+    }
+
+    public function delete($id)
+    {
+        Oferta::find($id)->delete();
+
+        return redirect()->route('ofertas.index');
+    }
+
+
+    public function render()
+    {
+        return view('livewire.show-edit-oferta', [
+            'oferta' => $this->oferta
+        ]);
+    }
+}

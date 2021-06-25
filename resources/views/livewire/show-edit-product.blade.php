@@ -56,14 +56,6 @@
                             @endforeach
                         </select>
                     </div>
-                    {{-- <div class="grid grid-cols-1">
-                        <label class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">Part Number:
-                        </label>
-                        <input
-                            wire:model='part_number' id='part_number' name="part_number"
-                            class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
-                            type="text" placeholder="{{ $product->part_number}}" />
-                    </div> --}}
                 </div>
 
                 <div class="grid grid-cols-1 gap-5 mt-5 md:grid-cols-4 md:gap-8 mx-7">
@@ -173,7 +165,7 @@
                     </div>
                 </div>
 
-                <div class="grid grid-cols-1 gap-5 mt-5 md:grid-cols-4 md:gap-8 mx-7">
+                <div class="grid grid-cols-1 gap-5 my-5 md:grid-cols-4 md:gap-8 mx-7">
                     <div class="grid grid-cols-1">
                         <label class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">
                             Unidades Embalaje 3:
@@ -207,8 +199,22 @@
                             type="text" placeholder="{{ $product->EAN_box_3 }}" />
                     </div>
                 </div>
+                <hr>
+                <div class="grid grid-cols-1 gap-5 m-8 md:grid-cols-4 md:gap-8 mx-7">
+                    <div class="grid grid-cols-1">
+                        <label class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">
+                            ¿ACTIVAR PRODUCTO?:</label>
+                            <select
+                            wire:model='active' id='active' name="active"
+                            class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent">
+                            <option value="">--Elige una opción--</option>
+                            <option value="0">NO</option>
+                            <option value="1">SI</option>
+                        </select>
+                    </div>
+                </div>
 
-                <div class="grid grid-cols-1 gap-5 mt-5 md:grid-cols-4 md:gap-8 mx-7">
+                {{-- <div class="grid grid-cols-1 gap-5 mt-5 md:grid-cols-4 md:gap-8 mx-7">
                     <div class="grid grid-cols-1">
                         <label class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">
                             Plazo Preparación Pedido:
@@ -294,7 +300,7 @@
                         </select>
                         {{-- <input wire:model='embalaje_original' id='embalaje_original' name="embalaje_original"
                             class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
-                            type="text" placeholder="Un select con Y - N" /> --}}
+                            type="text" placeholder="Un select con Y - N" />
                     </div>
                 </div>
 
@@ -349,7 +355,7 @@
                         @endif
                         {{-- <input
                             class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
-                            type="int" placeholder="CALCULAR EL %" /> --}}
+                            type="int" placeholder="CALCULAR EL %" />
                     </div>
                     {{-- <div class="grid grid-cols-1">
                         <div>
@@ -358,7 +364,7 @@
                                 ($product->offer_prize*100)/$product->invoice_cost_price), 2) !!} %
                             </span>
                         </div>
-                    </div> --}}
+                    </div>
 
                     <div class="grid grid-cols-1">
                         <label class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">
@@ -379,7 +385,7 @@
                             <option value="1">SI</option>
                         </select>
                     </div>
-                </div>
+                </div> --}}
 
 <!------>
                 {{-- <div class="grid grid-cols-1 gap-5 mt-5 md:grid-cols-4 md:gap-8 mx-7">
@@ -804,11 +810,11 @@
 
 
 
-                <label
+                {{-- <label
                     class="p-2 mt-12 text-4xl font-bold text-center text-gray-500 uppercase bg-gray-300 md:text-4xl text-light">
                     ACTUALIZAR FOTOS DEL PAQUETE
-                </label>
-                <div class="grid justify-between grid-cols-3 mt-5 bg-gray-200 mx-7">
+                </label> --}}
+                {{-- <div class="grid justify-between grid-cols-3 mt-5 bg-gray-200 mx-7">
                     <div class='flex items-center justify-center w-5/6'>
                         <label
                             class='flex flex-col w-full h-32 border-4 border-dashed hover:bg-gray-100 hover:border-purple-300 group'>
@@ -866,8 +872,8 @@
                             </div>
                         </label>
                     </div>
-                </div>
-                <div class="grid justify-between grid-cols-3 mt-5 bg-gray-200 mx-7">
+                </div> --}}
+                {{-- <div class="grid justify-between grid-cols-3 mt-5 bg-gray-200 mx-7">
                     <div class='flex items-center justify-center w-5/6'>
                         @if (!$user_image)
                         <label
@@ -946,7 +952,7 @@
                         </div>
                         @endif
                     </div>
-                </div>
+                </div> --}}
 
                 <div class='flex items-center justify-center gap-4 pt-5 pb-5 md:gap-8'>
                     <button
