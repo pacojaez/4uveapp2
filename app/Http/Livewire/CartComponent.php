@@ -18,6 +18,7 @@ class CartComponent extends Component
     protected $content;
     protected $orderItem;
     protected $newOrder;
+    protected $oferta_id;
 
     // public $abandoned = false;
 
@@ -140,15 +141,16 @@ class CartComponent extends Component
 
         //
          foreach( $this->content as $key => $value ){
-            // dd(($value['name']));
+            // dd(($key));
+            // $product_id = Product::where('id', 'like', )
             OrderItem::create([
                 'order_id' => $this->newOrder->id,
-                'product_id' => $key,
                 'units' => $value['quantity'],
                 'total_items' => $value['quantity'],
                 'unit_price' => $value['price'],
                 'user_id' => $user_id,
-                'subtotal' => $value['quantity'] * $value['price']
+                'subtotal' => $value['quantity'] * $value['price'],
+                'oferta_id' => $key,
            ]);
         };
 

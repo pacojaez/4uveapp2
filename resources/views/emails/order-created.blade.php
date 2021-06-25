@@ -157,13 +157,13 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus dolor aliquid om
                                 @foreach ( $orderItems as $item )
                                 <tr>
                                     <td width="25%" align="left" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px; padding: 15px 10px 5px 10px;">
-                                        {{ $item->product->name }}
+                                        {{ $item->oferta->product->name }}
                                     </td>
                                     <td width="25%" align="left" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px; padding: 15px 10px 5px 10px;">
-                                        {{ $item->unit_price}} €
+                                        {{ $item->oferta->offer_prize }} €
                                     </td>
                                     <td width="25%" align="left" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px; padding: 15px 10px 5px 10px;">
-                                        {{$item->units}} Unidades
+                                        {{ $item->units }} Unidades
                                     </td>
                                     <td width="25%" align="left" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px; padding: 15px 10px 5px 10px;">
                                         {{ $item->subtotal }} €
@@ -288,7 +288,7 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus dolor aliquid om
                             <table border="0" cellspacing="0" cellpadding="0">
                                 <tr>
                                     <td align="center" style="border-radius: 5px;" bgcolor="#66b3b7">
-                                      <a href="http://4uve.net" target="_blank" style="font-size: 18px; font-family: Open Sans, Helvetica, Arial, sans-serif; color: #ffffff; text-decoration: none; border-radius: 5px; background-color: #66b3b7; padding: 15px 30px; border: 1px solid #66b3b7; display: block;">Awesome</a>
+                                      <a href="http://4uve.net" target="_blank" style="font-size: 18px; font-family: Open Sans, Helvetica, Arial, sans-serif; color: #ffffff; text-decoration: none; border-radius: 5px; background-color: #66b3b7; padding: 15px 30px; border: 1px solid #66b3b7; display: block;">Te esperamos de vuelta</a>
                                     </td>
                                 </tr>
                             </table>

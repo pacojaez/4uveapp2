@@ -35,10 +35,18 @@ class Order extends Model
     }
 
     /**
-     * Get the user.
+     * Get the OrderItems.
      */
     public function orderItem()
     {
         return $this->hasMany(OrderItem::class);
+    }
+
+    /**
+     * Get the Oferta
+     */
+    public function oferta()
+    {
+        return $this->hasManyThrough(Oferta::class, OrderItem::class);
     }
 }

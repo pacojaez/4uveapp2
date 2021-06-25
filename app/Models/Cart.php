@@ -27,10 +27,18 @@ class Cart extends Model
     }
 
     /**
-     * Get the user.
+     * Get the product.
      */
     public function product()
     {
         return $this->hasOne(Product::class);
+    }
+
+    /**
+     * Get the user.
+     */
+    public function oferta()
+    {
+        return $this->hasOne(Oferta::class);
     }
 }
