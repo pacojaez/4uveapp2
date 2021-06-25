@@ -1,6 +1,4 @@
 @props(['formAction' => false])
-
-<div>
     @if($formAction)
         <form wire:submit.prevent="{{ $formAction }}">
     @endif
@@ -23,5 +21,4 @@
     @if($formAction)
         </form>
     @endif
-    <button wire:click="$emit('closeModal')"> X Cerrar</button>
 </div>

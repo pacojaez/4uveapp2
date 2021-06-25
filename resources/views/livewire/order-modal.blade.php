@@ -1,27 +1,3 @@
-{{-- <div>
-    <h3 class="text-lg font-medium leading-6 text-gray-900">
-        PEDIDO: {{ $order->id }}
-    </h3>
-
-    @foreach ($orderItems as $item )
-    <div class="p-4 bg-white border-b sm:px-6 sm:py-4 border-gray-150">
-
-
-
-    </div>
-    <div class="px-4 bg-white sm:p-6">
-        <div class="space-y-6">
-            {{ $content }}
-        </div>
-    </div>
-
-    <div class="px-4 pb-5 bg-white sm:px-4 sm:flex">
-        {{ $buttons }}
-    </div>
-
-    @endforeach
-
-</div> --}}
 
 <x-modal>
     <x-slot name="title">
@@ -64,23 +40,23 @@
                             </div> --}}
                             <div class="ml-4">
                               <div class="text-sm font-medium text-gray-900">
-                                {{$item->product->name}}
+                                {{$item->oferta->product->name}}
                               </div>
                               <div class="text-sm text-gray-500">
-                                {{$item->units}} Unidades
+                                {{ $item->units }} Unidades
                               </div>
                             </div>
                           </div>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap">
                           {{-- <div class="text-sm text-gray-900">{{ $item->unit_price }} €</div> --}}
-                          <div class="text-sm text-gray-500"> {{ $item->product->brand }}</div>
+                          <div class="text-sm text-gray-500"> {{ $item->oferta->product->brand }}</div>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap">
                             <div class="text-sm text-gray-900">{{ $order['status']}}</div>
                         </td>
                         <td class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
-                            <div class="text-sm text-gray-900">{{ $item->unit_price }} €</div>
+                            <div class="text-sm text-gray-900">{{ $item->oferta->offer_prize }} €</div>
                         </td>
                         <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
                             <div class="text-xl text-gray-500">{{ $item->subtotal }} €</div>
@@ -92,7 +68,7 @@
                     </tbody>
                   </table>
                 </div>
-                <div class="flex m-auto text-2xl text-center text-gray-800">TOTAL FACTURA: {{$order['total_factura']}} €</div>
+                <div class="mx-auto my-10 text-2xl text-center text-gray-800">TOTAL FACTURA: {{$order['total_factura']}} €</div>
               </div>
             </div>
           </div>
@@ -103,6 +79,8 @@
     </x-slot>
 
     <x-slot name="buttons">
-        Buttons go here...
+        <button wire:click="$emit('closeModal')" class="w-full px-3 py-2 m-2 text-center text-yellow-400 border-2 border-yellow-600 rounded-lg cursor-pointer hover:bg-yellow-600 hover:text-yellow-200">
+            X Close
+        </button>
     </x-slot>
 </x-modal>

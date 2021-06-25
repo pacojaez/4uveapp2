@@ -15,7 +15,8 @@
                     <th class="w-1/4 p-4">UNIDADES</th>
                     <th class="w-1/4 p-4">FECHA</th>
                     @if(Auth::user()->is_admin)
-                    <th class="w-1/4 p-4">COMPRADOR</th>
+                    {{-- <th class="w-1/4 p-4">COMPRADOR</th> --}}
+                    <th class="w-1/4 p-4">EMAIL COMPRADOR</th>
                     @endif
                 </tr>
             </thead>
@@ -39,7 +40,8 @@
                     <td class="w-1/4 p-4">{{ $order->created_at->format('d-m-Y') }}</td>
 
                     @if(Auth::user()->is_admin)
-                    <th class="w-1/4 p-4">{{ $order->user->name}}</th>
+                    {{-- <th class="w-1/4 p-4">{{ $order->user->name}}</th> --}}
+                    <th class="w-1/4 p-4">{{ $order->user->email}}</th>
                     @endif
                 </tr>
                 @endforeach
