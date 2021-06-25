@@ -103,7 +103,8 @@ class Wizard extends Component
         'provincia_recogida' => 'string|nullable',
         'porte_id' => 'required|int',
         'new' => 'nullable|int',
-        'categoria_oferta' => 'required|string'
+        'categoria_oferta' => 'required|string',
+        'offer_prize' => 'int|nullable|regex:/^\d*\.?\d+$/',
 
     ];
 

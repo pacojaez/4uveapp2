@@ -80,7 +80,7 @@
                                 <span class="flex items-center">
                                     <h3 class="p-2 text-lg text-center text-white uppercase bg-green-500 rounded font-subtitle">
                                         Ahorro:
-                                        {!! number_format((float)(100*$oferta->offer_prize/$oferta->invoice_cost_price), 2) !!}
+                                        {!! number_format((float)(100-(100*$oferta->offer_prize/$oferta->invoice_cost_price)), 2) !!}
                                         %
                                     </h3>
                                 </span>
