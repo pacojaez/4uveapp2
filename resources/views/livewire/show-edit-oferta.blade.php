@@ -246,7 +246,7 @@
                         <div class='flex flex-col w-full h-56 hover:bg-gray-100 hover:border-purple-300 group'>
                             <div class="class='flex flex-col items-center justify-center pt-7'">
                                 Foto #1 de la Oferta:
-                                <img src="{{ $user_image->temporaryUrl() }}" class="">
+                                {{-- <img src="{{ $user_image->temporaryUrl() }}" class=""> --}}
                             </div>
                             <div wire:loading>
                                 Procesando...
@@ -275,8 +275,8 @@
                         @else
                         <div class='flex flex-col w-full h-56 hover:bg-gray-100 hover:border-purple-300 group'>
                             <div class="class='flex flex-col items-center justify-center pt-7'">
-                                Foto #2 del Producto:
-                                <img src="{{ $oferta->user_image_2->temporaryUrl() }}" class="">
+                                Foto #2 de la Oferta:
+                                {{-- <img src="{{ $oferta->user_image_2->temporaryUrl() }}" class=""> --}}
                             </div>
                             <div wire:loading>
                                 Procesando...
@@ -304,8 +304,8 @@
                         @else
                         <div class='flex flex-col w-full h-56 hover:bg-gray-100 hover:border-purple-300 group'>
                             <div class="class='flex flex-col items-center justify-center pt-7'">
-                                Foto #3 del Producto:
-                                <img src="{{ $oferta->user_image_3->temporaryUrl() }}" class="">
+                                Foto #3 de la Oferta:
+                                {{-- <img src="{{ $oferta->user_image_3->temporaryUrl() }}" class=""> --}}
                             </div>
                             <div wire:loading>
                                 Procesando...
