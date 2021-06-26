@@ -131,6 +131,10 @@ Route::get('/politicacookies', function(){
     return view('politicacookies');
 })->name('politicacookies');
 
+Route::get('/avisolegal', function(){
+    return view('avisolegal');
+})->name('avisolegal');
+
 //******MAIL ROUTES  */
 Route::get('email-test', function(){
 
