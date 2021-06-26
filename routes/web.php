@@ -126,6 +126,10 @@ Route::get('/contact', function () {
     return view('contact');
 })->name('contact');
 
+//********LEGAL LINKS */
+Route::get('/politicacookies', function(){
+    return view('politicacookies');
+})->name('politicacookies');
 
 //******MAIL ROUTES  */
 Route::get('email-test', function(){
