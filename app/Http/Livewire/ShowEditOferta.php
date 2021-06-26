@@ -20,11 +20,11 @@ class ShowEditOferta extends Component
 
     public $user_image, $user_image_2, $user_image_3;
 
-    public $name, $description, $short_decsription, $product_code;
+    public $name, $description, $short_description, $product_code;
 
     public $plazo_preparacion_pedido, $localidad_recogida, $provincia_recogida, $cp_recogida, $embalaje_original,
             $provider, $invoice_cost_price, $buyed_date, $boxes, $subcategorie_id,
-            $offer_units, $offer_prize, $categoria_oferta, $active, $user_id, $product_id, $porte_id, $new;
+            $offer_units, $offer_prize, $categoria_oferta, $active, $user_id, $product_id, $porte_id, $new, $contraoferta;
 
     public $isOpen = false;
 
@@ -52,6 +52,12 @@ class ShowEditOferta extends Component
         'new' => 'nullable|int',
         'categoria_oferta' => 'required|string',
         'offer_prize' => 'int|nullable|regex:/^\d*\.?\d+$/',
+        'contraoferta' => 'string|nullable',
+        'active' => 'string|required',
+        //Producto
+        // 'name' => 'string|nullable',
+        // 'description' => 'string|nullable',
+        // 'short_description' => 'string|nullable',
 
     ];
 
@@ -196,6 +202,74 @@ class ShowEditOferta extends Component
             $this->storedOferta = true;
         }
 
+    }
+
+    public function update()
+    {
+        // dd('hell');
+        $data = $this->validate($this->rulesOffer);
+        dd($data);
+        //PROCESAMIENTO IMAGEN 1:
+        if($data['user_image']){
+            //mandamos un messaje al usuario de que la imagen se esta procesando
+            $this->processing = true;
+            $image = $this->user_image;
+            $name = substr( uniqid(rand(), true), 8,8 ).'.'.$image->getClientOriginalExtension();
+            $img = Image::make($image->getRealPath())->encode('jpg', 65)->resize(600, null, function($c){
+                $c->aspectRatio();
+                $c->upsize();
+            });
+            $img->stream();
+            Storage::disk('local')->put('public/images/products'.'/'.$name, $img, 'public');
+            $data['user_image'] = $name;
+            $this->oferta->user_image = $data['user_image'];
+        }
+
+        if($data['user_image_2']){
+            //mandamos un messaje al usuario de que la imagen se esta procesando
+            $this->processing = true;
+            $image = $this->user_image_2;
+            $name = substr( uniqid(rand(), true), 8,8 ).'.'.$image->getClientOriginalExtension();
+            $img = Image::make($image->getRealPath())->encode('jpg', 65)->resize(600, null, function($c){
+                $c->aspectRatio();
+                $c->upsize();
+            });
+            $img->stream();
+            Storage::disk('local')->put('public/images/products'.'/'.$name, $img, 'public');
+            $data['user_image_2'] = $name;
+            $this->oferta->user_image_2 = $data['user_image_2'];
+        }
+
+        if($data['user_image_3']){
+            //mandamos un messaje al usuario de que la imagen se esta procesando
+            $this->processing = true;
+            $image = $this->user_image_3;
+            $name = substr( uniqid(rand(), true), 8,8 ).'.'.$image->getClientOriginalExtension();
+            $img = Image::make($image->getRealPath())->encode('jpg', 65)->resize(600, null, function($c){
+                $c->aspectRatio();
+                $c->upsize();
+            });
+            $img->stream();
+            Storage::disk('local')->put('public/images/products'.'/'.$name, $img, 'public');
+            $data['user_image_3'] = $name;
+            $this->oferta->user_image_3 = $data['user_image_3'];
+        }
+
+        if($data['active'] == 0){
+            $this->oferta->active = 0;
+            $this->oferta->save();
+        }
+
+        $updateFields = array_filter($data, null);
+
+        foreach( $updateFields as $key => $value){
+            $this->oferta->$key = $value;
+            $this->oferta->save();
+        }
+
+        $this->processing = false;
+
+        return redirect()->route('ofertas.index');
     }
 
     public function delete($id)

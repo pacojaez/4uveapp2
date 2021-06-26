@@ -15,7 +15,7 @@ class Oferta extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'description', 'short_description', 'user_image', 'user_image_2','user_image_3',
+        'name', 'description', 'user_image', 'user_image_2','user_image_3',
         'plazo_preparacion_pedido', 'contraoferta', 'localidad_recogida', 'cp_recogida',
         'provincia_recogida','offer_units', 'boxes_quantity', 'whole_box_dimensions',
         'embalaje_original', 'provider', 'portes', 'invoice_cost_price', 'buyed_date',

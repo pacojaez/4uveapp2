@@ -10,7 +10,7 @@
                         <label class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">
                             PRODUCTO:
                         </label>
-                        <div wire:model='name' id='name'
+                        <div {{-- wire:model='name' id='name' --}}
                             class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent">
                             {{$oferta->product->name}}
                         </div>
@@ -19,7 +19,7 @@
                         <label class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">
                             Descripción Corta:
                         </label>
-                        <div wire:model='short_description' id='short_description'
+                        <div {{-- wire:model='short_description' id='short_description' --}}
                             class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent">
                             {{$oferta->product->short_description}}
                         </div>
@@ -29,7 +29,7 @@
                     <label class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">
                         Descripción:
                     </label>
-                    <div wire:model='description' name="description" id='description'
+                    <div {{-- wire:model='description' name="description" id='description' --}}
                         class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent">
                         {{ $oferta->product->description}}
                     </div>
@@ -138,7 +138,16 @@
                             class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
                             type="date" placeholder="{{ $oferta->plazo_preparacion_pedido }} mm" />
                     </div>
-
+                    <div class="grid grid-cols-1">
+                        <label class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">
+                            ¿ADMITE CONTRAOFERTA?:</label>
+                        <select wire:model='contraoferta' id='contraoferta' name="contraoferta"
+                            class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent">
+                            <option value="">--Elige una opción--</option>
+                            <option value="0">NO</option>
+                            <option value="1">SI</option>
+                        </select>
+                    </div>
                 </div>
 
                 <hr>
