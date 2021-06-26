@@ -2,6 +2,7 @@
     <div class="flex flex-row justify-center px-10 py-4 text-xl text-yellow-100 font-title">
         <div class="mx-4 pointer hover:underline hover:text-red-400 font-subtitles">Quienes Somos</div>
         <div class="mx-4 pointer hover:underline hover:text-red-400 font-subtitles"><a href="{{ route( 'avisolegal' ) }}">Aviso Legal </a></div>
+        <div class="mx-4 pointer hover:underline hover:text-red-400 font-subtitles"><a href="{{ route( 'politicacookies' ) }}">Política de Cookies</a></div>
         <div class="mx-4 pointer hover:underline hover:text-red-400 font-subtitles">Mapa Web</div>
         <div class="mx-4 pointer hover:underline hover:text-red-400 font-subtitles">Condiciones Generales</div>
       </div>
