@@ -55,26 +55,12 @@
                             {{ $oferta->offer_prize}} €</span>
                     </div>
                     <div class="flex">
-                        {{-- <span class="text-2xl font-medium text-gray-900 title-font">Oferta: {{ $product->offer_prize}}
-                        €</span> --}}
                         <div class="bottom-0 flex w-full pb-5 mt-5">
-                            {{-- <button wire:click="addToCart({{ $product->id }})"
-                            class="flex px-6 py-2 ml-auto mr-4 font-bold text-white uppercase bg-indigo-500 border-0 rounded focus:outline-none hover:bg-indigo-600">
-                            Add to cart
-                            </button> --}}
-                            {{-- <button wire:click="addToCart({{ $product->id }})"
-                            class="flex px-6 py-2 ml-auto mr-4 font-bold text-white uppercase bg-indigo-500 border-0 rounded focus:outline-none hover:bg-indigo-600">
-                            Add to cart
-                            </button> --}}
                             <input class="mb-2 border-2 rounded" type="number" min="1" wire:model="quantity">
                             <button wire:click="addToCart"
                                 class="flex px-6 py-2 ml-auto mr-4 font-bold text-white uppercase bg-indigo-500 border-0 rounded focus:outline-none hover:bg-indigo-600">
                                 AÑADIR AL CARRITO
                             </button>
-                            {{-- <button
-                                class="p-2 bg-blue-500 border-2 border-blue-500 rounded hover:border-blue-600 hover:bg-blue-600"
-                                wire:click="addToCart">Add To Cart</button>
-                            <button wire:click="$emitTo('cart', 'productAddedToCart')">add to cart en minusculas </button> --}}
                         </div>
                         {{-- <script>
                             Livewire.on('productAddedToCart', product_id => {
@@ -367,7 +353,8 @@
                 </div>
                 <div class="flex">
                     <div class="bottom-0 flex w-full pb-5 mt-5">
-                        <button wire:click="addToCart({{ $oferta->id }})"
+                        <input class="mb-2 border-2 rounded" type="number" min="1" wire:model="quantity">
+                        <button wire:click="addToCart"
                             class="flex px-6 py-2 ml-auto mr-4 font-bold text-white uppercase bg-indigo-500 border-0 rounded focus:outline-none hover:bg-indigo-600">
                             AÑADIR AL CARRITO
                         </button>

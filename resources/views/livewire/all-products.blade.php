@@ -110,7 +110,7 @@
                 </a>
             @endforeach
         </div>
-        <div class="p-2 mx-8 font-semibold bg-gray-800 justify-items-center">
+        <div class="p-2 mx-8 font-semibold bg-gray-300 justify-items-center">
             {{ $ofertas->links() }}
         </div>
 </div>
