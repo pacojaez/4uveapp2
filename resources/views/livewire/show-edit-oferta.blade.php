@@ -151,6 +151,7 @@
                 </div>
 
                 <hr>
+                @if(Auth::user()->is_admin)
                 <div class="grid grid-cols-1 gap-5 m-8 md:grid-cols-4 md:gap-8 mx-7">
                     <div class="grid grid-cols-1">
                         <label class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">
@@ -163,6 +164,7 @@
                         </select>
                     </div>
                 </div>
+                @endif
 
                 <hr>
 
@@ -231,7 +233,7 @@
                 </div>
                 <div class="grid justify-between grid-cols-3 mt-5 bg-gray-200 mx-7">
                     <div class='flex items-center justify-center w-5/6'>
-                        @if (!$oferta->user_image)
+                        @if (!$user_image)
                         <label
                             class='flex flex-col w-full h-32 border-4 border-dashed hover:bg-gray-100 hover:border-purple-300 group'>
                             <div class='flex flex-col items-center justify-center pt-7'>
@@ -251,21 +253,23 @@
                         <div wire:loading>
                             Procesando...
                         </div>
-
                         <div class='flex flex-col w-full h-56 hover:bg-gray-100 hover:border-purple-300 group'>
                             <div class="class='flex flex-col items-center justify-center pt-7'">
                                 Foto #1 de la Oferta:
-                                {{-- <img src="{{ $user_image->temporaryUrl() }}" class=""> --}}
+                                <img src="{{ $user_image->temporaryUrl() }}" class="">
                             </div>
                             <div wire:loading>
                                 Procesando...
                             </div>
                         </div>
-
+                        <button wire:click="clearPhoto1" type="reset"
+                            class="class='w-auto px-4 py-2 m-auto font-medium text-center text-white bg-red-600 rounded-lg shadow-xl hover:bg-gray-700'">
+                            Eliminar Foto 1
+                        </button>
                         @endif
                     </div>
                     <div class='flex items-center justify-center w-5/6'>
-                        @if (!$oferta->user_image_2)
+                        @if (!$user_image_2)
                         <label
                             class='flex flex-col w-full h-32 border-4 border-dashed hover:bg-gray-100 hover:border-purple-300 group'>
                             <div class='flex flex-col items-center justify-center pt-7'>
@@ -285,16 +289,20 @@
                         <div class='flex flex-col w-full h-56 hover:bg-gray-100 hover:border-purple-300 group'>
                             <div class="class='flex flex-col items-center justify-center pt-7'">
                                 Foto #2 de la Oferta:
-                                {{-- <img src="{{ $oferta->user_image_2->temporaryUrl() }}" class=""> --}}
+                                <img src="{{ $user_image_2->temporaryUrl() }}" class="">
                             </div>
                             <div wire:loading>
                                 Procesando...
                             </div>
                         </div>
+                        <button wire:click="clearPhoto2" type="reset"
+                            class="class='w-auto px-4 py-2 m-auto font-medium text-center text-white bg-red-600 rounded-lg shadow-xl hover:bg-gray-700'">
+                            Eliminar Foto 2
+                        </button>
                         @endif
                     </div>
                     <div class='flex items-center justify-center w-5/6'>
-                        @if (!$oferta->user_image_3)
+                        @if (!$user_image_3)
                         <label
                             class='flex flex-col w-full h-32 border-4 border-dashed hover:bg-gray-100 hover:border-purple-300 group'>
                             <div class='flex flex-col items-center justify-center pt-7'>
@@ -314,12 +322,16 @@
                         <div class='flex flex-col w-full h-56 hover:bg-gray-100 hover:border-purple-300 group'>
                             <div class="class='flex flex-col items-center justify-center pt-7'">
                                 Foto #3 de la Oferta:
-                                {{-- <img src="{{ $oferta->user_image_3->temporaryUrl() }}" class=""> --}}
+                                <img src="{{ $user_image_3->temporaryUrl() }}" class="">
                             </div>
                             <div wire:loading>
                                 Procesando...
                             </div>
                         </div>
+                        <button wire:click="clearPhoto3" type="reset"
+                            class="class='w-auto px-4 py-2 m-auto font-medium text-center text-white bg-red-600 rounded-lg shadow-xl hover:bg-gray-700'">
+                            Eliminar Foto 3
+                        </button>
                         @endif
                     </div>
                 </div>

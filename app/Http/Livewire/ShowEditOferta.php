@@ -206,7 +206,7 @@ class ShowEditOferta extends Component
 
     public function update()
     {
-        // dd('hell');
+        dd($this->rulesOffer);
         $data = $this->validate($this->rulesOffer);
         dd($data);
         //PROCESAMIENTO IMAGEN 1:
@@ -279,11 +279,28 @@ class ShowEditOferta extends Component
         return redirect()->route('ofertas.index');
     }
 
+    public function clearPhoto1()
+    {
+        $this->user_image = '';
+    }
+
+    public function clearPhoto2()
+    {
+        $this->user_image_2 = '';
+    }
+    public function clearPhoto3()
+    {
+        $this->user_image_3 = '';
+    }
+
 
     public function render()
     {
         return view('livewire.show-edit-oferta', [
-            'oferta' => $this->oferta
+            'oferta' => $this->oferta,
+            'user_image' => $this->user_image,
+            'user_image_2' => $this->user_image_2,
+            'user_image_3' => $this->user_image_3
         ]);
     }
 }
