@@ -5,6 +5,8 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\Oferta;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Middleware\IsAdmin;
 
 class OfertasTable extends Component
 {
@@ -20,9 +22,17 @@ class OfertasTable extends Component
 
     public function render()
     {
-        $this->ofertas =  Oferta::search($this->search)
-                            ->orderBy($this->orderBy, $this->orderAsc ? 'asc' : 'desc')
-                            ->paginate($this->perPage);
+        if(Auth::user()->isAdmin){
+            $this->ofertas =  Oferta::search($this->search)
+            ->orderBy($this->orderBy, $this->orderAsc ? 'asc' : 'desc')
+            ->paginate($this->perPage);
+        }else{
+            $this->ofertas =  Oferta::search($this->search)
+            ->where('user_id', 'like', Auth::user()->id)
+            ->orderBy($this->orderBy, $this->orderAsc ? 'asc' : 'desc')
+            ->paginate($this->perPage);
+        }
+
 
         return view('livewire.ofertas-table', [
             'ofertas' => $this->ofertas,
