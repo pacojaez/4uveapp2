@@ -26,12 +26,16 @@ class ShowEditOferta extends Component
             $provider, $invoice_cost_price, $buyed_date, $boxes, $subcategorie_id,
             $offer_units, $offer_prize, $categoria_oferta, $active, $user_id, $product_id, $porte_id, $new, $contraoferta;
 
+    public $gender;
+
     public $isOpen = false;
 
     public $processing = false;
 
     public $portes;
     public $subcategories;
+
+    public $ahorro;
 
     protected $rulesOffer = [
         // Lote: Imagenes
@@ -48,12 +52,13 @@ class ShowEditOferta extends Component
         'localidad_recogida' => 'string|nullable',
         'cp_recogida' => 'string|nullable',
         'provincia_recogida' => 'string|nullable',
-        'porte_id' => 'required|int',
+        'porte_id' => 'nullable|int',
+        'embalaje_original' => 'nullable|int',
         'new' => 'nullable|int',
-        'categoria_oferta' => 'required|string',
+        'categoria_oferta' => 'nullable|string',
         'offer_prize' => 'int|nullable|regex:/^\d*\.?\d+$/',
         'contraoferta' => 'string|nullable',
-        'active' => 'string|required',
+        'active' => 'string|nullable',
         //Producto
         // 'name' => 'string|nullable',
         // 'description' => 'string|nullable',
@@ -76,7 +81,7 @@ class ShowEditOferta extends Component
         $this->localidad_recogida = '';
         $this->provincia_recogida = '';
         $this->cp_recogida = '';
-        $this->categoria_oferta = 1;
+        $this->categoria_oferta = '';
         $this->units_offer = '';
         $this->boxes = '';
         $this->boxes_dimensions = '';
@@ -110,105 +115,106 @@ class ShowEditOferta extends Component
         $this->user_image_3 = '';
     }
 
-    public function storeOffer()
-    {
+    // public function storeOffer()
+    // {
 
-        $this->oferta = new Oferta;
-        $data = $this->validate($this->rulesOffer);
+    //     $this->oferta = new Oferta;
+    //     $data = $this->validate($this->rulesOffer);
 
 
-        //PROCESAMIENTO IMAGEN 1:
-        if ($data['user_image']) {
-            //mandamos un messaje al usuario de que la imagen se esta procesando
-            $this->processing = true;
-            $image = $this->user_image;
-            $name = substr(uniqid(rand(), true), 8, 8) . '.' . $image->getClientOriginalExtension();
-            $img = Image::make($image->getRealPath())->encode('jpg', 65)->resize(600, null, function ($c) {
-                $c->aspectRatio();
-                $c->upsize();
-            });
-            $img->stream();
-            Storage::disk('local')->put('public/images/products' . '/' . $name, $img, 'public');
-            $data['user_image'] = $name;
+    //     //PROCESAMIENTO IMAGEN 1:
+    //     if ($data['user_image']) {
+    //         //mandamos un messaje al usuario de que la imagen se esta procesando
+    //         $this->processing = true;
+    //         $image = $this->user_image;
+    //         $name = substr(uniqid(rand(), true), 8, 8) . '.' . $image->getClientOriginalExtension();
+    //         $img = Image::make($image->getRealPath())->encode('jpg', 65)->resize(600, null, function ($c) {
+    //             $c->aspectRatio();
+    //             $c->upsize();
+    //         });
+    //         $img->stream();
+    //         Storage::disk('local')->put('public/images/products' . '/' . $name, $img, 'public');
+    //         $data['user_image'] = $name;
 
-            $this->oferta->user_image = $name;
-            // $this->user_temp_url_1 = $image->temporaryUrl();
-        }
+    //         $this->oferta->user_image = $name;
+    //         // $this->user_temp_url_1 = $image->temporaryUrl();
+    //     }
 
-        //PROCESAMIENTO IMAGEN 2:
-        if ($data['user_image_2']) {
-            //mandamos un messaje al usuario de que la imagen se esta procesando
-            $this->processing = true;
-            $image = $this->user_image_2;
-            $name = substr(uniqid(rand(), true), 8, 8) . '.' . $image->getClientOriginalExtension();
-            $img = Image::make($image->getRealPath())->encode('jpg', 65)->resize(600, null, function ($c) {
-                $c->aspectRatio();
-                $c->upsize();
-            });
-            $img->stream();
-            Storage::disk('local')->put('public/images/products' . '/' . $name, $img, 'public');
-            $data['user_image_2'] = $name;
+    //     //PROCESAMIENTO IMAGEN 2:
+    //     if ($data['user_image_2']) {
+    //         //mandamos un messaje al usuario de que la imagen se esta procesando
+    //         $this->processing = true;
+    //         $image = $this->user_image_2;
+    //         $name = substr(uniqid(rand(), true), 8, 8) . '.' . $image->getClientOriginalExtension();
+    //         $img = Image::make($image->getRealPath())->encode('jpg', 65)->resize(600, null, function ($c) {
+    //             $c->aspectRatio();
+    //             $c->upsize();
+    //         });
+    //         $img->stream();
+    //         Storage::disk('local')->put('public/images/products' . '/' . $name, $img, 'public');
+    //         $data['user_image_2'] = $name;
 
-            $this->oferta->user_image_2 = $name;
-            // $this->user_temp_url_1 = $image->temporaryUrl();
-        }
+    //         $this->oferta->user_image_2 = $name;
+    //         // $this->user_temp_url_1 = $image->temporaryUrl();
+    //     }
 
-        //PROCESAMIENTO IMAGEN 1:
-        if ($data['user_image_3']) {
-            //mandamos un messaje al usuario de que la imagen se esta procesando
-            $this->processing = true;
-            $image = $this->user_image_3;
-            $name = substr(uniqid(rand(), true), 8, 8) . '.' . $image->getClientOriginalExtension();
-            $img = Image::make($image->getRealPath())->encode('jpg', 65)->resize(600, null, function ($c) {
-                $c->aspectRatio();
-                $c->upsize();
-            });
-            $img->stream();
-            Storage::disk('local')->put('public/images/products' . '/' . $name, $img, 'public');
-            $data['user_image_3'] = $name;
+    //     //PROCESAMIENTO IMAGEN 1:
+    //     if ($data['user_image_3']) {
+    //         //mandamos un messaje al usuario de que la imagen se esta procesando
+    //         $this->processing = true;
+    //         $image = $this->user_image_3;
+    //         $name = substr(uniqid(rand(), true), 8, 8) . '.' . $image->getClientOriginalExtension();
+    //         $img = Image::make($image->getRealPath())->encode('jpg', 65)->resize(600, null, function ($c) {
+    //             $c->aspectRatio();
+    //             $c->upsize();
+    //         });
+    //         $img->stream();
+    //         Storage::disk('local')->put('public/images/products' . '/' . $name, $img, 'public');
+    //         $data['user_image_3'] = $name;
 
-            $this->oferta->user_image_3 = $name;
-            // $this->user_temp_url_1 = $image->temporaryUrl();
-        }
+    //         $this->oferta->user_image_3 = $name;
+    //         // $this->user_temp_url_1 = $image->temporaryUrl();
+    //     }
 
-        $this->oferta->user_id = Auth::user()->id;
+    //     $this->oferta->user_id = Auth::user()->id;
 
-        $id = '';
+    //     $id = '';
 
-        if ($this->selectedProduct) {
-            $id = $this->selectedProduct->id;
-        } else {
-            $id = $this->product_id;
-        }
+    //     if ($this->selectedProduct) {
+    //         $id = $this->selectedProduct->id;
+    //     } else {
+    //         $id = $this->product_id;
+    //     }
 
-        $this->oferta->product_id = $id;
+    //     $this->oferta->product_id = $id;
 
-        //***ojo solo para pruebas*/
-        $this->oferta->active = 1;
-        //***ojo solo para pruebas*/
+    //     //***ojo solo para pruebas*/
+    //     $this->oferta->active = 1;
+    //     //***ojo solo para pruebas*/
 
-        $createFields = array_filter($data, null);
+    //     $createFields = array_filter($data, null);
 
-        foreach ($createFields as $key => $value) {
-            $this->oferta->$key = $value;
+    //     foreach ($createFields as $key => $value) {
+    //         $this->oferta->$key = $value;
 
-        }
-        $done = $this->oferta->saveOrFail();
+    //     }
+    //     $done = $this->oferta->saveOrFail();
 
-        if($done){
-            $this->processing = false;
-            $this->clearOfferForm();
+    //     if($done){
+    //         $this->processing = false;
+    //         $this->clearOfferForm();
 
-            $this->storedOferta = true;
-        }
+    //         $this->storedOferta = true;
+    //     }
 
-    }
+    // }
 
     public function update()
     {
-        dd($this->rulesOffer);
+        // Oferta::find($id)->delete();
+        // dd($this->rulesOffer);
         $data = $this->validate($this->rulesOffer);
-        dd($data);
+        // dd($data);
         //PROCESAMIENTO IMAGEN 1:
         if($data['user_image']){
             //mandamos un messaje al usuario de que la imagen se esta procesando
@@ -296,11 +302,16 @@ class ShowEditOferta extends Component
 
     public function render()
     {
+        if ($this->invoice_cost_price != 0) {
+            $this->ahorro = 100 - ($this->offer_prize * 100) / $this->invoice_cost_price;
+        }
+
         return view('livewire.show-edit-oferta', [
             'oferta' => $this->oferta,
             'user_image' => $this->user_image,
             'user_image_2' => $this->user_image_2,
-            'user_image_3' => $this->user_image_3
+            'user_image_3' => $this->user_image_3,
+            'ahorro' => $this->ahorro,
         ]);
     }
 }

@@ -27,10 +27,8 @@ class OfertasTable extends Component
             ->orderBy($this->orderBy, $this->orderAsc ? 'asc' : 'desc')
             ->paginate($this->perPage);
         }else{
-            $this->ofertas =  Oferta::search($this->search)
-            ->where('user_id', 'like', Auth::user()->id)
-            ->orderBy($this->orderBy, $this->orderAsc ? 'asc' : 'desc')
-            ->paginate($this->perPage);
+            $this->ofertas =  Oferta::where('user_id', '=', Auth::user()->id)->get();
+            // dd($this->ofertas);
         }
 
 

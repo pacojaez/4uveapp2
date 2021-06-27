@@ -107,7 +107,7 @@
                         </label>
                         <input wire:model='offer_units' id='offer_units' name="offer_units"
                             class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
-                            type="text" placeholder="{{ $oferta->offer_units }} mm" />
+                            type="text" placeholder="{{ $oferta->offer_units }}" />
                     </div>
 
                     <div class="grid grid-cols-1">
@@ -136,7 +136,7 @@
                         <input wire:model='plazo_preparacion_pedido' id='plazo_preparacion_pedido'
                             name="plazo_preparacion_pedido"
                             class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
-                            type="date" placeholder="{{ $oferta->plazo_preparacion_pedido }} mm" />
+                            type="date" placeholder="{{ $oferta->plazo_preparacion_pedido }}" />
                     </div>
                     <div class="grid grid-cols-1">
                         <label class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">
@@ -147,6 +147,114 @@
                             <option value="0">NO</option>
                             <option value="1">SI</option>
                         </select>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 gap-5 mt-5 md:grid-cols-4 md:gap-8 mx-7">
+                    <div class="grid grid-cols-1">
+                        <label
+                            class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">
+                            PORTES:
+                        </label>
+                        <select wire:model='porte_id' id='porte_id' name="porte_id"
+                            class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent">
+                            <option value="" selected>---elije un tipo de porte---</option>
+                            <option value="1">PORTES PAGADOS</option>
+                            <option value="2s">PORTES DEBIDOS</option>
+                            <option value="3">PORTES COMPARTIDOS</option>
+                        </select>
+                        @error('porte_id') <span
+                            class="text-red-600 error">{{ $message }}</span> @enderror
+                    </div>
+                    <div class="grid grid-cols-1">
+                        <label
+                            class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">
+                            Precio Compra:
+                        </label>
+                        <input wire:model='invoice_cost_price' id='invoice_cost_price'
+                            name="invoice_cost_price"
+                            class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                            type="text" placeholder="EJ: 6.25" />
+                        @error('invoice_cost_price') <span
+                            class="text-red-600 error">{{ $message }}</span> @enderror
+                    </div>
+                    <div class="grid grid-cols-1">
+                        <label
+                            class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">
+                            Porcentaje Ahorro:
+                        </label>
+                        @if($ahorro)
+                        <div wire:model='ahorro' id='ahorro'
+                            class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent">
+                            {{ $ahorro }} %
+                        </div>
+                        @endif
+                        @error('') <span class="text-red-600 error">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    <div class="grid grid-cols-1">
+                        <label
+                            class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">
+                            PRECIO OFERTA:
+                        </label>
+                        <input wire:model='offer_prize' id='offer_prize' name="offer_prize"
+                            class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                            type="text" placeholder="Ej: 5.6845 €" />
+                        @error('offer_prize') <span
+                            class="text-red-600 error">{{ $message }}</span> @enderror
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 gap-5 mt-5 md:grid-cols-4 md:gap-8 mx-7">
+                    <div class="grid grid-cols-1">
+                        <label
+                            class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">
+                            Categoría Oferta:
+                        </label>
+                        <select wire:model='categoria_oferta' id='categoria_oferta'
+                            name="categoria_oferta"
+                            class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent">
+                            <option value="" selected>---elije una categoría---</option>
+                            <option value="Venta Unitaria">VENTA UNITARIA</option>
+                            <option value="Venta Por Lotes">VENTA POR LOTES</option>
+                            <option value="Liquidación Lote">LIQUIDACIÓN LOTE</option>
+                            <option value="Liquidación Total">LIQUIDACIÓN TOTAL</option>
+                        </select>
+                        @error('categoria_oferta') <span
+                            class="text-red-600 error">{{ $message }}</span> @enderror
+                    </div>
+                    <div class="grid grid-cols-1">
+                        <label
+                            class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">
+                            ¿Embalaje Original?
+                        </label>
+                        <select wire:model='embalaje_original' id='embalaje_original'
+                            name="embalaje_original"
+                            class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent">
+                            <option value="" selected>---elije una opción---</option>
+                            <option value="0">NO</option>
+                            <option value="1">SI</option>
+
+                        </select>
+                        @error('embalaje_original') <span
+                            class="text-red-600 error">{{ $message }}</span> @enderror
+                        {{-- <div class="flex">
+                            <label
+                                class="flex items-center justify-start py-3 pl-4 pr-6 mr-4 bg-white rounded-lg shadow-sm text-truncate">
+                                <div class="mr-3 text-teal-600">
+                                    <input type="radio" x-model="embalaje_original" value="1"
+                                        class="form-radio focus:outline-none focus:shadow-outline" />
+                                </div>
+                                <div class="text-gray-700 select-none">SI</div>
+                            </label>
+
+                            <label
+                                class="flex items-center justify-start py-3 pl-4 pr-6 bg-white rounded-lg shadow-sm text-truncate">
+                                <div class="mr-3 text-teal-600">
+                                    <input type="radio" x-model="embalaje_original" value="0"
+                                        class="form-radio focus:outline-none focus:shadow-outline" />
+                                </div>
+                                <div class="text-gray-700 select-none">NO</div>
+                            </label>
+                        </div> --}}
                     </div>
                 </div>
 
