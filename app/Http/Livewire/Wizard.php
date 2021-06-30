@@ -101,7 +101,7 @@ class Wizard extends Component
         'localidad_recogida' => 'string|nullable',
         'cp_recogida' => 'string|nullable',
         'provincia_recogida' => 'string|nullable',
-        'porte_id' => 'required|int',
+        'porte_id' => 'required|string|regex:/^\d*\.?\d+$/',
         'new' => 'nullable|int',
         'categoria_oferta' => 'required|string',
         'offer_prize' => 'int|nullable|regex:/^\d*\.?\d+$/',
@@ -288,7 +288,7 @@ class Wizard extends Component
         $this->oferta->product_id = $id;
 
         //***ojo solo para pruebas*/
-        $this->oferta->active = 1;
+        // $this->oferta->active = 1;
         //***ojo solo para pruebas*/
 
         $createFields = array_filter($data, null);
