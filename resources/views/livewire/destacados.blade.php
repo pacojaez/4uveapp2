@@ -27,7 +27,7 @@
                     </div>
                     <hr class="border-gray-300" />
                     <div class="flex flex-wrap items-center flex-1 px-4 py-1 mx-auto text-center">
-                        <a href="#" class="hover:underline">
+                        <a  href="{{ route('singleoferta', ['id' => $oferta->id]) }}" class="hover:underline">
                             <h2 class="text-2xl font-bold tracking-normal text-gray-800">
                                 {{ $oferta->product->name }}
                             </h2>
