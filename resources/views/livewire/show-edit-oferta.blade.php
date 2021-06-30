@@ -5,55 +5,59 @@
         @csrf
         <div class="flex items-center justify-center mt-4 mb-2 bg-gray-200">
             <div class="grid w-11/12 bg-white rounded-lg shadow-xl md:w-1/12 lg:w-10/12">
-                <div class="grid grid-cols-1 gap-5 mt-5 md:grid-cols-2 md:gap-8 mx-7">
-                    <div class="grid grid-cols-1">
-                        <label class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">
-                            PRODUCTO:
-                        </label>
-                        <div {{-- wire:model='name' id='name' --}}
-                            class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent">
-                            {{$oferta->product->name}}
+                <div class="p-3 bg-gray-200">
+                    <div class="grid grid-cols-1 gap-5 mt-5 md:grid-cols-2 md:gap-8 mx-7">
+                        <div class="grid grid-cols-1">
+                            <label class="text-3xl font-semibold text-gray-500 uppercase md:text-sm text-light">
+                                PRODUCTO:
+                            </label>
+                            <div {{-- wire:model='name' id='name' --}}
+                                class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent">
+                                {{$oferta->product->name}}
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1">
+                            <label class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">
+                                Descripción Corta:
+                            </label>
+                            <div {{-- wire:model='short_description' id='short_description' --}}
+                                class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent">
+                                {{$oferta->product->short_description}}
+                            </div>
                         </div>
                     </div>
-                    <div class="grid grid-cols-1">
+                    <div class="grid grid-cols-1 mt-5 mx-7">
                         <label class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">
-                            Descripción Corta:
+                            Descripción:
                         </label>
-                        <div {{-- wire:model='short_description' id='short_description' --}}
+                        <div {{-- wire:model='description' name="description" id='description' --}}
                             class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent">
-                            {{$oferta->product->short_description}}
+                            {{ $oferta->product->description}}
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 gap-5 mt-5 md:grid-cols-2 md:gap-8 mx-7">
+                        <div class="grid grid-cols-1">
+                            <label class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">
+                                Código de Producto:
+                            </label>
+                            <div wire:model='product_code' id='product_code'
+                                class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent">
+                                {{ $oferta->product->product_code}}
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1">
+                            <label class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">
+                                CATEGORÍA:
+                            </label>
+                            <div wire:model='product_code' id='product_code'
+                                class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent">
+                                {{ $oferta->product->subcategorie->name }}
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="grid grid-cols-1 mt-5 mx-7">
-                    <label class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">
-                        Descripción:
-                    </label>
-                    <div {{-- wire:model='description' name="description" id='description' --}}
-                        class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent">
-                        {{ $oferta->product->description}}
-                    </div>
-                </div>
-                <div class="grid grid-cols-1 gap-5 mt-5 md:grid-cols-2 md:gap-8 mx-7">
-                    <div class="grid grid-cols-1">
-                        <label class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">
-                            Código de Producto:
-                        </label>
-                        <div wire:model='product_code' id='product_code'
-                            class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent">
-                            {{ $oferta->product->product_code}}
-                        </div>
-                    </div>
-                    <div class="grid grid-cols-1">
-                        <label class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">
-                            CATEGORÍA:
-                        </label>
-                        <div wire:model='product_code' id='product_code'
-                            class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent">
-                            {{ $oferta->product->subcategorie->name }}
-                        </div>
-                    </div>
-                </div>
+
+
                 <div class="grid grid-cols-1 gap-5 mt-5 mx-7">
                     <h2 class="text-3xl">DATOS DE LA OFERTA:</h2>
                 </div>
@@ -173,9 +177,10 @@
                         <input wire:model='invoice_cost_price' id='invoice_cost_price'
                             name="invoice_cost_price"
                             class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
-                            type="text" placeholder="EJ: 6.25" />
+                            type="text" placeholder="{{ $oferta->invoice_cost_price }}" />
                         @error('invoice_cost_price') <span
-                            class="text-red-600 error">{{ $message }}</span> @enderror
+                            class="text-red-600 error">{{ $message }}</span>
+                        @enderror
                     </div>
                     <div class="grid grid-cols-1">
                         <label
@@ -198,7 +203,7 @@
                         </label>
                         <input wire:model='offer_prize' id='offer_prize' name="offer_prize"
                             class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
-                            type="text" placeholder="Ej: 5.6845 €" />
+                            type="text" placeholder="{{ $oferta->offer_prize }}" />
                         @error('offer_prize') <span
                             class="text-red-600 error">{{ $message }}</span> @enderror
                     </div>
@@ -260,7 +265,7 @@
 
                 <hr>
                 @if(Auth::user()->is_admin)
-                <div class="grid grid-cols-1 gap-5 m-8 md:grid-cols-4 md:gap-8 mx-7">
+                <div class="grid grid-cols-1 gap-5 p-3 m-8 bg-red-100 md:grid-cols-4 md:gap-8 mx-7">
                     <div class="grid grid-cols-1">
                         <label class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">
                             ¿ACTIVAR OFERTA?:</label>

@@ -22,12 +22,11 @@ class ShowEditProduct extends Component
 
     public $product_image, $product_image_2, $product_image_3, $user_image, $user_image_2, $user_image_3;
 
-    public $name, $description, $short_description, $product_code, $lote_image, $cb_unit, $part_number, $brand,
-        $EAN13_individual, $unidades_embalaje_individual, $dimensions_boxes, $weight, $pack_units,
-        $unidades_embalaje_2, $dimensions_boxes_2, $weight_2, $unidades_embalaje_3, $dimensions_boxes_3, $weight_3,
-        $plazo_preparacion_pedido, $contraoferta, $localidad_recogida, $cp_recogida, $provincia_recogida, $offer_units,
-        $boxes_quantity, $whole_box_dimensions, $embalaje_original, $provider, $invoice_cost_price,
-        $buyed_date, $boxes, $offer, $new, $offer_until, $offer_prize, $porte_id, $subcategorie_id, $active, $net_price;
+    public $name, $description, $short_description, $product_code, $subcategorie_id,
+        $part_number, $brand, $EAN13_individual, $net_price, $unidades_embalaje_individual, $dimensions_boxes, $weight,
+        $pack_units, $EAN13_box_1, $unidades_embalaje_2, $dimensions_boxes_2, $weight_2,
+        $EAN13_box_2, $unidades_embalaje_3, $dimensions_boxes_3, $weight_3, $EAN13_box_3,
+        $embalaje_original, $active;
 
     public $isOpen = false;
 
@@ -37,44 +36,35 @@ class ShowEditProduct extends Component
     public $subcategories;
 
     protected $rules = [
+            //images
             'product_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048|nullable',
             'product_image_2' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048|nullable',
             'product_image_3' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048|nullable',
-            'user_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048|nullable',
-            'user_image_2' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048|nullable',
-            'user_image_3' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048|nullable',
             //rest of the fields:
             'name' => 'string|nullable',
             'short_description' => 'string|nullable',
             'description' => 'string|nullable',
             'product_code' => 'string|nullable',
+            'subcategorie_id' => 'int|nullable',
             'part_number'=> 'string|nullable',
             'brand' => 'string|nullable',
             'EAN13_individual' =>'string|nullable',
-            'dimensions_boxes' => 'string|nullable',
+            'net_price' => 'int|nullable',
             'unidades_embalaje_individual' => 'string|nullable',
+            'dimensions_boxes' => 'string|nullable',
             'weight' => 'string|nullable',
             'pack_units' => 'string|nullable',
+            'EAN13_box_1' => 'string|nullable',
+            'unidades_embalaje_2' => 'string|nullable',
             'dimensions_boxes_2' => 'string|nullable',
             'weight_2' => 'string|nullable',
+            'EAN13_box_2' => 'string|nullable',
+            'unidades_embalaje_3' => 'string|nullable',
             'dimensions_boxes_3' => 'string|nullable',
             'weight_3' => 'string|nullable',
-            'plazo_preparacion_pedido' => 'string|nullable',
-            'offer_units' => 'string|nullable',
-            'boxes_quantity' => 'string|nullable',
-            'whole_box_dimensions' => 'string|nullable',
-            'boxes_quantity' => 'string|nullable',
-            'provider' => 'string|nullable',
-            'invoice_cost_price' => 'string|nullable',
-            'buyed_date' => 'date|nullable',
-            'offer_until' => 'string|nullable',
-            'localidad_recogida' => 'string|nullable',
-            'cp_recogida' => 'string|nullable',
-            'provincia_recogida' => 'string|nullable',
-            'porte_id' => 'int|nullable',
-            'subcategorie_id' => 'int|nullable',
-            'active' => 'int|required',
-            'net_price' => 'int|nullable',
+            'EAN13_box_3' => 'string|nullable',
+            'active' => 'int|nullable',
+
     ];
 
     /**
@@ -151,49 +141,49 @@ class ShowEditProduct extends Component
             $this->product->product_image_3 = $data['product_image_3'];
         }
 
-        if($data['user_image']){
-            //mandamos un messaje al usuario de que la imagen se esta procesando
-            $this->processing = true;
-            $image = $this->user_image;
-            $name = substr( uniqid(rand(), true), 8,8 ).'.'.$image->getClientOriginalExtension();
-            $img = Image::make($image->getRealPath())->encode('jpg', 65)->resize(600, null, function($c){
-                $c->aspectRatio();
-                $c->upsize();
-            });
-            $img->stream();
-            Storage::disk('local')->put('public/images/products'.'/'.$name, $img, 'public');
-            $data['user_image'] = $name;
-            $this->product->user_image = $data['user_image'];
-        }
+        // if($data['user_image']){
+        //     //mandamos un messaje al usuario de que la imagen se esta procesando
+        //     $this->processing = true;
+        //     $image = $this->user_image;
+        //     $name = substr( uniqid(rand(), true), 8,8 ).'.'.$image->getClientOriginalExtension();
+        //     $img = Image::make($image->getRealPath())->encode('jpg', 65)->resize(600, null, function($c){
+        //         $c->aspectRatio();
+        //         $c->upsize();
+        //     });
+        //     $img->stream();
+        //     Storage::disk('local')->put('public/images/products'.'/'.$name, $img, 'public');
+        //     $data['user_image'] = $name;
+        //     $this->product->user_image = $data['user_image'];
+        // }
 
-        if($data['user_image_2']){
-            //mandamos un messaje al usuario de que la imagen se esta procesando
-            $this->processing = true;
-            $image = $this->user_image_2;
-            $name = substr( uniqid(rand(), true), 8,8 ).'.'.$image->getClientOriginalExtension();
-            $img = Image::make($image->getRealPath())->encode('jpg', 65)->resize(600, null, function($c){
-                $c->aspectRatio();
-                $c->upsize();
-            });
-            $img->stream();
-            Storage::disk('local')->put('public/images/products'.'/'.$name, $img, 'public');
-            $data['user_image_2'] = $name;
-            $this->product->user_image_2 = $data['user_image_2'];
-        }
-        if($data['user_image_3']){
-            //mandamos un messaje al usuario de que la imagen se esta procesando
-            $this->processing = true;
-            $image = $this->user_image_3;
-            $name = substr( uniqid(rand(), true), 8,8 ).'.'.$image->getClientOriginalExtension();
-            $img = Image::make($image->getRealPath())->encode('jpg', 65)->resize(600, null, function($c){
-                $c->aspectRatio();
-                $c->upsize();
-            });
-            $img->stream();
-            Storage::disk('local')->put('public/images/products'.'/'.$name, $img, 'public');
-            $data['user_image_3'] = $name;
-            $this->product->user_image_3 = $data['user_image_3'];
-        }
+        // if($data['user_image_2']){
+        //     //mandamos un messaje al usuario de que la imagen se esta procesando
+        //     $this->processing = true;
+        //     $image = $this->user_image_2;
+        //     $name = substr( uniqid(rand(), true), 8,8 ).'.'.$image->getClientOriginalExtension();
+        //     $img = Image::make($image->getRealPath())->encode('jpg', 65)->resize(600, null, function($c){
+        //         $c->aspectRatio();
+        //         $c->upsize();
+        //     });
+        //     $img->stream();
+        //     Storage::disk('local')->put('public/images/products'.'/'.$name, $img, 'public');
+        //     $data['user_image_2'] = $name;
+        //     $this->product->user_image_2 = $data['user_image_2'];
+        // }
+        // if($data['user_image_3']){
+        //     //mandamos un messaje al usuario de que la imagen se esta procesando
+        //     $this->processing = true;
+        //     $image = $this->user_image_3;
+        //     $name = substr( uniqid(rand(), true), 8,8 ).'.'.$image->getClientOriginalExtension();
+        //     $img = Image::make($image->getRealPath())->encode('jpg', 65)->resize(600, null, function($c){
+        //         $c->aspectRatio();
+        //         $c->upsize();
+        //     });
+        //     $img->stream();
+        //     Storage::disk('local')->put('public/images/products'.'/'.$name, $img, 'public');
+        //     $data['user_image_3'] = $name;
+        //     $this->product->user_image_3 = $data['user_image_3'];
+        // }
 
 
 
@@ -283,7 +273,11 @@ class ShowEditProduct extends Component
 
         $this->processing = false;
 
-        return redirect()->route('products.index');
+        if($this->product->active == 0){
+            return redirect()->route('products.inactive');
+        }else{
+            return redirect()->route('products.index');
+        }
     }
 
 

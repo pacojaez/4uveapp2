@@ -28,7 +28,7 @@ Route::resource('products', 'ProductController');
 
 Route::get('inactive', function () {
     return view('products.inactive');
-});
+})->name('products.inactive');
 
 Route::get('productos', function() {
     return view('allproducts');

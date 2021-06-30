@@ -28,7 +28,7 @@
                                 </th>
                                 <th scope="col"
                                     class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                                    DIMENSIONES
+                                    DATOS OFERTA
                                 </th>
                                 <th scope="col"
                                     class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
@@ -76,7 +76,10 @@
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <div class="text-sm text-gray-500">
-                                        Localidad: {{ $oferta->localida_recogida }}
+                                        Localidad: {{ $oferta->localidad_recogida }}
+                                    </div>
+                                    <div class="text-sm text-gray-500">
+                                        Provincia: {{ $oferta->provincia_recogida }}
                                     </div>
                                     <div class="text-sm text-gray-900">
                                         Plazo Preparación: : {{ $oferta->plazo_preparacion_pedido }}
@@ -116,8 +119,12 @@
                                     <div class="text-sm font-medium text-gray-900">
                                         {{ $oferta->user->email }}
                                     </div>
-
-
+                                    <div class="inline-flex text-sm font-medium text-gray-900 align-middle">
+                                        <img class="w-5 h-5"
+                                        src="{{asset('storage/images/elementos/phone_icon.png')}}"
+                                        alt="{{ $oferta->product->name}}" />
+                                        <span>{{ $oferta->user->phone }}</span>
+                                    </div>
                                 </td>
                                 <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
                                     <a href="{{ route( 'ofertas.show', $oferta->id ) }}"
