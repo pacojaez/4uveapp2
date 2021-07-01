@@ -1,4 +1,4 @@
-<x-guestfullpage-layout>
+<x-guest-full-page>
     <x-jet-validation-errors class="w-5/6 mb-4" />
     {{-- <x-jet-authentication-card> --}}
     <x-slot name="logo">
@@ -285,13 +285,13 @@
                                         </div>
                                         <select id="tipo_usuario" name="tipo_usuario"
                                             class="w-32 py-3 pl-3 pr-8 leading-tight text-gray-600 border-none rounded appearance-none">
-                                            <option value="Papeleria" selected>Papelería</option>
+                                            <option value="Papelería" selected>Papelería</option>
                                             <option value="Cadena de Papelerias">Cadena de Papelerías</option>
                                             <option value="Suministrador a Oficinas con Punto de Venta">Suministrador a
                                                 Oficinas con Punto de Venta</option>
-                                            <option value="Suministrador a Colegios con Almacen">Suministrador a
+                                            <option value="Suministrador a Colegios con Almacén">Suministrador a
                                                 Colegios con Almacén</option>
-                                            <option value="Suministrador a Oficinas con Almacen">Suministrador a
+                                            <option value="Suministrador a Oficinas con Almacén">Suministrador a
                                                 Oficinas con Almacén</option>
                                             <option value="Mayorista">Mayorista</option>
                                             <option value="Mayorista con Punto de Venta">Mayorista con Punto de Venta
@@ -387,4 +387,4 @@
     </div>
     </div>
     {{-- </x-jet-authentication-card> --}}
-</x-guestfullpage-layout>
+</x-guest-full-page>

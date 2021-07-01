@@ -1,4 +1,4 @@
-<x-guestfullpage-layout>
+<x-guest-full-page>
         <!-- PRUEBA DE LOGIN -->
         <section class="flex items-stretch w-full min-h-screen text-white ">
             <div class="relative items-center hidden w-2/3 bg-gray-500 bg-no-repeat bg-cover lg:flex" style="background-image: url(https://images.unsplash.com/photo-1609618992870-f519a360482e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80);">
@@ -63,7 +63,7 @@
         </section>
         <!-- FIN PRUEBA LOGIN -->
     {{-- </x-jet-authentication-card> --}}
-</x-guestfullpage-layout>
+</x-guest-full-page>
 
 
 
