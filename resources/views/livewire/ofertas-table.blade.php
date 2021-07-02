@@ -128,10 +128,17 @@
                                 </td>
                                 <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
                                     <a href="{{ route( 'ofertas.show', $oferta->id ) }}"
-                                        class="px-2 py-1 text-blue-500 bg-blue-200 rounded hover:bg-blue-500 hover:text-white">Editar</a>
-
-                                    <button wire:click="destroy({{$oferta->id}})"
-                                        class="px-2 py-1 text-red-500 bg-red-200 rounded hover:bg-red-500 hover:text-white">Borrar</button>
+                                        class="px-2 py-1 mx-2 text-blue-500 bg-blue-200 rounded hover:bg-blue-500 hover:text-white">
+                                        Editar
+                                    </a>
+                                    <button wire:click="$emit('openModal', 'delete-offer-modal', {{ json_encode(["oferta_id" => $oferta->id ]) }})"
+                                        class="px-2 py-1 mx-2 text-red-500 bg-red-200 rounded hover:bg-ref-500 hover:text-white">
+                                        Borrar
+                                    </button>
+                                    {{-- <button wire:click="destroy({{$oferta->id}})"
+                                        class="px-2 py-1 text-red-500 bg-red-200 rounded hover:bg-red-500 hover:text-white">
+                                        Borrar
+                                    </button> --}}
                                 </td>
                             </tr>
                             @endforeach

@@ -20,6 +20,16 @@ class OfertasTable extends Component
     public $orderAsc = false;
     public $noOfertas;
 
+    public function delete($id){
+
+
+    }
+
+    public function destroy($id){
+
+
+    }
+
     public function render()
     {
         if(Auth::user()->is_admin){
