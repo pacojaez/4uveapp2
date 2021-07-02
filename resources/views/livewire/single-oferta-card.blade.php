@@ -104,11 +104,11 @@
                 @endif
                 @if($oferta->user_image_2)
                 <img alt="{{ $product->name }}" class="object-cover object-center w-1/4 h-64 m-2 rounded lg:w-1/4 lg:h-auto"
-                src="{{asset('storage/images/products/'.$oferta->user_image_2)}} /">
+                src="{{asset('storage/images/products/'.$oferta->user_image_2)}}" />
                 @endif
                 @if($oferta->user_image_3)
                 <img alt="{{ $product->name }}" class="object-cover object-center w-1/4 h-64 m-2 rounded lg:w-1/4 lg:h-auto"
-                    src="{{asset('storage/images/products/'.$oferta->user_image_3)}} /">
+                    src="{{asset('storage/images/products/'.$oferta->user_image_3)}}" />
                 @endif
             </div>
         </div>
