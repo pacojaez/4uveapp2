@@ -22,10 +22,12 @@ class OfertasTable extends Component
 
     public function render()
     {
-        if(Auth::user()->isAdmin){
+        if(Auth::user()->is_admin){
             $this->ofertas =  Oferta::search($this->search)
             ->orderBy($this->orderBy, $this->orderAsc ? 'asc' : 'desc')
             ->paginate($this->perPage);
+
+            // dd($this->ofertas);
         }else{
             $this->ofertas =  Oferta::where('user_id', '=', Auth::user()->id)->get();
             // dd($this->ofertas);
