@@ -1,19 +1,8 @@
 <div>
-    {{-- <button wire:click.prefetch="toggleContent" class="px-4 py-2 mb-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700">Show/Hide Register Form</button> --}}
 
-    {{-- @if ($contentIsVisible)
-        <button wire:click.prefetch="updateMode" class="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700">Reset Form</button>
-        @if($updateMode)
-            @include('livewire.update')
-        @else
-            @include('livewire.create')
-        @endif
-    @endif --}}
-    @if (\Session::has('success'))
-    <div class="alert alert-success">
-        <ul>
-            <li>{!! \Session::get('success') !!}</li>
-        </ul>
+    @if (session()->has('product_deleted'))
+    <div class="px-4 py-2 text-sm font-semibold text-green-900 bg-green-500 border border-green-600 rounded-md">
+        {{ session('product_deleted') }}
     </div>
     @endif
     <div class="flex w-full pb-10">
@@ -36,9 +25,7 @@
                 <option value="invoice_cost_price">Precio Compra</option>
             </select>
             <div class="absolute inset-y-0 right-0 flex items-center px-2 text-gray-700 pointer-events-none">
-                {{-- <svg class="w-4 h-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                    <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
-                </svg> --}}
+
             </div>
         </div>
         <div class="relative w-1/6 mx-1">
@@ -121,23 +108,7 @@
                                             <div class="text-sm font-medium text-gray-900">
                                                 Marca: {{$product->brand }}
                                             </div>
-                                            {{-- <div class="text-sm text-gray-500">
-                                                Codigo: {{ $product->product_code }}
-                                                EAN-13: {{ $product->EAN13_individual }}
-                                                Part Number: {{ $product->part_number }}
-                                            </div> --}}
-                                            {{-- <div class="text-sm text-gray-500">
-                                                Dimensiones: {{ $product->dimensions_boxes }}
-                                                Peso: {{ $product->weight }}
-                                            </div>
-                                            <div class="text-sm text-gray-500">
-                                                Unidades Embalaje Individual:
-                                                {{ $product->unidades_embalaje_individual }}
-                                                Unidades Pack: {{ $product->pack_units }}
-                                            </div> --}}
-                                            {{-- <div class="text-sm font-medium text-gray-900">
-                                                Contacto Vendedor: {{ $product->user->email }}
-                                            </div> --}}
+
                                         </div>
                                     </div>
                                 </td>
@@ -166,51 +137,56 @@
                                     <div class="text-sm text-gray-500">
                                         Unidades Pack: {{ $product->pack_units }}
                                     </div>
-                                    {{-- <div class="text-sm text-gray-900">Precio Coste: {{ $product->invoice_cost_price }}</div>
-                                    <div class="text-sm text-gray-900">Precio Oferta: {{ $product->offer_price }}</div>
-                                    <div class="text-sm text-gray-900">Fecha Compra: {{ $product->buyed_date }}</div>
-                                    <div class="text-sm text-gray-900">Oferta hasta: {{ $product->offer_until }}</div> --}}
-                                    {{-- <span
+                                    {{-- <div class="text-sm text-gray-900">Precio Coste: {{ $product->invoice_cost_price }}
+                </div>
+                <div class="text-sm text-gray-900">Precio Oferta: {{ $product->offer_price }}</div>
+                <div class="text-sm text-gray-900">Fecha Compra: {{ $product->buyed_date }}</div>
+                <div class="text-sm text-gray-900">Oferta hasta: {{ $product->offer_until }}</div> --}}
+                {{-- <span
                                         class="inline-flex px-2 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full">
                                         {{ $user->tipo_usuario }}
-                                    </span> --}}
-                                </td>
-                                <td class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
-                                    @if($product->embalaje_original == 'Y')
-                                    <span
-                                        class="inline-flex px-2 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full">
-                                        Embalaje Original
-                                    </span>
-                                    @endif
-                                    {{-- <div class="text-sm text-gray-900">Embalaje Original: {{ $product->embalaje_original }}
-                </div> --}}
-                <div class="text-sm text-gray-900">Subido por:</div>
-                <div class="text-sm text-gray-900">
-                    {{ $product->user->name.' '. $product->user->surname }}
-                </div>
-                <div class="text-sm text-gray-900">CONTACTO:</div>
-                <div class="text-sm font-medium text-gray-900">
-                    {{ $product->user->email }}
-                </div>
-
-                {{-- <div class="text-sm text-gray-900">Portes: {{ $product->oferta->porte->tipo }}</div> --}}
+                </span> --}}
                 </td>
-                <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
-                    <a href="{{ route( 'products.show', $product->id ) }}"
-                        class="px-2 py-1 text-blue-500 bg-blue-200 rounded hover:bg-blue-500 hover:text-white">Editar</a>
-                    {{-- <button class="px-2 py-1 text-blue-500 bg-blue-200 rounded hover:bg-blue-500 hover:text-white">Editar</button> --}}
-
-                    <button wire:click="destroy({{$product->id}})"
-                        class="px-2 py-1 text-red-500 bg-red-200 rounded hover:bg-red-500 hover:text-white">Borrar</button>
-                </td>
-                </tr>
-                @endforeach
-                </tbody>
-                </table>
-                <div class="p-2 m-auto bg-gray-200"> {!! $products->links() !!} </div>
+                <td class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
+                    @if($product->embalaje_original == 'Y')
+                    <span
+                        class="inline-flex px-2 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full">
+                        Embalaje Original
+                    </span>
+                    @endif
+                    {{-- <div class="text-sm text-gray-900">Embalaje Original: {{ $product->embalaje_original }}
+            </div> --}}
+            <div class="text-sm text-gray-900">Subido por:</div>
+            <div class="text-sm text-gray-900">
+                {{ $product->user->name.' '. $product->user->surname }}
             </div>
-        </div>
+            <div class="text-sm text-gray-900">CONTACTO:</div>
+            <div class="text-sm font-medium text-gray-900">
+                {{ $product->user->email }}
+            </div>
+
+            {{-- <div class="text-sm text-gray-900">Portes: {{ $product->oferta->porte->tipo }}
+        </div> --}}
+        </td>
+        <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
+            <a href="{{ route( 'products.show', $product->id ) }}"
+                class="px-2 py-1 text-blue-500 bg-blue-200 rounded hover:bg-blue-500 hover:text-white">Editar</a>
+            {{-- <button class="px-2 py-1 text-blue-500 bg-blue-200 rounded hover:bg-blue-500 hover:text-white">Editar</button> --}}
+
+            <button
+                wire:click="$emit('openModal', 'delete-product-modal', {{ json_encode(["product_id" => $product->id ]) }})"
+                class="px-2 py-1 mx-2 text-red-500 bg-red-200 rounded hover:bg-ref-500 hover:text-white">
+                Borrar
+            </button>
+        </td>
+        </tr>
+        @endforeach
+        </tbody>
+        </table>
+        <div class="p-2 m-auto bg-gray-200"> {!! $products->links() !!} </div>
     </div>
+</div>
+</div>
 </div>
 @endif
 </div>

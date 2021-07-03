@@ -6,6 +6,11 @@
         </ul>
     </div>
     @endif
+    @if (session()->has('offer_deleted'))
+    <div class="px-4 py-2 text-sm font-semibold text-green-900 bg-green-500 border border-green-600 rounded-md">
+        {{ session('offer_deleted') }}
+    </div>
+    @endif
 
     @if( $ofertas->count() == 0 )
     <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -130,8 +135,11 @@
                                     <a href="{{ route( 'ofertas.show', $oferta->id ) }}"
                                         class="px-2 py-1 text-blue-500 bg-blue-200 rounded hover:bg-blue-500 hover:text-white">Editar</a>
 
-                                    <button wire:click="destroy({{$oferta->id}})"
-                                        class="px-2 py-1 text-red-500 bg-red-200 rounded hover:bg-red-500 hover:text-white">Borrar</button>
+                                    <button
+                                        wire:click="$emit('openModal', 'delete-offer-modal', {{ json_encode(["oferta_id" => $oferta->id ]) }})"
+                                        class="px-2 py-1 mx-2 text-red-500 bg-red-200 rounded hover:bg-ref-500 hover:text-white">
+                                        Borrar
+                                    </button>
                                 </td>
                             </tr>
                             @endforeach

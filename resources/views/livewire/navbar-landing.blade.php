@@ -8,7 +8,7 @@
                     <a href="{{ route('welcome') }}">
                         <x-jet-application-mark class="block w-auto h-9" />
                     </a>
-                    <h3 class="ml-10 text-xl text-red-500 font-title">la web de las papelerías</h3>
+                    <h3 class="ml-10 text-xl text-red-500 uppercase font-title">la web de las papelerías</h3>
                 </div>
                 <div class="items-center justify-end flex-grow hidden md:flex">
                     <x-jet-nav-link href="{{ route('register') }}" class="m-5 font-title">
