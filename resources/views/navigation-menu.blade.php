@@ -59,9 +59,6 @@
                                 {{ __('Perfil') }}
                             </x-jet-dropdown-link>
                             @if(Auth::user())
-                            {{-- <x-jet-dropdown-link href="{{ route('products.create') }}">
-                                {{ __('Añadir Producto') }}
-                            </x-jet-dropdown-link> --}}
                             <x-jet-dropdown-link href="{{ route('products.wizard') }}">
                                 {{ __('Añadir Oferta') }}
                             </x-jet-dropdown-link>

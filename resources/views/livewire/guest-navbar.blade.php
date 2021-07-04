@@ -67,16 +67,18 @@
                             <x-slot name="content">
                                 <!-- Account Management -->
                                 <div class="block px-4 py-2 text-xs text-gray-400">
-                                    {{ __('GESTIONAR CUENTA') }}
+                                    {{ __('Gestionar tu Cuenta') }}
                                 </div>
 
                                 <x-jet-dropdown-link href="{{ route('profile.show') }}">
-                                    {{ __('Tu perfil') }}
+                                    {{ __('Perfil') }}
                                 </x-jet-dropdown-link>
-
-                                @if(Auth::user()->isAdmin())
-                                <x-jet-dropdown-link href="{{ route('products.create') }}">
-                                    {{ __('Añadir Producto') }}
+                                @if(Auth::user())
+                                <x-jet-dropdown-link href="{{ route('products.wizard') }}">
+                                    {{ __('Añadir Oferta') }}
+                                </x-jet-dropdown-link>
+                                <x-jet-dropdown-link href="{{ route('ofertas.index') }}">
+                                    {{ __('Mis Ofertas') }}
                                 </x-jet-dropdown-link>
                                 @endif
                                 @if(Auth::user()->isAdmin())
@@ -86,18 +88,24 @@
                                 <x-jet-dropdown-link href="{{ url('inactive') }}">
                                     {{ __('Productos INACTIVOS') }}
                                 </x-jet-dropdown-link>
-                                    <x-jet-dropdown-link href="{{ route('user.create') }}">
-                                        {{ __('Añadir Usuario') }}
-                                    </x-jet-dropdown-link>
-                                    <x-jet-dropdown-link href="{{ route('users.index') }}">
-                                        {{ __('Todos los Usuarios') }}
-                                    </x-jet-dropdown-link>
+                                <x-jet-dropdown-link href="{{ route('ofertas.index') }}">
+                                    {{ __('Todas las Ofertas') }}
+                                </x-jet-dropdown-link>
+                                <x-jet-dropdown-link href="{{ url('ofertasinactive') }}">
+                                    {{ __('Ofertas INACTIVAS') }}
+                                </x-jet-dropdown-link>
+                                <x-jet-dropdown-link href="{{ route('user.create') }}">
+                                    {{ __('Añadir Usuario') }}
+                                </x-jet-dropdown-link>
+                                <x-jet-dropdown-link href="{{ route('users.index') }}">
+                                    {{ __('Todos los Usuarios') }}
+                                </x-jet-dropdown-link>
                                 @endif
 
                                 @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
-                                <x-jet-dropdown-link href="{{ route('api-tokens.index') }}">
-                                    {{ __('API Tokens') }}
-                                </x-jet-dropdown-link>
+                                    <x-jet-dropdown-link href="{{ route('api-tokens.index') }}">
+                                        {{ __('API Tokens') }}
+                                    </x-jet-dropdown-link>
                                 @endif
 
                                 <div class="border-t border-gray-100"></div>
@@ -106,7 +114,8 @@
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
 
-                                    <x-jet-dropdown-link href="{{ route('logout') }}" onclick="event.preventDefault();
+                                    <x-jet-dropdown-link href="{{ route('logout') }}"
+                                             onclick="event.preventDefault();
                                                     this.closest('form').submit();">
                                         {{ __('Log Out') }}
                                     </x-jet-dropdown-link>
