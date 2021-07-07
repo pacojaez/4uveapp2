@@ -1,6 +1,8 @@
-<div class="flex flex-wrap content-center md:h-screen">
+<div x-cloak class="flex flex-wrap content-center md:h-screen">
     <div class="w-full text-center">
-        <div class="text-6xl leading-none text-red-600 py-auto font-title">Si no se vende, súbelo!,</div>
+        <div class="text-6xl leading-none text-red-600 py-auto font-title">
+            Si no se vende, súbelo!,
+        </div>
         <div class="py-4 text-4xl antialiased text-red-600 font-subtitle text-true-gray-500">
             cóbralo al contado y encuentra los artículos que necesitas al mejor precio.
         </div>
@@ -17,4 +19,4 @@
             </div>
         </div>
     </div>
-  </div>
+</div>
