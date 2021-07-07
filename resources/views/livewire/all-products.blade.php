@@ -1,7 +1,7 @@
 <div>
         <div class="p-2 mx-8 font-semibold bg-gray-300 justify-items-center">
             <h2 class="m-4 ml-12 text-xl font-semibold leading-tight text-gray-800">
-                {{ __('Todos nuestros Productos y Ofertas')  }}
+                {{ __('Busca entre todos nuestros Productos y Ofertas')  }}
             </h2>
              <!-- BUSCADOR -->
              <div class="flex w-full pb-10">
@@ -101,8 +101,8 @@
                           </div>
                         <div class="flex-1 w-full ml-2">
                             <div>
-                                <div class="mt-3 text-xl font-bold leading-8">Precio Compra: {{$oferta->invoice_cost_price}} €</div>
-                                <div class="mt-3 text-3xl font-bold leading-8">Oferta: {{$oferta->offer_prize}} €</div>
+                                <div class="mt-1 text-base font-bold leading-8">Precio Mercado:  <span class="line-through ">{{$oferta->invoice_cost_price}} €</span></div>
+                                <div class="mt-1 text-xl font-bold leading-8">Oferta:{{$oferta->offer_prize}} €</div>
                                 <div class="mt-1 text-base text-gray-600">{{$oferta->product->name}}</div>
                             </div>
                         </div>

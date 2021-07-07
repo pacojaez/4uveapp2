@@ -26,7 +26,6 @@ class AllProducts extends Component
 
         $ofertas = Oferta::join("products", "ofertas.product_id", "=", "products.id")
         ->select('ofertas.*',"products.name", "products.product_image", "products.brand", "products.EAN13_individual" )
-        // ->where("alumnos.nombre", "=", $this->search)
         ->where('products.brand', 'like', '%'.$this->search.'%')
         ->orWhere('products.EAN13_individual', 'like', '%'.$this->search.'%')
         ->orWhere('products.name', 'like', '%'.$this->search.'%')
@@ -34,12 +33,12 @@ class AllProducts extends Component
         ->orderBy($this->orderBy, $this->orderAsc ? 'asc' : 'desc')
         ->paginate($this->perPage);
 
-        $this->products =  Product::search($this->search)
-                ->select('id', 'name', 'description', 'product_image', 'brand')
-                ->with('oferta')
-                ->with('porte')
-                ->orderBy($this->orderBy, $this->orderAsc ? 'asc' : 'desc')
-                ->paginate($this->perPage);
+        // $this->products =  Product::search($this->search)
+        //         ->select('id', 'name', 'description', 'product_image', 'brand')
+        //         ->with('oferta')
+        //         ->with('porte')
+        //         ->orderBy($this->orderBy, $this->orderAsc ? 'asc' : 'desc')
+        //         ->paginate($this->perPage);
         // dd($ofertas);
 
         return view('livewire.all-products', [
