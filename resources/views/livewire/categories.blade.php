@@ -27,11 +27,11 @@
 
             <div class="p-5 shadow-2xl">
                 <div class="flex justify-between">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="text-blue-400 h-7 w-7" fill="none"
+                    {{-- <svg xmlns="http://www.w3.org/2000/svg" class="text-blue-400 h-7 w-7" fill="none"
                         viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-                    </svg>
+                    </svg> --}}
                     @if($oferta->categoria_oferta == 'Venta Unitaria' || $oferta->categoria_oferta == 'Venta Por Lotes')
                     <div class="flex h-6 px-2 text-sm font-semibold text-white bg-green-500 rounded-full justify-items-center">
                         <span class="flex items-center">
@@ -48,9 +48,10 @@
                     @endif
                     @if($oferta->invoice_cost_price)
                     <div
-                        class="flex h-6 px-2 text-sm font-semibold text-white bg-green-500 rounded-full justify-items-center">
+                        class="flex h-10 px-2 text-sm font-semibold text-white bg-green-500 rounded-full justify-items-center">
                         <span class="flex items-center">
-                            {!! number_format((float)(($oferta->offer_prize*100)/$oferta->invoice_cost_price), 2) !!} %
+                            Ahorro:
+                            {!! number_format((float)(100 -($oferta->offer_prize*100)/$oferta->invoice_cost_price), 2) !!} %
                         </span>
                     </div>
                     @endif
@@ -70,10 +71,10 @@
                 @endif
                 <div class="flex-1 w-full ml-2">
                     <div>
-                        <div class="mt-3 text-xl font-bold leading-8">Precio Compra: {{$oferta->invoice_cost_price}} €
+                        <div class="mt-1 text-base font-bold leading-4 text-gray-500">Precio Mercado: <span class="line-through">{{$oferta->invoice_cost_price}} €</span>
                         </div>
-                        <div class="mt-3 text-3xl font-bold leading-8">Oferta: {{$oferta->offer_prize}} €</div>
-                        <div class="mt-1 text-base text-gray-600">{{$oferta->product->name}}</div>
+                        <div class="mt-1 text-xl font-bold leading-8 text-gray-800">Oferta: {{$oferta->offer_prize}} €</div>
+                        <div class="mt-1 text-base font-bold text-gray-800">{{$oferta->product->name}}</div>
                     </div>
                 </div>
             </div>
@@ -81,7 +82,7 @@
         @endforeach
     </div>
     @else
-    <div class="w-full p-2 mt-5 text-2xl text-center">
+    <div class="w-full p-2 mt-5 text-xl font-bold text-center">
         <h3 class="font-bold">AÚN NO TENEMOS PRODUCTOS EN ESTA CATEGORÍA</h3>
     </div>
     @endif

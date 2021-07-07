@@ -1,6 +1,6 @@
 <div>
-    <section class="overflow-hidden text-gray-600 body-font">
-        <div class="container px-5 py-2 mx-auto">
+    <section class="mb-3 overflow-hidden text-gray-600 body-font">
+        <div class="container px-2 py-2 mx-auto">
             <div class="flex flex-wrap m-2 mx-auto lg:w-4/5">
                 <x-jet-nav-link class="m-5 font-bold">
                     Categoría: {{ $category->name }}
@@ -10,16 +10,16 @@
                 </x-jet-nav-link>
             </div>
             <div class="flex flex-wrap m-2 mx-auto lg:w-4/5">
-                <h1 class="mb-4 text-3xl font-medium text-gray-900 title-font">{{ $product->name }}</h1>
+                <h1 class="mb-4 text-3xl font-medium text-gray-900 uppercase title-font">{{ $product->name }}</h1>
             </div>
             <div class="flex flex-wrap mx-auto lg:w-4/5">
                 <div class="w-full mb-6 lg:w-1/2 lg:pr-10 lg:py-6 lg:mb-0">
-
                     <h2 class="text-xl font-semibold tracking-widest text-gray-500 title-font">Marca: {{ $product->brand }}
                     </h2>
                     {{-- <h1 class="mb-4 text-3xl font-medium text-gray-900 title-font">{{ $product->name }}</h1> --}}
                     <div class="flex mb-4">
-                        <h3 class="flex-grow px-1 py-2 text-lg text-indigo-500 border-b-2 border-indigo-500">Descripción
+                        <h3 class="flex-grow px-1 py-2 text-lg text-indigo-500 border-b-2 border-indigo-500">
+                            Descripción
                         </h3>
                         {{-- <a class="flex-grow px-1 py-2 text-lg border-b-2 border-gray-300">Reviews</a>
                         <a class="flex-grow px-1 py-2 text-lg border-b-2 border-gray-300">Details</a> --}}
@@ -33,33 +33,36 @@
                         <span class="text-gray-500">Código de Producto</span>
                         <span class="ml-auto text-gray-900">{{$product->product_code}}</span>
                     </div>
-                    <div class="flex py-2 mb-6 border-t border-b border-gray-200">
+                    <div class="flex py-2 border-t border-gray-200">
                         <span class="text-gray-500">Part Number</span>
                         <span class="ml-auto text-gray-900">{{ $product->part_number }}</span>
                     </div>
-                    <div class="flex py-2 mb-6 border-t border-b border-gray-200">
-                        <span class="text-gray-500">Precio Coste: </span>
-                        <span class="ml-auto text-gray-900">{{ $oferta->invoice_cost_price }}</span>
+                    <div class="flex py-2 mb-2 border-t border-gray-200">
+                        <span class="text-gray-500">Precio Mercado: </span>
+                        <span class="ml-auto text-gray-900 line-through">{{ $oferta->invoice_cost_price }} €</span>
                     </div>
-                    <div class="flex p-2 mb-2 border-t border-gray-200">
-                        <span class="text-2xl font-extrabold text-gray-500">Porcentaje de Ahorro</span>
+                    <div class="flex py-2 mb-2 border-t border-gray-200">
+                        <span class="text-xl font-extrabold text-gray-500">Porcentaje de Ahorro</span>
                         @if($oferta->invoice_cost_price)
-                        <span class="ml-auto text-2xl font-extrabold text-gray-900">
+                        <span class="ml-auto text-xl font-extrabold text-gray-900">
                             {!! number_format((float)(100- ($oferta->offer_prize*100)/$oferta->invoice_cost_price), 2) !!}
                             %</span>
                         @endif
                     </div>
-                    <div class="flex p-2 mb-2 border-t border-gray-200">
-                        <span class="text-4xl font-extrabold text-gray-500">Oferta: </span>
-                        <span class="ml-auto text-4xl font-extrabold text-gray-900">
+                    <div class="flex py-2 border-t border-gray-200">
+                        <span class="text-2xl font-extrabold text-gray-500">Oferta: </span>
+                        <span class="ml-auto text-3xl font-extrabold text-gray-900">
                             {{ $oferta->offer_prize}} €</span>
                     </div>
                     <div class="flex">
-                        <div class="bottom-0 flex w-full pb-5 mt-5">
+                        <div class="bottom-0 flex w-full pb-5 mt-2">
+                            <label for="quantity" class="mr-2 text-xl font-extrabold text-gray-500">
+                                Cantidad:
+                            </label>
                             <input class="mb-2 border-2 rounded" type="number" min="1" wire:model="quantity">
                             <button wire:click="addToCart"
-                                class="flex px-6 py-2 ml-auto mr-4 font-bold text-white uppercase bg-indigo-500 border-0 rounded focus:outline-none hover:bg-indigo-600">
-                                AÑADIR AL CARRITO
+                                class="flex px-4 py-2 ml-2 font-bold text-white uppercase bg-indigo-500 border-0 rounded focus:outline-none hover:bg-indigo-600">
+                                COMPRAR
                             </button>
                         </div>
                         {{-- <script>
@@ -83,18 +86,24 @@
         </div>
     </section>
     <!-- SECCION DE FOTOS DEL PRODUCTO -->
+    @if( $product->image_2 || $product->image_3)
     <section class="overflow-hidden text-gray-600 body-font">
         <h2 class="flex justify-center w-full text-2xl font-bold body-font">FOTOS DEL PRODUCTO</h2>
         <div class="container px-5 py-6 mx-auto">
             <div class="flex flex-wrap justify-between mx-auto lg:w-4/5">
+                @if( $product->image_2)
                 <img alt="{{ $product->name }}" class="object-cover object-center w-1/3 h-64 m-2 rounded lg:w-1/3 lg:h-80"
                     src="{{asset('storage/images/products/'.$product->product_image_2)}}">
+                @endif
+                @if( $product->image_2)
                 <img alt="{{ $product->name }}" class="object-cover object-center w-1/3 h-64 m-2 rounded lg:w-1/3 lg:h-80"
                     src="{{asset('storage/images/products/'.$product->product_image_2)}}">
+                @endif
             </div>
         </div>
     </section>
-    <section class="overflow-hidden text-gray-600 body-font">
+    @endif
+    <section class="mt-4 overflow-hidden text-gray-600 body-font">
         <h2 class="flex justify-center text-2xl font-bold body-font">FOTOS DEL LOTE</h2>
         <div class="container px-5 py-6 mx-auto">
             <div class="flex flex-wrap justify-between mx-auto lg:w-full">
@@ -262,8 +271,8 @@
                         <span class="ml-auto text-gray-900">{{ $oferta->provider }}</span>
                     </div>
                     <div class="flex p-2 bg-gray-200 border-t border-gray-200">
-                        <span class="text-gray-500">Precio Compra</span>
-                        <span class="ml-auto text-gray-900">{{$oferta->invoice_cost_price}} €</span>
+                        <span class="text-gray-500">Precio Mercado: </span>
+                        <span class="ml-auto text-gray-900 line-through">{{$oferta->invoice_cost_price}} €</span>
                     </div>
                     <div class="flex p-2 border-t border-gray-200">
                         <span class="text-gray-500">Fecha de Compra</span>
@@ -334,7 +343,7 @@
                     {{-- <span class="ml-auto text-gray-900">{{ $product->EAN13_box_2 }}</span> --}}
                 </div>
                 <div class="flex p-2 mb-4 bg-gray-200 border-t border-gray-200">
-                    <span class="text-gray-500">PORTES</span>
+                    {{-- <span class="text-gray-500">PORTES</span> --}}
                     <span class="ml-auto text-gray-900">{{$porte->name}}</span>
                 </div>
                 <div class="flex p-2 border-t border-gray-200">
@@ -356,7 +365,7 @@
                         <input class="mb-2 border-2 rounded" type="number" min="1" wire:model="quantity">
                         <button wire:click="addToCart"
                             class="flex px-6 py-2 ml-auto mr-4 font-bold text-white uppercase bg-indigo-500 border-0 rounded focus:outline-none hover:bg-indigo-600">
-                            AÑADIR AL CARRITO
+                            COMPRAR
                         </button>
                     </div>
                 </div>

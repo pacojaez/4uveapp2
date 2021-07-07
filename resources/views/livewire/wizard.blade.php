@@ -516,14 +516,14 @@
                                                 <div class="grid grid-cols-1">
                                                     <label
                                                         class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">
-                                                        Unidades Embalaje Original:
+                                                        Unidades Embalaje Individual:
                                                     </label>
-                                                    <input wire:model='unidades_embalaje_original'
-                                                        id='unidades_embalaje_original'
-                                                        name="unidades_embalaje_original"
+                                                    <input wire:model='unidades_embalaje_individual'
+                                                        id='unidades_embalaje_individual'
+                                                        name="unidades_embalaje_individual"
                                                         class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
                                                         type="int" placeholder="Ej: 1" />
-                                                    @error('unidades_embalaje_original') <span
+                                                    @error('unidades_embalaje_individual') <span
                                                         class="text-red-600 error">{{ $message }}</span> @enderror
                                                 </div>
                                                 <div class="grid grid-cols-1">

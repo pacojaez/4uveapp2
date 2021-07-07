@@ -45,7 +45,7 @@ class Wizard extends Component
     public $temp_url_3 = false;
 
     public $name, $description, $short_description, $product_code, $lote_image, $cb_unit, $part_number, $brand,
-        $EAN13_individual, $unidades_embalaje_original, $dimensions, $weight, $subcategorie_id,
+        $EAN13_individual, $unidades_embalaje_individual, $dimensions, $weight, $subcategorie_id,
         $unidades_embalaje_2, $dimensions_boxes_2, $weight_2, $unidades_embalaje_3, $dimensions_boxes_3, $weight_3, $EAN13_box_1, $EAN13_box_2, $EAN13_box_3;
 
     public $plazo_preparacion_pedido, $contraoferta, $localidad_recogida, $cp_recogida, $provincia_recogida, $offer_units,
@@ -76,14 +76,14 @@ class Wizard extends Component
         'EAN13_individual' => 'string|nullable',
         'dimensions' => 'string|nullable',
         'weight' => 'string|nullable|regex:/^\d*\.?\d+$/',
-        'unidades_embalaje_original' => 'string|nullable',
+        'unidades_embalaje_individual' => 'string|nullable|regex:/^\d*\.?\d+$/',
         'dimensions_boxes_2' => 'string|nullable',
         'weight_2' => 'string|nullable',
         'dimensions_boxes_3' => 'string|nullable',
         'weight_3' => 'string|nullable',
         'subcategorie_id' => 'int|required',
         'net_price' => 'string|nullable|regex:/^\d*\.?\d+$/',
-        'unidades_embalaje_original' => 'string|nullable|regex:/^\d*\.?\d+$/',
+        // 'unidades_embalaje_original' => 'string|nullable|regex:/^\d*\.?\d+$/',
     ];
 
     protected $rulesOffer = [
@@ -104,7 +104,7 @@ class Wizard extends Component
         'porte_id' => 'required|string|regex:/^\d*\.?\d+$/',
         'new' => 'nullable|int',
         'categoria_oferta' => 'required|string',
-        'offer_prize' => 'int|nullable|regex:/^\d*\.?\d+$/',
+        'offer_prize' => 'nullable|regex:/^\d*(\.\d{2})?$/',
 
     ];
 
@@ -517,7 +517,7 @@ class Wizard extends Component
             $this->part_number = $this->selectedProduct->part_number;
             $this->EAN13_individual = $this->selectedProduct->EAN13_individual;
             $this->net_price = $this->selectedProduct->net_price;
-            $this->unidades_embalaje_original = $this->selectedProduct->unidades_embalaje_original;
+            $this->unidades_embalaje_individual = $this->selectedProduct->unidades_embalaje_individual;
             $this->dimensions_boxes = $this->selectedProduct->dimensions_boxes;
             $this->weight = $this->selectedProduct->weight;
             $this->EAN13_box_1 = $this->selectedProduct->EAN13_box_1;
