@@ -33,6 +33,7 @@ class ShowEditOferta extends Component
     public $processing = false;
 
     public $portes;
+    public $porte;
     public $subcategories;
 
     public $ahorro;
@@ -71,6 +72,10 @@ class ShowEditOferta extends Component
         $this->oferta = $oferta;
         $this->subcategories = Subcategorie::all();
         $this->portes = Porte::all();
+        $this->categoria_oferta = $oferta->categoria_oferta;
+        $this->contraoferta = $oferta->contraoferta;
+        $this->porte_id = $oferta->porte_id;
+        $this->new = $oferta->new;
         // $this->temp_url_1;
 
     }
@@ -306,12 +311,16 @@ class ShowEditOferta extends Component
             $this->ahorro = 100 - ($this->offer_prize * 100) / $this->invoice_cost_price;
         }
 
+        // $contraoferta = Oferta::all()->list('contraoferta');
+        // dd($contraoferta);
+
         return view('livewire.show-edit-oferta', [
             'oferta' => $this->oferta,
             'user_image' => $this->user_image,
             'user_image_2' => $this->user_image_2,
             'user_image_3' => $this->user_image_3,
             'ahorro' => $this->ahorro,
+            // 'contraoferta' => $contraoferta,
         ]);
     }
 }

@@ -1,5 +1,4 @@
 <div>
-
     <form wire:submit.prevent="update" enctype="multipart/form-data">
         @method('PUT')
         @csrf
@@ -56,8 +55,6 @@
                         </div>
                     </div>
                 </div>
-
-
                 <div class="grid grid-cols-1 gap-5 mt-5 mx-7">
                     <h2 class="text-3xl">DATOS DE LA OFERTA:</h2>
                 </div>
@@ -144,12 +141,13 @@
                     </div>
                     <div class="grid grid-cols-1">
                         <label class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">
-                            ¿ADMITE CONTRAOFERTA?:</label>
+                            ¿ADMITE CONTRAOFERTA?:
+                        </label>
                         <select wire:model='contraoferta' id='contraoferta' name="contraoferta"
                             class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent">
-                            <option value="">--Elige una opción--</option>
-                            <option value="0">NO</option>
-                            <option value="1">SI</option>
+                            {{-- <option value="">--Elige una opción--</option> --}}
+                            <option value="0" {{ $this->oferta->contraoferta ==0 ? 'selected' : '' }} >NO</option>
+                            <option value="1" {{ $this->oferta->contraoferta ==1 ? 'selected' : '' }} >SI</option>
                         </select>
                     </div>
                 </div>
@@ -161,10 +159,10 @@
                         </label>
                         <select wire:model='porte_id' id='porte_id' name="porte_id"
                             class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent">
-                            <option value="" selected>---elije un tipo de porte---</option>
-                            <option value="1">PORTES PAGADOS</option>
-                            <option value="2s">PORTES DEBIDOS</option>
-                            <option value="3">PORTES COMPARTIDOS</option>
+                            <option value="" selected disabled>---elije un tipo de porte---</option>
+                            <option value="1" {{ $this->oferta->porte_id =="1" ? 'selected' : '' }}>PORTES PAGADOS</option>
+                            <option value="2" {{ $this->oferta->porte_id =="2" ? 'selected' : '' }}>PORTES DEBIDOS</option>
+                            <option value="3" {{ $this->oferta->porte_id =="3" ? 'selected' : '' }}>PORTES COMPARTIDOS</option>
                         </select>
                         @error('porte_id') <span
                             class="text-red-600 error">{{ $message }}</span> @enderror
@@ -217,11 +215,11 @@
                         <select wire:model='categoria_oferta' id='categoria_oferta'
                             name="categoria_oferta"
                             class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent">
-                            <option value="" selected>---elije una categoría---</option>
-                            <option value="Venta Unitaria">VENTA UNITARIA</option>
-                            <option value="Venta Por Lotes">VENTA POR LOTES</option>
-                            <option value="Liquidación Lote">LIQUIDACIÓN LOTE</option>
-                            <option value="Liquidación Total">LIQUIDACIÓN TOTAL</option>
+                            <option value="" disabled>---elije una categoría---</option>
+                            <option value="Venta Unitaria" {{ $this->oferta->categoria_oferta =="Venta Unitaria" ? 'selected' : '' }}>VENTA UNITARIA</option>
+                            <option value="Venta Por Lotes" {{ $this->oferta->categoria_oferta =="Venta Por Lotes" ? 'selected' : '' }}>VENTA POR LOTES</option>
+                            <option value="Liquidación Lote" {{ $this->oferta->categoria_oferta =="Liquidación Lote" ? 'selected' : '' }}>LIQUIDACIÓN LOTE</option>
+                            <option value="Liquidación Total" {{ $this->oferta->categoria_oferta =="Liquidación Total" ? 'selected' : '' }}>LIQUIDACIÓN TOTAL</option>
                         </select>
                         @error('categoria_oferta') <span
                             class="text-red-600 error">{{ $message }}</span> @enderror
@@ -234,9 +232,9 @@
                         <select wire:model='embalaje_original' id='embalaje_original'
                             name="embalaje_original"
                             class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent">
-                            <option value="" selected>---elije una opción---</option>
-                            <option value="0">NO</option>
-                            <option value="1">SI</option>
+                            <option value="" disabled>---elije una opción---</option>
+                            <option value="0" {{ $this->oferta->new =="0" ? 'selected' : '' }}>NO</option>
+                            <option value="1" {{ $this->oferta->new =="1" ? 'selected' : '' }}>SI</option>
 
                         </select>
                         @error('embalaje_original') <span
