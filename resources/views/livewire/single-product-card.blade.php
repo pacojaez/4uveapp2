@@ -137,7 +137,7 @@
                     </div>
                     <div class="flex p-2 bg-gray-200 border-t border-gray-200">
                         <span class="text-gray-500">Código de Producto</span>
-                        <span class="ml-auto text-gray-900">{{$product->product_code}}</span>
+                        <span class="ml-auto text-gray-900">{{ $product->product_code }}</span>
                     </div>
                     <div class="flex p-2 mb-6 border-t border-b border-gray-200">
                         <span class="text-gray-500">Part Number</span>
@@ -150,7 +150,7 @@
                     </div>
                     <div class="flex p-2 border-t border-gray-200">
                         <span class="text-gray-500">DIMENSIONES (LxAxH)</span>
-                        <span class="ml-auto text-gray-900">{{$product->dimensions_boxes}} mm</span>
+                        <span class="ml-auto text-gray-900">{{ $product->dimensions }} mm</span>
                     </div>
                     <div class="flex p-2 mb-6 bg-gray-200 border-t border-b border-gray-200">
                         <span class="text-gray-500">PESO</span>

@@ -49,7 +49,7 @@ class Wizard extends Component
         $unidades_embalaje_2, $dimensions_boxes_2, $weight_2, $unidades_embalaje_3, $dimensions_boxes_3, $weight_3, $EAN13_box_1, $EAN13_box_2, $EAN13_box_3;
 
     public $plazo_preparacion_pedido, $contraoferta, $localidad_recogida, $cp_recogida, $provincia_recogida, $offer_units,
-        $boxes_quantity, $boxes_dimensions, $embalaje_original_oferta, $provider, $invoice_cost_price,
+        $boxes_quantity, $boxes_dimensions, $embalaje_original, $provider, $invoice_cost_price,
         $buyed_date, $boxes, $offer, $new, $offer_until, $offer_prize, $net_price,
         $categoria_oferta, $porte_id;
 
@@ -57,6 +57,7 @@ class Wizard extends Component
 
     //esta propiedad equivale al embalaje_original mientras averiguo porque se rompe la vista con embalaje_original
     public $gender;
+    public $contra_oferta;
 
     protected $rules = [
         // Producto: Imagenes
@@ -100,15 +101,17 @@ class Wizard extends Component
         'offer_units' => 'int|nullable|regex:/^\d*\.?\d+$/',
         'boxes' => 'int|nullable|regex:/^\d*\.?\d+$/',
         'provider' => 'string|nullable',
-        'invoice_cost_price' => 'string|nullable|regex:/^\d*\.?\d+$/',
         'buyed_date' => 'date|nullable',
         'localidad_recogida' => 'string|nullable',
         'cp_recogida' => 'string|nullable',
         'provincia_recogida' => 'string|nullable',
         'porte_id' => 'required|string|regex:/^\d*\.?\d+$/',
         'new' => 'nullable|int',
+        'contraoferta' => 'nullable|int',
+        'embalaje_original' => 'nullable|int',
         'categoria_oferta' => 'required|string',
-        'offer_prize' => 'nullable|regex:/^\d*(\.\d{2})?$/',
+        'invoice_cost_price' => 'nullable|regex:/^\d*\.?\d+$/',
+        'offer_prize' => 'nullable|regex:/^\d*\.?\d+$/',
 
     ];
 
@@ -225,7 +228,7 @@ class Wizard extends Component
         $data = $this->validate($this->rulesOffer);
 
 
-        //PROCESAMIENTO IMAGEN 1:
+        //PROCESAMIENTO IMAGEN  USUARIO:
         if ($data['user_image']) {
             //mandamos un messaje al usuario de que la imagen se esta procesando
             $this->processing = true;
@@ -243,7 +246,7 @@ class Wizard extends Component
             // $this->user_temp_url_1 = $image->temporaryUrl();
         }
 
-        //PROCESAMIENTO IMAGEN 2:
+        //PROCESAMIENTO IMAGEN USUARIO 2:
         if ($data['user_image_2']) {
             //mandamos un messaje al usuario de que la imagen se esta procesando
             $this->processing = true;
@@ -261,7 +264,7 @@ class Wizard extends Component
             // $this->user_temp_url_1 = $image->temporaryUrl();
         }
 
-        //PROCESAMIENTO IMAGEN 1:
+        //PROCESAMIENTO IMAGEN  USUARIO 3:
         if ($data['user_image_3']) {
             //mandamos un messaje al usuario de que la imagen se esta procesando
             $this->processing = true;
@@ -545,8 +548,11 @@ class Wizard extends Component
         if ($this->productslist == '') {
             $this->clearSearch();
         }
-        if ($this->invoice_cost_price != 0) {
-            $this->ahorro = 100 - ($this->offer_prize * 100) / $this->invoice_cost_price;
+        $in = floatval($this->invoice_cost_price);
+        $of = floatval($this->offer_prize);
+        if ($in != 0 && $of != 0 ) {
+            // dd(gettype($this->invoice_cost_price));
+            $this->ahorro = number_format( 100 - ( $of * 100) / $in, 2);
         }
 
         // $selected = Product::findOrFail($this->selectedProduct);
@@ -566,8 +572,7 @@ class Wizard extends Component
     /**
      * Write code on Method
      */
-    public function firstStepSubmit()
-    {
+    public function firstStepSubmit(){
         // // dd($this->selectedProduct);
         // $validatedData = $this->validate([
         //     'name' => 'required',
@@ -581,8 +586,7 @@ class Wizard extends Component
     /**
      * Write code on Method
      */
-    public function secondStepSubmit()
-    {
+    public function secondStepSubmit(){
         // $validatedData = $this->validate([
         //     'status' => 'required',
         // ]);
@@ -613,16 +617,14 @@ class Wizard extends Component
     /**
      * Write code on Method
      */
-    public function back($step)
-    {
+    public function back($step){
         $this->currentStep = $step;
     }
 
     /**
      * Write code on Method
      */
-    public function clearForm()
-    {
+    public function clearForm(){
         // $this->name = '';
         // $this->price = '';
         // $this->detail = '';
