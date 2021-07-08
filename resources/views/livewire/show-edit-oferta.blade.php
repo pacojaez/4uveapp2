@@ -12,7 +12,7 @@
                             </label>
                             <div {{-- wire:model='name' id='name' --}}
                                 class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent">
-                                {{$oferta->product->name}}
+                                {{ $oferta->product->name }}
                             </div>
                         </div>
                         <div class="grid grid-cols-1">
@@ -21,7 +21,7 @@
                             </label>
                             <div {{-- wire:model='short_description' id='short_description' --}}
                                 class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent">
-                                {{$oferta->product->short_description}}
+                                {{ $oferta->product->short_description }}
                             </div>
                         </div>
                     </div>
@@ -31,7 +31,7 @@
                         </label>
                         <div {{-- wire:model='description' name="description" id='description' --}}
                             class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent">
-                            {{ $oferta->product->description}}
+                            {{ $oferta->product->description }}
                         </div>
                     </div>
                     <div class="grid grid-cols-1 gap-5 mt-5 md:grid-cols-2 md:gap-8 mx-7">
@@ -39,7 +39,7 @@
                             <label class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">
                                 Código de Producto:
                             </label>
-                            <div wire:model='product_code' id='product_code'
+                             <div {{--wire:model='product_code' id='product_code' --}}
                                 class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent">
                                 {{ $oferta->product->product_code}}
                             </div>
@@ -48,7 +48,8 @@
                             <label class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">
                                 CATEGORÍA:
                             </label>
-                            <div wire:model='product_code' id='product_code'
+                            <div
+                                {{-- wire:model='product_code' id='product_code' --}}
                                 class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent">
                                 {{ $oferta->product->subcategorie->name }}
                             </div>
@@ -145,7 +146,7 @@
                         </label>
                         <select wire:model='contraoferta' id='contraoferta' name="contraoferta"
                             class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent">
-                            {{-- <option value="">--Elige una opción--</option> --}}
+                            <option value="" selected disabled>---elije una opción ---</option>
                             <option value="0" {{ $this->oferta->contraoferta ==0 ? 'selected' : '' }} >NO</option>
                             <option value="1" {{ $this->oferta->contraoferta ==1 ? 'selected' : '' }} >SI</option>
                         </select>
@@ -238,7 +239,8 @@
 
                         </select>
                         @error('embalaje_original') <span
-                            class="text-red-600 error">{{ $message }}</span> @enderror
+                            class="text-red-600 error">{{ $message }}</span>
+                        @enderror
                         {{-- <div class="flex">
                             <label
                                 class="flex items-center justify-start py-3 pl-4 pr-6 mr-4 bg-white rounded-lg shadow-sm text-truncate">
@@ -269,7 +271,7 @@
                             ¿ACTIVAR OFERTA?:</label>
                         <select wire:model='active' id='active' name="active"
                             class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent">
-                            <option value="">--Elige una opción--</option>
+                            <option value="" disabled>--Elige una opción--</option>
                             <option value="0">NO</option>
                             <option value="1">SI</option>
                         </select>

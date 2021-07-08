@@ -219,7 +219,7 @@ class ShowEditOferta extends Component
         // Oferta::find($id)->delete();
         // dd($this->rulesOffer);
         $data = $this->validate($this->rulesOffer);
-        // dd($data);
+        dd($data);
         //PROCESAMIENTO IMAGEN 1:
         if($data['user_image']){
             //mandamos un messaje al usuario de que la imagen se esta procesando
