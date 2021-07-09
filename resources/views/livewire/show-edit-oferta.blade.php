@@ -84,14 +84,14 @@
                             class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
                             type="text" placeholder="{{ $oferta->cp_recogida }}" />
                     </div>
-                    <div class="grid grid-cols-1">
+                    {{-- <div class="grid grid-cols-1">
                         <label class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">
                             Precio Coste:
                         </label>
                         <input wire:model='invoice_cost_price' id='invoice_cost_price' name="invoice_cost_price"
                             class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
                             type="text" placeholder="{{ $oferta->invoice_cost_price }} €" />
-                    </div>
+                    </div> --}}
                 </div>
 
                 <div class="grid grid-cols-1 gap-5 mt-5 md:grid-cols-4 md:gap-8 mx-7">
@@ -152,6 +152,84 @@
                         </select>
                     </div>
                 </div>
+
+                <div class="grid grid-cols-1 gap-5 mt-5 md:grid-cols-4 md:gap-8 mx-7">
+                    <div class="grid grid-cols-1">
+                        <label
+                            class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">
+                            Categoría Oferta:
+                        </label>
+                        <select wire:model='categoria_oferta' id='categoria_oferta'
+                            name="categoria_oferta"
+                            class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent">
+                            <option value="" disabled>---elije una categoría---</option>
+                            <option value="Venta Unitaria" {{ $this->oferta->categoria_oferta =="Venta Unitaria" ? 'selected' : '' }}>VENTA UNITARIA</option>
+                            <option value="Venta Por Lotes" {{ $this->oferta->categoria_oferta =="Venta Por Lotes" ? 'selected' : '' }}>VENTA POR LOTES</option>
+                            <option value="Liquidación Lote" {{ $this->oferta->categoria_oferta =="Liquidación Lote" ? 'selected' : '' }}>LIQUIDACIÓN LOTE</option>
+                            <option value="Liquidación Total" {{ $this->oferta->categoria_oferta =="Liquidación Total" ? 'selected' : '' }}>LIQUIDACIÓN TOTAL</option>
+                        </select>
+                        @error('categoria_oferta') <span
+                            class="text-red-600 error">{{ $message }}</span> @enderror
+                    </div>
+                    <div class="grid grid-cols-1">
+                        <label
+                            class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">
+                            ¿Embalaje Original?
+                        </label>
+                        <select wire:model='embalaje_original' id='embalaje_original'
+                            name="embalaje_original"
+                            class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent">
+                            <option value="" disabled>---elije una opción---</option>
+                            <option value="0" {{ $this->oferta->embalaje_original =="0" ? 'selected' : '' }}>NO</option>
+                            <option value="1" {{ $this->oferta->embalaje_original =="1" ? 'selected' : '' }}>SI</option>
+
+                        </select>
+                        @error('embalaje_original') <span
+                            class="text-red-600 error">{{ $message }}</span>
+                        @enderror
+
+                    </div>
+                    <div class="grid grid-cols-1">
+                        <label
+                            class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">
+                            ¿Producto Nuevo?
+                        </label>
+                        <select wire:model='new' id='new'
+                            name="new"
+                            class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent">
+                            <option value="" disabled>---elije una opción---</option>
+                            <option value="0" {{ $this->oferta->new =="0" ? 'selected' : '' }}>NO</option>
+                            <option value="1" {{ $this->oferta->new =="1" ? 'selected' : '' }}>SI</option>
+
+                        </select>
+                        @error('embalaje_original') <span
+                            class="text-red-600 error">{{ $message }}</span>
+                        @enderror
+
+                    </div>
+                    {{-- <div class="grid grid-cols-1">
+                        <label
+                            class="flex items-center justify-start py-3 pl-4 pr-6 mr-4 bg-white rounded-lg shadow-sm text-truncate">
+                        PRODUCTO NUEVO
+                        </label>
+                            <div class="mr-3 text-teal-600">
+                                <input type="radio" wire:model="new" value="1"
+                                    class="form-radio focus:outline-none focus:shadow-outline" />
+                            </div>
+                            <div class="text-gray-700 select-none">SI</div>
+
+
+                        <label
+                            class="flex items-center justify-start py-3 pl-4 pr-6 bg-white rounded-lg shadow-sm text-truncate">
+                            <div class="mr-3 text-teal-600">
+                                <input type="radio" wire:model="new" value="0"
+                                    class="form-radio focus:outline-none focus:shadow-outline" />
+                            </div>
+                            <div class="text-gray-700 select-none">NO</div>
+                        </label>
+                    </div> --}}
+                </div>
+
                 <div class="grid grid-cols-1 gap-5 mt-5 md:grid-cols-4 md:gap-8 mx-7">
                     <div class="grid grid-cols-1">
                         <label
@@ -184,6 +262,17 @@
                     <div class="grid grid-cols-1">
                         <label
                             class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">
+                            PRECIO OFERTA:
+                        </label>
+                        <input wire:model='offer_prize' id='offer_prize' name="offer_prize"
+                            class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                            type="text" placeholder="{{ $oferta->offer_prize }}" />
+                        @error('offer_prize') <span
+                            class="text-red-600 error">{{ $message }}</span> @enderror
+                    </div>
+                    <div class="grid grid-cols-1">
+                        <label
+                            class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">
                             Porcentaje Ahorro:
                         </label>
                         @if($ahorro)
@@ -195,72 +284,7 @@
                         @error('') <span class="text-red-600 error">{{ $message }}</span>
                         @enderror
                     </div>
-                    <div class="grid grid-cols-1">
-                        <label
-                            class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">
-                            PRECIO OFERTA:
-                        </label>
-                        <input wire:model='offer_prize' id='offer_prize' name="offer_prize"
-                            class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
-                            type="text" placeholder="{{ $oferta->offer_prize }}" />
-                        @error('offer_prize') <span
-                            class="text-red-600 error">{{ $message }}</span> @enderror
-                    </div>
-                </div>
-                <div class="grid grid-cols-1 gap-5 mt-5 md:grid-cols-4 md:gap-8 mx-7">
-                    <div class="grid grid-cols-1">
-                        <label
-                            class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">
-                            Categoría Oferta:
-                        </label>
-                        <select wire:model='categoria_oferta' id='categoria_oferta'
-                            name="categoria_oferta"
-                            class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent">
-                            <option value="" disabled>---elije una categoría---</option>
-                            <option value="Venta Unitaria" {{ $this->oferta->categoria_oferta =="Venta Unitaria" ? 'selected' : '' }}>VENTA UNITARIA</option>
-                            <option value="Venta Por Lotes" {{ $this->oferta->categoria_oferta =="Venta Por Lotes" ? 'selected' : '' }}>VENTA POR LOTES</option>
-                            <option value="Liquidación Lote" {{ $this->oferta->categoria_oferta =="Liquidación Lote" ? 'selected' : '' }}>LIQUIDACIÓN LOTE</option>
-                            <option value="Liquidación Total" {{ $this->oferta->categoria_oferta =="Liquidación Total" ? 'selected' : '' }}>LIQUIDACIÓN TOTAL</option>
-                        </select>
-                        @error('categoria_oferta') <span
-                            class="text-red-600 error">{{ $message }}</span> @enderror
-                    </div>
-                    <div class="grid grid-cols-1">
-                        <label
-                            class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">
-                            ¿Embalaje Original?
-                        </label>
-                        <select wire:model='embalaje_original' id='embalaje_original'
-                            name="embalaje_original"
-                            class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent">
-                            <option value="" disabled>---elije una opción---</option>
-                            <option value="0" {{ $this->oferta->new =="0" ? 'selected' : '' }}>NO</option>
-                            <option value="1" {{ $this->oferta->new =="1" ? 'selected' : '' }}>SI</option>
 
-                        </select>
-                        @error('embalaje_original') <span
-                            class="text-red-600 error">{{ $message }}</span>
-                        @enderror
-                        {{-- <div class="flex">
-                            <label
-                                class="flex items-center justify-start py-3 pl-4 pr-6 mr-4 bg-white rounded-lg shadow-sm text-truncate">
-                                <div class="mr-3 text-teal-600">
-                                    <input type="radio" x-model="embalaje_original" value="1"
-                                        class="form-radio focus:outline-none focus:shadow-outline" />
-                                </div>
-                                <div class="text-gray-700 select-none">SI</div>
-                            </label>
-
-                            <label
-                                class="flex items-center justify-start py-3 pl-4 pr-6 bg-white rounded-lg shadow-sm text-truncate">
-                                <div class="mr-3 text-teal-600">
-                                    <input type="radio" x-model="embalaje_original" value="0"
-                                        class="form-radio focus:outline-none focus:shadow-outline" />
-                                </div>
-                                <div class="text-gray-700 select-none">NO</div>
-                            </label>
-                        </div> --}}
-                    </div>
                 </div>
 
                 <hr>

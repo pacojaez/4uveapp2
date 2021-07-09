@@ -38,32 +38,36 @@ class ShowEditOferta extends Component
 
     public $ahorro;
 
+    /***
+     * Rules for the Offer Form
+     */
     protected $rulesOffer = [
         // Lote: Imagenes
         'user_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048|nullable',
         'user_image_2' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048|nullable',
         'user_image_3' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048|nullable',
         // Oferta:
-        'plazo_preparacion_pedido' => 'string|nullable',
-        'offer_units' => 'int|nullable|regex:/^\d*\.?\d+$/',
-        'boxes' => 'int|nullable|regex:/^\d*\.?\d+$/',
-        'provider' => 'string|nullable',
-        'invoice_cost_price' => 'string|nullable|regex:/^\d*\.?\d+$/',
-        'buyed_date' => 'date|nullable',
         'localidad_recogida' => 'string|nullable',
-        'cp_recogida' => 'string|nullable',
         'provincia_recogida' => 'string|nullable',
+        'cp_recogida' => 'string|nullable',
+
+        'boxes' => 'int|nullable|regex:/^\d*\.?\d+$/',
+        'offer_units' => 'int|nullable|regex:/^\d*\.?\d+$/',
+        'provider' => 'string|nullable',
+
+        'buyed_date' => 'date|nullable',
+        'plazo_preparacion_pedido' => 'date|nullable',
+        'contraoferta' => 'int|nullable',
+
         'porte_id' => 'nullable|int',
+        'invoice_cost_price' => 'string|nullable|regex:/^\d*\.?\d+$/',
+        'offer_prize' => 'int|nullable|regex:/^\d*\.?\d+$/',
+
+        'categoria_oferta' => 'required|string',
         'embalaje_original' => 'nullable|int',
         'new' => 'nullable|int',
-        'categoria_oferta' => 'nullable|string',
-        'offer_prize' => 'int|nullable|regex:/^\d*\.?\d+$/',
-        'contraoferta' => 'string|nullable',
+
         'active' => 'string|nullable',
-        //Producto
-        // 'name' => 'string|nullable',
-        // 'description' => 'string|nullable',
-        // 'short_description' => 'string|nullable',
 
     ];
 
@@ -76,10 +80,14 @@ class ShowEditOferta extends Component
         $this->contraoferta = $oferta->contraoferta;
         $this->porte_id = $oferta->porte_id;
         $this->new = $oferta->new;
+        $this->embalaje_original = $oferta->embalaje_original;
         // $this->temp_url_1;
 
     }
 
+    /***
+     * Clear all the inputs from the offer Form
+     */
     public function clearOfferForm()
     {
 
@@ -104,7 +112,9 @@ class ShowEditOferta extends Component
         $this->storedOferta = false;
         $this->resetErrorBag();
     }
-
+    /***
+     * Clear the images from the Form
+     */
     public function clearPhotoUser1()
     {
         $this->user_image = '';
@@ -214,12 +224,16 @@ class ShowEditOferta extends Component
 
     // }
 
+    /***
+     * Update the Offer Form
+     * Empty fields are not updated
+     */
     public function update()
     {
         // Oferta::find($id)->delete();
         // dd($this->rulesOffer);
         $data = $this->validate($this->rulesOffer);
-        dd($data);
+        // dd($data);
         //PROCESAMIENTO IMAGEN 1:
         if($data['user_image']){
             //mandamos un messaje al usuario de que la imagen se esta procesando
@@ -271,6 +285,33 @@ class ShowEditOferta extends Component
             $this->oferta->save();
         }
 
+        if($data['embalaje_original'] == "0"){
+            $this->oferta->embalaje_original = 0;
+            $this->oferta->save();
+        }else{
+            $this->oferta->embalaje_original = 1;
+            $this->oferta->save();
+        }
+
+        if($data['new'] == "0"){
+            $this->oferta->new = 0;
+            $this->oferta->save();
+        }else{
+            $this->oferta->new = 1;
+            $this->oferta->save();
+        }
+
+        if($data['contraoferta'] == "0"){
+            $this->oferta->contraoferta = 0;
+            $this->oferta->save();
+        }else{
+            $this->oferta->contraoferta = 1;
+            $this->oferta->save();
+        }
+
+
+        // intval($data['embalaje_original']);
+        // dd(gettype($data['embalaje_original']));
         $updateFields = array_filter($data, null);
 
         foreach( $updateFields as $key => $value){
@@ -282,7 +323,9 @@ class ShowEditOferta extends Component
 
         return redirect()->route('ofertas.index');
     }
-
+    /***
+     * Delete the Offer
+     */
     public function delete($id)
     {
         Oferta::find($id)->delete();

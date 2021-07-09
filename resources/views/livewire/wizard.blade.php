@@ -1085,7 +1085,7 @@
                                                         <label
                                                             class="flex items-center justify-start py-3 pl-4 pr-6 mr-4 bg-white rounded-lg shadow-sm text-truncate">
                                                             <div class="mr-3 text-teal-600">
-                                                                <input type="radio" x-model="gender" value="Y"
+                                                                <input type="radio" wire:model="embalaje_original" value="1"
                                                                     class="border-purple-300 form-radio focus:outline-none focus:shadow-outline" />
                                                             </div>
                                                             <div class="text-gray-700 select-none">SI</div>
@@ -1094,7 +1094,7 @@
                                                         <label
                                                             class="flex items-center justify-start py-3 pl-4 pr-6 bg-white rounded-lg shadow-sm text-truncate">
                                                             <div class="mr-3 text-teal-600">
-                                                                <input type="radio" x-model="gender" value="N"
+                                                                <input type="radio" wire:model="embalaje_original" value="0"
                                                                     class="border-purple-300 form-radio focus:outline-none focus:shadow-outline" />
                                                             </div>
                                                             <div class="text-gray-700 select-none">NO</div>
@@ -1182,7 +1182,7 @@
                                                     <label
                                                         class="flex items-center justify-start py-3 pl-4 pr-6 mr-4 bg-white rounded-lg shadow-sm text-truncate">
                                                         <div class="mr-3 text-teal-600">
-                                                            <input type="radio" wire:model="contraoferta" value="1"
+                                                            <input type="radio" wire:model="contraoferta" value= 1
                                                                 class="border-purple-300 form-radio focus:outline-none focus:shadow-outline" />
                                                         </div>
                                                         <div class="text-gray-700 select-none">SI</div>

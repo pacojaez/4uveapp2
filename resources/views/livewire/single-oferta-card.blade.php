@@ -313,7 +313,7 @@
                         @endif
                     </div>
                     <div class="w-full mb-2 lg:w-1/2 lg:pr-10 lg:py-6 lg:mb-0">
-                        @if ( $product->contraoferta == 'Y' )
+                        @if ( $oferta->contraoferta == 1 )
                         <div class="flex p-2 mb-2 border-t border-b border-gray-200">
                             <span class="text-gray-500">Admite contraoferta</span>
                             <svg width="20" height="20" fill="currentColor" viewBox="0 0 1024 1024"

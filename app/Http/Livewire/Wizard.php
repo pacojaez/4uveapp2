@@ -227,7 +227,6 @@ class Wizard extends Component
         $this->oferta = new Oferta;
         $data = $this->validate($this->rulesOffer);
 
-
         //PROCESAMIENTO IMAGEN  USUARIO:
         if ($data['user_image']) {
             //mandamos un messaje al usuario de que la imagen se esta procesando
