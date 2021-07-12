@@ -6,7 +6,7 @@ use Livewire\Component;
 use App\Models\Subcategorie;
 
 class SubcategoriesNavbar extends Component
-{   
+{
 
     protected $subcategories;
 
@@ -15,8 +15,7 @@ class SubcategoriesNavbar extends Component
     }
 
     public function render()
-    {       
-        // dd($this->subcategories);
+    {
         return view('livewire.subcategories-navbar', ['subcategories' => $this->subcategories]);
     }
 }

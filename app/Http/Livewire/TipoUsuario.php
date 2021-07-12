@@ -62,7 +62,14 @@ class TipoUsuario extends Component
     {
         // dd($column);
     }
-
+    /**
+     * TODO:
+     * Rendering the view with some graphics
+     * prepare good data to show to the admin
+     *
+     *
+     * @return void
+     */
     public function render()
     {
 
