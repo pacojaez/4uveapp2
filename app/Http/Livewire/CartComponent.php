@@ -20,7 +20,7 @@ class CartComponent extends Component
     protected $newOrder;
     protected $oferta_id;
 
-    // public $abandoned = false;
+    // public $abandoned = false;  Property to remarketing TODO
 
     public $confirmedMessage = false;
 
@@ -52,7 +52,7 @@ class CartComponent extends Component
         return view('livewire.cart', [
             'total' => $this->total,
             'content' => $this->content,
-            // 'abandoned' => $this->abandoned,
+            // 'abandoned' => $this->abandoned,   Property to remarketing TODO
         ]);
     }
 
@@ -113,24 +113,20 @@ class CartComponent extends Component
 
     }
 
-    /**
-     * RSend a mail to customer and admin to fionish the checkout.
-     *
-     * @return void
-     */
+
     public function checkOut()
     {
         $user_id = Auth::user()->id;
         $userEmail = Auth::user()->email;
         $total_units = Cart::items();
 
-        // dd($total_units);
+        //Recogemos los valores del Cart en variables para poder generar un nuevo registro en la DB
 
         $this->total = Cart::total();
         $this->content = Cart::content();
         $this->emitTo('nav-cart', 'refresh');
 
-        // dd($this->total);
+        //Crear una nueva Order para obtner el id y poder referenciar cada OrderItem a él
 
         $this->newOrder = Order::create([
             'status' => 'Pendiente de confirmación',
@@ -139,10 +135,9 @@ class CartComponent extends Component
             'total_factura' => $this->total
         ]);
 
-        //
+        //crear cada OrderItem en la DB
          foreach( $this->content as $key => $value ){
-            // dd(($key));
-            // $product_id = Product::where('id', 'like', )
+
             OrderItem::create([
                 'order_id' => $this->newOrder->id,
                 'units' => $value['quantity'],
@@ -153,59 +148,24 @@ class CartComponent extends Component
                 'oferta_id' => $key,
            ]);
         };
-
+        //borrar el carrito tras la confirmacion de que se ha creado
         $this->clearCart();
-        // dd($userEmail);
+
+        //Mandar Mail de confirmacion de recepción del pedido
         SendEMailController::orderCreated($this->content, $userEmail, $this->newOrder);
+
+        /**
+         * TO DO
+         * Send a mail to customer and admin to finish the checkout.
+         *
+         * @return void
+         */
 
         $this->confirmedMessage = true;
 
-        //Mandar Mail de confirmacion de recepción del pedido
+
 
 
 
     }
 }
-
-
-
-
-// namespace App\Http\Livewire;
-
-// use App\Facades\Cart as CartFacade;
-// use Livewire\Component;
-
-// class Cart extends Component
-// {
-//     public $cart;
-
-//     public function mount(): void
-//     {
-//         $this->cart = CartFacade::get();
-//         dd($this->cart);
-//     }
-
-//     public function render()
-//     {
-//         $this->cart = CartFacade::get();
-//         // $this->cart = ['product', 1];
-//         return view('livewire.cart', [
-//             'cart' => $this->cart,
-//         ]);
-//     }
-
-//     public function removeFromCart(string $product_id): void
-//     {
-//         dd($product_id);
-//         CartFacade::remove($product_id);
-//         $this->cart = CartFacade::get();
-//         $this->emit('productRemoved');
-//     }
-
-//     public function checkout(): void
-//     {
-//         CartFacade::clear();
-//         $this->emit('clearCart');
-//         $this->cart = CartFacade::get();
-//     }
-// }
