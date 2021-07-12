@@ -3,26 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-// use App\Models\Cart;
-// use App\Facades\Cart as CartFacade;
+
 
 class CartController extends Controller
 {
 
-    // protected $total =0;
-    // protected $content =[];
 
-    // protected $listeners = [
-    //     'productAddedToCart' => 'updateCart',
-    // ];
-//     /**
-//      * Display a listing of the resource.
-//      *
-//      * @return \Illuminate\Http\Response
-//      */
+      /* Display a listing of the resource.
+     *
+      * @return \Illuminate\Http\Response
+      */
     public function index()
     {
-        // dd(count($this->content));
         return view('cart');
     }
 

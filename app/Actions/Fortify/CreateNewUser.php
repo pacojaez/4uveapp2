@@ -40,6 +40,9 @@ class CreateNewUser implements CreatesNewUsers
             'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['required', 'accepted'] : '',
         ])->validate();
 
+        /**
+         * send a welcome mail
+         */
         SendEMailController::welcomeMail($data);
 
         return DB::transaction(function () use ($input) {
