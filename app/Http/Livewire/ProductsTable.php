@@ -37,73 +37,19 @@ class ProductsTable extends Component
 
 
     public function render()
+
+    /**
+     * WE ONLY NEED TO RENDER THE VIEW WITH THE DATA
+     * ALL THE LOGIC IN THE LIVEWIRE WIZARD COMPONENT
+     */
     {
         $this->products =  Product::search($this->search)
                             ->orderBy($this->orderBy, $this->orderAsc ? 'asc' : 'desc')
                             ->paginate($this->perPage);
 
-        // $one = Product::where('id', '=', '5582')->get();
-        // dd($one->user()->name);
-
         return view('livewire.products-table',[
             'products' => $this->products
         ]);
-    }
-
-    private function resetInput()
-    {
-        $this->name = null;
-        $this->email = null;
-        $this->password = null;
-    }
-    public function store()
-    {
-        $this->validate([
-            'name' => 'required|min:5',
-            'email' => 'required|email:rfc,dns',
-            'password' => 'required'
-        ]);
-        Product::create([
-            'name' => $this->name,
-            'email' => $this->email,
-            'password' => $this->password
-        ]);
-        $this->resetInput();
-    }
-    public function edit($id)
-    {
-        $this->contentIsVisible = true;
-
-        $record = Product::findOrFail($id);
-        $this->selected_id = $id;
-        $this->name = $record->name;
-        $this->email = $record->email;
-        $this->updateMode = true;
-    }
-    public function update()
-    {
-        $this->validate([
-            'name' => 'required|min:5',
-            'email' => 'required|email:rfc,dns',
-            'password' => 'required'
-        ]);
-        if ($this->selected_id) {
-            $record = Product::find($this->selected_id);
-            $record->update([
-                'name' => $this->name,
-                'email' => $this->email,
-                'password' => $this->password
-            ]);
-            $this->resetInput();
-            $this->updateMode = false;
-        }
-    }
-    public function destroy($id)
-    {
-        if ($id) {
-            $record = Product::where('id', $id);
-            $record->delete();
-        }
     }
 
 
