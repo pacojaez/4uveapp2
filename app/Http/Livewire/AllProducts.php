@@ -12,7 +12,11 @@ class AllProducts extends Component
 {
     use WithPagination;
 
-    protected $products;
+
+    /**
+     * properties to dinamic searching and paginate the view
+     *
+     */
     public $perPage= 20;
     public $search;
     public $orderBy = 'id';
@@ -23,26 +27,25 @@ class AllProducts extends Component
 
     public function render()
     {
-
+        /**
+         * GETTING ONLY THE ACTIVE OFFERS WITH BRAND, NAME AND EAN13
+         * a multiple query to filter first active offers and then add
+         * the required fields to show to the user more data
+         */
         $ofertas = Oferta::join("products", "ofertas.product_id", "=", "products.id")
         ->select('ofertas.*',"products.name", "products.product_image", "products.brand", "products.EAN13_individual" )
-        ->where('products.brand', 'like', '%'.$this->search.'%')
-        ->orWhere('products.EAN13_individual', 'like', '%'.$this->search.'%')
-        ->orWhere('products.name', 'like', '%'.$this->search.'%')
+        ->where('ofertas.active', 'like', 1)
+        ->where(function($query) {
+			$query->where('products.brand', 'like', '%'.$this->search.'%')
+                ->orWhere('products.EAN13_individual', 'like', '%'.$this->search.'%')
+                ->orWhere('products.name', 'like', '%'.$this->search.'%');
+        })
         ->with('porte')
         ->orderBy($this->orderBy, $this->orderAsc ? 'asc' : 'desc')
         ->paginate($this->perPage);
 
-        // $this->products =  Product::search($this->search)
-        //         ->select('id', 'name', 'description', 'product_image', 'brand')
-        //         ->with('oferta')
-        //         ->with('porte')
-        //         ->orderBy($this->orderBy, $this->orderAsc ? 'asc' : 'desc')
-        //         ->paginate($this->perPage);
-        // dd($ofertas);
 
         return view('livewire.all-products', [
-            // 'products' => $this->products,
             'ofertas' => $ofertas
         ]);
     }
