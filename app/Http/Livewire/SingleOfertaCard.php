@@ -28,14 +28,21 @@ class SingleOfertaCard extends Component
      */
     public function addToCart(): void
     {
+        //añadimos un Item con la cantidad indicada al Carrito
         Cart::add($this->oferta->id, $this->product->name, $this->oferta->getRawOriginal('offer_prize'), $this->quantity);
+        //emite al nav-cart el dato para que lo actualize
         $this->emitTo('nav-cart', 'refresh');
     }
 
+    /**
+     * Recogemos los parametros necesario para montar la vista
+     *
+     * @param [type] $id
+     * @return void
+     */
     public function mount($id){
 
         $this->oferta = Oferta::findOrFail($id);
-        // dd($this->oferta->product_id);
         $this->product = Product::where('id', 'like', $this->oferta->product_id)->first();
         // dd($this->product);
         $this->subcategorie = Subcategorie::where('id', 'like', $this->product->subcategorie_id)->first();
