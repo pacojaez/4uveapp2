@@ -67,7 +67,7 @@ class UserController extends Controller
         $user = User::create($validated);
         // dd($user);
         // $this->emit('alert_remove');
-        return redirect()->route('users.index')->with('message', 'Usuario añadido correctamente');
+        return redirect()->route('users.index')->with(session()->flash('user-created-message', 'Usuario añadido correctamente.'));
         // return back()->with('message', 'Usuario añadido correctamente');
     }
 
@@ -133,13 +133,16 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\User $user
+     * @param  \$id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy($id)
     {
-        $user->delete();
-
-        return back()->with('message', 'item deleted successfully');
+        // dd('Destroy method');
+        if ($id) {
+            $record = User::findOrFail($id);
+            $record->delete();
+        }
+        return redirect()->route('users.index')->with('user-deleted-message', 'Usuario borrado correctamente');
     }
 }

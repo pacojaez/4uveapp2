@@ -52,9 +52,9 @@ Route::get('ofertasinactive', function () {
     return view('ofertas.inactive');
 })->name('ofertas.inactive');
 
-Route::get('/vistadeprueba', function() {
-    return view('vistadeprueba');
- })->name('prueba');
+// Route::get('/vistadeprueba', function() {
+//     return view('vistadeprueba');
+//  })->name('prueba');
 
  Route::get('oferta/{id}', function($id) {
     return view('singleoferta', compact('id'));
@@ -83,7 +83,8 @@ Route::get('/users/index', [UserController::class, 'index'])->middleware('isAdmi
 Route::get('/user/edit/{user}', [UserController::class, 'edit'])->middleware('isAdmin')->name('user.edit');
 // Store One user
 Route::put('/user/update/{id}',[UserController::class, 'update'])->middleware('isAdmin')->name('user.update');
-
+// Delete One user
+Route::get('/user/destroy/{id}',[UserController::class, 'destroy'])->middleware('isAdmin')->name('user.destroy');
 
 //*******CONTACT ***************************/
 

@@ -4,6 +4,20 @@
         {{ session('user-updated-message') }}
     </div>
     @endif
+    @if (session()->has('user-deleted-message'))
+    <div class="px-4 py-2 my-2 text-sm font-semibold text-red-900 bg-red-500 border border-red-600 rounded-md">
+        {{ session('user-deleted-message') }}
+    </div>
+    @endif
+    @if (session()->has('user-created-message'))
+    <div class="px-4 py-2 my-2 text-sm font-semibold text-green-900 bg-green-500 border border-green-600 rounded-md">
+        {{ session('user-created-message') }}
+    </div>
+    @endif
+
+
+
+
     <div class="flex w-full pb-10">
         <div class="w-3/6 mx-1">
             <input wire:model.debounce.500ms="search" type="search"
@@ -122,10 +136,15 @@
                                 <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
                                     <a href="{{ route( 'user.edit', $user->id ) }}">
                                         <button
-                                            class="px-2 py-1 text-blue-500 bg-blue-200 rounded hover:bg-blue-500 hover:text-white">Editar</button>
+                                            class="px-2 py-1 text-blue-500 bg-blue-200 rounded hover:bg-blue-500 hover:text-white">
+                                            Editar
+                                        </button>
                                     </a>
-                                    <button wire:click="destroy({{ $user->id }})"
-                                        class="px-2 py-1 text-red-500 bg-red-200 rounded hover:bg-red-500 hover:text-white">Borrar</button>
+                                    <button
+                                        wire:click="$emit('openModal', 'delete-user-modal', {{ json_encode(["user_id" => $user->id ]) }})"
+                                        class="px-2 py-1 mx-2 text-red-500 bg-red-200 rounded hover:bg-ref-500 hover:text-white">
+                                        Borrar
+                                    </button>
                                 </td>
                             </tr>
                             @endforeach

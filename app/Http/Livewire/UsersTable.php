@@ -10,6 +10,11 @@ class UsersTable extends Component
 {
     use WithPagination;
 
+    /**
+     * TODO: The name of the variables will begin with a verb like Is, Can, Will
+     *
+     * @var boolean
+     */
     public $contentIsVisible= false;
     public $noUsers = false;
     protected $users;
@@ -32,7 +37,6 @@ class UsersTable extends Component
 
     public function render()
     {
-        // dd($this->search);
         $this->users =  User::search($this->search)
                             ->orderBy($this->orderBy, $this->orderAsc ? 'asc' : 'desc')
                             ->simplePaginate($this->perPage);
@@ -47,69 +51,82 @@ class UsersTable extends Component
         ]);
     }
 
-    private function resetInput()
-    {
-        $this->name = null;
-        $this->email = null;
-        $this->password = null;
-    }
+    /**
+     * Reset the inputs
+     *
+     * @return void
+     */
+    // private function resetInput()
+    // {
+    //     $this->name = null;
+    //     $this->email = null;
+    //     $this->password = null;
+    // }
 
 
-    public function store()
-    {
-        $this->validate([
-            'name' => 'required|min:5',
-            'email' => 'required|email:rfc,dns',
-            'password' => 'required'
-        ]);
-        User::create([
-            'name' => $this->name,
-            'email' => $this->email,
-            'password' => $this->password
-        ]);
-        $this->resetInput();
-    }
+    // public function store()
+    // {
+    //     $this->validate([
+    //         'name' => 'required|min:5',
+    //         'email' => 'required|email:rfc,dns',
+    //         'password' => 'required'
+    //     ]);
+    //     User::create([
+    //         'name' => $this->name,
+    //         'email' => $this->email,
+    //         'password' => $this->password
+    //     ]);
+    //     $this->resetInput();
+    // }
 
 
-    public function edit($id)
-    {
-        // $this->contentIsVisible = true;
-        // dd($id);
-        // $record = User::findOrFail($id);
-        // $this->selected_id = $id;
-        // $this->name = $record->name;
-        // $this->email = $record->email;
-        // $this->updateMode = true;
+    // public function edit($id)
+    // {
+    //     // $this->contentIsVisible = true;
+    //     // dd($id);
+    //     // $record = User::findOrFail($id);
+    //     // $this->selected_id = $id;
+    //     // $this->name = $record->name;
+    //     // $this->email = $record->email;
+    //     // $this->updateMode = true;
 
-        return redirect()->route('products.index');
-    }
+    //     return redirect()->route('products.index');
+    // }
 
 
-    public function update()
-    {
-        $this->validate([
-            'name' => 'required|min:5',
-            'email' => 'required|email:rfc,dns',
-            'password' => 'required'
-        ]);
-        if ($this->selected_id) {
-            $record = User::find($this->selected_id);
-            $record->update([
-                'name' => $this->name,
-                'email' => $this->email,
-                'password' => $this->password
-            ]);
-            $this->resetInput();
-            $this->updateMode = false;
-        }
-    }
-    public function destroy($id)
-    {
-        if ($id) {
-            $record = User::where('id', $id);
-            $record->delete();
-        }
-    }
+    // public function update()
+    // {
+    //     $this->validate([
+    //         'name' => 'required|min:5',
+    //         'email' => 'required|email:rfc,dns',
+    //         'password' => 'required'
+    //     ]);
+    //     if ($this->selected_id) {
+    //         $record = User::find($this->selected_id);
+    //         $record->update([
+    //             'name' => $this->name,
+    //             'email' => $this->email,
+    //             'password' => $this->password
+    //         ]);
+    //         $this->resetInput();
+    //         $this->updateMode = false;
+    //     }
+    // }
+
+    /**
+     * Destroy the User
+     *
+     * @param [type] $id
+     * @return void
+     */
+    // public function destroy($id)
+    // {
+    //     dd('Destroy method');
+    //     if ($id) {
+    //         $record = User::where('id', 'like', $id);
+    //         $record->delete();
+    //     }
+    // }
 
 
 }
