@@ -20,7 +20,12 @@ class ShowEditProduct extends Component
 
     public $product;
 
-    public $product_image, $product_image_2, $product_image_3, $user_image, $user_image_2, $user_image_3;
+    /**
+     * The attributes that are mass assignable.
+     */
+
+    public $product_image , $product_image_2, $product_image_3;
+    // public $user_image, $user_image_2, $user_image_3;
 
     public $name, $description, $short_description, $product_code, $subcategorie_id,
         $part_number, $brand, $EAN13_individual, $net_price, $unidades_embalaje_individual, $dimensions_boxes, $weight,
@@ -35,6 +40,11 @@ class ShowEditProduct extends Component
     public $portes;
     public $subcategories;
 
+    /**
+     * Rules to validete the form fields of the Product Update Form
+     *
+     * @var array
+     */
     protected $rules = [
             //images
             'product_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048|nullable',
@@ -68,34 +78,37 @@ class ShowEditProduct extends Component
     ];
 
     /**
-     * The attributes that are mass assignable.
+     * Modal functions
      *
-     * @var array
+     * @void
      */
     public function openModal()
     {
         $this->isOpen = true;
     }
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     public function closeModal()
     {
         $this->isOpen = false;
     }
 
-    // public function mount($product){
-    //     $this->product = Product::findOrFail($id);
-    // }
+    /**
+     * Update function
+     *
+     * @void
+     */
     public function update()
     {
+        //el proceso es el mismo que para actualizar ofertas:
 
-        $data =  $this->validate();
-        // dd($data['active']);
+        $data =  $this->validate($this->rules);
+
         //PROCESAMIENTO IMAGEN 1:
+        //repetimos cada proceso por cada imagen
+        //al ser tres repetimos algo de código para darle al usuario opciones
+        //de poder actualizar cada foto independientemente
+        //estas funciones se podrían minimizar en una dependiendo si el input trae o no datos
+        //y filtrar el array
         if($data['product_image']){
             //mandamos un messaje al usuario de que la imagen se esta procesando
             $this->processing = true;
@@ -127,7 +140,7 @@ class ShowEditProduct extends Component
         }
 
         if($data['product_image_3']){
-            //mandamos un messaje al usuario de que la imagen se esta procesando
+            //mandamos un mensaje al usuario de que la imagen se esta procesando
             $this->processing = true;
             $image = $this->product_image_3;
             $name = substr( uniqid(rand(), true), 8,8 ).'.'.$image->getClientOriginalExtension();
@@ -141,131 +154,13 @@ class ShowEditProduct extends Component
             $this->product->product_image_3 = $data['product_image_3'];
         }
 
-        // if($data['user_image']){
-        //     //mandamos un messaje al usuario de que la imagen se esta procesando
-        //     $this->processing = true;
-        //     $image = $this->user_image;
-        //     $name = substr( uniqid(rand(), true), 8,8 ).'.'.$image->getClientOriginalExtension();
-        //     $img = Image::make($image->getRealPath())->encode('jpg', 65)->resize(600, null, function($c){
-        //         $c->aspectRatio();
-        //         $c->upsize();
-        //     });
-        //     $img->stream();
-        //     Storage::disk('local')->put('public/images/products'.'/'.$name, $img, 'public');
-        //     $data['user_image'] = $name;
-        //     $this->product->user_image = $data['user_image'];
-        // }
 
-        // if($data['user_image_2']){
-        //     //mandamos un messaje al usuario de que la imagen se esta procesando
-        //     $this->processing = true;
-        //     $image = $this->user_image_2;
-        //     $name = substr( uniqid(rand(), true), 8,8 ).'.'.$image->getClientOriginalExtension();
-        //     $img = Image::make($image->getRealPath())->encode('jpg', 65)->resize(600, null, function($c){
-        //         $c->aspectRatio();
-        //         $c->upsize();
-        //     });
-        //     $img->stream();
-        //     Storage::disk('local')->put('public/images/products'.'/'.$name, $img, 'public');
-        //     $data['user_image_2'] = $name;
-        //     $this->product->user_image_2 = $data['user_image_2'];
-        // }
-        // if($data['user_image_3']){
-        //     //mandamos un messaje al usuario de que la imagen se esta procesando
-        //     $this->processing = true;
-        //     $image = $this->user_image_3;
-        //     $name = substr( uniqid(rand(), true), 8,8 ).'.'.$image->getClientOriginalExtension();
-        //     $img = Image::make($image->getRealPath())->encode('jpg', 65)->resize(600, null, function($c){
-        //         $c->aspectRatio();
-        //         $c->upsize();
-        //     });
-        //     $img->stream();
-        //     Storage::disk('local')->put('public/images/products'.'/'.$name, $img, 'public');
-        //     $data['user_image_3'] = $name;
-        //     $this->product->user_image_3 = $data['user_image_3'];
-        // }
-
-
-
-        // $image = $this->product_image;
-        // $image_2 = $this->product_image_2;
-        // $image_3 = $this->product_image_3;
-        // $user_image = $this->user_image;
-        // $user_image_2 = $this->user_image_2;
-        // $user_image_3 = $this->user_image_3;
-
-        // $name = substr( uniqid(rand(), true), 8,8 ).'.'.$image->getClientOriginalExtension();
-        // $name_2 = substr( uniqid(rand(), true), 8,8 ).'.'.$image_2->getClientOriginalExtension();
-        // $name_3 = substr( uniqid(rand(), true), 8,8 ).'.'.$image_3->getClientOriginalExtension();
-
-        // $name_user = substr( uniqid(rand(), true), 8,8 ).'.'.$user_image->getClientOriginalExtension();
-        // $name_user_2 = substr( uniqid(rand(), true), 8,8 ).'.'.$user_image_2->getClientOriginalExtension();
-        // $name_user_3 = substr( uniqid(rand(), true), 8,8 ).'.'.$user_image_3->getClientOriginalExtension();
-
-        // $img = Image::make($image->getRealPath())->encode('jpg', 65)->resize(600, null, function($c){
-        //     $c->aspectRatio();
-        //     $c->upsize();
-        // });
-        // $img_2 = Image::make($image_2->getRealPath())->encode('jpg', 65)->resize(600, null, function($c){
-        //     $c->aspectRatio();
-        //     $c->upsize();
-        // });
-        // $img_3 = Image::make($image_3->getRealPath())->encode('jpg', 65)->resize(600, null, function($c){
-        //     $c->aspectRatio();
-        //     $c->upsize();
-        // });
-
-        // $img_user = Image::make($user_image->getRealPath())->encode('jpg', 65)->resize(600, null, function($c){
-        //     $c->aspectRatio();
-        //     $c->upsize();
-        // });
-        // $img_user_2 = Image::make($user_image_2->getRealPath())->encode('jpg', 65)->resize(600, null, function($c){
-        //     $c->aspectRatio();
-        //     $c->upsize();
-        // });
-        // $img_user_3 = Image::make($user_image_3->getRealPath())->encode('jpg', 65)->resize(600, null, function($c){
-        //     $c->aspectRatio();
-        //     $c->upsize();
-        // });
-
-        // $img->stream();
-        // $img_2->stream();
-        // $img_3->stream();
-
-        // $img_user->stream();
-        // $img_user_2->stream();
-        // $img_user_3->stream();
-
-        // Storage::disk('local')->put('public/images/products'.'/'.$name, $img, 'public');
-        // Storage::disk('local')->put('public/images/products'.'/'.$name_2, $img_2, 'public');
-        // Storage::disk('local')->put('public/images/products'.'/'.$name_3, $img_3, 'public');
-        // Storage::disk('local')->put('public/images/products'.'/'.$name_user, $img_user, 'public');
-        // Storage::disk('local')->put('public/images/products'.'/'.$name_user_2, $img_user_2, 'public');
-        // Storage::disk('local')->put('public/images/products'.'/'.$name_user_3, $img_user_3, 'public');
-        // // dd($data);
-
-        // $data['product_image'] = $name;
-        // $data['product_image_2'] = $name_2;
-        // $data['product_image_3'] = $name_3;
-        // $data['user_image'] = $name_user;
-        // $data['user_image_2'] = $name_user_2;
-        // $data['user_image_3'] = $name_user_3;
-
-        // $this->product->product_image = $data['product_image'];
-        // $this->product->product_image_2 = $data['product_image_2'];
-        // $this->product->product_image_3 = $data['product_image_3'];
-
-        // $this->product->user_image = $data['user_image'];
-        // $this->product->user_image_2 = $data['user_image_2'];
-        // $this->product->user_image_3 = $data['user_image_3'];
-        // dd($this->product->product_image_3);
         if($data['active'] == 0){
             $this->product->active = 0;
             $this->product->save();
         }
         $updateFields = array_filter($data, null);
-        // dd($updateFields);
-        // $product = Product::find($this->product);
+
         foreach( $updateFields as $key => $value){
             $this->product->$key = $value;
             $this->product->save();
@@ -280,7 +175,12 @@ class ShowEditProduct extends Component
         }
     }
 
-
+    /**
+     * Borrar un Producto de la base de datos
+     *
+     * @param [type] $id
+     * @return void
+     */
     public function delete($id)
     {
         Product::find($id)->delete();
@@ -288,14 +188,24 @@ class ShowEditProduct extends Component
         return redirect()->route('products.index');
     }
 
+    /**
+     * Recogemos los parámetros necesarios para montar la vista
+     *
+     * @param [type] $product
+     * @return void
+     */
     public function mount($product)
     {
         $this->product = $product;
         $this->subcategories = Subcategorie::all();
         $this->portes = Porte::all();
-        // dd($this->portes);
     }
 
+    /**
+     * Renderizamos la vista con el producto a editar
+     *
+     * @return void
+     */
     public function render()
     {
 
