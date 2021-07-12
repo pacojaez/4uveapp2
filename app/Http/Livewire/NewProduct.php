@@ -5,7 +5,7 @@ namespace App\Http\Livewire;
 use App\Models\Product;
 use App\Models\Oferta;
 use App\Models\Subcategorie;
-use App\Models\Portes;
+use App\Models\Porte;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Storage;
@@ -222,7 +222,7 @@ class NewProduct extends Component
 
         return redirect()->route('products.index', [
             'subcategorie' => Subcategorie::all(),
-            'portes' => Portes::all(),
+            'portes' => Porte::all(),
         ]);
     }
 
@@ -234,7 +234,7 @@ class NewProduct extends Component
     public function mount()
     {
         $this->subcategories = Subcategorie::all();
-        $this->portes = Portes::all();
+        $this->portes = Porte::all();
 
     }
 
