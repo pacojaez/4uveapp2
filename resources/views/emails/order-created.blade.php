@@ -118,6 +118,9 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus dolor aliquid om
                             <h2 style="font-size: 30px; font-weight: 800; line-height: 36px; color: #333333; margin: 0;">
                                 Gracias por tu compra!
                             </h2>
+                            <h4 style="font-size: 20px; font-weight: 600; line-height: 36px; color: #333333; margin: 0;">
+                                El pedido será enviado a la dirección que nos facilitaste con este email: {{ $order->user->email }}
+                            </h4>
                         </td>
                     </tr>
                     <tr>
@@ -128,9 +131,9 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus dolor aliquid om
                         </td>
                     </tr>
                     <tr>
-                        <td align="left" style="padding-top: 20px;">
+                        <td align="left" style="padding-top: 20px;" width="100%">
                             <table cellspacing="0" cellpadding="0" border="0" width="100%">
-                                <tr>
+                                <tr style="width: 100%">
                                     <td width="75%" align="left" bgcolor="#eeeeee" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 800; line-height: 24px; padding: 10px;">
                                         Pedido #
                                     </td>
@@ -138,7 +141,7 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus dolor aliquid om
                                         {{ $order->id }}
                                     </td>
                                 </tr>
-                                <tr>
+                                 <tr style="width: 100%">
                                     <td width="75%" align="left" bgcolor="#eeeeee" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 800; line-height: 24px; padding: 10px;">
                                         Estado del Pedido
                                     </td>
@@ -146,7 +149,7 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus dolor aliquid om
                                         {{ $order->status }}
                                     </td>
                                 </tr>
-                                <tr>
+                                 <tr style="width: 100%">
                                     <td width="75%" align="left" bgcolor="#eeeeee" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 800; line-height: 24px; padding: 10px;">
                                         Fecha del Pedido
                                     </td>
@@ -154,39 +157,37 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus dolor aliquid om
                                         {{ $order->created_at }}
                                     </td>
                                 </tr>
+                                <hr>
+                                <tr style="margin-top: 4">
+                                    <td width="25%" align="left" style="font-bold font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 600; line-height: 24px; padding: 15px 10px 5px 10px;">
+                                        PRODUCTO
+                                    </td>
+                                    <td width="25%" align="left" style="font-bold font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 600; line-height: 24px; padding: 15px 10px 5px 10px;">
+                                        PRECIO UNIDAD
+                                    </td>
+                                    <td width="25%" align="left" style="font-bold font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 600; line-height: 24px; padding: 15px 10px 5px 10px;">
+                                       UNIDADES
+                                    </td>
+                                    <td width="25%" align="left" style="font-bold font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 600; line-height: 24px; padding: 15px 10px 5px 10px;">
+                                        SUBTOTAL
+                                    </td>
+                                </tr>
                                 @foreach ( $orderItems as $item )
                                 <tr>
-                                    <td width="25%" align="left" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px; padding: 15px 10px 5px 10px;">
+                                    <td width="25%" align="left" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 14px; font-weight: 400; line-height: 24px; padding: 15px 10px 5px 10px;">
                                         {{ $item->oferta->product->name }}
                                     </td>
-                                    <td width="25%" align="left" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px; padding: 15px 10px 5px 10px;">
+                                    <td width="25%" align="left" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 14px; font-weight: 400; line-height: 24px; padding: 15px 10px 5px 10px;">
                                         {{ $item->oferta->offer_prize }} €
                                     </td>
-                                    <td width="25%" align="left" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px; padding: 15px 10px 5px 10px;">
-                                        {{ $item->units }} Unidades
+                                    <td width="25%" align="left" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 14px; font-weight: 400; line-height: 24px; padding: 15px 10px 5px 10px;">
+                                        {{ $item->units }}
                                     </td>
-                                    <td width="25%" align="left" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px; padding: 15px 10px 5px 10px;">
+                                    <td width="25%" align="left" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 14px; font-weight: 400; line-height: 24px; padding: 15px 10px 5px 10px;">
                                         {{ $item->subtotal }} €
                                     </td>
                                 </tr>
                                 @endforeach
-
-                                {{-- <tr>
-                                    <td width="75%" align="left" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px; padding: 5px 10px;">
-                                        Shipping + Handling
-                                    </td>
-                                    <td width="25%" align="left" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px; padding: 5px 10px;">
-                                        $10.00
-                                    </td>
-                                </tr> --}}
-                                {{-- <tr>
-                                    <td width="75%" align="left" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px; padding: 5px 10px;">
-                                        Sales Tax
-                                    </td>
-                                    <td width="25%" align="left" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px; padding: 5px 10px;">
-                                        $5.00
-                                    </td>
-                                </tr> --}}
                             </table>
                         </td>
                     </tr>
