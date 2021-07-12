@@ -11,6 +11,8 @@ class ShoppingCart extends Component
     {
         return view('livewire.shopping-cart', [
             'cart' => $this->cart,
-        ])->extends('layouts.guest');
+        ])
+        // ->extends('layouts.guest')
+        ;
     }
 }
