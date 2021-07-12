@@ -93,6 +93,10 @@
                     class="px-6 py-4 m-2 tracking-wide uppercase transition duration-200 ease-in-out rounded-full outline-none font-title bg-gradient-to-b from-blue-500 to-blue-900 focus:outline-none hover:shadow-lg hover:from-blue-700">
                     <span class="text-2xl text-white">{{ __('Registrate') }}</span>
                 </x-jet-nav-link>
+                <x-jet-nav-link href="{{ route('login') }}"
+                    class="px-6 py-4 m-2 tracking-wide uppercase transition duration-200 ease-in-out rounded-full outline-none font-title bg-gradient-to-b from-blue-500 to-blue-900 focus:outline-none hover:shadow-lg hover:from-blue-700">
+                    <span class="text-2xl text-white">{{ __('USUARIO REGISTRADO') }}</span>
+                </x-jet-nav-link>
             </div>
         </div>
         @endif
