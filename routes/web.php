@@ -50,7 +50,7 @@ Route::resource('ofertas', 'OfertaController');
 
 Route::get('ofertasinactive', function () {
     return view('ofertas.inactive');
-});
+})->name('ofertas.inactive');
 
 Route::get('/vistadeprueba', function() {
     return view('vistadeprueba');
