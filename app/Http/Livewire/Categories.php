@@ -16,19 +16,26 @@ class Categories extends Component
     public $search;
     public $orderBy = 'id';
     public $orderAsc = false;
+    public $_id;
 
     public function mount($id){
 
-        $this->products = Product::where('subcategorie_id', '=', $id)->get();
-        $this->title = Subcategorie::where('id', '=', $id)->get();
+        $this->_id = $id;
+        $this->products = Product::where('subcategorie_id', '=', $this->_id)->get();
+        $this->title = Subcategorie::where('id', '=', $this->_id)->get();
 
+        /**
+         * GETTING ONLY THE ACTIVE OFFERS WITH BRAND, NAME AND EAN13
+         * a multiple query to filter first active offers and then add
+         * the required fields to show to the user more data
+         * from a subcategorie
+         */
         $this->ofertas = Oferta::join("products", "ofertas.product_id", "=", "products.id")
         ->select('ofertas.*',"products.name", "products.product_image", "products.brand", "products.EAN13_individual" )
-        // ->where("alumnos.nombre", "=", $this->search)
-        ->where('products.subcategorie_id', 'like', $id)
-        // ->where('products.brand', 'like', '%'.$this->search.'%')
-        // ->orWhere('products.EAN13_individual', 'like', '%'.$this->search.'%')
-        // ->orWhere('products.name', 'like', '%'.$this->search.'%')
+        ->where('ofertas.active', 'like', 1)
+        ->where(function($query) {
+			$query->where('products.subcategorie_id', 'like', $this->_id);
+        })
         ->with('porte')
         ->orderBy($this->orderBy, $this->orderAsc ? 'asc' : 'desc')
         ->paginate($this->perPage);
