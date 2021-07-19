@@ -45,28 +45,40 @@
                                         <x-jet-input id="name" class="block w-full mt-1" type="text" name="name"
                                             :value="old('name')" required autofocus />
                                             @error('name')
-                                                <span class="error">{{ $message }}</span>
+                                                <span class="text-red-800 error">{{ $message }}</span>
                                             @enderror
                                     </div>
                                     <div>
                                         <x-jet-label for="surname" value="{{ __('Apellidos') }}" />
                                         <x-jet-input id="surname" class="block w-full mt-1" type="text" name="surname"
                                             :value="old('surname')" required autofocus />
+                                            @error('surname')
+                                                <span class="text-red-800 error">{{ $message }}</span>
+                                            @enderror
                                     </div>
                                     <div>
                                         <x-jet-label for="phone" value="{{ __('Teléfono') }}" />
                                         <x-jet-input id="phone" class="block w-full mt-1" type="text" name="phone"
                                             :value="old('phone')" required autofocus />
+                                            @error('phone')
+                                                <span class="text-red-800 error">{{ $message }}</span>
+                                            @enderror
                                     </div>
                                     <div>
                                         <x-jet-label for="email" value="{{ __('Email') }}" />
                                         <x-jet-input id="email" class="block w-full mt-1" type="email" name="email"
                                             :value="old('email')" required autofocus />
+                                            @error('email')
+                                                <span class="text-red-800 error">{{ $message }}</span>
+                                            @enderror
                                     </div>
                                     <div class="mt-4">
                                         <x-jet-label for="password" value="{{ __('Password') }}" />
                                         <x-jet-input id="password" class="block w-full mt-1" type="password"
                                             name="password" required autocomplete="new-password" />
+                                            @error('password')
+                                                <span class="text-red-800 error">{{ $message }}</span>
+                                            @enderror
                                     </div>
                                     <div class="mt-4">
                                         <x-jet-label for="password_confirmation" value="{{ __('Confirm Password') }}" />
@@ -78,36 +90,57 @@
                                         <x-jet-label for="company" value="{{ __('Empresa') }}" />
                                         <x-jet-input id="company" class="block w-full mt-1" type="text" name="company"
                                             :value="old('company')" required autofocus />
+                                            @error('company')
+                                                <span class="text-red-800 error">{{ $message }}</span>
+                                            @enderror
                                     </div>
                                     <div>
                                         <x-jet-label for="comercial_name" value="{{ __('Nombre Comercial') }}" />
                                         <x-jet-input id="comercial_name" class="block w-full mt-1" type="text"
                                             name="comercial_name" :value="old('comercial_name')" required autofocus />
+                                            @error('comercial_name')
+                                                <span class="text-red-800 error">{{ $message }}</span>
+                                            @enderror
                                     </div>
                                     <div>
                                         <x-jet-label for="CIF" value="{{ __('CIF') }}" />
                                         <x-jet-input id="CIF" class="block w-full mt-1" type="text" name="CIF"
                                             :value="old('CIF')" required autofocus />
+                                            @error('CIF')
+                                                <span class="text-red-800 error">{{ $message }}</span>
+                                            @enderror
                                     </div>
                                     <div>
                                         <x-jet-label for="adress" value="{{ __('Dirección') }}" />
                                         <x-jet-input id="adress" class="block w-full mt-1" type="text" name="adress"
                                             :value="old('adress')" required autofocus />
+                                            @error('adress')
+                                                <span class="text-red-800 error">{{ $message }}</span>
+                                            @enderror
                                     </div>
                                     <div>
                                         <x-jet-label for="city" value="{{ __('Localidad') }}" />
                                         <x-jet-input id="city" class="block w-full mt-1" type="text" name="city"
                                             :value="old('city')" required autofocus />
+                                            @error('city')
+                                                <span class="text-red-800 error">{{ $message }}</span>
+                                            @enderror
                                     </div>
                                     <div>
                                         <x-jet-label for="cp" value="{{ __('Codigo Postal') }}" />
                                         <x-jet-input id="cp" class="block w-full mt-1" type="number" name="cp"
                                             :value="old('cp')" pattern="{0-9}" required autofocus />
+                                            @error('cp')
+                                                <span class="text-red-800 error">{{ $message }}</span>
+                                            @enderror
                                     </div>
                                     <div>
                                         <x-jet-label for="province" value="{{ __('Provincia') }}" />
                                         <x-jet-input id="province" class="block w-full mt-1" type="text" max=5
                                             name="province" :value="old('province')" required autofocus />
+                                            @error('province')
+                                                <span class="text-red-800 error">{{ $message }}</span>
+                                            @enderror
                                     </div>
                                     <div class="block w-full mt-1">
                                         <div class="flex flex-col px-2 text-left">
