@@ -5,7 +5,11 @@
         <div class="flex items-center justify-center mt-4 mb-2 bg-gray-200">
             <div class="grid w-11/12 bg-white rounded-lg shadow-xl md:w-1/12 lg:w-10/12">
                 <div class="p-3 bg-gray-200">
-                    <div class="grid grid-cols-1 gap-5 mt-5 md:grid-cols-2 md:gap-8 mx-7">
+                    <div class="grid grid-cols-1 gap-5 mt-5 md:grid-cols-2 md:gap-8 mx-7 has-tooltip">
+                        <span class='p-1 -mt-8 text-red-500 bg-gray-200 rounded shadow-lg tooltip'>
+                            Los datos del Producto al que está vinculada esta oferta. No se puede editar en este formulario.
+                            Si lo deseas debes editar la ficha del Producto
+                        </span>
                         <div class="grid grid-cols-1">
                             <label class="text-3xl font-semibold text-gray-500 uppercase md:text-sm text-light">
                                 PRODUCTO:
@@ -60,7 +64,10 @@
                     <h2 class="text-3xl">DATOS DE LA OFERTA:</h2>
                 </div>
                 <div class="grid grid-cols-1 gap-5 mt-5 md:grid-cols-4 md:gap-8 mx-7">
-                    <div class="grid grid-cols-1">
+                    <div class="grid grid-cols-1 has-tooltip">
+                        <span class='p-1 -mt-8 text-red-500 bg-gray-200 rounded shadow-lg tooltip'>
+                            Población de origen de la Oferta
+                        </span>
                         <label class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">
                             LOCALIDAD RECOGIDA:
                         </label>
@@ -68,7 +75,10 @@
                             class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
                             type="text" placeholder="{{ $oferta->localidad_recogida }}" />
                     </div>
-                    <div class="grid grid-cols-1">
+                    <div class="grid grid-cols-1 has-tooltip">
+                        <span class='p-1 -mt-8 text-red-500 bg-gray-200 rounded shadow-lg tooltip'>
+                            Provincia de origen de la Oferta
+                        </span>
                         <label class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">
                             PROVINCIA RECOGIDA:
                         </label>
@@ -76,7 +86,10 @@
                             class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
                             type="text" placeholder="{{ $oferta->provincia_recogida }}" />
                     </div>
-                    <div class="grid grid-cols-1">
+                    <div class="grid grid-cols-1 has-tooltip">
+                        <span class='p-1 -mt-8 text-red-500 bg-gray-200 rounded shadow-lg tooltip'>
+                            Código Postal (5 dígitos)
+                        </span>
                         <label class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">
                             CP:
                         </label>
@@ -95,7 +108,10 @@
                 </div>
 
                 <div class="grid grid-cols-1 gap-5 mt-5 md:grid-cols-4 md:gap-8 mx-7">
-                    <div class="grid grid-cols-1">
+                    <div class="grid grid-cols-1 has-tooltip">
+                        <span class='p-1 -mt-8 text-red-500 bg-gray-200 rounded shadow-lg tooltip'>
+                            Número de unidades que componen la Oferta
+                        </span>
                         <label class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">
                             Unidades:
                         </label>
@@ -103,7 +119,10 @@
                             class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
                             type="int" placeholder="{{ $oferta->boxes }}" />
                     </div>
-                    <div class="grid grid-cols-1">
+                    <div class="grid grid-cols-1 has-tooltip">
+                        <span class='p-1 -mt-8 text-red-500 bg-gray-200 rounded shadow-lg tooltip'>
+                            Número de unidades que componen la Oferta
+                        </span>
                         <label class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">
                             Unidades en Oferta:
                         </label>
@@ -112,7 +131,10 @@
                             type="text" placeholder="{{ $oferta->offer_units }}" />
                     </div>
 
-                    <div class="grid grid-cols-1">
+                    <div class="grid grid-cols-1 has-tooltip">
+                        <span class='p-1 -mt-8 text-red-500 bg-gray-200 rounded shadow-lg tooltip'>
+                            Origen de la Oferta
+                        </span>
                         <label class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">
                             Proveedor:
                         </label>
@@ -123,7 +145,10 @@
                 </div>
 
                 <div class="grid grid-cols-1 gap-5 mt-5 md:grid-cols-4 md:gap-8 mx-7">
-                    <div class="grid grid-cols-1">
+                    <div class="grid grid-cols-1 has-tooltip">
+                        <span class='p-1 -mt-8 text-red-500 bg-gray-200 rounded shadow-lg tooltip'>
+                            Fecha aproximada de compra del Producto en Oferta
+                        </span>
                         <label class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">
                             Fecha Compra:
                         </label>
@@ -131,7 +156,10 @@
                             class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
                             type="date" placeholder="{{ $oferta->buyed_date }}" />
                     </div>
-                    <div class="grid grid-cols-1">
+                    <div class="grid grid-cols-1 has-tooltip">
+                        <span class='p-1 -mt-8 text-red-500 bg-gray-200 rounded shadow-lg tooltip'>
+                            Número de días de preparación del pedido
+                        </span>
                         <label class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">
                             Plazo Preparación Pedido:
                         </label>
@@ -140,7 +168,10 @@
                             class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
                             type="date" placeholder="{{ $oferta->plazo_preparacion_pedido }}" />
                     </div>
-                    <div class="grid grid-cols-1">
+                    <div class="grid grid-cols-1 has-tooltip">
+                        <span class='p-1 -mt-8 text-red-500 bg-gray-200 rounded shadow-lg tooltip'>
+                            Elije una opción
+                        </span>
                         <label class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">
                             ¿ADMITE CONTRAOFERTA?:
                         </label>
@@ -154,7 +185,10 @@
                 </div>
 
                 <div class="grid grid-cols-1 gap-5 mt-5 md:grid-cols-4 md:gap-8 mx-7">
-                    <div class="grid grid-cols-1">
+                    <div class="grid grid-cols-1 has-tooltip">
+                        <span class='p-1 -mt-8 text-red-500 bg-gray-200 rounded shadow-lg tooltip'>
+                            Elige una categoría. La categoría de la Oferta determinará el precio final de la oferta
+                        </span>
                         <label
                             class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">
                             Categoría Oferta:
@@ -171,7 +205,10 @@
                         @error('categoria_oferta') <span
                             class="text-red-600 error">{{ $message }}</span> @enderror
                     </div>
-                    <div class="grid grid-cols-1">
+                    <div class="grid grid-cols-1 has-tooltip">
+                        <span class='p-1 -mt-8 text-red-500 bg-gray-200 rounded shadow-lg tooltip'>
+                            ¿Es el embalaje del Producto el original?
+                        </span>
                         <label
                             class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">
                             ¿Embalaje Original?
@@ -189,7 +226,10 @@
                         @enderror
 
                     </div>
-                    <div class="grid grid-cols-1">
+                    <div class="grid grid-cols-1 has-tooltip">
+                        <span class='p-1 -mt-8 text-red-500 bg-gray-200 rounded shadow-lg tooltip'>
+                            ¿Es nuevo el Producto?
+                        </span>
                         <label
                             class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">
                             ¿Producto Nuevo?
@@ -231,7 +271,10 @@
                 </div>
 
                 <div class="grid grid-cols-1 gap-5 mt-5 md:grid-cols-4 md:gap-8 mx-7">
-                    <div class="grid grid-cols-1">
+                    <div class="grid grid-cols-1 has-tooltip">
+                        <span class='p-1 -mt-8 text-red-500 bg-gray-200 rounded shadow-lg tooltip'>
+                            El porte de aconsejamos que sea COMPARTIDO para poder hacer la oferta más atractiva al comprador
+                        </span>
                         <label
                             class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">
                             PORTES:
@@ -246,7 +289,10 @@
                         @error('porte_id') <span
                             class="text-red-600 error">{{ $message }}</span> @enderror
                     </div>
-                    <div class="grid grid-cols-1">
+                    <div class="grid grid-cols-1 has-tooltip">
+                        <span class='p-1 -mt-8 text-red-500 bg-gray-200 rounded shadow-lg tooltip'>
+                            Precio al que se compró el Producto
+                        </span>
                         <label
                             class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">
                             Precio Compra:
@@ -259,7 +305,10 @@
                             class="text-red-600 error">{{ $message }}</span>
                         @enderror
                     </div>
-                    <div class="grid grid-cols-1">
+                    <div class="grid grid-cols-1 has-tooltip">
+                        <span class='p-1 -mt-8 text-red-500 bg-gray-200 rounded shadow-lg tooltip'>
+                            Determinado por el Precio del Mercado y la categoría de la Oferta
+                        </span>
                         <label
                             class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">
                             PRECIO OFERTA:
@@ -290,7 +339,10 @@
                 <hr>
                 @if(Auth::user()->is_admin)
                 <div class="grid grid-cols-1 gap-5 p-3 m-8 bg-red-100 md:grid-cols-4 md:gap-8 mx-7">
-                    <div class="grid grid-cols-1">
+                    <div class="grid grid-cols-1 has-tooltip">
+                        <span class='p-1 -mt-8 text-red-500 bg-gray-200 rounded shadow-lg tooltip'>
+                            Si activas la Oferta será visible para todos los Usuarios en el Área de Compra de la Aplicación. Repasa bien la Oferta antes de activarla.
+                        </span>
                         <label class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">
                             ¿ACTIVAR OFERTA?:</label>
                         <select wire:model='active' id='active' name="active"
