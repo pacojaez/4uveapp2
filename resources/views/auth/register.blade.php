@@ -26,9 +26,16 @@
                             <div class="font-semibold text-center text-black">
                                 FORMULARIO DE REGISTRO
                             </div>
-                            <div class="text-center text-black font-base">
-                                4uve
-                            </div>
+                            @if (count($errors) > 0)
+                                <div class="w-full p-2 m-2 text-center bg-gray-200 rounded">
+                                    <p class="font-semibold text-red-500 text-">Upss!! Corrige los siguientes errores:</p>
+                                    <ol>
+                                        @foreach ($errors->all() as $message)
+                                            <li class="font-semibold text-center">{{ trans($message) }}</li>
+                                        @endforeach
+                                    </ol>
+                                </div>
+                            @endif
                             <form method="POST" action="{{ route('register') }}" class="w-full px-4 mx-auto lg:px-0"
                                 x-data="{password: '',password_confirm: ''}">
                                 @csrf
@@ -37,6 +44,9 @@
                                         <x-jet-label for="name" value="{{ __('Nombre') }}" />
                                         <x-jet-input id="name" class="block w-full mt-1" type="text" name="name"
                                             :value="old('name')" required autofocus />
+                                            @error('name')
+                                                <span class="error">{{ $message }}</span>
+                                            @enderror
                                     </div>
                                     <div>
                                         <x-jet-label for="surname" value="{{ __('Apellidos') }}" />

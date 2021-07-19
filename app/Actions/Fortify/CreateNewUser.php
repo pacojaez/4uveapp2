@@ -24,18 +24,18 @@ class CreateNewUser implements CreatesNewUsers
     public function create(array $input)
     {
         $data = Validator::make($input, [
-            'name' => ['required', 'string', 'max:255'],
-            'surname' => ['required', 'string', 'max:255'],
+            'name' => ['required', 'string', 'regex:/^[a-zA-Z\s]{2,254}gi/'],
+            'surname' => ['required', 'string', 'regex:/^[a-zA-Z\s]{2,254}gi/'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => $this->passwordRules(),
             'company' => ['required', 'string', 'max:255'],
             'comercial_name' => ['required', 'string', 'max:255'],
-            'CIF' => ['required', 'string', 'max:255'],
-            'adress' => ['required', 'string', 'max:255'],
-            'city' => ['required', 'string', 'max:255'],
-            'cp' => ['required', 'string', 'max:5'],
+            'CIF' => ['required', 'string', 'max:255', 'min: 4'],
+            'adress' => ['required', 'string', 'max:255', 'min: 4'],
+            'city' => ['required', 'string', 'max:255', 'min: 4'],
+            'cp' => ['required', 'string', 'max:5', 'regex:/[0-9]+$/'],
             'province' => ['required', 'string', 'max:255'],
-            'phone' => ['required', 'string'],
+            'phone' => ['required', 'string', 'min: 9', 'regex:/[0-9]+$/'],
             'tipo_usuario' => ['required', 'string'],
             'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['required', 'accepted'] : '',
         ])->validate();
