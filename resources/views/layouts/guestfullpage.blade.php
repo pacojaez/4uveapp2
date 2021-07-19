@@ -13,6 +13,9 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+    <!-- Styles -->
+    <link rel="stylesheet" href="{{ asset('css/fonts.css') }}">
+
     @livewireStyles
 
     <!-- Scripts -->
