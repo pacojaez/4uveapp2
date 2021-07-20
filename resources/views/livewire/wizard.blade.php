@@ -89,7 +89,7 @@
                 <!-- Pasos para rellenar el form-->
                 <div x-show.transition="step != 'complete'">
                     <!-- Top Steps Navigation -->
-                    <div class="left-0 right-0 py-5 bg-white shadow-md" x-show="step != 'complete'">
+                    {{-- <div class="left-0 right-0 py-5 bg-white shadow-md" x-show="step != 'complete'">
                         <div class="max-w-3xl px-4 mx-auto">
                             <div class="flex justify-between">
                                 <div class="w-1/2">
@@ -107,24 +107,51 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                     <!-- / Top Steps Navigation -->
                     <!-- Top Navigation -->
                     <div class="py-4 border-b-2">
                         <div class="mb-1 text-xs font-bold leading-tight tracking-wide text-gray-500 uppercase"
-                            x-text="`Step: ${step} of 3`"></div>
+                            x-text="`Paso: ${step} de 3`"></div>
                         <div class="flex flex-col md:flex-row md:items-center md:justify-between">
                             <div class="flex-1">
 
                                 <div x-show="step === 1">
                                     <div class="text-lg font-bold leading-tight text-gray-700">
-                                        Buscar Producto en nuestra Base de Datos
+                                        Buscar Producto en nuestra Base de Datos o crear un Producto Nuevo
                                     </div>
                                 </div>
 
                                 <div x-show="step === 2">
-                                    <div class="text-lg font-bold leading-tight text-gray-700">
+                                    {{-- <div class="text-lg font-bold leading-tight text-gray-700">
                                         Crear Producto
+                                    </div> --}}
+                                    <div class="flex justify-between">
+                                        <div class="max-w-3xl px-4 mx-auto">
+                                            <div class="flex justify-between">
+                                                @if(!$storedProduct)
+                                                    @if(!$selected)
+                                                    <div class="w-full text-center">
+                                                        <p class="p-4 text-xl text-white uppercase bg-gray-300 rounded">
+                                                            Formulario de creación de un Nuevo Producto
+                                                        </p>
+                                                    </div>
+                                                    @else
+                                                    <div class="w-full text-center">
+                                                        <p class="p-4 text-xl text-white uppercase bg-green-600 rounded">
+                                                            PRODUCTO YA CREADO, YA PUEDES RELLENAR LA OFERTA en el siguiente paso
+                                                        </p>
+                                                    </div>
+                                                    @endif
+                                                @else
+                                                    <div class="w-full">
+                                                        <p class="p-4 text-xl text-white uppercase bg-green-300 rounded">
+                                                            PRODUCTO GUARDADO, YA PUEDES RELLENAR LA OFERTA en el siguiente paso
+                                                        </p>
+                                                    </div>
+                                                @endif
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -153,14 +180,21 @@
                             <!-- buscador de producto-->
                             <div class="mb-5 text-center">
                                 <div class="inline-flex justify-between w-5/6 m-2">
-                                    <div class="w-1/3 mx-1">
+                                    <div class="w-1/3 mx-1 has-tooltip">
                                         <label class="w-16 font-bold">Buscar producto:</label>
+                                        <span class='p-1 -mt-8 text-red-500 bg-gray-200 rounded shadow-lg tooltip'>
+                                            Si no tenemos el producto en nuestra Base de Datos, clicka en SIGUIENTE y crea un nuevo Producto.
+                                            Si el producto está en nuestra Base de Datos seleccionalo primero y clicka SIGUIENTE
+                                        </span>
                                         <input wire:model.debounce.500ms="search" type="search"
                                             class="flex w-full px-4 py-3 leading-tight text-gray-700 bg-gray-200 border border-gray-200 rounded appearance-none focus:outline-none focus:bg-white focus:border-gray-500"
-                                            placeholder="Buscar Producto por EAN13 o Nombre...">
+                                            placeholder="EAN13, Marca o Nombre del Producto">
                                     </div>
-                                    <div class="w-1/3 mx-1">
+                                    <div class="w-1/3 mx-1 has-tooltip">
                                         <label class="w-16 font-bold"> Seleccionar producto:</label>
+                                        <span class='p-1 -mt-8 text-red-500 bg-gray-200 rounded shadow-lg tooltip'>
+                                            Productos que coiniciden con tu criterio de búsqueda. Selecciona el que corresponda a tu Oferta
+                                        </span>
                                         <select name="selected" wire:model="selected"
                                             class="w-full p-2 px-4 py-3 leading-tight bg-white border shadow">
                                             <option value=''>Elije un producto de nuestra Base de Datos</option>
@@ -177,16 +211,14 @@
                                         </button> --}}
                                         <label class="w-16 font-bold"> Limpiar el Formulario</label>
                                         <button wire:click="clearSearch"
-                                            class="w-full px-4 py-3 leading-tight text-center text-gray-200 bg-blue-400 border border-gray-200 rounded w-1/2flex text-white-700">
-                                            Clear
+                                            class="w-full px-4 py-3 leading-tight text-center text-gray-200 bg-red-400 border border-gray-200 rounded w-1/2flex text-white-700">
+                                            Anular Selección
                                         </button>
-
                                     </div>
                                 </div>
                             </div>
                             <!-- producto Step 1-->
                             <div class="p-10 mb-2 text-center bg-gray-300">
-
                                 @if($selectedProduct != '')
                                 <div class="inline-flex justify-between w-full p-10 m-2 bg-gray-200">
                                     <div class="mb-5">
@@ -378,14 +410,28 @@
                         <!-- Step 2 Crear producto IfnotExists -->
                         <div x-show.transition.in="step === 2">
                             <div class="p-10 mb-2 text-center bg-gray-300">
-                                @if(!$selectedProduct)
-                                <div class="w-1/3 mx-1 text-center">
-                                    <button wire:click="clearSearch" type="reset"
-                                        class="class='w-auto px-4 py-2 m-auto font-medium text-center text-white bg-red-600 rounded-lg shadow-xl hover:bg-gray-700'">
-                                        Reiniciar el Formulario
-                                    </button>
+
+                                <div class="flex justify-between">
+                                    <div class="max-w-3xl px-4 mx-auto">
+                                        <div class="flex justify-between">
+                                            @if(!$selected && !$storedProduct)
+                                            <div class="w-1/2">
+                                                <button wire:click="clearSearch" type="reset"
+                                                    class="class='w-auto px-4 py-2 m-auto font-medium text-center text-white bg-red-600 rounded-lg shadow-xl hover:bg-gray-700'">
+                                                    Limpiar el Formulario
+                                                </button>
+                                            </div>
+                                            <div class="w-1/2 text-right">
+                                                <button
+                                                    class='w-auto px-4 py-2 m-auto font-medium text-center text-white bg-blue-500 rounded-lg shadow-xl hover:bg-gray-700'
+                                                    wire:click="storeProduct">
+                                                    GUARDAR EL PRODUCTO
+                                                </button>
+                                            </div>
+                                            @endif
+                                        </div>
+                                    </div>
                                 </div>
-                                @endif
                                 <!--Product FORM -->
                                 <form wire:submit.prevent="storeProduct" enctype="multipart/form-data">
                                     @method('post')
@@ -1021,7 +1067,8 @@
                                                         class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
                                                         type="text" placeholder="EJ: 65x20x30" />
                                                     @error('boxes_dimensions') <span
-                                                        class="text-red-600 error">{{ $message }}</span> @enderror
+                                                        class="text-red-600 error">{{ $message }}</span>
+                                                    @enderror
                                                 </div>
                                                 {{-- <div class="grid grid-cols-1">
                                                     <label
@@ -1126,7 +1173,7 @@
                                                     class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent">
                                                     <option value="" selected>---elije un tipo de porte---</option>
                                                     <option value="1">PORTES PAGADOS</option>
-                                                    <option value="2s">PORTES DEBIDOS</option>
+                                                    <option value="2">PORTES DEBIDOS</option>
                                                     <option value="3">PORTES COMPARTIDOS</option>
                                                 </select>
                                                 @error('porte_id') <span
@@ -1395,11 +1442,13 @@
                                             </button>
                                         </div>
                                         <div class="w-1/2 text-right">
+                                            @if($selected || $storedProduct)
                                             <button
                                                 class='w-auto px-4 py-2 m-auto font-medium text-center text-white bg-blue-500 rounded-lg shadow-xl hover:bg-gray-700'
                                                 wire:click="storeOffer">
                                                 GUARDAR LA OFERTA
                                             </button>
+                                            @endif
                                         </div>
                                         @endif
                                     </div>
@@ -1463,15 +1512,14 @@
                 <div class="flex justify-between">
                     <div class="w-1/2">
                         <button x-show="step > 1" @click="step--"
-                            class="w-32 px-5 py-2 font-medium text-center text-gray-600 bg-white border rounded-lg shadow-sm focus:outline-none hover:bg-gray-100">Previous</button>
+                            class="w-32 px-5 py-2 font-medium text-center text-white bg-green-400 border rounded-lg shadow-sm focus:outline-none hover:bg-green-600">ANTERIOR</button>
                     </div>
-
                     <div class="w-1/2 text-right">
                         <button x-show="step < 3" @click="step++"
-                            class="w-32 px-5 py-2 font-medium text-center text-white bg-blue-500 border border-transparent rounded-lg shadow-sm focus:outline-none hover:bg-blue-600">Next</button>
+                            class="w-32 px-5 py-2 font-medium text-center text-white bg-blue-500 border border-transparent rounded-lg shadow-sm focus:outline-none hover:bg-blue-600">SIGUIENTE</button>
                         @if($storedOferta)
                         <button @click="step = 'complete'" x-show="step === 3" wire:click="storeProduct"
-                            class="w-32 px-5 py-2 font-medium text-center text-white bg-blue-500 border border-transparent rounded-lg shadow-sm focus:outline-none hover:bg-blue-600">Complete</button>
+                            class="w-32 px-5 py-2 font-medium text-center text-white bg-blue-500 border border-transparent rounded-lg shadow-sm focus:outline-none hover:bg-blue-600">COMPLETADO</button>
                         @endif
                     </div>
                 </div>
