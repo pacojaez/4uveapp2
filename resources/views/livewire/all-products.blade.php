@@ -78,11 +78,13 @@
                             @else --}}
                             <div class="flex h-8 p-2 text-xs font-semibold text-white bg-green-500 rounded-full justify-items-center">
                                 <span class="flex items-center">
+                                    @if($oferta->invoice_cost_price != 0 && $oferta->offer_prize != 0)
                                     <h3 class="p-2 text-lg text-center text-white uppercase bg-green-500 rounded font-subtitle">
                                         Ahorro:
                                         {!! number_format((float)(100-(100*$oferta->offer_prize/$oferta->invoice_cost_price)), 2) !!}
                                         %
                                     </h3>
+                                    @endif
                                 </span>
                             </div>
                             {{-- <div class="flex p-2 mb-2 border-t border-gray-200">
@@ -95,7 +97,7 @@
                             @if($oferta->product->product_image)
                             <img class="object-cover w-full h-48 md:w-48" src="{{asset('storage/images/products/'.$oferta->product->product_image)}}" alt="{{ $oferta->product->name}}" />
                             @else
-                            <img class="object-cover w-full h-48 md:w-48" src="{{asset('storage/images/elementos/no-image-icon.png')}}" alt="{{ $product->name}}" />
+                            <img class="object-cover w-full h-48 md:w-48" src="{{asset('storage/images/elementos/no-image-icon.png')}}" alt="{{ $oferta->product->name}}" />
                             @endif
                             {{-- <img class="w-10 h-10" src="{{asset('storage/images/products/'.$product->product_image)}}" alt="{{ $product->name}}" /> --}}
                           </div>

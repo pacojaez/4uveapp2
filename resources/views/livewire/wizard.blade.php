@@ -129,10 +129,13 @@
                                     <div class="flex justify-between">
                                         <div class="max-w-3xl px-4 mx-auto">
                                             <div class="flex justify-between">
+                                                @if($errors->any())
+                                                    <h4 class="p-4 mx-2 text-lg font-semibold bg-red-300 rounded">ERROR: {{$errors->first()}}</h4>
+                                                @endif
                                                 @if(!$storedProduct)
                                                     @if(!$selected)
                                                     <div class="w-full text-center">
-                                                        <p class="p-4 text-xl text-white uppercase bg-gray-300 rounded">
+                                                        <p class="p-4 text-xl text-gray-700 uppercase bg-gray-300 rounded">
                                                             Formulario de creación de un Nuevo Producto
                                                         </p>
                                                     </div>
@@ -159,6 +162,9 @@
                                     <div class="text-lg font-bold leading-tight text-gray-700">
                                         Crear Oferta
                                     </div>
+                                    @if($errors->any())
+                                        <h4 class="p-4 mx-2 text-lg font-semibold bg-red-300 rounded">ERROR: {{$errors->first()}}</h4>
+                                    @endif
                                 </div>
 
                             </div>
@@ -1512,14 +1518,20 @@
                 <div class="flex justify-between">
                     <div class="w-1/2">
                         <button x-show="step > 1" @click="step--"
-                            class="w-32 px-5 py-2 font-medium text-center text-white bg-green-400 border rounded-lg shadow-sm focus:outline-none hover:bg-green-600">ANTERIOR</button>
+                            class="w-32 px-5 py-2 font-medium text-center text-white bg-green-400 border rounded-lg shadow-sm focus:outline-none hover:bg-green-600">
+                            ANTERIOR
+                        </button>
                     </div>
                     <div class="w-1/2 text-right">
                         <button x-show="step < 3" @click="step++"
-                            class="w-32 px-5 py-2 font-medium text-center text-white bg-blue-500 border border-transparent rounded-lg shadow-sm focus:outline-none hover:bg-blue-600">SIGUIENTE</button>
+                            class="w-32 px-5 py-2 font-medium text-center text-white bg-blue-500 border border-transparent rounded-lg shadow-sm focus:outline-none hover:bg-blue-600">
+                            SIGUIENTE
+                        </button>
                         @if($storedOferta)
                         <button @click="step = 'complete'" x-show="step === 3" wire:click="storeProduct"
-                            class="w-32 px-5 py-2 font-medium text-center text-white bg-blue-500 border border-transparent rounded-lg shadow-sm focus:outline-none hover:bg-blue-600">COMPLETADO</button>
+                            class="w-32 px-5 py-2 font-medium text-center text-white bg-blue-500 border border-transparent rounded-lg shadow-sm focus:outline-none hover:bg-blue-600">
+                            COMPLETADO
+                        </button>
                         @endif
                     </div>
                 </div>

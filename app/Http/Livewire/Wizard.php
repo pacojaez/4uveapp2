@@ -102,16 +102,16 @@ class Wizard extends Component
         'boxes' => 'int|nullable|regex:/^\d*\.?\d+$/',
         'provider' => 'string|nullable',
         'buyed_date' => 'date|nullable',
-        'localidad_recogida' => 'string|nullable',
-        'cp_recogida' => 'string|nullable',
-        'provincia_recogida' => 'string|nullable',
+        'localidad_recogida' => 'string|required',
+        'cp_recogida' => 'string|required',
+        'provincia_recogida' => 'string|required',
         'porte_id' => 'required|string|regex:/^\d*\.?\d+$/',
         'new' => 'nullable|int',
         'contraoferta' => 'nullable|int',
         'embalaje_original' => 'nullable|int',
         'categoria_oferta' => 'required|string',
-        'invoice_cost_price' => 'nullable|regex:/^\d*\.?\d+$/',
-        'offer_prize' => 'nullable|regex:/^\d*\.?\d+$/',
+        'invoice_cost_price' => 'required|regex:/^\d*\.?\d+$/',
+        'offer_prize' => 'required|regex:/^\d*\.?\d+$/',
 
     ];
 
@@ -287,8 +287,10 @@ class Wizard extends Component
 
         if ($this->selectedProduct) {
             $id = $this->selectedProduct->id;
-        } else {
+        } elseif ($this->product_id)  {
             $id = $this->product_id;
+        }else{
+            return back()->with(['msg', 'La oferta debe estar vinculada a un Producto de nuestra Base de Datos o creado por tí']);
         }
 
         $this->oferta->product_id = $id;
