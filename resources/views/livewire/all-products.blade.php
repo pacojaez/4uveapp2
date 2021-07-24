@@ -47,9 +47,9 @@
         <div class="p-2 mx-8 font-semibold bg-gray-300 justify-items-center">
             {{ $ofertas->links() }}
         </div>
-        <div class="grid grid-cols-12 gap-6 p-2 m-5">
+        <div class="grid grid-flow-col grid-cols-3 gap-6 p-2 m-5 grid-col">
             @foreach($ofertas as $oferta)
-                <a class="col-span-12 transition duration-300 transform bg-white rounded-lg shadow-xl hover:scale-105 sm:col-span-6 xl:col-span-3 intro-y"
+                <a class="transition duration-300 transform bg-white rounded-lg shadow-xl col-span hover:scale-105 sm:col-span-6 xl:col-span-3 intro-y"
                     href="{{ route('singleoferta', ['id' => $oferta->id]) }}">
 
                     <div class="p-2">
