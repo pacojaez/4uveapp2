@@ -28,7 +28,7 @@ class ShowEditProduct extends Component
     // public $user_image, $user_image_2, $user_image_3;
 
     public $name, $description, $short_description, $product_code, $subcategorie_id,
-        $part_number, $brand, $EAN13_individual, $net_price, $unidades_embalaje_individual, $dimensions_boxes, $weight,
+        $part_number, $brand, $EAN13_individual, $net_price, $unidades_embalaje_individual, $dimensions, $weight,
         $pack_units, $EAN13_box_1, $unidades_embalaje_2, $dimensions_boxes_2, $weight_2,
         $EAN13_box_2, $unidades_embalaje_3, $dimensions_boxes_3, $weight_3, $EAN13_box_3,
         $embalaje_original, $active;
@@ -61,7 +61,7 @@ class ShowEditProduct extends Component
             'EAN13_individual' =>'string|nullable',
             'net_price' => 'int|nullable',
             'unidades_embalaje_individual' => 'string|nullable',
-            'dimensions_boxes' => 'string|nullable',
+            'dimensions' => 'string|nullable',
             'weight' => 'string|nullable',
             'pack_units' => 'string|nullable',
             'EAN13_box_1' => 'string|nullable',
