@@ -5,17 +5,13 @@ namespace App\Http\Livewire;
 use LivewireUI\Modal\ModalComponent;
 use App\Models\OrderItem;
 use App\Models\Order;
-
+use Illuminate\Support\Facades\Auth;
 
 class OrderModalUpdate extends ModalComponent
 {
 
     public $order;
-    public $status;
-
-    public $listeners = [
-        'openModalUpdate'=> 'mount'
-    ];
+    public $editstatus;
 
     public static function modalMaxWidth(): string
     {
@@ -24,19 +20,34 @@ class OrderModalUpdate extends ModalComponent
 
     public function mount($order)
     {
-
         $this->order = $order;
-
-        dd($this->order);
     }
 
     public function render()
     {
-        $orderItems = OrderItem::where('order_id', 'like', $this->order->id)->get();
-        //dd($orderItems);
+        $orderItems = OrderItem::where('order_id', 'like', $this->order['id'])->get();
+
         return view('livewire.order-modal-update', [
             'orderItems' => $orderItems,
             'order' => $this->order
         ]);
+    }
+
+    public function update(){
+
+        if(Auth::user()->is_admin && $this->editstatus){
+            Order::where('id', $this->order['id'])
+                    ->update(['status' => $this->editstatus]);
+
+            $this->emit('closeModal');
+
+            $this->emit('orderUpdated');
+        }
+
+    }
+
+    public function updateOrderStatus(){
+        Order::where('id', $this->order['id'])
+        ->update(['status' => $this->editstatus]);
     }
 }

@@ -13,6 +13,10 @@ class OrdersDashboard extends Component
     protected $orders;
     protected $orderItems= [];
 
+    public $listeners = [
+        'orderUpdated' => 'mount'
+    ];
+
     // public function emitToModal($id){
     //     dd($id);
     // }

@@ -1,5 +1,5 @@
 
-<x-modal>
+ <x-modal form-action="update">
     <x-slot name="title">
         EDITAR Pedido numero: {{$order['id']}}
     </x-slot>
@@ -53,16 +53,9 @@
                           <div class="text-sm text-gray-500"> {{ $item->oferta->product->brand }}</div>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap">
-                           <select wire:model='editstatus' id='editstatus' name="editstatus"
-                            class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent">
-                            <option value="">--Elige una opción--</option>
-                            <option value="Pendiente de Confirmación">Pendiente de Confirmación</option>
-                            <option value="Aceptado">Aceptado</option>
-                            <option value="Enviado">Enviado</option>
-                            <option value="En reparto">En reparto</option>
-                            <option value="Cerrado">Cerrado</option>
-                        </select>
-                            <div class="text-sm text-gray-900">{{ $order['status']}}</div>
+                           <div class="text-sm text-gray-900">
+                              <span class="font-bold">{{ $order['status']}}</span>
+                            </div>
                         </td>
                         <td class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
                             <div class="text-sm text-gray-900">{{ $item->oferta->offer_prize }} €</div>
@@ -73,6 +66,18 @@
                       </tr>
 
                       @endforeach
+                      <td class="px-6 py-4 whitespace-nowrap">
+                           <div class="text-sm text-gray-900">ACTUAL: <span class="font-bold">{{ $order['status']}}</span></div>
+                           <select wire:model='editstatus' id='editstatus' name="editstatus"
+                            class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent">
+                                <option value="">--Elige una opción--</option>
+                                <option value="Pendiente de Confirmación">Pendiente de Confirmación</option>
+                                <option value="Aceptado">Aceptado</option>
+                                <option value="Enviado">Enviado</option>
+                                <option value="En reparto">En reparto</option>
+                                <option value="Cerrado">Cerrado</option>
+                        </select>
+                        </td>
                       <!-- More people... -->
                     </tbody>
                   </table>
@@ -88,6 +93,11 @@
     </x-slot>
 
     <x-slot name="buttons">
+
+        <button wire:click="$emit('update')" class="w-full px-3 py-2 m-2 text-center text-red-400 border-2 border-red-600 rounded-lg cursor-pointer hover:bg-red-600 hover:text-red-200">
+            <> UPDATE
+        </button>
+
         <button wire:click="$emit('closeModal')" class="w-full px-3 py-2 m-2 text-center text-yellow-400 border-2 border-yellow-600 rounded-lg cursor-pointer hover:bg-yellow-600 hover:text-yellow-200">
             X Close
         </button>
