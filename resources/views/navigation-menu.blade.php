@@ -67,6 +67,10 @@
                             </x-jet-dropdown-link>
                             @endif
                             @if(Auth::user()->isAdmin())
+                            <x-jet-dropdown-link href="{{ route('dashboard') }}">
+                                {{ __('PEDIDOS') }}
+                            </x-jet-dropdown-link>
+
                             <x-jet-dropdown-link href="{{ route('products.index') }}">
                                 {{ __('Todos los Productos') }}
                             </x-jet-dropdown-link>
@@ -156,6 +160,40 @@
                         {{ __('API Tokens') }}
                     </x-jet-responsive-nav-link>
                 @endif
+                @if(Auth::user())
+                            <x-jet-dropdown-link href="{{ route('products.wizard') }}">
+                                {{ __('Añadir Oferta') }}
+                            </x-jet-dropdown-link>
+                            <x-jet-dropdown-link href="{{ route('ofertas.index') }}">
+                                {{ __('Mis Ofertas') }}
+                            </x-jet-dropdown-link>
+                            @endif
+                            @if(Auth::user()->isAdmin())
+                            <x-jet-dropdown-link href="{{ route('dashboard') }}">
+                                {{ __('PEDIDOS') }}
+                            </x-jet-dropdown-link>
+
+                            <x-jet-dropdown-link href="{{ route('products.index') }}">
+                                {{ __('Todos los Productos') }}
+                            </x-jet-dropdown-link>
+                            <x-jet-dropdown-link href="{{ url('inactive') }}">
+                                {{ __('Productos INACTIVOS') }}
+                            </x-jet-dropdown-link>
+                            <x-jet-dropdown-link href="{{ route('ofertas.index') }}">
+                                {{ __('Todas las Ofertas') }}
+                            </x-jet-dropdown-link>
+                            <x-jet-dropdown-link href="{{ url('ofertasinactive') }}">
+                                {{ __('Ofertas INACTIVAS') }}
+                            </x-jet-dropdown-link>
+                            <x-jet-dropdown-link href="{{ route('user.create') }}">
+                                {{ __('Añadir Usuario') }}
+                            </x-jet-dropdown-link>
+                            <x-jet-dropdown-link href="{{ route('users.index') }}">
+                                {{ __('Todos los Usuarios') }}
+                            </x-jet-dropdown-link>
+                            @endif
+
+
 
                 <!-- Authentication -->
                 <form method="POST" action="{{ route('logout') }}">

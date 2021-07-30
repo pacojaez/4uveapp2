@@ -1,24 +1,47 @@
-<div>
-    <h2 class="mt-4 ml-12 text-xl font-semibold leading-tight text-gray-800">
-        Productos en la categoría {{  $title }}:
-    </h2>
+<div class="flex flex-col justify-center">
+    <div class="flex flex-row justify-start p-2 m-1">
+        <h2 class="mt-4 ml-12 text-xl font-semibold leading-tight text-gray-800">
+            <a href="{{route('allproducts')}}" class="text-sm font-semibold"> Home  >> </a><span class="text-sm font-bold">{{ $title }}</span>:
+        </h2>
+    </div>
     <!-- BUSCADOR -->
-    {{-- <div class="space-x-8 text-center justify-items-center sm:-my-px sm:ml-10 sm:flex sm:w-full">
-        <div class="relative w-1/2">
-            <input type="text" wire:model.debounce.500ms="search" type="search"
-                class="w-full p-2 pl-8 bg-gray-200 border border-gray-200 rounded focus:bg-white focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent"
-                placeholder="Buscar Productos..." />
-            <svg class="w-4 h-4 absolute left-2.5 top-3.5" xmlns="http://www.w3.org/2000/svg" fill="none"
-                viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-            </svg>
+    <div class="flex flex-col flex-wrap justify-end w-5/6 pb-10 md:flex-row md:flex-no-wrap">
+        <div class="w-full m-1 md:w-2/5">
+            <input wire:model.debounce.500ms="search" type="search"
+                class="block w-full px-4 py-3 leading-tight text-gray-700 bg-gray-200 border border-gray-200 rounded appearance-none focus:outline-none focus:bg-white focus:border-gray-500"
+                placeholder="Buscar Oferta por Marca o Descripción...">
         </div>
-        {{-- <input wire:model.debounce.500ms="search" type="search" class="max-w-md px-3 mt-2 mb-2 ml-20 text-xl rounded shadow-lg sm:max-w-1/2 h-5/6 focus:outline-none focus:shadow-outline" placeholder="Buscar Productos...">
-                <svg class="w-4 h-4 absolute left-2.5 top-3.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
-                </svg>
-    </div> --}}
+        <div class="relative w-full m-1 md:w-1/6">
+            <select wire:model="orderBy"
+                class="block w-full px-4 py-3 pr-8 leading-tight text-gray-700 bg-gray-200 border border-gray-200 rounded appearance-none focus:outline-none focus:bg-white focus:border-gray-500"
+                id="grid-state">
+                <option value="name">Descripción</option>
+                <option value="EAN13_individual">EAN13</option>
+                <option value="brand">Marca</option>
+                <option value="part_number">Part Number</option>
+            </select>
+        </div>
+        <div class="relative w-full m-1 md:w-1/6">
+            <select wire:model="orderAsc"
+                class="block w-full px-4 py-3 pr-8 leading-tight text-gray-700 bg-gray-200 border border-gray-200 rounded appearance-none focus:outline-none focus:bg-white focus:border-gray-500"
+                id="grid-state">
+                <option value="1">Orden Ascendente</option>
+                <option value="0">Orden Descendente</option>
+            </select>
+
+        </div>
+        <div class="relative w-full m-1 md:w-1/6">
+            <select wire:model="perPage"
+                class="block w-full px-4 py-3 pr-8 leading-tight text-gray-700 bg-gray-200 border border-gray-200 rounded appearance-none focus:outline-none focus:bg-white focus:border-gray-500"
+                id="grid-state">
+                <option value="10">10</option>
+                <option value="25">25</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
+            </select>
+
+        </div>
+    </div>
     @if ($ofertas)
     <div class="grid grid-cols-12 gap-6 p-2 m-5 bg-yellow-300 rounded shadow-sm">
         @foreach($ofertas as $oferta)

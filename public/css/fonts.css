@@ -81,9 +81,20 @@
 
 /******* Tootips ****/
 
+.has-tooltip {
+    display: flex;
+    flex-wrap: wrap;
+    overflow-wrap: normal;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 .tooltip {
     visibility: hidden;
     position: absolute;
+    width: 50%;
+    /* margin-top: -45%; */
 }
 
 .has-tooltip:hover .tooltip {

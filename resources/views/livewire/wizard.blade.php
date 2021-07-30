@@ -130,28 +130,32 @@
                                         <div class="max-w-3xl px-4 mx-auto">
                                             <div class="flex justify-between">
                                                 @if($errors->any())
-                                                    <h4 class="p-4 mx-2 text-lg font-semibold bg-red-300 rounded">ERROR: {{$errors->first()}}</h4>
+                                                <h4 class="p-4 mx-2 text-lg font-semibold bg-red-300 rounded">ERROR:
+                                                    {{$errors->first()}}</h4>
                                                 @endif
                                                 @if(!$storedProduct)
-                                                    @if(!$selected)
-                                                    <div class="w-full text-center">
-                                                        <p class="p-4 text-xl text-gray-700 uppercase bg-gray-300 rounded">
-                                                            Formulario de creación de un Nuevo Producto
-                                                        </p>
-                                                    </div>
-                                                    @else
-                                                    <div class="w-full text-center">
-                                                        <p class="p-4 text-xl text-white uppercase bg-green-600 rounded">
-                                                            PRODUCTO YA CREADO, YA PUEDES RELLENAR LA OFERTA en el siguiente paso
-                                                        </p>
-                                                    </div>
-                                                    @endif
+                                                @if(!$selected)
+                                                <div class="w-full text-center">
+                                                    <p class="p-4 text-xl text-gray-700 uppercase bg-gray-300 rounded">
+                                                        Formulario de creación de un Nuevo Producto
+                                                    </p>
+                                                </div>
                                                 @else
-                                                    <div class="w-full">
-                                                        <p class="p-4 text-xl text-white uppercase bg-green-300 rounded">
-                                                            PRODUCTO GUARDADO, YA PUEDES RELLENAR LA OFERTA en el siguiente paso
-                                                        </p>
-                                                    </div>
+                                                <div class="w-full text-center">
+                                                    <p
+                                                        class="p-4 text-xs text-white uppercase bg-green-600 rounded md:text-xl">
+                                                        PRODUCTO YA CREADO, YA PUEDES RELLENAR LA OFERTA en el siguiente
+                                                        paso
+                                                    </p>
+                                                </div>
+                                                @endif
+                                                @else
+                                                <div class="w-full">
+                                                    <p class="p-4 text-xl text-white uppercase bg-green-300 rounded">
+                                                        PRODUCTO GUARDADO, YA PUEDES RELLENAR LA OFERTA en el siguiente
+                                                        paso
+                                                    </p>
+                                                </div>
                                                 @endif
                                             </div>
                                         </div>
@@ -163,7 +167,8 @@
                                         Crear Oferta
                                     </div>
                                     @if($errors->any())
-                                        <h4 class="p-4 mx-2 text-lg font-semibold bg-red-300 rounded">ERROR: {{$errors->first()}}</h4>
+                                    <h4 class="p-4 mx-2 text-lg font-semibold bg-red-300 rounded">ERROR:
+                                        {{$errors->first()}}</h4>
                                     @endif
                                 </div>
 
@@ -185,21 +190,24 @@
                         <div x-show.transition.in="step === 1">
                             <!-- buscador de producto-->
                             <div class="mb-5 text-center">
-                                <div class="inline-flex justify-between w-5/6 m-2">
-                                    <div class="w-1/3 mx-1 has-tooltip">
+                                <div class="flex flex-row flex-wrap justify-around w-5/6 m-2 md:flex-row">
+                                    <div class="w-full mx-3 has-tooltip md:w-1/4">
                                         <label class="w-16 font-bold">Buscar producto:</label>
                                         <span class='p-1 -mt-8 text-red-500 bg-gray-200 rounded shadow-lg tooltip'>
-                                            Si no tenemos el producto en nuestra Base de Datos, clicka en SIGUIENTE y crea un nuevo Producto.
-                                            Si el producto está en nuestra Base de Datos seleccionalo primero y clicka SIGUIENTE
+                                            Si no tenemos el producto en nuestra Base de Datos, clicka en SIGUIENTE y
+                                            crea un nuevo Producto.
+                                            Si el producto está en nuestra Base de Datos seleccionalo primero y clicka
+                                            SIGUIENTE
                                         </span>
                                         <input wire:model.debounce.500ms="search" type="search"
                                             class="flex w-full px-4 py-3 leading-tight text-gray-700 bg-gray-200 border border-gray-200 rounded appearance-none focus:outline-none focus:bg-white focus:border-gray-500"
                                             placeholder="EAN13, Marca o Nombre del Producto">
                                     </div>
-                                    <div class="w-1/3 mx-1 has-tooltip">
+                                    <div class="w-full mx-3 has-tooltip md:w-1/4">
                                         <label class="w-16 font-bold"> Seleccionar producto:</label>
                                         <span class='p-1 -mt-8 text-red-500 bg-gray-200 rounded shadow-lg tooltip'>
-                                            Productos que coiniciden con tu criterio de búsqueda. Selecciona el que corresponda a tu Oferta
+                                            Productos que coiniciden con tu criterio de búsqueda. Selecciona el que
+                                            corresponda a tu Oferta
                                         </span>
                                         <select name="selected" wire:model="selected"
                                             class="w-full p-2 px-4 py-3 leading-tight bg-white border shadow">
@@ -209,7 +217,7 @@
                                             @endforeach
                                         </select>
                                     </div>
-                                    <div class="w-1/3 mx-1 text-center">
+                                    <div class="w-full mx-3 has-tooltip md:w-1/4">
                                         {{-- <label class="w-16 font-bold"> Seleccionar Producto</label>
                                         <button wire:click="selectProduct"
                                             class="w-1/2 px-4 py-3 leading-tight text-center text-gray-200 bg-blue-400 border border-gray-200 rounded text-centerflex text-white-700">
@@ -224,9 +232,10 @@
                                 </div>
                             </div>
                             <!-- producto Step 1-->
-                            <div class="p-10 mb-2 text-center bg-gray-300">
+                            <div
+                                class="flex flex-row flex-wrap items-center justify-center p-10 mb-2 text-center bg-gray-300">
                                 @if($selectedProduct != '')
-                                <div class="inline-flex justify-between w-full p-10 m-2 bg-gray-200">
+                                <div class="flex flex-col justify-between w-full p-10 m-2 bg-gray-200 md:flex-row">
                                     <div class="mb-5">
                                         <label for="name" class="block mb-1 font-bold text-gray-700">Producto:</label>
                                         <div
@@ -255,7 +264,7 @@
                                     </div>
 
                                 </div>
-                                <div class="inline-flex justify-center w-full p-10 m-2 bg-gray-100">
+                                <div class="flex flex-col justify-between w-full p-10 m-2 bg-gray-200 md:flex-row">
                                     <div class="mb-5">
                                         <label for="description"
                                             class="block mb-1 font-bold text-gray-700">Descripción:</label>
@@ -265,7 +274,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="inline-flex justify-between w-full p-10 m-2 bg-gray-200">
+                                <div class="flex flex-col justify-between w-full p-10 m-2 bg-gray-200 md:flex-row">
                                     <div class="mb-5">
                                         <label for="part_number" class="block mb-1 font-bold text-gray-700">Part
                                             Number:</label>
@@ -298,7 +307,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="inline-flex justify-between w-full p-10 m-2 bg-gray-100">
+                                <div class="flex flex-col justify-between w-full p-10 m-2 bg-gray-200 md:flex-row">
                                     <div class="mb-5">
                                         <label for="unidades_embalaje_original"
                                             class="block mb-1 font-bold text-gray-700">Unidades
@@ -333,7 +342,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="inline-flex justify-between w-full p-10 m-2 bg-gray-200">
+                                <div class="flex flex-col justify-between w-full p-10 m-2 bg-gray-200 md:flex-row">
                                     <div class="mb-5">
                                         <label for="unidades_embalaje_2"
                                             class="block mb-1 font-bold text-gray-700">Unidades
@@ -371,7 +380,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="inline-flex justify-between w-full p-10 m-2 bg-gray-100">
+                                <div class="flex flex-col justify-between w-full p-10 m-2 bg-gray-200 md:flex-row">
                                     <div class="mb-5">
                                         <label for="unidades_embalaje_3"
                                             class="block mb-1 font-bold text-gray-700">Unidades
@@ -417,40 +426,37 @@
                         <div x-show.transition.in="step === 2">
                             <div class="p-10 mb-2 text-center bg-gray-300">
 
-                                <div class="flex justify-between">
-                                    <div class="max-w-3xl px-4 mx-auto">
-                                        <div class="flex justify-between">
-                                            @if(!$selected && !$storedProduct)
-                                            <div class="w-1/2">
-                                                <button wire:click="clearSearch" type="reset"
-                                                    class="class='w-auto px-4 py-2 m-auto font-medium text-center text-white bg-red-600 rounded-lg shadow-xl hover:bg-gray-700'">
-                                                    Limpiar el Formulario
-                                                </button>
-                                            </div>
-                                            <div class="w-1/2 text-right">
-                                                <button
-                                                    class='w-auto px-4 py-2 m-auto font-medium text-center text-white bg-blue-500 rounded-lg shadow-xl hover:bg-gray-700'
-                                                    wire:click="storeProduct">
-                                                    GUARDAR EL PRODUCTO
-                                                </button>
-                                            </div>
-                                            @endif
-                                        </div>
+                                <div class="flex flex-col justify-center max-w-3xl px-4 mx-auto md:flex-row">
+                                    @if(!$selected && !$storedProduct)
+                                    <div class="w-full my-2">
+                                        <button wire:click="clearSearch" type="reset"
+                                            class="class='w-auto px-4 py-2 m-auto font-medium text-center text-white bg-red-600 rounded-lg shadow-xl hover:bg-gray-700'">
+                                            Limpiar el Formulario
+                                        </button>
                                     </div>
+                                    <div class="w-full my-2">
+                                        <button
+                                            class='w-auto px-4 py-2 m-auto font-medium text-center text-white bg-blue-500 rounded-lg shadow-xl hover:bg-gray-700'
+                                            wire:click="storeProduct">
+                                            GUARDAR EL PRODUCTO
+                                        </button>
+                                    </div>
+                                    @endif
                                 </div>
                                 <!--Product FORM -->
                                 <form wire:submit.prevent="storeProduct" enctype="multipart/form-data">
                                     @method('post')
                                     @csrf
-                                    <div class="items-center justify-center p-2 mt-4 mb-2 bg-gray-200">
+                                    <div
+                                        class="grid grid-cols-1 gap-5 p-2 mx-2 mb-2 bg-gray-200 md:grid-cols-1 md:gap-8">
                                         <div
-                                            class="grid w-11/12 mb-4 bg-gray-300 rounded-lg shadow-xl md:w-1/12 lg:w-11/12">
-                                            <h2 class="p-2 m-auto font-bold text-center bg-white rounded">
+                                            class="grid w-full grid-cols-1 gap-2 mt-2 mb-4 bg-gray-300 rounded-lg shadow-xl md:grid-cols-1 md:gap-8 mx-7 md:w-1/12 lg:w-11/12">
+                                            <h2 class="p-2 m-2 font-bold text-center bg-white rounded">
                                                 LOS DATOS DEL PRODUCTO:
                                             </h2>
                                             <!-- BLOQUE 1 -->
-                                            <div class="grid grid-cols-1 gap-5 mt-5 md:grid-cols-2 md:gap-8 mx-7">
-                                                <div class="grid grid-cols-1">
+                                            <div class="grid grid-rows-2 gap-5 mt-1 md:gap-6 mx-7 md:grid-cols-2">
+                                                <div class="flex flex-row flex-wrap w-full md:flex-col">
                                                     <label
                                                         class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">
                                                         Producto:
@@ -462,7 +468,7 @@
                                                     @error('name') <span
                                                         class="text-red-600 error">{{ $message }}</span> @enderror
                                                 </div>
-                                                <div class="grid grid-cols-1">
+                                                <div class="flex flex-col w-full">
                                                     <label
                                                         class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">
                                                         Descripción Corta:
@@ -476,13 +482,13 @@
                                                 </div>
                                             </div>
                                             <!-- BLOQUE 2 -->
-                                            <div class="grid grid-cols-1 mt-5 mx-7">
+                                            <div class="grid grid-cols-1 gap-1 mt-1 md:gap-2 mx-7">
                                                 <label
                                                     class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">
                                                     Descripción:
                                                 </label>
                                                 <textarea wire:model='description' name="description" id='description'
-                                                    cols="2" rows="2"
+                                                    cols="2" rows="3"
                                                     placeholder="Ej: El clasico BIC Cristal Original, es el bolígrafo más vendido del mundo.Su punta media de 1mm se desliza por el papel con suavidad para ofrecer una escritura sin manchas. Tiene un cuerpo transparente que permite comprobar en todo momento el nivel de tinta."
                                                     class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent">
                                                         </textarea>
@@ -927,22 +933,28 @@
                                             <div class="flex justify-between">
                                                 @if(!$storedProduct)
                                                 @if(!$selected)
-                                                <div class="w-1/2">
-                                                    <button wire:click="clearSearch" type="reset"
-                                                        class="class='w-auto px-4 py-2 m-auto font-medium text-center text-white bg-red-600 rounded-lg shadow-xl hover:bg-gray-700'">
-                                                        Limpiar el Formulario
-                                                    </button>
-                                                </div>
-                                                <div class="w-1/2 text-right">
-                                                    <button
-                                                        class='w-auto px-4 py-2 m-auto font-medium text-center text-white bg-blue-500 rounded-lg shadow-xl hover:bg-gray-700'
-                                                        wire:click="storeProduct">
-                                                        GUARDAR EL PRODUCTO
-                                                    </button>
+                                                <div
+                                                    class="flex flex-col justify-center max-w-3xl px-4 mx-auto md:flex-row">
+                                                    @if(!$selected && !$storedProduct)
+                                                    <div class="w-full my-2">
+                                                        <button wire:click="clearSearch" type="reset"
+                                                            class="class='w-auto px-4 py-2 m-auto font-medium text-center text-white bg-red-600 rounded-lg shadow-xl hover:bg-gray-700'">
+                                                            Limpiar el Formulario
+                                                        </button>
+                                                    </div>
+                                                    <div class="w-full my-2">
+                                                        <button
+                                                            class='w-auto px-4 py-2 m-auto font-medium text-center text-white bg-blue-500 rounded-lg shadow-xl hover:bg-gray-700'
+                                                            wire:click="storeProduct">
+                                                            GUARDAR EL PRODUCTO
+                                                        </button>
+                                                    </div>
+                                                    @endif
                                                 </div>
                                                 @else
                                                 <div class="w-full text-center">
-                                                    <p class="p-4 text-xl text-white uppercase bg-green-600 rounded">
+                                                    <p
+                                                        class="p-4 text-xs text-white uppercase bg-green-600 rounded md:text-xl">
                                                         PRODUCTO YA CREADO, YA PUEDES RELLENAR LA OFERTA en el siguiente
                                                         paso
                                                     </p>
@@ -1138,7 +1150,8 @@
                                                         <label
                                                             class="flex items-center justify-start py-3 pl-4 pr-6 mr-4 bg-white rounded-lg shadow-sm text-truncate">
                                                             <div class="mr-3 text-teal-600">
-                                                                <input type="radio" wire:model="embalaje_original" value="1"
+                                                                <input type="radio" wire:model="embalaje_original"
+                                                                    value="1"
                                                                     class="border-purple-300 form-radio focus:outline-none focus:shadow-outline" />
                                                             </div>
                                                             <div class="text-gray-700 select-none">SI</div>
@@ -1147,7 +1160,8 @@
                                                         <label
                                                             class="flex items-center justify-start py-3 pl-4 pr-6 bg-white rounded-lg shadow-sm text-truncate">
                                                             <div class="mr-3 text-teal-600">
-                                                                <input type="radio" wire:model="embalaje_original" value="0"
+                                                                <input type="radio" wire:model="embalaje_original"
+                                                                    value="0"
                                                                     class="border-purple-300 form-radio focus:outline-none focus:shadow-outline" />
                                                             </div>
                                                             <div class="text-gray-700 select-none">NO</div>
@@ -1155,326 +1169,329 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        {{-- </div> --}}
-                                        <!-- BLOQUE 4 -->
-                                        <div class="grid grid-cols-1 gap-5 mt-5 md:grid-cols-4 md:gap-8 mx-7">
-                                            <div class="grid grid-cols-1">
-                                                <label
-                                                    class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">
-                                                    Proveedor:
-                                                </label>
-                                                <input wire:model='provider' id='provider' name="provider"
-                                                    class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
-                                                    type="text" placeholder="Ej: No se" />
-                                                @error('provider') <span
-                                                    class="text-red-600 error">{{ $message }}</span> @enderror
-                                            </div>
-
-                                            <div class="grid grid-cols-1">
-                                                <label
-                                                    class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">
-                                                    PORTES:
-                                                </label>
-                                                <select wire:model='porte_id' id='porte_id' name="porte_id"
-                                                    class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent">
-                                                    <option value="" selected>---elije un tipo de porte---</option>
-                                                    <option value="1">PORTES PAGADOS</option>
-                                                    <option value="2">PORTES DEBIDOS</option>
-                                                    <option value="3">PORTES COMPARTIDOS</option>
-                                                </select>
-                                                @error('porte_id') <span
-                                                    class="text-red-600 error">{{ $message }}</span> @enderror
-                                            </div>
-
-                                            <div class="grid grid-cols-1">
-                                                <label
-                                                    class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">
-                                                    Fecha Compra:
-                                                </label>
-                                                <input wire:model='buyed_date' id='buyed_date' name="buyed_date"
-                                                    class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
-                                                    type="date" />
-                                                @error('buyed_date') <span
-                                                    class="text-red-600 error">{{ $message }}</span> @enderror
-                                            </div>
-
-                                            <div class="grid grid-cols-1">
-                                                <label
-                                                    class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">
-                                                    Precio Compra:
-                                                </label>
-                                                <input wire:model='invoice_cost_price' id='invoice_cost_price'
-                                                    name="invoice_cost_price"
-                                                    class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
-                                                    type="number" placeholder="EJ: 6.25" />
-                                                @error('invoice_cost_price') <span
-                                                    class="text-red-600 error">{{ $message }}</span> @enderror
-                                            </div>
-
-                                        </div>
-                                        <!-- BLOQUE 5 -->
-                                        <div class="grid grid-cols-1 gap-5 mt-5 md:grid-cols-4 md:gap-8 mx-7">
-                                            <div class="grid grid-cols-1">
-                                                <label
-                                                    class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">
-                                                    Plazo Preparación Pedido:
-                                                </label>
-                                                <input wire:model='plazo_preparacion_pedido'
-                                                    id='plazo_preparacion_pedido' name="plazo_preparacion_pedido"
-                                                    class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
-                                                    type="date" />
-                                                @error('plazo_preparacion_pedido') <span
-                                                    class="text-red-600 error">{{ $message }}</span> @enderror
-                                            </div>
-                                            <div class="grid grid-cols-1">
-                                                <label
-                                                    class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">
-                                                    ¿Admite contraoferta?
-                                                </label>
-                                                <div class="flex">
+                                            {{-- </div> --}}
+                                            <!-- BLOQUE 4 -->
+                                            <div class="grid grid-cols-1 gap-5 mt-5 md:grid-cols-4 md:gap-8 mx-7">
+                                                <div class="grid grid-cols-1">
                                                     <label
-                                                        class="flex items-center justify-start py-3 pl-4 pr-6 mr-4 bg-white rounded-lg shadow-sm text-truncate">
-                                                        <div class="mr-3 text-teal-600">
-                                                            <input type="radio" wire:model="contraoferta" value= 1
-                                                                class="border-purple-300 form-radio focus:outline-none focus:shadow-outline" />
-                                                        </div>
-                                                        <div class="text-gray-700 select-none">SI</div>
+                                                        class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">
+                                                        Proveedor:
                                                     </label>
-
-                                                    <label
-                                                        class="flex items-center justify-start py-3 pl-4 pr-6 bg-white rounded-lg shadow-sm text-truncate">
-                                                        <div class="mr-3 text-teal-600 border-purple-300">
-                                                            <input type="radio" wire:model="contraoferta" value="0"
-                                                                class="border-purple-300 form-radio focus:outline-none focus:shadow-outline" />
-                                                        </div>
-                                                        <div class="text-gray-700 select-none">NO</div>
-                                                    </label>
+                                                    <input wire:model='provider' id='provider' name="provider"
+                                                        class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                                                        type="text" placeholder="Ej: No se" />
+                                                    @error('provider') <span
+                                                        class="text-red-600 error">{{ $message }}</span> @enderror
                                                 </div>
-                                            </div>
-                                            <div class="grid grid-cols-1">
-                                                @if($ahorro)
-                                                <label
-                                                    class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">
-                                                    Porcentaje Ahorro:
-                                                </label>
-                                                <div wire:model='ahorro' id='ahorro'
-                                                    class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent">
-                                                    {{ $ahorro }} %
-                                                </div>
-                                                @endif
-                                                @error('') <span class="text-red-600 error">{{ $message }}</span>
-                                                @enderror
-                                            </div>
-                                            <div class="grid grid-cols-1">
-                                                <label
-                                                    class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">
-                                                    PRECIO OFERTA:
-                                                </label>
-                                                <input wire:model='offer_prize' id='offer_prize' name="offer_prize"
-                                                    class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
-                                                    type="number" placeholder="Ej: 5.6845 €" />
-                                                @error('offer_prize') <span
-                                                    class="text-red-600 error">{{ $message }}</span> @enderror
-                                            </div>
-                                        </div>
 
-                                        <!--FOTOS-->
-                                        <h2 class="p-2 m-auto mt-5 font-bold text-center bg-white rounded">
-                                            FOTOS DEL LOTE:
-                                        </h2>
-                                        <div class="grid grid-cols-1 gap-5 mt-5 mb-10 md:grid-cols-3 md:gap-8 mx-7">
-                                            <!--FOTO 1 -->
-                                            <div class="grid grid-cols-1">
-                                                <div class='flex items-center justify-center w-5/6'>
-                                                    @if (!$user_image)
+                                                <div class="grid grid-cols-1">
                                                     <label
-                                                        class='flex flex-col w-full h-32 border-4 border-dashed hover:bg-gray-100 hover:border-purple-300 group'>
-                                                        <div class='flex flex-col items-center justify-center pt-7'>
-                                                            <svg class="w-10 h-10 text-purple-400 group-hover:text-purple-600"
-                                                                fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                                                xmlns="http://www.w3.org/2000/svg">
-                                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                                    stroke-width="2"
-                                                                    d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z">
-                                                                </path>
-                                                            </svg>
-                                                            <p
-                                                                class='pt-1 text-sm tracking-wider text-gray-400 lowercase group-hover:text-purple-600'>
-                                                                Select a photo
-                                                            </p>
-                                                        </div>
-                                                        <input type='file' class="hidden" wire:model="user_image"
-                                                            name="user_image" />
-                                                        @error('user_image') <span
-                                                            class="text-red-600 error">{{ $message }}</span>
-                                                        @enderror
+                                                        class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">
+                                                        PORTES:
                                                     </label>
-                                                    @else
-                                                    <div class='flex w-full h-56 hover:border-purple-300 group'>
-                                                        @if($user_image->temporaryUrl())
-                                                        <div
-                                                            class="class='flex flex-col items-center justify-center w-60 h-60 pt-7'">
+                                                    <select wire:model='porte_id' id='porte_id' name="porte_id"
+                                                        class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent">
+                                                        <option value="" selected>---elije un tipo de porte---</option>
+                                                        <option value="1">PORTES PAGADOS</option>
+                                                        <option value="2">PORTES DEBIDOS</option>
+                                                        <option value="3">PORTES COMPARTIDOS</option>
+                                                    </select>
+                                                    @error('porte_id') <span
+                                                        class="text-red-600 error">{{ $message }}</span> @enderror
+                                                </div>
 
-                                                            <p
-                                                                class='pt-1 text-sm tracking-wider text-gray-400 lowercase'>
-                                                                Foto #1 del Lote:</p>
-                                                            {{-- <input type="image" wire:model="temp_url_1" name="temp_url_1"> --}}
-                                                            <img src="{{ $user_image->temporaryUrl() }}" class="">
-                                                        </div>
-                                                        <div wire:loading>
-                                                            Procesando...
-                                                        </div>
-                                                        <button wire:click="clearPhotoUser1" type="reset"
-                                                            class="class='w-auto px-4 py-2 m-auto font-medium text-center text-white bg-red-600 rounded-lg shadow-xl hover:bg-gray-700'">
-                                                            Eliminar Foto 1
-                                                        </button>
-                                                        @endif
+                                                <div class="grid grid-cols-1">
+                                                    <label
+                                                        class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">
+                                                        Fecha Compra:
+                                                    </label>
+                                                    <input wire:model='buyed_date' id='buyed_date' name="buyed_date"
+                                                        class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                                                        type="date" />
+                                                    @error('buyed_date') <span
+                                                        class="text-red-600 error">{{ $message }}</span> @enderror
+                                                </div>
+
+                                                <div class="grid grid-cols-1">
+                                                    <label
+                                                        class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">
+                                                        Precio Compra:
+                                                    </label>
+                                                    <input wire:model='invoice_cost_price' id='invoice_cost_price'
+                                                        name="invoice_cost_price"
+                                                        class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                                                        type="number" placeholder="EJ: 6.25" />
+                                                    @error('invoice_cost_price') <span
+                                                        class="text-red-600 error">{{ $message }}</span> @enderror
+                                                </div>
+
+                                            </div>
+                                            <!-- BLOQUE 5 -->
+                                            <div class="grid grid-cols-1 gap-5 mt-5 md:grid-cols-4 md:gap-8 mx-7">
+                                                <div class="grid grid-cols-1">
+                                                    <label
+                                                        class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">
+                                                        Plazo Preparación Pedido:
+                                                    </label>
+                                                    <input wire:model='plazo_preparacion_pedido'
+                                                        id='plazo_preparacion_pedido' name="plazo_preparacion_pedido"
+                                                        class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                                                        type="date" />
+                                                    @error('plazo_preparacion_pedido') <span
+                                                        class="text-red-600 error">{{ $message }}</span> @enderror
+                                                </div>
+                                                <div class="grid grid-cols-1">
+                                                    <label
+                                                        class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">
+                                                        ¿Admite contraoferta?
+                                                    </label>
+                                                    <div class="flex">
+                                                        <label
+                                                            class="flex items-center justify-start py-3 pl-4 pr-6 mr-4 bg-white rounded-lg shadow-sm text-truncate">
+                                                            <div class="mr-3 text-teal-600">
+                                                                <input type="radio" wire:model="contraoferta" value=1
+                                                                    class="border-purple-300 form-radio focus:outline-none focus:shadow-outline" />
+                                                            </div>
+                                                            <div class="text-gray-700 select-none">SI</div>
+                                                        </label>
+
+                                                        <label
+                                                            class="flex items-center justify-start py-3 pl-4 pr-6 bg-white rounded-lg shadow-sm text-truncate">
+                                                            <div class="mr-3 text-teal-600 border-purple-300">
+                                                                <input type="radio" wire:model="contraoferta" value="0"
+                                                                    class="border-purple-300 form-radio focus:outline-none focus:shadow-outline" />
+                                                            </div>
+                                                            <div class="text-gray-700 select-none">NO</div>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="grid grid-cols-1">
+                                                    @if($ahorro)
+                                                    <label
+                                                        class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">
+                                                        Porcentaje Ahorro:
+                                                    </label>
+                                                    <div wire:model='ahorro' id='ahorro'
+                                                        class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent">
+                                                        {{ $ahorro }} %
                                                     </div>
                                                     @endif
+                                                    @error('') <span class="text-red-600 error">{{ $message }}</span>
+                                                    @enderror
+                                                </div>
+                                                <div class="grid grid-cols-1">
+                                                    <label
+                                                        class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">
+                                                        PRECIO OFERTA:
+                                                    </label>
+                                                    <input wire:model='offer_prize' id='offer_prize' name="offer_prize"
+                                                        class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                                                        type="number" placeholder="Ej: 5.6845 €" />
+                                                    @error('offer_prize') <span
+                                                        class="text-red-600 error">{{ $message }}</span> @enderror
                                                 </div>
                                             </div>
-                                            <!--FOTO 2 -->
-                                            <div class="grid grid-cols-1">
-                                                <div class='flex items-center justify-center w-5/6'>
-                                                    @if (!$user_image_2)
-                                                    <label
-                                                        class='flex flex-col w-full h-32 border-4 border-dashed hover:bg-gray-100 hover:border-purple-300 group'>
-                                                        <div class='flex items-center justify-center pt-7'>
-                                                            <svg class="w-10 h-10 text-purple-400 group-hover:text-purple-600"
-                                                                fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                                                xmlns="http://www.w3.org/2000/svg">
-                                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                                    stroke-width="2"
-                                                                    d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z">
-                                                                </path>
-                                                            </svg>
-                                                            <p
-                                                                class='pt-1 text-sm tracking-wider text-gray-400 lowercase group-hover:text-purple-600'>
-                                                                Select a photo
-                                                            </p>
-                                                        </div>
-                                                        <input type='file' class="hidden" wire:model="user_image_2"
-                                                            name="user_image_2" />
-                                                        @error('user_image_2') <span
-                                                            class="text-red-600 error">{{ $message }}</span>
-                                                        @enderror
 
-                                                    </label>
-                                                    @else
-                                                    <div class='flex w-full h-56 hover:border-purple-300 group'>
-                                                        @if($user_image_2->temporaryUrl())
-                                                        <div
-                                                            class="class='flex flex-col items-center justify-center w-60 h-60 pt-7'">
-                                                            <p
-                                                                class='pt-1 text-sm tracking-wider text-gray-400 lowercase'>
-                                                                Foto #2 del Lote:</p>
-                                                            <img src="{{ $user_image_2->temporaryUrl() }}" class="">
+                                            <!--FOTOS-->
+                                            <h2 class="p-2 m-auto mt-5 font-bold text-center bg-white rounded">
+                                                FOTOS DEL LOTE:
+                                            </h2>
+                                            <div class="grid grid-cols-1 gap-5 mt-5 mb-10 md:grid-cols-3 md:gap-8 mx-7">
+                                                <!--FOTO 1 -->
+                                                <div class="grid grid-cols-1">
+                                                    <div class='flex items-center justify-center w-5/6'>
+                                                        @if (!$user_image)
+                                                        <label
+                                                            class='flex flex-col w-full h-32 border-4 border-dashed hover:bg-gray-100 hover:border-purple-300 group'>
+                                                            <div class='flex flex-col items-center justify-center pt-7'>
+                                                                <svg class="w-10 h-10 text-purple-400 group-hover:text-purple-600"
+                                                                    fill="none" stroke="currentColor"
+                                                                    viewBox="0 0 24 24"
+                                                                    xmlns="http://www.w3.org/2000/svg">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                                        stroke-width="2"
+                                                                        d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z">
+                                                                    </path>
+                                                                </svg>
+                                                                <p
+                                                                    class='pt-1 text-sm tracking-wider text-gray-400 lowercase group-hover:text-purple-600'>
+                                                                    Select a photo
+                                                                </p>
+                                                            </div>
+                                                            <input type='file' class="hidden" wire:model="user_image"
+                                                                name="user_image" />
+                                                            @error('user_image') <span
+                                                                class="text-red-600 error">{{ $message }}</span>
+                                                            @enderror
+                                                        </label>
+                                                        @else
+                                                        <div class='flex w-full h-56 hover:border-purple-300 group'>
+                                                            @if($user_image->temporaryUrl())
+                                                            <div
+                                                                class="class='flex flex-col items-center justify-center w-60 h-60 pt-7'">
+
+                                                                <p
+                                                                    class='pt-1 text-sm tracking-wider text-gray-400 lowercase'>
+                                                                    Foto #1 del Lote:</p>
+                                                                {{-- <input type="image" wire:model="temp_url_1" name="temp_url_1"> --}}
+                                                                <img src="{{ $user_image->temporaryUrl() }}" class="">
+                                                            </div>
+                                                            <div wire:loading>
+                                                                Procesando...
+                                                            </div>
+                                                            <button wire:click="clearPhotoUser1" type="reset"
+                                                                class="class='w-auto px-4 py-2 m-auto font-medium text-center text-white bg-red-600 rounded-lg shadow-xl hover:bg-gray-700'">
+                                                                Eliminar Foto 1
+                                                            </button>
+                                                            @endif
                                                         </div>
-                                                        <div wire:loading>
-                                                            Procesando...
-                                                        </div>
-                                                        <button wire:click="clearPhotoUser2" type="reset"
-                                                            class="class='w-auto px-4 py-2 m-auto font-medium text-center text-white bg-red-600 rounded-lg shadow-xl hover:bg-gray-700'">
-                                                            Eliminar Foto 2
-                                                        </button>
                                                         @endif
                                                     </div>
-                                                    @endif
                                                 </div>
+                                                <!--FOTO 2 -->
+                                                <div class="grid grid-cols-1">
+                                                    <div class='flex items-center justify-center w-5/6'>
+                                                        @if (!$user_image_2)
+                                                        <label
+                                                            class='flex flex-col w-full h-32 border-4 border-dashed hover:bg-gray-100 hover:border-purple-300 group'>
+                                                            <div class='flex items-center justify-center pt-7'>
+                                                                <svg class="w-10 h-10 text-purple-400 group-hover:text-purple-600"
+                                                                    fill="none" stroke="currentColor"
+                                                                    viewBox="0 0 24 24"
+                                                                    xmlns="http://www.w3.org/2000/svg">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                                        stroke-width="2"
+                                                                        d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z">
+                                                                    </path>
+                                                                </svg>
+                                                                <p
+                                                                    class='pt-1 text-sm tracking-wider text-gray-400 lowercase group-hover:text-purple-600'>
+                                                                    Select a photo
+                                                                </p>
+                                                            </div>
+                                                            <input type='file' class="hidden" wire:model="user_image_2"
+                                                                name="user_image_2" />
+                                                            @error('user_image_2') <span
+                                                                class="text-red-600 error">{{ $message }}</span>
+                                                            @enderror
+
+                                                        </label>
+                                                        @else
+                                                        <div class='flex w-full h-56 hover:border-purple-300 group'>
+                                                            @if($user_image_2->temporaryUrl())
+                                                            <div
+                                                                class="class='flex flex-col items-center justify-center w-60 h-60 pt-7'">
+                                                                <p
+                                                                    class='pt-1 text-sm tracking-wider text-gray-400 lowercase'>
+                                                                    Foto #2 del Lote:</p>
+                                                                <img src="{{ $user_image_2->temporaryUrl() }}" class="">
+                                                            </div>
+                                                            <div wire:loading>
+                                                                Procesando...
+                                                            </div>
+                                                            <button wire:click="clearPhotoUser2" type="reset"
+                                                                class="class='w-auto px-4 py-2 m-auto font-medium text-center text-white bg-red-600 rounded-lg shadow-xl hover:bg-gray-700'">
+                                                                Eliminar Foto 2
+                                                            </button>
+                                                            @endif
+                                                        </div>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                                <!--FOTO 3 -->
+                                                <div class="grid grid-cols-1">
+                                                    <div class='flex items-center justify-center w-5/6'>
+                                                        @if (!$user_image_3)
+                                                        <label
+                                                            class='flex flex-col w-full h-32 border-4 border-dashed hover:bg-gray-100 hover:border-purple-300 group'>
+                                                            <div class='flex items-center justify-center pt-7'>
+                                                                <svg class="w-10 h-10 text-purple-400 group-hover:text-purple-600"
+                                                                    fill="none" stroke="currentColor"
+                                                                    viewBox="0 0 24 24"
+                                                                    xmlns="http://www.w3.org/2000/svg">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                                        stroke-width="2"
+                                                                        d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z">
+                                                                    </path>
+                                                                </svg>
+                                                                <p
+                                                                    class='pt-1 text-sm tracking-wider text-gray-400 lowercase group-hover:text-purple-600'>
+                                                                    Select a photo
+                                                                </p>
+                                                            </div>
+                                                            <input type='file' class="hidden" wire:model="user_image_3"
+                                                                name="user_image_3" />
+                                                            @error('user_image_3') <span
+                                                                class="text-red-600 error">{{ $message }}</span>
+                                                            @enderror
+                                                        </label>
+                                                        @else
+                                                        <div class='flex w-full h-56 hover:border-purple-300 group'>
+                                                            @if($user_image_3->temporaryUrl())
+                                                            <div
+                                                                class="class='flex items-center justify-center w-60 h-60 pt-7'">
+                                                                <p
+                                                                    class='pt-1 text-base tracking-wider text-gray-400 lowercase'>
+                                                                    Foto #3 del Lote:</p>
+                                                                <img src="{{ $user_image_3->temporaryUrl() }}" class="">
+                                                            </div>
+                                                            <div wire:loading>
+                                                                Procesando...
+                                                            </div>
+                                                            <button wire:click="clearPhotoUser3" type="reset"
+                                                                class="class='w-auto px-4 py-2 m-auto font-medium text-center text-white bg-red-600 rounded-lg shadow-xl hover:bg-gray-700'">
+                                                                Eliminar Foto 3
+                                                            </button>
+                                                            @endif
+                                                        </div>
+                                                        @endif
+                                                    </div>
+                                                </div>
+
                                             </div>
-                                            <!--FOTO 3 -->
-                                            <div class="grid grid-cols-1">
-                                                <div class='flex items-center justify-center w-5/6'>
-                                                    @if (!$user_image_3)
-                                                    <label
-                                                        class='flex flex-col w-full h-32 border-4 border-dashed hover:bg-gray-100 hover:border-purple-300 group'>
-                                                        <div class='flex items-center justify-center pt-7'>
-                                                            <svg class="w-10 h-10 text-purple-400 group-hover:text-purple-600"
-                                                                fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                                                xmlns="http://www.w3.org/2000/svg">
-                                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                                    stroke-width="2"
-                                                                    d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z">
-                                                                </path>
-                                                            </svg>
-                                                            <p
-                                                                class='pt-1 text-sm tracking-wider text-gray-400 lowercase group-hover:text-purple-600'>
-                                                                Select a photo
-                                                            </p>
-                                                        </div>
-                                                        <input type='file' class="hidden" wire:model="user_image_3"
-                                                            name="user_image_3" />
-                                                        @error('user_image_3') <span
-                                                            class="text-red-600 error">{{ $message }}</span>
-                                                        @enderror
-                                                    </label>
-                                                    @else
-                                                    <div class='flex w-full h-56 hover:border-purple-300 group'>
-                                                        @if($user_image_3->temporaryUrl())
-                                                        <div
-                                                            class="class='flex items-center justify-center w-60 h-60 pt-7'">
-                                                            <p
-                                                                class='pt-1 text-base tracking-wider text-gray-400 lowercase'>
-                                                                Foto #3 del Lote:</p>
-                                                            <img src="{{ $user_image_3->temporaryUrl() }}" class="">
-                                                        </div>
-                                                        <div wire:loading>
-                                                            Procesando...
-                                                        </div>
-                                                        <button wire:click="clearPhotoUser3" type="reset"
-                                                            class="class='w-auto px-4 py-2 m-auto font-medium text-center text-white bg-red-600 rounded-lg shadow-xl hover:bg-gray-700'">
-                                                            Eliminar Foto 3
-                                                        </button>
-                                                        @endif
-                                                    </div>
-                                                    @endif
-                                                </div>
+                                            <div>
                                             </div>
 
                                         </div>
-                                        <div>
-                                        </div>
-
                                     </div>
-                            </div>
-                            <div class="flex justify-between">
-                                <div class="max-w-3xl px-4 mx-auto">
-                                    <div class="flex justify-between">
-                                        @if(!$storedOferta)
-                                        <div class="w-1/2">
-                                            <button wire:click="clearOfferForm" type="reset"
-                                                class="class='w-auto px-4 py-2 m-auto font-medium text-center text-white bg-red-600 rounded-lg shadow-xl hover:bg-gray-700'">
-                                                Limpiar el Formulario
-                                            </button>
-                                        </div>
-                                        <div class="w-1/2 text-right">
-                                            @if($selected || $storedProduct)
-                                            <button
-                                                class='w-auto px-4 py-2 m-auto font-medium text-center text-white bg-blue-500 rounded-lg shadow-xl hover:bg-gray-700'
-                                                wire:click="storeOffer">
-                                                GUARDAR LA OFERTA
-                                            </button>
+                                    <div class="flex flex-col justify-center px-4 mx-auto md:flex-row">
+
+                                        <div class="flex flex-col justify-center md:flex-row">
+                                            @if(!$storedOferta)
+                                            <div class="w-1/2 m-2">
+                                                <button wire:click="clearOfferForm" type="reset"
+                                                    class="class='w-auto px-4 py-2 m-auto font-medium text-center text-white bg-red-600 rounded-lg shadow-xl hover:bg-gray-700'">
+                                                    Limpiar el Formulario
+                                                </button>
+                                            </div>
+                                            <div class="w-1/2 m-2 text-right">
+                                                @if($selected || $storedProduct)
+                                                <button
+                                                    class='w-auto px-4 py-2 m-auto font-medium text-center text-white bg-blue-500 rounded-lg shadow-xl hover:bg-gray-700'
+                                                    wire:click="storeOffer">
+                                                    GUARDAR LA OFERTA
+                                                </button>
+                                                @endif
+                                            </div>
                                             @endif
                                         </div>
-                                        @endif
+
+                                    </div>
+                                </form>
+                                @else
+                                <div class="flex justify-between">
+                                    <div class="max-w-3xl px-4 mx-auto">
+                                        <div class="flex justify-between">
+                                            Oferta guardada
+                                        </div>
                                     </div>
                                 </div>
+                                @endif
                             </div>
-                            </form>
-                            @else
-                            <div class="flex justify-between">
-                                <div class="max-w-3xl px-4 mx-auto">
-                                    <div class="flex justify-between">
-                                        Oferta guardada
-                                    </div>
-                                </div>
-                            </div>
-                            @endif
                         </div>
-                    </div>
-                    <!-- / Step 3 Crear Oferta y Validar -->
-                    <!-- Step 3 Crear Oferta y Validar -->
-                    {{-- <div x-show.transition.in="step === 3">
+                        <!-- / Step 3 Crear Oferta y Validar -->
+                        <!-- Step 3 Crear Oferta y Validar -->
+                        {{-- <div x-show.transition.in="step === 3">
                             <div class="mb-5">
                                 <label for="email" class="block mb-1 font-bold text-gray-700">Gender</label>
 
@@ -1506,41 +1523,41 @@
                                     placeholder="eg. Web Developer">
                             </div>
                         </div> --}}
-                    <!-- / Step 3 Crear Oferta y Validar -->
+                        <!-- / Step 3 Crear Oferta y Validar -->
+                    </div>
+                    <!-- / Step Content -->
                 </div>
-                <!-- / Step Content -->
             </div>
-        </div>
 
-        <!-- Bottom Navigation -->
-        <div class="fixed bottom-0 left-0 right-0 py-5 bg-white shadow-md" x-show="step != 'complete'">
-            <div class="max-w-3xl px-4 mx-auto">
-                <div class="flex justify-between">
-                    <div class="w-1/2">
-                        <button x-show="step > 1" @click="step--"
-                            class="w-32 px-5 py-2 font-medium text-center text-white bg-green-400 border rounded-lg shadow-sm focus:outline-none hover:bg-green-600">
-                            ANTERIOR
-                        </button>
-                    </div>
-                    <div class="w-1/2 text-right">
-                        <button x-show="step < 3" @click="step++"
-                            class="w-32 px-5 py-2 font-medium text-center text-white bg-blue-500 border border-transparent rounded-lg shadow-sm focus:outline-none hover:bg-blue-600">
-                            SIGUIENTE
-                        </button>
-                        @if($storedOferta)
-                        <button @click="step = 'complete'" x-show="step === 3" wire:click="storeProduct"
-                            class="w-32 px-5 py-2 font-medium text-center text-white bg-blue-500 border border-transparent rounded-lg shadow-sm focus:outline-none hover:bg-blue-600">
-                            COMPLETADO
-                        </button>
-                        @endif
+            <!-- Bottom Navigation -->
+            <div class="fixed bottom-0 left-0 right-0 py-5 bg-white shadow-md" x-show="step != 'complete'">
+                <div class="max-w-3xl px-4 mx-auto">
+                    <div class="flex justify-between">
+                        <div class="w-1/2">
+                            <button x-show="step > 1" @click="step--"
+                                class="w-32 px-5 py-2 font-medium text-center text-white bg-green-400 border rounded-lg shadow-sm focus:outline-none hover:bg-green-600">
+                                ANTERIOR
+                            </button>
+                        </div>
+                        <div class="w-1/2 text-right">
+                            <button x-show="step < 3" @click="step++"
+                                class="w-32 px-5 py-2 font-medium text-center text-white bg-blue-500 border border-transparent rounded-lg shadow-sm focus:outline-none hover:bg-blue-600">
+                                SIGUIENTE
+                            </button>
+                            @if($storedOferta)
+                            <button @click="step = 'complete'" x-show="step === 3" wire:click="storeProduct"
+                                class="w-32 px-5 py-2 font-medium text-center text-white bg-blue-500 border border-transparent rounded-lg shadow-sm focus:outline-none hover:bg-blue-600">
+                                COMPLETADO
+                            </button>
+                            @endif
+                        </div>
                     </div>
                 </div>
             </div>
+            <!-- / Bottom Navigation https://placehold.co/300x300/e2e8f0/cccccc -->
         </div>
-        <!-- / Bottom Navigation https://placehold.co/300x300/e2e8f0/cccccc -->
-    </div>
-    <script>
-        function app() {
+        <script>
+            function app() {
 			return {
 				step: 1,
 				passwordStrengthText: '',
@@ -1566,6 +1583,6 @@
 				}
 			}
 		}
-    </script>
-</div>
+        </script>
+    </div>
 </div>
