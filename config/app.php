@@ -176,7 +176,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\FortifyServiceProvider::class,
         App\Providers\JetstreamServiceProvider::class,
-        Darryldecode\Cart\CartServiceProvider::class,
+        // Darryldecode\Cart\CartServiceProvider::class,
         App\Providers\CartFacadeServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         Spatie\CookieConsent\CookieConsentServiceProvider::class,
