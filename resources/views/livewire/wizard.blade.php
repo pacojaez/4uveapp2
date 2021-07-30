@@ -565,7 +565,7 @@
                                                     </label>
                                                     <input wire:model='net_price' id='net_price' name="net_price"
                                                         class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
-                                                        type="text" placeholder="Ej: 5.6845 €" />
+                                                        type="text" placeholder="Ej: 5.68 €" />
                                                     @error('net_price') <span
                                                         class="text-red-600 error">{{ $message }}</span> @enderror
                                                 </div>

@@ -87,7 +87,7 @@ class Wizard extends Component
         'weight_3' => 'string|nullable',
         'unidades_embalaje_3' => 'string|nullable|regex:/^\d*\.?\d+$/',
         'subcategorie_id' => 'int|required',
-        'net_price' => 'string|nullable|regex:/^\d*\.?\d+$/',
+        'net_price' => 'string|required|regex:/^\d*\.?\d+$/',
         // 'unidades_embalaje_original' => 'string|nullable|regex:/^\d*\.?\d+$/',
     ];
 

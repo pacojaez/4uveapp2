@@ -147,9 +147,9 @@
                         <span class='p-1 -mt-8 text-red-500 bg-gray-200 rounded shadow-lg tooltip'>
                             Dimensiones Largo x Ancho x Alto
                         </span>
-                        <input wire:model='dimensions_boxes' id='dimensions_boxes' name="dimensions_boxes"
+                        <input wire:model='dimensions' id='dimensions' name="dimensions"
                             class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
-                            type="text" placeholder="{{ $product->dimensions_boxes }} mm" />
+                            type="text" placeholder="{{ $product->dimensions }} mm" />
                     </div>
                     <div class="grid grid-cols-1 has-tooltip">
                         <label class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">
