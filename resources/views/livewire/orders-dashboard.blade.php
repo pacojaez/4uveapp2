@@ -30,6 +30,12 @@
                                 class="p-2 m-2 bg-green-300 rounded">
                                 DETALLES
                         </button>
+                         @if(Auth::user()->is_admin)
+                         <button wire:click="$emit('openModal', 'order-modal-update', {{ json_encode(["order" => $order]) }})"
+                                class="p-2 m-2 bg-red-300 rounded">
+                                UPDATE
+                        </button>
+                        @endif
                         {{-- <button wire:click="$emit('openModal', 'order-modal', ['order', {{ $order }}])">VER</button> --}}
 
                     </td>
