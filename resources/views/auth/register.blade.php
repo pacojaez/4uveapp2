@@ -8,8 +8,7 @@
     </x-slot>
     <x-slot name="slot">
 
-        <div class="container relative items-center max-w-full px-6 mx-auto bg-gray-500 bg-no-repeat bg-cover md:py-24"
-            style="background-image: url(https://images.unsplash.com/photo-1609618992870-f519a360482e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80);">
+        <div class="container relative items-center max-w-full px-6 mx-auto bg-yellow-300 bg-no-repeat bg-cover md:py-24">
             <div class="w-5/6 px-6 mx-auto">
                 <div class="relative flex flex-wrap">
                     <div

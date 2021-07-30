@@ -1,9 +1,9 @@
 <x-guest-full-page>
     <!-- PRUEBA DE LOGIN -->
     <section class="flex items-stretch w-full min-h-screen text-white ">
-        <div class="relative items-center hidden w-2/3 bg-gray-500 bg-no-repeat bg-cover lg:flex"
-            style="background-image: url(https://images.unsplash.com/photo-1609618992870-f519a360482e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80);">
-            <div class="absolute inset-0 z-0 bg-black opacity-40"></div>
+        <div class="relative items-center hidden w-2/3 bg-yellow-300 bg-no-repeat bg-cover lg:flex">
+            <!--  style="background-image: url(https://images.unsplash.com/photo-1609618992870-f519a360482e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80);"-->
+            <div class="absolute inset-0 z-0"></div>
             <div class="z-10 w-full px-24">
                 <h1 class="text-5xl font-bold tracking-wide text-left">Vende tu STOCK</h1>
                 <p class="my-4 text-3xl">cóbralo al contado</p>
@@ -21,7 +21,7 @@
                 <div class="absolute inset-0 z-0 bg-black opacity-60"></div>
             </div>
             <div class="z-20 py-6">
-                <div class="relative flex justify-center w-full bg-gray-600 bg-opacity-10 rounded-3xl">
+                <div class="relative flex justify-center w-full bg-yellow-300 bg-opacity-80 rounded-3xl">
                     <x-jet-application-logo />
                 </div>
                 <p class="text-gray-100">
