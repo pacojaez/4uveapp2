@@ -135,21 +135,21 @@
                                                     {{$errors->first()}}</h4>
                                                 @endif
                                                 @if(!$storedProduct)
-                                                @if(!$selected)
-                                                <div class="w-full text-center">
-                                                    <p class="p-4 text-xl text-gray-700 uppercase bg-gray-300 rounded">
-                                                        Formulario de creación de un Nuevo Producto
-                                                    </p>
-                                                </div>
-                                                @else
-                                                <div class="w-full text-center">
-                                                    <p
-                                                        class="p-4 text-xs text-white uppercase bg-green-600 rounded md:text-xl">
-                                                        PRODUCTO YA CREADO, YA PUEDES RELLENAR LA OFERTA en el siguiente
-                                                        paso
-                                                    </p>
-                                                </div>
-                                                @endif
+                                                    @if(!$selected)
+                                                    <div class="w-full text-center">
+                                                        <p class="p-4 text-xl text-gray-700 uppercase bg-gray-300 rounded">
+                                                            Formulario de creación de un Nuevo Producto
+                                                        </p>
+                                                    </div>
+                                                    @else
+                                                    <div class="w-full text-center">
+                                                        <p
+                                                            class="p-4 text-xs text-white uppercase bg-green-600 rounded md:text-xl">
+                                                            PRODUCTO YA CREADO, YA PUEDES RELLENAR LA OFERTA en el siguiente
+                                                            paso
+                                                        </p>
+                                                    </div>
+                                                    @endif
                                                 @else
                                                 <div class="w-full">
                                                     <p class="p-4 text-xl text-white uppercase bg-green-300 rounded">
@@ -169,7 +169,7 @@
                                     </div>
                                     @if($errors->any())
                                     <h4 class="p-4 mx-2 text-lg font-semibold bg-red-300 rounded">ERROR:
-                                        {{$errors->first()}}</h4>
+                                        {{ $errors->first() }}</h4>
                                     @endif
                                 </div>
 
@@ -227,6 +227,7 @@
                                             class="flex w-full px-4 py-3 leading-tight text-gray-700 bg-gray-200 border border-gray-200 rounded appearance-none focus:outline-none focus:bg-white focus:border-gray-500"
                                             placeholder="Nombre del Producto, color,...">
                                     </div>
+                                    @if($productslist)
                                     <div class="w-full m-3 has-tooltip md:w-1/4">
                                         <label class="w-48 font-bold"> Seleccionar producto:</label>
                                         <span class='p-1 -mt-8 text-red-500 bg-gray-200 rounded shadow-lg tooltip'>
@@ -241,6 +242,7 @@
                                             @endforeach
                                         </select>
                                     </div>
+                                    @endif
                                     <div class="w-full m-3 has-tooltip md:w-1/4">
                                         {{-- <label class="w-16 font-bold"> Seleccionar Producto</label>
                                         <button wire:click="selectProduct"
@@ -466,7 +468,6 @@
                         <!-- Step 2 Crear producto IfnotExists -->
                         <div x-show.transition.in="step === 2">
                             <div class="p-10 mb-2 text-center bg-gray-300">
-
                                 <div class="flex flex-col justify-center max-w-3xl px-4 mx-auto md:flex-row">
                                     @if(!$selected && !$storedProduct)
                                     <div class="w-full my-2">
@@ -485,6 +486,7 @@
                                     @endif
                                 </div>
                                 <!--Product FORM -->
+                                 @if(!$storedProduct)
                                 <form wire:submit.prevent="storeProduct" enctype="multipart/form-data">
                                     @method('post')
                                     @csrf
@@ -507,7 +509,8 @@
                                                         type="text"
                                                         placeholder="Ej: Caja de Bolígrafos BIC. Color Rojo" />
                                                     @error('name') <span
-                                                        class="text-red-600 error">{{ $message }}</span> @enderror
+                                                        class="text-red-600 error">{{ $message }}</span>
+                                                    @enderror
                                                 </div>
                                                 <div class="flex flex-col w-full">
                                                     <label
@@ -519,7 +522,8 @@
                                                         class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
                                                         type="text" placeholder="Ej: El Bic Naranja de toda la vida" />
                                                     @error('short_description') <span
-                                                        class="text-red-600 error">{{ $message }}</span> @enderror
+                                                        class="text-red-600 error">{{ $message }}</span>
+                                                    @enderror
                                                 </div>
                                             </div>
                                             <!-- BLOQUE 2 -->
@@ -1012,6 +1016,7 @@
                                         </div>
                                     </div>
                                 </form>
+                                @endif
                             </div>
                         </div>
                         <!--/ Step 2 Crear producto IfnotExists -->

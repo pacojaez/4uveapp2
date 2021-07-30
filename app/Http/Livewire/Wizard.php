@@ -427,7 +427,7 @@ class Wizard extends Component
         $this->product = new Product;
 
         $data =  $this->validate($this->rules);
-
+        //dd($data);
         //INIT IMAGE PROCESSING
         if ($data['product_image']) {
             //mandamos un messaje al usuario de que la imagen se esta procesando
@@ -490,9 +490,9 @@ class Wizard extends Component
         //***ojo solo para pruebas*/
         $this->product->active = 1;
         //***ojo solo para pruebas*/
-
-        $createFields = array_filter($data, null);
-
+        //dd(gettype($data));
+        $createFields = array_filter($data);
+        //dd($createFields);
         foreach ($createFields as $key => $value) {
             $this->product->$key = $value;
             $this->product->saveOrFail();
@@ -510,7 +510,8 @@ class Wizard extends Component
             $this->storedProduct = true;
             $this->searchByBrand = '';
             $this->searchCategory = '';
-        }
+
+            $errors = '';        }
         // dd($this->product_id);
         return;
     }
