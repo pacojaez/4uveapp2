@@ -117,8 +117,9 @@
                             <div class="flex-1">
 
                                 <div x-show="step === 1">
-                                    <div class="text-lg font-bold leading-tight text-gray-700">
-                                        Buscar Producto en nuestra Base de Datos o crear un Producto Nuevo
+                                    <div class="text-lg font-semibold leading-tight text-gray-700 mx-2">
+                                        Con este formulario podrás crear una oferta vinculada a un producto de nuestra base de datos o
+                                        bien crear un producto nuevo y crear luego una oferta vinculada a ese producto
                                     </div>
                                 </div>
 
@@ -191,39 +192,62 @@
                             <!-- buscador de producto-->
                             <div class="mb-5 text-center">
                                 <div class="flex flex-row flex-wrap justify-around w-5/6 m-2 md:flex-row">
-                                    <div class="w-full mx-3 has-tooltip md:w-1/4">
-                                        <label class="w-16 font-bold">Buscar producto:</label>
+                                    <div class="w-full m-3 has-tooltip md:w-1/4">
+                                        <label class="w-32 font-bold">Buscar MARCA:</label>
                                         <span class='p-1 -mt-8 text-red-500 bg-gray-200 rounded shadow-lg tooltip'>
-                                            Si no tenemos el producto en nuestra Base de Datos, clicka en SIGUIENTE y
-                                            crea un nuevo Producto.
-                                            Si el producto está en nuestra Base de Datos seleccionalo primero y clicka
-                                            SIGUIENTE
+                                            Puedes buscar por Marca
+                                        </span>
+                                         <select name="searchByBrand" wire:model="searchByBrand"
+                                            class="flex w-full px-4 py-3 leading-tight text-gray-700 bg-gray-200 border border-gray-200 rounded appearance-none focus:outline-none focus:bg-white focus:border-gray-500">
+                                            <option value='' disabled>Elije una Categoría</option>
+                                            @foreach( $productsGroupByBrand as $brand )
+                                            <option value="{{ $brand->brand }}">{{ $brand->brand }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="w-full m-3 has-tooltip md:w-1/4">
+                                        <label class="w-32 font-bold">Buscar categoria:</label>
+                                        <span class='p-1 -mt-8 text-red-500 bg-gray-200 rounded shadow-lg tooltip'>
+                                            Puedes buscar por categoría del Producto
+                                        </span>
+                                        <select name="searchCategory" wire:model="searchCategory"
+                                            class="flex w-full px-4 py-3 leading-tight text-gray-700 bg-gray-200 border border-gray-200 rounded appearance-none focus:outline-none focus:bg-white focus:border-gray-500">
+                                            <option value='' disabled>Elije una Categoría</option>
+                                            @foreach($productsCategory as $category)
+                                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="w-full m-3 has-tooltip md:w-1/4">
+                                        <label class="w-48 font-bold">Término de búsqueda:</label>
+                                        <span class='p-1 -mt-8 text-red-500 bg-gray-200 rounded shadow-lg tooltip'>
+                                            Puedes buscar por un término como bolígrafo
                                         </span>
                                         <input wire:model.debounce.500ms="search" type="search"
                                             class="flex w-full px-4 py-3 leading-tight text-gray-700 bg-gray-200 border border-gray-200 rounded appearance-none focus:outline-none focus:bg-white focus:border-gray-500"
-                                            placeholder="EAN13, Marca o Nombre del Producto">
+                                            placeholder="Nombre del Producto, color,...">
                                     </div>
-                                    <div class="w-full mx-3 has-tooltip md:w-1/4">
-                                        <label class="w-16 font-bold"> Seleccionar producto:</label>
+                                    <div class="w-full m-3 has-tooltip md:w-1/4">
+                                        <label class="w-48 font-bold"> Seleccionar producto:</label>
                                         <span class='p-1 -mt-8 text-red-500 bg-gray-200 rounded shadow-lg tooltip'>
-                                            Productos que coiniciden con tu criterio de búsqueda. Selecciona el que
+                                            Productos que coinciden con tu criterio de búsqueda. Selecciona el que
                                             corresponda a tu Oferta
                                         </span>
                                         <select name="selected" wire:model="selected"
                                             class="w-full p-2 px-4 py-3 leading-tight bg-white border shadow">
-                                            <option value=''>Elije un producto de nuestra Base de Datos</option>
+                                            <option value=''>Tenemos estos productos</option>
                                             @foreach($productslist as $product)
                                             <option value={{ $product->id }}>{{ $product->name }}</option>
                                             @endforeach
                                         </select>
                                     </div>
-                                    <div class="w-full mx-3 has-tooltip md:w-1/4">
+                                    <div class="w-full m-3 has-tooltip md:w-1/4">
                                         {{-- <label class="w-16 font-bold"> Seleccionar Producto</label>
                                         <button wire:click="selectProduct"
                                             class="w-1/2 px-4 py-3 leading-tight text-center text-gray-200 bg-blue-400 border border-gray-200 rounded text-centerflex text-white-700">
                                             Select
                                         </button> --}}
-                                        <label class="w-16 font-bold"> Limpiar el Formulario</label>
+                                        <label class="w-48 font-bold"> Limpiar el Formulario</label>
                                         <button wire:click="clearSearch"
                                             class="w-full px-4 py-3 leading-tight text-center text-gray-200 bg-red-400 border border-gray-200 rounded w-1/2flex text-white-700">
                                             Anular Selección
@@ -270,7 +294,7 @@
                                             class="block mb-1 font-bold text-gray-700">Descripción:</label>
                                         <div
                                             class="w-full px-4 py-3 font-medium text-gray-600 rounded-lg shadow-sm focus:outline-none focus:shadow-outline">
-                                            <h3>{{ $selectedProduct->description }} Kgs</h3>
+                                            <h3>{{ $selectedProduct->description }}</h3>
                                         </div>
                                     </div>
                                 </div>
@@ -417,6 +441,23 @@
                                             <h3>{{ $selectedProduct->EAN13_box_3 }}</h3>
                                         </div>
                                     </div>
+                                </div>
+                                @else
+                                <div class="flex flex-col justify-between w-full p-10 m-2 bg-gray-200 md:flex-col">
+                                    <div class="mb-5">
+                                        <div
+                                            class="w-full px-4 py-3 font-medium text-gray-600 rounded-lg shadow-sm focus:outline-none focus:shadow-outline">
+                                            <h3>Si el producto al que quieres vincular tu oferta no está en nuestra base de datos, clicka en este botón y crea el producto</h3>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-5">
+                                    <button x-show="step < 3" @click="step++"
+                                        class="w-32 px-5 py-2 font-medium text-center text-white bg-blue-500 border border-transparent rounded-lg shadow-sm focus:outline-none hover:bg-blue-600">
+                                        CREAR NUEVO PRODUCTO
+                                    </button>
+                                    </div>
+
                                 </div>
                                 @endif
                             </div>

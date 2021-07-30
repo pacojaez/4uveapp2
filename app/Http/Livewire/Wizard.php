@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 use App\Models\Product;
 use App\Models\Oferta;
@@ -27,6 +28,8 @@ class Wizard extends Component
 
     public $productslist;
     public $search;
+    public $searchByBrand;
+    public $searchCategory;
 
     // public $product;
     public $oferta;
@@ -157,6 +160,9 @@ class Wizard extends Component
 
         $this->storedProduct = false;
         $this->storedOferta = false;
+
+        $this->searchByBrand = '';
+        $this->searchCategory = '';
 
         $this->resetErrorBag();
     }
@@ -502,7 +508,8 @@ class Wizard extends Component
             $this->product = '';
             $this->processing = false;
             $this->storedProduct = true;
-
+            $this->searchByBrand = '';
+            $this->searchCategory = '';
         }
         // dd($this->product_id);
         return;
@@ -511,7 +518,13 @@ class Wizard extends Component
 
     public function render()
     {
-        $this->productslist = Product::search($this->search)->get();
+        if($this->searchByBrand){
+            $this->productslist = Product::search($this->searchByBrand)->get();
+        }elseif($this->searchCategory){
+             $this->productslist = Product::where('subcategorie_id', 'like', $this->searchCategory)->get();
+        }else{
+            $this->productslist = Product::search($this->search)->get();
+        }
 
         if ($this->selected != null) {
 
@@ -556,6 +569,20 @@ class Wizard extends Component
             $this->ahorro = number_format( 100 - ( $of * 100) / $in, 2);
         }
 
+        /**
+         * search category to feed the select options
+         */
+        $productsCategory = Subcategorie::all();
+
+         /**
+         * search products group by brand to shos the select
+         */
+        $productsGroupByBrand = DB::table('products')
+                                ->select('brand')
+                                ->groupBy('brand')
+                                ->get();
+        //dd($productsGroupByBrand);
+
         // $selected = Product::findOrFail($this->selectedProduct);
         // dd($selected);
         return view('livewire.wizard', [
@@ -567,6 +594,9 @@ class Wizard extends Component
             'tempUrl2' => $this->temp_url_2,
             'tempUrl3' => $this->temp_url_3,
             'ahorro' => $this->ahorro,
+            'productsCategory' => $productsCategory,
+            'productsGroupByBrand' => $productsGroupByBrand
+
         ]);
     }
 

@@ -98,6 +98,21 @@ class Product extends Model
 
     }
 
+    public static function searchCat ( $searchCategory ){
+        /**
+        *The function get a parameter from the View and retrieve the query from the DB
+        */
+        $result = empty($search) ? static::query()
+                                : static::query()
+                                        ->where('subcategorie_id', 'like', $searchCategory );
+
+        $result->where('active', 1);
+        // dd($result);
+        return $result;
+
+    }
+
+
     // public static function inactive( $searchInactive )
     // {
     //     $result = empty($searchInactive) ? static::query()
