@@ -61,6 +61,22 @@
                 background-position: center;
                 background-repeat: no-repeat;
             }
+
+            .loader {
+            border-top-color: #3498db;
+            -webkit-animation: spinner 1.5s linear infinite;
+            animation: spinner 1.5s linear infinite;
+            }
+
+            @-webkit-keyframes spinner {
+            0% { -webkit-transform: rotate(0deg); }
+            100% { -webkit-transform: rotate(360deg); }
+            }
+
+            @keyframes spinner {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+            }
         </style>
 
         <div x-data="app()" x-cloak>
@@ -771,6 +787,7 @@
                                                 </div>
                                             </div>
                                             <!--FOTOS-->
+                                            <div wire:loading class="grid grid-cols-1 loader ease-linear rounded-full border-8 border-t-8 border-gray-200 h-64 w-64"></div>
                                             <div class="grid grid-cols-1 gap-5 mt-5 mb-10 md:grid-cols-3 md:gap-8 mx-7">
                                                 <!--FOTO 1 -->
                                                 <div class="grid grid-cols-1">
@@ -779,26 +796,26 @@
                                                         <label
                                                             class='flex flex-col justify-center w-full border-4 border-dashed hover:bg-gray-100 hover:border-purple-300 group'>
                                                             @if(!$product_image)
-                                                            <div class='flex flex-col items-center justify-center pt-7'>
-                                                                <svg class="w-10 h-10 text-purple-400 group-hover:text-purple-600"
-                                                                    fill="none" stroke="currentColor"
-                                                                    viewBox="0 0 24 24"
-                                                                    xmlns="http://www.w3.org/2000/svg">
-                                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                                        stroke-width="2"
-                                                                        d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z">
-                                                                    </path>
-                                                                </svg>
-                                                                <p
-                                                                    class='pt-1 text-sm tracking-wider text-gray-400 lowercase group-hover:text-purple-600'>
-                                                                    Select a photo
-                                                                </p>
-                                                            </div>
-                                                            <input type='file' class="hidden" wire:model="product_image"
-                                                                name="product_image" />
-                                                            @error('product_image') <span
-                                                                class="text-red-600 error">{{ $message }}</span>
-                                                            @enderror
+                                                                <div class='flex flex-col items-center justify-center pt-7'>
+                                                                    <svg class="w-10 h-10 text-purple-400 group-hover:text-purple-600"
+                                                                        fill="none" stroke="currentColor"
+                                                                        viewBox="0 0 24 24"
+                                                                        xmlns="http://www.w3.org/2000/svg">
+                                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                                            stroke-width="2"
+                                                                            d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z">
+                                                                        </path>
+                                                                    </svg>
+                                                                    <p
+                                                                        class='pt-1 text-sm tracking-wider text-gray-400 lowercase group-hover:text-purple-600'>
+                                                                        Select a photo
+                                                                    </p>
+                                                                </div>
+                                                                <input type='file' class="hidden" wire:model="product_image"
+                                                                    name="product_image" />
+                                                                @error('product_image') <span
+                                                                    class="text-red-600 error">{{ $message }}</span>
+                                                                @enderror
 
                                                             @else
                                                             <div
@@ -811,9 +828,10 @@
                                                                 <img src="{{ $product_image->temporaryUrl() }}"
                                                                     class="">
                                                             </div>
+                                                            {{--<div wire:loading class="loader ease-linear rounded-full border-8 border-t-8 border-gray-200 h-64 w-64"></div>
                                                             <div wire:loading>
                                                                 Procesando...
-                                                            </div>
+                                                            </div>--}}
                                                             <button wire:click="clearPhoto1" type="reset"
                                                                 class="class='w-auto px-4 py-2 m-auto font-medium text-center text-white bg-red-600 rounded-lg shadow-xl hover:bg-gray-700'">
                                                                 Eliminar Foto 1
