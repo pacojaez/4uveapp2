@@ -113,7 +113,7 @@ class Wizard extends Component
         'contraoferta' => 'nullable|int',
         'embalaje_original' => 'nullable|int',
         'categoria_oferta' => 'required|string',
-        'invoice_cost_price' => 'required|regex:/^\d*\.?\d+$/',
+        'invoice_cost_price' => 'required|regex:/^[0-9]{1,2}[.][0-9]{1,3}+$/',
         'offer_prize' => 'required|regex:/^\d*\.?\d+$/',
 
     ];
@@ -163,6 +163,7 @@ class Wizard extends Component
 
         $this->searchByBrand = '';
         $this->searchCategory = '';
+        $this->search = '';
 
         $this->resetErrorBag();
     }
@@ -305,8 +306,8 @@ class Wizard extends Component
         // $this->oferta->active = 1;
         //***ojo solo para pruebas*/
 
-        $createFields = array_filter($data, null);
-
+        $createFields = array_filter($data);
+        //dd($createFields);
         foreach ($createFields as $key => $value) {
             $this->oferta->$key = $value;
 

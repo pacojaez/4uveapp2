@@ -64,7 +64,7 @@
         </style>
 
         <div x-data="app()" x-cloak>
-            <div class="px-4 py-10 mx-auto max-w-5/6">
+            <div class="px-4 py-10 mx-auto my-2 max-w-5/6">
                 <!-- pantalla final-->
                 <div x-show.transition="step === 'complete'">
                     <div class="flex flex-row items-center justify-between p-10 bg-white rounded-lg shadow">
@@ -199,7 +199,7 @@
                                         </span>
                                          <select name="searchByBrand" wire:model="searchByBrand"
                                             class="flex w-full px-4 py-3 leading-tight text-gray-700 bg-gray-200 border border-gray-200 rounded appearance-none focus:outline-none focus:bg-white focus:border-gray-500">
-                                            <option value='' disabled>Elije una Categoría</option>
+                                            <option value=''>Elije una Categoría</option>
                                             @foreach( $productsGroupByBrand as $brand )
                                             <option value="{{ $brand->brand }}">{{ $brand->brand }}</option>
                                             @endforeach
@@ -212,7 +212,7 @@
                                         </span>
                                         <select name="searchCategory" wire:model="searchCategory"
                                             class="flex w-full px-4 py-3 leading-tight text-gray-700 bg-gray-200 border border-gray-200 rounded appearance-none focus:outline-none focus:bg-white focus:border-gray-500">
-                                            <option value='' disabled>Elije una Categoría</option>
+                                            <option value=''>Elije una Categoría</option>
                                             @foreach($productsCategory as $category)
                                             <option value="{{ $category->id }}">{{ $category->name }}</option>
                                             @endforeach
@@ -562,8 +562,9 @@
                                                     <select wire:model='subcategorie_id' id='subcategorie_id'
                                                         name="subcategorie_id"
                                                         class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent">
-                                                        <option value="" selected='selected'>---elije una categoría---
-                                                        </option>
+                                                        {{--<option value="" selected='selected'>
+                                                            ---elije una categoría---
+                                                        </option>--}}
                                                         @foreach ($subcategories as $subcategorie )
                                                         <option value="{{ $subcategorie->id }}">{{ $subcategorie->name}}
                                                         </option>

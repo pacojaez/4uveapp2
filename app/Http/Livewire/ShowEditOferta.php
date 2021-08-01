@@ -232,7 +232,7 @@ class ShowEditOferta extends Component
         }
 
         // filtramos el array de data para añadir solo los campos que traigan datos
-        $updateFields = array_filter($data, null);
+        $updateFields = array_filter($data);
 
         //por cada campo que trae datos hacemos un update en la DB
         //dandole así flexibilidad al usuario de que actualice los campos que desee
