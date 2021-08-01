@@ -26,9 +26,17 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/tipousuario', function ()
 
 Route::resource('products', 'ProductController');
 
-Route::get('inactive', function () {
+
+Route::middleware(['isAdmin'])->group(function () {
+    //productos no validados
+    Route::get('inactive', function () {
     return view('products.inactive');
-})->name('products.inactive');
+    })->name('products.inactive');
+
+});
+//Route::get('inactive', function () {
+//    return view('products.inactive');
+//})->middleware(['isAdmin'])->name('products.inactive');
 
 Route::get('productos', function() {
     return view('allproducts');
@@ -48,9 +56,9 @@ Route::get('product/{id}', function($id) {
 
 Route::resource('ofertas', 'OfertaController');
 
-Route::get('ofertasinactive', function () {
-    return view('ofertas.inactive');
-})->name('ofertas.inactive');
+//Route::get('ofertasinactive', function () {
+//    return view('ofertas.inactive');
+//})->name('ofertas.inactive');
 
 // Route::get('/vistadeprueba', function() {
 //     return view('vistadeprueba');
@@ -72,19 +80,39 @@ Route::get('cart2', function(){
     return view('livewire.cart', compact('content',));
 })->name('cart2');
 
-//************************RUTAS USUARIOS*****************/
+//************************RUTAS ADMIN MIDDLEWARE*****************/
+
+Route::middleware(['isAdmin'])->group( function () {
+    // User create form
+    Route::get('/user/create', [UserController::class, 'createUser'])->name('user.create');
+    // Store One user
+    Route::post('/user/store',[UserController::class, 'store'])->name('user.store');
+    // Show all users
+    Route::get('/users/index', [UserController::class, 'index'])->name('users.index');
+    // Show one user
+    Route::get('/user/edit/{user}', [UserController::class, 'edit'])->name('user.edit');
+    // Store One user
+    Route::put('/user/update/{id}',[UserController::class, 'update'])->name('user.update');
+    // Delete One user
+    Route::get('/user/destroy/{id}',[UserController::class, 'destroy'])->name('user.destroy');
+
+    //OFERTAS NO MOSTRADAS AL USUARIO PERO YA CREADAS
+    Route::get('/ofertasinactive', function () {
+        return view('ofertas.inactive');
+    })->name('ofertas.inactive');
+});
 // User create form
-Route::get('/user/create', [UserController::class, 'createUser'])->middleware('isAdmin')->name('user.create');
-// Store One user
-Route::post('/user/store',[UserController::class, 'store'])->middleware('isAdmin')->name('user.store');
-// Show all users
-Route::get('/users/index', [UserController::class, 'index'])->middleware('isAdmin')->name('users.index');
-// Show one user
-Route::get('/user/edit/{user}', [UserController::class, 'edit'])->middleware('isAdmin')->name('user.edit');
-// Store One user
-Route::put('/user/update/{id}',[UserController::class, 'update'])->middleware('isAdmin')->name('user.update');
-// Delete One user
-Route::get('/user/destroy/{id}',[UserController::class, 'destroy'])->middleware('isAdmin')->name('user.destroy');
+//Route::get('/user/create', [UserController::class, 'createUser'])->middleware('isAdmin')->name('user.create');
+//// Store One user
+//Route::post('/user/store',[UserController::class, 'store'])->middleware('isAdmin')->name('user.store');
+//// Show all users
+//Route::get('/users/index', [UserController::class, 'index'])->middleware('isAdmin')->name('users.index');
+//// Show one user
+//Route::get('/user/edit/{user}', [UserController::class, 'edit'])->middleware('isAdmin')->name('user.edit');
+//// Store One user
+//Route::put('/user/update/{id}',[UserController::class, 'update'])->middleware('isAdmin')->name('user.update');
+//// Delete One user
+//Route::get('/user/destroy/{id}',[UserController::class, 'destroy'])->middleware('isAdmin')->name('user.destroy');
 
 //*******CONTACT ***************************/
 
@@ -93,13 +121,15 @@ Route::get('/contact', function () {
 })->name('contact');
 
 //********LEGAL LINKS */
-Route::get('/politicacookies', function(){
-    return view('politicacookies');
-})->name('politicacookies');
+Route::view('/politicacookies', 'politicacookies')->name('politicacookies');
+Route::view('/avisolegal', 'avisolegal')->name('avisolegal');
+//Route::get('/politicacookies', function(){
+//    return view('politicacookies');
+//})->name('politicacookies');
 
-Route::get('/avisolegal', function(){
-    return view('avisolegal');
-})->name('avisolegal');
+//Route::get('/avisolegal', function(){
+//    return view('avisolegal');
+//})->name('avisolegal');
 
 //******MAIL ROUTES  */
 Route::get('email-test', function(){

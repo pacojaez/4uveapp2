@@ -119,7 +119,7 @@ class UserController extends Controller
             "phone" => "string|max:5|regex:/(\d{9})/i|nullable",
             "tipo_usuario" => "nullable"
         ]);
-        $updateFields = array_filter($validated, null);
+        $updateFields = array_filter($validated);
         // dd($updateFields);
         $user = User::find($user);
         foreach( $updateFields as $key => $value){
