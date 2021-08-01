@@ -29,9 +29,7 @@ Route::resource('products', 'ProductController');
 
 Route::middleware(['isAdmin'])->group(function () {
     //productos no validados
-    Route::get('inactive', function () {
-    return view('products.inactive');
-    })->name('products.inactive');
+    Route::view('productsinactive', 'products.inactive')->name('products.inactive');
 
 });
 //Route::get('inactive', function () {

@@ -74,13 +74,13 @@
                             <x-jet-dropdown-link href="{{ route('products.index') }}">
                                 {{ __('Todos los Productos') }}
                             </x-jet-dropdown-link>
-                            <x-jet-dropdown-link href="{{ url('inactive') }}">
+                            <x-jet-dropdown-link href="{{ route('products.inactive') }}">
                                 {{ __('Productos INACTIVOS') }}
                             </x-jet-dropdown-link>
                             <x-jet-dropdown-link href="{{ route('ofertas.index') }}">
                                 {{ __('Todas las Ofertas') }}
                             </x-jet-dropdown-link>
-                            <x-jet-dropdown-link href="{{ url('ofertasinactive') }}">
+                            <x-jet-dropdown-link href="{{ route('ofertas.inactive') }}">
                                 {{ __('Ofertas INACTIVAS') }}
                             </x-jet-dropdown-link>
                             <x-jet-dropdown-link href="{{ route('user.create') }}">
