@@ -58,6 +58,7 @@
                                     <div>
                                         <x-jet-label for="phone" value="{{ __('Teléfono') }}" />
                                         <x-jet-input id="phone" class="block w-full mt-1" type="text" name="phone"
+                                            max="9" min="9"
                                             :value="old('phone')" required autofocus />
                                             @error('phone')
                                                 <span class="text-red-800 error">{{ $message }}</span>

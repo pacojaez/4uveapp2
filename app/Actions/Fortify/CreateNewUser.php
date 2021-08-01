@@ -35,7 +35,7 @@ class CreateNewUser implements CreatesNewUsers
             'city' => ['required', 'string', 'max:255', 'min: 4'],
             'cp' => ['required', 'string', 'max:5', 'regex:/[0-9]+$/'],
             'province' => ['required', 'string', 'max:255'],
-            'phone' => ['required', 'string', 'min: 9', 'regex:/[0-9]+$/'],
+            'phone' => ['required', 'string', 'max: 9', 'regex:/[0-9]{9}+$/'],
             'tipo_usuario' => ['required', 'string'],
             'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['required', 'accepted'] : '',
         ])->validate();
@@ -43,7 +43,6 @@ class CreateNewUser implements CreatesNewUsers
         /**
          * send a welcome mail
          */
-        SendEMailController::welcomeMail($data);
 
         return DB::transaction(function () use ($input) {
             return tap(User::create([
@@ -66,6 +65,9 @@ class CreateNewUser implements CreatesNewUsers
                 $this->createTeam($user);
             });
         });
+
+        SendEMailController::welcomeMail($data);
+
     }
 
     /**
