@@ -81,6 +81,7 @@ class ShowEditOferta extends Component
         $this->porte_id = $oferta->porte_id;
         $this->new = $oferta->new;
         $this->embalaje_original = $oferta->embalaje_original;
+        // $this->processing = false;
         // $this->temp_url_1;
 
     }
@@ -111,6 +112,8 @@ class ShowEditOferta extends Component
 
         $this->storedOferta = false;
         $this->resetErrorBag();
+
+        $this->processing = false;
     }
     /***
      * Clear the images from the Form
@@ -164,6 +167,7 @@ class ShowEditOferta extends Component
             $data['user_image'] = $name;
             //añadimos el campo al array que guardaremos en la DB
             $this->oferta->user_image = $data['user_image'];
+
         }
 
         //PROCESAMIENTO IMAGEN 2:
@@ -181,6 +185,8 @@ class ShowEditOferta extends Component
             Storage::disk('local')->put('public/images/products'.'/'.$name, $img, 'public');
             $data['user_image_2'] = $name;
             $this->oferta->user_image_2 = $data['user_image_2'];
+
+            // $this->processing = false;
         }
 
         if($data['user_image_3']){
@@ -196,6 +202,8 @@ class ShowEditOferta extends Component
             Storage::disk('local')->put('public/images/products'.'/'.$name, $img, 'public');
             $data['user_image_3'] = $name;
             $this->oferta->user_image_3 = $data['user_image_3'];
+
+            // $this->processing = false;
         }
 
         //si el campo de la oferta no está activo lo guardamos en la DB
@@ -230,7 +238,7 @@ class ShowEditOferta extends Component
             $this->oferta->contraoferta = 1;
             $this->oferta->save();
         }
-
+        // dd($data);
         // filtramos el array de data para añadir solo los campos que traigan datos
         $updateFields = array_filter($data);
 
@@ -296,6 +304,7 @@ class ShowEditOferta extends Component
             'user_image_2' => $this->user_image_2,
             'user_image_3' => $this->user_image_3,
             'ahorro' => $this->ahorro,
+            'processing' => $this->processing,
         ]);
     }
 }

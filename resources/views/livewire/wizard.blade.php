@@ -133,7 +133,7 @@
                             <div class="flex-1">
 
                                 <div x-show="step === 1">
-                                    <div class="text-lg font-semibold leading-tight text-gray-700 mx-2">
+                                    <div class="mx-2 text-lg font-semibold leading-tight text-gray-700">
                                         Con este formulario podrás crear una oferta vinculada a un producto de nuestra base de datos o
                                         bien crear un producto nuevo y crear luego una oferta vinculada a ese producto
                                     </div>
@@ -147,8 +147,14 @@
                                         <div class="max-w-3xl px-4 mx-auto">
                                             <div class="flex justify-between">
                                                 @if($errors->any())
-                                                <h4 class="p-4 mx-2 text-lg font-semibold bg-red-300 rounded">ERROR:
-                                                    {{$errors->first()}}</h4>
+                                                <div class="flex flex-col justify-center p-2 m-2 bg-red-300">
+                                                    <h4 class="p-4 mx-2 text-lg font-semibold bg-red-300 rounded">Corrije los siguientes ERRORES:</h4>
+                                                    <ul>
+                                                        @foreach ($errors->all() as $error )
+                                                        <li>{!! $error !!}</li>
+                                                    @endforeach
+                                                    </ul>
+                                                </div>
                                                 @endif
                                                 @if(!$storedProduct)
                                                     @if(!$selected)
@@ -184,8 +190,14 @@
                                         Crear Oferta
                                     </div>
                                     @if($errors->any())
-                                    <h4 class="p-4 mx-2 text-lg font-semibold bg-red-300 rounded">ERROR:
-                                        {{ $errors->first() }}</h4>
+                                    <div class="flex flex-col flex-wrap items-center justify-center p-2 m-2 bg-red-300">
+                                        <h4 class="p-4 mx-2 text-lg font-semibold bg-red-300 rounded">Corrije los siguientes ERRORES:</h4>
+                                        <ul>
+                                            @foreach ($errors->all() as $error )
+                                            <li>{!! $error !!}</li>
+                                        @endforeach
+                                        </ul>
+                                    </div>
                                     @endif
                                 </div>
 
@@ -787,7 +799,8 @@
                                                 </div>
                                             </div>
                                             <!--FOTOS-->
-                                            <div wire:loading class="grid grid-cols-1 loader ease-linear rounded-full border-8 border-t-8 border-gray-200 h-64 w-64"></div>
+                                            <h2>FOTOS DEL PRODUCTO</h2>
+                                            <div wire:loading class="grid w-64 h-64 grid-cols-1 ease-linear border-8 border-t-8 border-gray-200 rounded-full loader"></div>
                                             <div class="grid grid-cols-1 gap-5 mt-5 mb-10 md:grid-cols-3 md:gap-8 mx-7">
                                                 <!--FOTO 1 -->
                                                 <div class="grid grid-cols-1">
@@ -828,7 +841,7 @@
                                                                 <img src="{{ $product_image->temporaryUrl() }}"
                                                                     class="">
                                                             </div>
-                                                            {{--<div wire:loading class="loader ease-linear rounded-full border-8 border-t-8 border-gray-200 h-64 w-64"></div>
+                                                            {{--<div wire:loading class="w-64 h-64 ease-linear border-8 border-t-8 border-gray-200 rounded-full loader"></div>
                                                             <div wire:loading>
                                                                 Procesando...
                                                             </div>--}}
@@ -1361,6 +1374,7 @@
                                             <h2 class="p-2 m-auto mt-5 font-bold text-center bg-white rounded">
                                                 FOTOS DEL LOTE:
                                             </h2>
+                                            <div wire:loading class="grid w-64 h-64 grid-cols-1 ease-linear border-8 border-t-8 border-gray-200 rounded-full loader"></div>
                                             <div class="grid grid-cols-1 gap-5 mt-5 mb-10 md:grid-cols-3 md:gap-8 mx-7">
                                                 <!--FOTO 1 -->
                                                 <div class="grid grid-cols-1">
@@ -1401,9 +1415,9 @@
                                                                 {{-- <input type="image" wire:model="temp_url_1" name="temp_url_1"> --}}
                                                                 <img src="{{ $user_image->temporaryUrl() }}" class="">
                                                             </div>
-                                                            <div wire:loading>
+                                                            {{-- <div wire:loading>
                                                                 Procesando...
-                                                            </div>
+                                                            </div> --}}
                                                             <button wire:click="clearPhotoUser1" type="reset"
                                                                 class="class='w-auto px-4 py-2 m-auto font-medium text-center text-white bg-red-600 rounded-lg shadow-xl hover:bg-gray-700'">
                                                                 Eliminar Foto 1
@@ -1451,9 +1465,9 @@
                                                                     Foto #2 del Lote:</p>
                                                                 <img src="{{ $user_image_2->temporaryUrl() }}" class="">
                                                             </div>
-                                                            <div wire:loading>
+                                                            {{-- <div wire:loading>
                                                                 Procesando...
-                                                            </div>
+                                                            </div> --}}
                                                             <button wire:click="clearPhotoUser2" type="reset"
                                                                 class="class='w-auto px-4 py-2 m-auto font-medium text-center text-white bg-red-600 rounded-lg shadow-xl hover:bg-gray-700'">
                                                                 Eliminar Foto 2
@@ -1500,9 +1514,9 @@
                                                                     Foto #3 del Lote:</p>
                                                                 <img src="{{ $user_image_3->temporaryUrl() }}" class="">
                                                             </div>
-                                                            <div wire:loading>
+                                                            {{-- <div wire:loading>
                                                                 Procesando...
-                                                            </div>
+                                                            </div> --}}
                                                             <button wire:click="clearPhotoUser3" type="reset"
                                                                 class="class='w-auto px-4 py-2 m-auto font-medium text-center text-white bg-red-600 rounded-lg shadow-xl hover:bg-gray-700'">
                                                                 Eliminar Foto 3

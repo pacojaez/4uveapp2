@@ -1,4 +1,30 @@
 <div>
+    <style>
+
+.loader {
+    border-top-color: #3498db;
+    -webkit-animation: spinner 1.5s linear infinite;
+    animation: spinner 1.5s linear infinite;
+}
+
+@-webkit-keyframes spinner {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@keyframes spinner {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+    </style>
     <form wire:submit.prevent="update" enctype="multipart/form-data">
         @method('PUT')
         @csrf
@@ -361,6 +387,7 @@
                     class="p-2 mt-12 text-4xl font-bold text-center text-gray-500 uppercase bg-gray-300 md:text-4xl text-light">
                     ACTUALIZAR FOTOS DE LA OFERTA
                 </label>
+
                 <div class="grid justify-between grid-cols-3 mt-5 bg-gray-200 mx-7">
                     <div class='flex items-center justify-center w-5/6'>
                         <label
@@ -420,6 +447,9 @@
                         </label>
                     </div>
                 </div>
+
+
+                <div wire:loading class="grid w-64 h-64 grid-cols-1 ease-linear border-8 border-t-8 border-gray-200 rounded-full loader"></div>
                 <div class="grid justify-between grid-cols-3 mt-5 bg-gray-200 mx-7">
                     <div class='flex items-center justify-center w-5/6'>
                         @if (!$user_image)
@@ -439,16 +469,13 @@
                             <input type='file' class="hidden" wire:model="user_image" name="user_image" />
                         </label>
                         @else
-                        <div wire:loading>
+                        {{-- <div wire:processing>
                             Procesando...
-                        </div>
+                        </div> --}}
                         <div class='flex flex-col w-full h-56 hover:bg-gray-100 hover:border-purple-300 group'>
                             <div class="class='flex flex-col items-center justify-center pt-7'">
                                 Foto #1 de la Oferta:
                                 <img src="{{ $user_image->temporaryUrl() }}" class="">
-                            </div>
-                            <div wire:loading>
-                                Procesando...
                             </div>
                         </div>
                         <button wire:click="clearPhoto1" type="reset"
@@ -524,6 +551,7 @@
                         @endif
                     </div>
                 </div>
+
                 <div class='flex items-center justify-center gap-4 pt-5 pb-5 md:gap-8'>
                     <button
                         class='w-auto px-4 py-2 font-medium text-white bg-gray-500 rounded-lg shadow-xl hover:bg-gray-700'
@@ -531,9 +559,9 @@
                     <button
                         class='w-auto px-4 py-2 font-medium text-white bg-purple-500 rounded-lg shadow-xl hover:bg-purple-700'
                         type="submit">ACTUALIZAR</button>
-                    <button
+                    {{-- <button
                         class='w-auto px-4 py-2 font-medium text-white bg-red-500 rounded-lg shadow-xl hover:bg-red-700'
-                        wire:click="delete ({{ $oferta->id }})">BORRAR</button>
+                        wire:click="delete ({{ $oferta->id }})">BORRAR</button> --}}
                 </div>
             </div>
         </div>

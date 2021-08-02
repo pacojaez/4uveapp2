@@ -512,7 +512,8 @@ class Wizard extends Component
             $this->searchByBrand = '';
             $this->searchCategory = '';
 
-            $errors = '';        }
+            $errors = '';
+        }
         // dd($this->product_id);
         return;
     }
