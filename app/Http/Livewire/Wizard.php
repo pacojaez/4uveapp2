@@ -503,7 +503,7 @@ class Wizard extends Component
         // dd($done);
 
         if($done){
-            $this->clearSearch();
+            //$this->clearSearch();
 
             $this->product_id = $this->product->id;
             $this->product = '';
