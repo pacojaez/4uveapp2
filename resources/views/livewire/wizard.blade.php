@@ -151,7 +151,8 @@
                                                     <h4 class="p-4 mx-2 text-lg font-semibold bg-red-300 rounded">Corrije los siguientes ERRORES:</h4>
                                                     <ul>
                                                         @foreach ($errors->all() as $error )
-                                                        <li>{!! $error !!}</li>
+                                                        <li class="p-2 my-2">{!! $error !!}</li>
+                                                        <hr>
                                                     @endforeach
                                                     </ul>
                                                 </div>
