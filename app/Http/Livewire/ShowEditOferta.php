@@ -56,7 +56,7 @@ class ShowEditOferta extends Component
         'provider' => 'string|nullable',
 
         'buyed_date' => 'date|nullable',
-        'plazo_preparacion_pedido' => 'date|nullable',
+        'plazo_preparacion_pedido' => 'string|nullable',
         'contraoferta' => 'int|nullable',
 
         'porte_id' => 'nullable|int',
