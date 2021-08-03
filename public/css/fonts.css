@@ -92,9 +92,9 @@
 
 .tooltip {
     visibility: hidden;
-    position: absolute;
-    width: 50%;
-    /* margin-top: -45%; */
+    position: relative;
+    width: 80%;
+    padding: 3%;
 }
 
 .has-tooltip:hover .tooltip {

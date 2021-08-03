@@ -24,7 +24,7 @@
             <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
         </div>
 
-        <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+        <span class="hidden lg:inline-block lg:align-middle lg:h-screen" aria-hidden="true">&#8203;</span>
 
         <div
             x-show="show && showActiveComponent"
@@ -35,7 +35,7 @@
             x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
             x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             x-bind:class="modalWidth"
-            class="inline-block w-full align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:w-full"
+            class="inline-block w-full overflow-hidden text-left align-middle transition-all transform bg-white rounded-lg shadow-xl sm:my-8"
         >
             @forelse($components as $id => $component)
                 <div x-show.immediate="activeComponent == '{{ $id }}'">
