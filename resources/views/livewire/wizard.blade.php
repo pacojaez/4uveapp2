@@ -496,9 +496,10 @@
                         <!-- / Step 1 Buscar Producto -->
                         <!-- Step 2 Crear producto IfnotExists -->
                         <div x-show.transition.in="step === 2">
-                            <div class="p-10 mb-2 text-center bg-gray-300">
+                            <div class="p-2 mb-2 text-center bg-gray-300">
+                                @if(!$selected && !$storedProduct)
                                 <div class="flex flex-col justify-center max-w-3xl px-4 mx-auto md:flex-row">
-                                    @if(!$selected && !$storedProduct)
+
                                     <div class="w-full my-2">
                                         <button wire:click="clearSearch" type="reset"
                                             class="class='w-auto px-4 py-2 m-auto font-medium text-center text-white bg-red-600 rounded-lg shadow-xl hover:bg-gray-700'">
@@ -512,23 +513,24 @@
                                             GUARDAR EL PRODUCTO
                                         </button>
                                     </div>
-                                    @endif
+
                                 </div>
+                                @endif
                                 <!--Product FORM -->
                                  @if(!$storedProduct)
                                 <form wire:submit.prevent="storeProduct" enctype="multipart/form-data">
                                     @method('post')
                                     @csrf
                                     <div
-                                        class="grid grid-cols-1 gap-5 p-2 mx-2 mb-2 bg-gray-200 md:grid-cols-1 md:gap-8">
+                                        class="grid grid-cols-1 gap-2 p-2 mx-2 mb-2 bg-gray-200 md:grid-cols-1 md:gap-4">
                                         <div
-                                            class="grid w-full grid-cols-1 gap-2 mt-2 mb-4 bg-gray-300 rounded-lg shadow-xl md:grid-cols-1 md:gap-8 mx-7 md:w-1/12 lg:w-11/12">
+                                            class="grid w-full grid-cols-1 gap-2 mx-1 mt-2 mb-4 bg-gray-100 rounded-lg shadow-xl md:grid-cols-1 md:gap-4">
                                             <h2 class="p-2 m-2 font-bold text-center bg-white rounded">
                                                 LOS DATOS DEL PRODUCTO:
                                             </h2>
                                             <!-- BLOQUE 1 -->
-                                            <div class="grid grid-rows-2 gap-5 mt-1 md:gap-6 mx-7 md:grid-cols-2">
-                                                <div class="flex flex-row flex-wrap w-full md:flex-col">
+                                            <div class="grid grid-rows-2 gap-1 mt-1 mx-7 md:grid-cols-2">
+                                                <div class="flex flex-col flex-wrap w-full">
                                                     <label
                                                         class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">
                                                         Producto:
@@ -556,7 +558,7 @@
                                                 </div>
                                             </div>
                                             <!-- BLOQUE 2 -->
-                                            <div class="grid grid-cols-1 gap-1 mt-1 md:gap-2 mx-7">
+                                            <div class="grid grid-cols-1 gap-1 mx-4">
                                                 <label
                                                     class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">
                                                     Descripción:
@@ -564,7 +566,7 @@
                                                 <textarea wire:model='description' name="description" id='description'
                                                     cols="2" rows="3"
                                                     placeholder="Ej: El clasico BIC Cristal Original, es el bolígrafo más vendido del mundo.Su punta media de 1mm se desliza por el papel con suavidad para ofrecer una escritura sin manchas. Tiene un cuerpo transparente que permite comprobar en todo momento el nivel de tinta."
-                                                    class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent">
+                                                    class="px-1 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent">
                                                         </textarea>
                                                 @error('description') <span
                                                     class="text-red-600 error">{{ $message }}</span> @enderror
@@ -1055,9 +1057,9 @@
                         <!--/ Step 2 Crear producto IfnotExists -->
                         <!-- Step 3 Crear Oferta y Validar -->
                         <div x-show.transition.in="step === 3">
-                            <div class="p-10 mb-2 text-center bg-gray-300">
+                            <div class="flex flex-col justify-center w-11/12 px-4 mx-auto bg-gray-500">
                                 @if(!$storedOferta)
-                                <div class="w-1/3 mx-1 text-center">
+                                <div class="flex flex-col justify-center w-5/6 mx-1 mt-3 text-center md:w-full">
                                     <button wire:click="clearOfferForm" type="reset"
                                         class="class='w-auto px-4 py-2 m-auto font-medium text-center text-white bg-red-600 rounded-lg shadow-xl hover:bg-gray-700'">
                                         Limpiar el Formulario
@@ -1068,9 +1070,9 @@
                                 <form wire:submit.prevent="storeOffer" enctype="multipart/form-data">
                                     @method('post')
                                     @csrf
-                                    <div class="items-center justify-center p-2 mt-4 mb-2 bg-gray-200">
+                                    <div class="flex flex-col items-center justify-center p-2 mt-4 mb-2 bg-gray-200">
                                         <div
-                                            class="grid w-11/12 mb-4 text-center bg-gray-300 rounded-lg shadow-xl sm:w-11/12 lg:w-11/12">
+                                            class="grid w-11/12 mb-4 text-center bg-gray-300 rounded-lg shadow-xl">
                                             <h2 class="p-2 m-auto font-bold text-center bg-white rounded">
                                                 LOS DATOS DE LA OFERTA:
                                             </h2>
@@ -1534,9 +1536,8 @@
 
                                         </div>
                                     </div>
-                                    <div class="flex flex-col justify-center px-4 mx-auto md:flex-row">
 
-                                        <div class="flex flex-col justify-center md:flex-row">
+                                        <div class="flex flex-row justify-between px-4 mx-auto my-2">
                                             @if(!$storedOferta)
                                             <div class="w-1/2 m-2">
                                                 <button wire:click="clearOfferForm" type="reset"
@@ -1556,7 +1557,7 @@
                                             @endif
                                         </div>
 
-                                    </div>
+
                                 </form>
                                 @else
                                 <div class="flex justify-between">
