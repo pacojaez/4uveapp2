@@ -91,7 +91,7 @@
                                         Localidad: {{ $oferta->localidad_recogida }}
                                     </div>
                                     <div class="text-sm text-gray-900">
-                                        Plazo Preparación: : {{ $oferta->plazo_preparacion_pedido }}
+                                        Plazo Preparación: {{ $oferta->plazo_preparacion_pedido }}
                                     </div>
                                     <div class="text-sm text-gray-900">
                                         Proveedor: {{ $oferta->provider }}

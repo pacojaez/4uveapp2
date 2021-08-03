@@ -186,13 +186,18 @@
                         <span class='p-1 -mt-8 text-red-500 bg-gray-200 rounded shadow-lg tooltip'>
                             Número de días de preparación del pedido
                         </span>
-                        <label class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">
-                            Plazo Preparación Pedido:
-                        </label>
-                        <input wire:model='plazo_preparacion_pedido' id='plazo_preparacion_pedido'
-                            name="plazo_preparacion_pedido"
-                            class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
-                            type="date" placeholder="{{ $oferta->plazo_preparacion_pedido }}" />
+                         <label
+                            class="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light">
+                                Plazo Preparación Pedido:
+                            </label>
+                            <select wire:model='plazo_preparacion_pedido' id='plazo_preparacion_pedido' name="plazo_preparacion_pedido"
+                                class="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent">
+                                <option value="1 día" selected>1 día</option>
+                                <option value="2 días">2 días</option>
+                                <option value="3 días">3 días</option>
+                                <option value="4 días">4 días</option>
+                                <option value="5 días">5 días</option>
+                            </select>
                     </div>
                     <div class="grid grid-cols-1 has-tooltip">
                         <span class='p-1 -mt-8 text-red-500 bg-gray-200 rounded shadow-lg tooltip'>
